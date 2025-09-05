@@ -1,0 +1,44 @@
+@import url('app_style/header_style.scss');
+@import url('app_style/main_content.scss');
+
+// variables
+$brand: #c0beeb;
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    color: #222;
+}
+.mainContainer {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #dddbdb;
+
+}
+
+.btn {
+    background: $brand;
+    border: 0;
+    padding: 0.6rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid black;
+    font-weight: 600;
+    font-size: large;
+
+    &:hover {
+        opacity: 1;
+        background-color: #222;
+        color: #fff;
+    border: 2px solid rgb(220, 169, 28);
+
+    }
+}
