@@ -15,8 +15,7 @@ Route::get('/dashboard', function () {
 Route::get('/blog', [BlogController::class, 'index'])
 ->name('blog.main');
 
-Route::prefix('posts')->controller(PostController::class)
-    ->group(function () {
+Route::prefix('posts')->controller(PostController::class)->group(function () {
         Route::get('/', 'index')->name('posts.index');
     })->middleware(['auth', 'verified']);
 
