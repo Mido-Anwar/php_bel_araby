@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -25,36 +25,31 @@
         <header class="header">
             <nav class="logo-login-nav">
                 <div class="login">
-                    @if (Route::has('login'))
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="btn-dashboard">
 
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="btn-dashboard">
-                                Dashboard
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}" class="btn-login">
-                                Log in
-                            </a>
-
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="btn-register">
-                                    Register
-                                </a>
-                            @endif
-                        @endauth
-                    @endif
+                            Dashboard
+                        </a>
+                    @endauth
                 </div>
 
                 <div class="logo" dir="rtl">
-                    php بالعربي
+
+                    <a href="{{ url('/') }}"> php بالعربي</a>
                 </div>
             </nav>
             <div class="site-nav">
-                <ul dir="rtl">
+                <ul dir="rtl" class="nav-list-1">
                     <li><a href="{{ url('/') }}">الرئيسية</a></li>
                     <li><a href="{{ route('blog.main') }}">مدونة</a></li>
-                    <li><a href="#">php</a></li>
+
                     <li><a href="#">اتصل بنا</a></li>
+                </ul>
+                <ul class="nav-list-2">
+                    <li><a href="{{ route('blog.main') }} ">php</a></li>
+                    <li><a href="{{ route('blog.main') }} ">Javascript</a></li>
+                    <li><a href="{{ route('blog.main') }} ">HTML</a></li>
+                    <li><a href="{{ route('blog.main') }} ">Css</a></li>
                 </ul>
             </div>
         </header>

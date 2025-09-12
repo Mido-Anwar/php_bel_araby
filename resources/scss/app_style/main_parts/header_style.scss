@@ -1,7 +1,10 @@
-$primary-color: #4a90e2;
+$primary-color: #0d65cb;
 $secondary-color: #50e3c2;
 $font-color: #333;
 $background-color: #f9f9f9;
+$nav-list-1-color:#4a90e2;
+$nav-list-2-color:black;
+
 
 .header {
     width: 100%;
@@ -40,22 +43,34 @@ $background-color: #f9f9f9;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
         flex: 1; /* ياخد نص المساحة */
-        ul {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            a {
-                font-size: 17px;
-                font-weight: 900;
-                &:hover {
-                    padding: 10px;
-                    border-radius: 5px;
-                    background-color: #333;
-                    color: #f9f9f9;
-                }
-            }
+    }
+}
+@mixin nav-list($background) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    background-color: $background;
+    a {
+        font-size: 17px;
+        font-weight: 900;
+        &:hover {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #333;
+            color: #f9f9f9;
         }
     }
+}
+.nav-list-1 {
+    @include nav-list($nav-list-1-color);
+}
+.nav-list-2 {
+    @include nav-list($nav-list-2-color);
+    color: #ffffff;
+
 }

@@ -35,7 +35,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
-    
+
     &:hover {
         background-color: darken($bg-color, 10%);
         transform: translateY(-2px);
@@ -46,22 +46,27 @@ body {
     }
 }
 // ألوان أساسية للأزرار
-$btn-login-color: rgb(68, 68, 136); // أزرق غامق
+$btn-login-color: rgb(17, 17, 19); // أزرق غامق
 $btn-register-color: #28a745; // أخضر (Register)
-$btn-dashboard-color: rgb(222, 145, 20);
+$btn-dashboard-color: rgb(71, 20, 222);
 
 // الأزرار المختلفة
 .btn-login {
     @include btn-style($btn-login-color);
-    text-shadow: 3px 3px 3px #5b5858;
+    text-shadow: 3px 3px 3px #b5b3b3;
+    border: 2px solid whitesmoke;
+
 }
 
 .btn-register {
     @include btn-style($btn-register-color);
     text-shadow: 3px 3px 3px #5b5858;
+    border: 2px solid whitesmoke;
+
 }
 
 .btn-dashboard {
     @include btn-style($btn-dashboard-color);
     text-shadow: 3px 3px 3px #5b5858;
+    border: 2px solid whitesmoke;
 }
