@@ -2,9 +2,8 @@ $primary-color: #0d65cb;
 $secondary-color: #50e3c2;
 $font-color: #333;
 $background-color: #f9f9f9;
-$nav-list-1-color:#4a90e2;
-$nav-list-2-color:black;
-
+$nav-list-1-color: #ffffff;
+$nav-list-2-color: black;
 
 .header {
     width: 100%;
@@ -27,7 +26,7 @@ $nav-list-2-color:black;
             text-align: start;
             font-size: 25px;
             font-weight: 500;
-            text-shadow: 3px 3px 3px #d0cdcd;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
             padding: 0 20px;
         }
         .login {
@@ -72,5 +71,4 @@ $nav-list-2-color:black;
 .nav-list-2 {
     @include nav-list($nav-list-2-color);
     color: #ffffff;
-
 }

@@ -46,10 +46,10 @@
                     <li><a href="#">اتصل بنا</a></li>
                 </ul>
                 <ul class="nav-list-2">
-                    <li><a href="{{ route('blog.main') }} ">php</a></li>
-                    <li><a href="{{ route('blog.main') }} ">Javascript</a></li>
-                    <li><a href="{{ route('blog.main') }} ">HTML</a></li>
-                    <li><a href="{{ route('blog.main') }} ">Css</a></li>
+                    <li><a href="{{ route('learn.main') }} ">php</a></li>
+                    <li><a href="{{ route('learn.main') }} ">Javascript</a></li>
+                    <li><a href="{{ route('learn.main') }} ">HTML</a></li>
+                    <li><a href="{{ route('learn.main') }} ">Css</a></li>
                 </ul>
             </div>
         </header>
