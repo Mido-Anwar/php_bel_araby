@@ -1,54 +1,15 @@
 <x-master-layout>
 
-    <aside class="sidebar">
+    <aside class="learn-sidebar" id="accordion">
         <h3>Categories</h3>
-        <ul>
-             <li><a href="#">News</a></li>
-      <li><a href="#">Tutorials</a></li>
-      <li><a href="#">Projects</a></li> <li><a href="#">News</a></li>
-      <li><a href="#">Tutorials</a></li>
-      <li><a href="#">Projects</a></li> <li><a href="#">News</a></li>
-      <li><a href="#">Tutorials</a></li>
-      <li><a href="#">Projects</a></li> <li><a href="#">News</a></li>
-      <li><a href="#">Tutorials</a></li>
-      <li><a href="#">Projects</a></li> <li><a href="#">News</a></li>
-      <li><a href="#">Tutorials</a></li>
-      <li><a href="#">Projects</a></li> <li><a href="#">News</a></li>
-      <li><a href="#">Tutorials</a></li>
-      <li><a href="#">Projects</a></li> <li><a href="#">News</a></li>
-      <li><a href="#">Tutorials</a></li>
-      <li><a href="#">Projects</a></li> <li><a href="#">News</a></li>
-      <li><a href="#">Tutorials</a></li>
-      <li><a href="#">Projects</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Tutorials</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Tutorials</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Tutorials</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Tutorials</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Tutorials</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Tutorials</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Tutorials</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Tutorials</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Tutorials</a></li>
-            <li><a href="#">Projects</a></li>
-        </ul>
+        @for ($i = 0; $i < 25; $i++)
+            <details class="aside-main-links">
+                <summary class="">العنوان {{ $i }}</summary>
+                <a href="">content</a>
+            </details>
+        @endfor
     </aside>
+
     <section class="content">
         <h1>Welcome to My Website</h1>
         <p>

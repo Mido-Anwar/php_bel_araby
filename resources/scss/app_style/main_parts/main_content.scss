@@ -1,61 +1,90 @@
-:root {
-    --header-height: 200px; // عدّل لو الهيدر غير 200px
+$primary-color: #1e293b;
+$logo-color: #f3ebeb;
+$nav-list-1-background: #2b384f;
+$nav-list-2-background: #3a4861;
+$nav-color-1: #f3ebeb;
+$nav-color-2: #f3ebeb;
+
+// reusable aside
+@mixin aside {
+    flex: 0 0 260px; // عرض ثابت للaside
+    background-color: rgb(86, 86, 86);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    align-self: flex-start; // يتكدّس من فوق
+    /* ارتفاع محسوب بحيث لا يسبب overflow للصفحة العامة */
+    height: 70vh;
+    overflow-y: auto; // مهم لظهور الاسكرول
+    -webkit-overflow-scrolling: touch; // smooth scrolling على iOS
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: green rgba(255, 255, 255, 0.12);
+    position: sticky;
+
+    /* WebKit browsers */
+    &::-webkit-scrollbar {
+        width: 30px;
+    }
+    &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: green;
+        border-radius: 10px;
+        border: 2px solid rgba(255, 255, 255, 0.06);
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: darken(
+            green,
+            8%
+        ); // لو الـ compiler مش يعرف darken استبدله بلون ثابت
+    }
+    @media (max-width: 768px) {
+        width: 100%;
+        height: auto; /* مش هيبقى طول الشاشة في الموبايل */
+        max-height: 300px; /* اسكرول بسيط */
+        position: static !important;
+    }
+
 }
+
 
 /* maincontent container */
 .maincontent {
     width: 100%;
     min-height: 100vh;
     display: flex;
-    align-items: flex-start;
+    justify-content: center;
+
     gap: 2rem;
     padding: 20px;
     order: 2;
-
-    .sidebar {
-        flex: 0 0 260px; // عرض ثابت للaside
-        background-color: rgb(86, 86, 86);
-        color: white;
-        padding: 20px;
-        border-radius: 10px;
-        align-self: flex-start; // يتكدّس من فوق
-        /* ارتفاع محسوب بحيث لا يسبب overflow للصفحة العامة */
-        height: calc(100vh - var(--header-height) - 40px);
-        overflow-y: auto; // مهم لظهور الاسكرول
-        -webkit-overflow-scrolling: touch; // smooth scrolling على iOS
-
-        /* Firefox */
-        scrollbar-width: thin;
-        scrollbar-color: green rgba(255, 255, 255, 0.12);
-        position: sticky;
-        top: 20px; /* مسافة من فوق */
-        /* WebKit browsers */
-        &::-webkit-scrollbar {
-            width: 30px;
-        }
-        &::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 10px;
-        }
-        &::-webkit-scrollbar-thumb {
-            background: green;
-            border-radius: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.06);
-        }
-        &::-webkit-scrollbar-thumb:hover {
-            background: darken(
-                green,
-                8%
-            ); // لو الـ compiler مش يعرف darken استبدله بلون ثابت
+    background-color: $primary-color;
+    .learn-sidebar {
+        @include aside();
+        background-color: $nav-list-2-background;
+        color: $logo-color;
+        .aside-main-links{
+            padding: 5px;
+            .link-content{
+                background-color: $primary-color;
+                border-radius: 5px;
+                font-weight: 600;
+                text-align: center;
+            }
         }
     }
 
     .content {
         flex: 1;
-        background-color: orangered;
+        background-color: $logo-color;
         padding: 20px;
         border-radius: 10px;
-        min-height: calc(100vh - var(--header-height) - 40px);
+        min-height: 70vh;
+        border: 1px solid black;
     }
 }
 /* Responsive بسيط */

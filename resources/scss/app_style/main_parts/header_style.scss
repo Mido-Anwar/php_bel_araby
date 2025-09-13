@@ -1,9 +1,15 @@
-$primary-color: #0d65cb;
-$secondary-color: #50e3c2;
-$font-color: #333;
+$primary-color: #1e293b;
+$secondary-color: #1e293b;
+$logo-color: #f3ebeb;
 $background-color: #f9f9f9;
-$nav-list-1-color: #ffffff;
-$nav-list-2-color: black;
+$nav-list-1-background: #2b384f;
+$nav-list-2-background: #3a4861;
+$nav-color-1: #f3ebeb;
+$nav-color-2: #f3ebeb;
+
+
+
+
 
 .header {
     width: 100%;
@@ -26,8 +32,9 @@ $nav-list-2-color: black;
             text-align: start;
             font-size: 25px;
             font-weight: 500;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.2);
             padding: 0 20px;
+            color: $logo-color;
         }
         .login {
             flex: 1; /* ياخد نص المساحة */
@@ -66,9 +73,11 @@ $nav-list-2-color: black;
     }
 }
 .nav-list-1 {
-    @include nav-list($nav-list-1-color);
+    @include nav-list($nav-list-1-background);
+    color: $nav-color-1;
 }
 .nav-list-2 {
-    @include nav-list($nav-list-2-color);
-    color: #ffffff;
+    @include nav-list($nav-list-2-background);
+    color: $nav-color-1;
+
 }
