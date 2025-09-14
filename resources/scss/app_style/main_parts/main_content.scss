@@ -37,10 +37,7 @@ $nav-color-2: #f3ebeb;
         border: 2px solid rgba(255, 255, 255, 0.06);
     }
     &::-webkit-scrollbar-thumb:hover {
-        background: darken(
-            green,
-            8%
-        ); // لو الـ compiler مش يعرف darken استبدله بلون ثابت
+        background:rgb(4, 85, 4) // لو الـ compiler مش يعرف darken استبدله بلون ثابت
     }
     @media (max-width: 768px) {
         width: 100%;
@@ -50,7 +47,19 @@ $nav-color-2: #f3ebeb;
     }
 
 }
+//accordion
+.accordion{
+    width:90vh;
+        background-color: $nav-list-1-background;
 
+    h3{
+        background-color: $nav-list-2-background;
+    }
+    p{
+        max-height: 0;
+        overflow: hidden;
+    }
+}
 
 /* maincontent container */
 .maincontent {

@@ -2,12 +2,9 @@
 
     <aside class="learn-sidebar" id="accordion">
         <h3>Categories</h3>
-        @for ($i = 0; $i < 25; $i++)
-            <details class="aside-main-links">
-                <summary class="">العنوان {{ $i }}</summary>
-                <a href="">content</a>
-            </details>
-        @endfor
+    
+
+
     </aside>
 
     <section class="content">

@@ -70,3 +70,44 @@ $btn-dashboard-color: rgb(71, 20, 222);
     text-shadow: 3px 3px 3px #5b5858;
     border: 2px solid whitesmoke;
 }
+
+
+.accordion {
+  max-width: 200px;
+  margin: auto;
+
+  .item {
+    border: 1px solid #414f69;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    overflow: hidden;
+
+    .header {
+      padding: 12px;
+      background: #545760;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &:hover {
+        background: #665e99;
+      }
+    }
+
+    .content {
+      max-height: 0;
+      overflow: hidden;
+      background: #bab3b3;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 12px;
+    }
+
+    &.active {
+      .content {
+        max-height: 200px; // ارتفاع افتراضي
+        padding: 12px;
+      }
+    }
+  }
+}
