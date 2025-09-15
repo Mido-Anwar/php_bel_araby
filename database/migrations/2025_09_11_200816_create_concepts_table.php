@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('concepts', function (Blueprint $table) {
             $table->id();
+            $table->string('name'); // اسم الكونسبت
+            $table->text('description')->nullable();
+            $table->foreignId('section_id')
+                ->constrained()
+                ->onDelete('cascade'); // الكونسبت مرتبط بـ Section
             $table->timestamps();
         });
     }

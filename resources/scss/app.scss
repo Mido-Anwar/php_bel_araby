@@ -1,10 +1,10 @@
-@import url("app_style/main_parts/header_style.scss");
-@import url("app_style/main_parts/main_content.scss");
-@import url("app_style/main_parts/footer_style.scss");
-@import url("app_style/blog/blog.scss");
-
-
-
+@use "variables" as *;
+@use "reusableElements" as *;
+// لو لسه بتستخدم ملفات SCSS تانية
+@import "app_style/main_parts/header_style";
+@import "app_style/main_parts/main_content";
+@import "app_style/main_parts/footer_style";
+@import "app_style/blog/blog";
 
 * {
     box-sizing: border-box;
@@ -25,89 +25,27 @@ body {
     align-items: center;
     background: #dddbdb;
 }
-// Mixin قابل لإعادة الاستخدام
-@mixin btn-style($bg-color) {
-    background-color: $bg-color;
-    color: #fff;
-    font-weight: bold;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-
-    &:hover {
-        background-color: darken($bg-color, 10%);
-        transform: translateY(-2px);
-    }
-
-    &:active {
-        transform: scale(0.97);
-    }
-}
-// ألوان أساسية للأزرار
-$btn-login-color: rgb(17, 17, 19); // أزرق غامق
-$btn-register-color: #28a745;
-$btn-dashboard-color: rgb(71, 20, 222);
 
 // الأزرار المختلفة
 .btn-login {
-    @include btn-style($btn-login-color);
-    text-shadow: 3px 3px 3px #b5b3b3;
+    @include btn-style($nav-list-2-background);
+    text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
-
 }
 
 .btn-register {
-    @include btn-style($btn-register-color);
-    text-shadow: 3px 3px 3px #5b5858;
+     @include btn-style($nav-list-2-background);
+    text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
-
 }
 
 .btn-dashboard {
-    @include btn-style($btn-dashboard-color);
-    text-shadow: 3px 3px 3px #5b5858;
+    @include btn-style($nav-list-2-background);
+    text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
 }
 
-
-.accordion {
-  max-width: 200px;
-  margin: auto;
-
-  .item {
-    border: 1px solid #414f69;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    overflow: hidden;
-
-    .header {
-      padding: 12px;
-      background: #545760;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      &:hover {
-        background: #665e99;
-      }
-    }
-
-    .content {
-      max-height: 0;
-      overflow: hidden;
-      background: #bab3b3;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-      padding: 0 12px;
-    }
-
-    &.active {
-      .content {
-        max-height: 200px; // ارتفاع افتراضي
-        padding: 12px;
-      }
-    }
-  }
+.sidebar{
+    @include aside;
+    color: #dddbdb;
 }

@@ -9,23 +9,8 @@
     gap: 1rem;
     padding: 20px;
 }
-// card
-.card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1rem;
-    max-width: 300px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 
-    h3 {
-        margin: 0 0 0.5rem;
-        font-size: 1.1rem;
-    }
 
-    p {
-        font-size: 0.9rem;
-        color: #555;
-        overflow-wrap: break-word;
-    }
+.article-card{
+    @include card;
 }

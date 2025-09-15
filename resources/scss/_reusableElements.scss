@@ -1,0 +1,84 @@
+// Mixin قابل لإعادة الاستخدام
+@mixin btn-style($bg-color) {
+    background-color: $bg-color;
+    color: #fff;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+        background-color: darken($bg-color, 10%);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: scale(0.97);
+    }
+}
+
+// reusable aside
+@mixin aside {
+    flex: 0 0 260px; // عرض ثابت للaside
+    background-color: rgb(86, 86, 86);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    align-self: flex-start; // يتكدّس من فوق
+    /* ارتفاع محسوب بحيث لا يسبب overflow للصفحة العامة */
+    height: 70vh;
+    overflow-y: auto; // مهم لظهور الاسكرول
+    -webkit-overflow-scrolling: touch; // smooth scrolling على iOS
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: green rgba(255, 255, 255, 0.12);
+    position: sticky;
+
+    /* WebKit browsers */
+    &::-webkit-scrollbar {
+        width: 30px;
+    }
+    &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: green;
+        border-radius: 10px;
+        border: 2px solid rgba(255, 255, 255, 0.06);
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background:rgb(4, 85, 4) // لو الـ compiler مش يعرف darken استبدله بلون ثابت
+    }
+    @media (max-width: 768px) {
+        width: 100%;
+        height: auto; /* مش هيبقى طول الشاشة في الموبايل */
+        max-height: 300px; /* اسكرول بسيط */
+        position: static !important;
+    }
+
+}
+
+// card
+@mixin card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    max-width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+    h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+        color: #555;
+        overflow-wrap: break-word;
+    }
+}

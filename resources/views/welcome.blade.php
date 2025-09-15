@@ -1,9 +1,9 @@
 <x-master-layout>
-    <div class="accordion">
+    <div  class="sidebar">
             @for ($i = 0; $i < 25; $i++)
 
                 <h3>Section {{ $i }}</h3>
-<p>sjlkkljljlkjkljlkjkljkl</p>
+
 
             @endfor
         </div>
