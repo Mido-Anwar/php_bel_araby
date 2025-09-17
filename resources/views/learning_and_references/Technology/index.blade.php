@@ -14,10 +14,20 @@
                             + Create Technology
                         </a>
                     </div>
-                    <div class="my-2 p-3">
+                    <div class="m-2 p-3 flex flex-col w-1/2">
                         @foreach ($techs as $tech)
                             <a href="{{ route('tech.show', $tech->name) }}"
-                                class="px-4 py-2 bg-black text-white rounded-md ">{{ $tech->name }}</a>
+                                class="my-2 px-4 py-2 w-1/2 bg-black text-white rounded-md ">{{ $tech->name }}</a>
+
+                            <form action="{{ route('tech.destroy', $tech->name) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this technology?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="px-3 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                                    Delete {{ $tech->name }}
+                                </button>
+                            </form>
+                            <hr class="my-2">
                         @endforeach
                     </div>
                 </div>

@@ -30,5 +30,7 @@ Route::prefix('tech')->controller(TechnologyController::class)->group(function (
     Route::get('/show/{name}', 'show')->name('tech.show');
     Route::get('/edit/{name}', 'edit')->name('tech.edit');
     Route::post('/update/{name}', 'update')->name('tech.update');
+    Route::delete('/delete/{name}', 'destroy')->name('tech.destroy');
+
 })->middleware(['auth', 'verified']);
 require __DIR__ . '/auth.php';
