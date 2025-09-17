@@ -15,19 +15,20 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/blog', [BlogController::class, 'index'])
-->name('blog.main');
+    ->name('blog.main');
 Route::get('/learn', [LearnReferenceController::class, 'index'])
-->name('learn.main');
+    ->name('learn.main');
 
 Route::prefix('posts')->controller(PostController::class)->group(function () {
-        Route::get('/', 'index')->name('posts.index');
-    })->middleware(['auth', 'verified']);
+    Route::get('/', 'index')->name('posts.index');
+})->middleware(['auth', 'verified']);
 
 Route::prefix('tech')->controller(TechnologyController::class)->group(function () {
-        Route::get('/', 'index')->name('tech.index');
-        Route::get('/create', 'create')->name('tech.create');
-        Route::post('/store', 'store')->name('tech.store');
-        Route::get('/show/{name}', 'show')->name('tech.show');
-
-    })->middleware(['auth', 'verified']);
+    Route::get('/', 'index')->name('tech.index');
+    Route::get('/create', 'create')->name('tech.create');
+    Route::post('/store', 'store')->name('tech.store');
+    Route::get('/show/{name}', 'show')->name('tech.show');
+    Route::get('/edit/{name}', 'edit')->name('tech.edit');
+    Route::post('/update/{name}', 'update')->name('tech.update');
+})->middleware(['auth', 'verified']);
 require __DIR__ . '/auth.php';

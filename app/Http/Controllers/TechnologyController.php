@@ -42,24 +42,30 @@ class TechnologyController extends Controller
      */
     public function show($name)
     {
-        $technology = Technology::where('name', $name)->firstOrFail();
-        return view('learning_and_references.Technology.show', compact('technology'));
+        $tech = Technology::where('name', $name)->firstOrFail();
+        return view('learning_and_references.Technology.show', compact('tech'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Technology $technology)
+    public function edit($name)
     {
-        return view('learning_and_references.Technology.edit');
+        $tech = Technology::where('name', $name)->firstOrFail();
+
+        return view('learning_and_references.Technology.edit', compact('tech'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTechnologyRequest $request, Technology $technology)
+    public function update(UpdateTechnologyRequest $request, $name)
     {
-        //
+        $tech = Technology::where('name', $name)->firstOrFail();
+        $tech->update($request->validated());
+        return redirect()
+            ->route('tech.index')
+            ->with('success', 'Technology created successfully.');
     }
 
     /**
