@@ -11,6 +11,9 @@ class Technology extends Model
 {
     /** @use HasFactory<\Database\Factories\TechnologyFactory> */
     use HasFactory;
+
+     protected $fillable = ['name','description'];
+
     public function sections():HasMany{
       return $this->hasMany(Section::class);
     }

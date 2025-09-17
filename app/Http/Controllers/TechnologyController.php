@@ -13,7 +13,8 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        return view('laerning_and_references.technologiesDashboard');
+        $techs = Technology::select('id', 'name')->get();
+        return view('learning_and_references.Technology.index', ['techs' => $techs]);
     }
 
     /**
@@ -21,7 +22,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('learning_and_references.Technology.create');
     }
 
     /**
@@ -29,15 +30,20 @@ class TechnologyController extends Controller
      */
     public function store(StoreTechnologyRequest $request)
     {
-        //
+
+        Technology::create($request->validated());
+        return redirect()
+            ->route('tech.index')
+            ->with('success', 'Technology created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Technology $technology)
+    public function show($name)
     {
-        //
+        $technology = Technology::where('name', $name)->firstOrFail();
+        return view('learning_and_references.Technology.show', compact('technology'));
     }
 
     /**
@@ -45,7 +51,7 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology)
     {
-        //
+        return view('learning_and_references.Technology.edit');
     }
 
     /**

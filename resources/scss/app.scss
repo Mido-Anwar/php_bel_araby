@@ -26,7 +26,6 @@ body {
     background: #dddbdb;
 }
 
-// الأزرار المختلفة
 .btn-login {
     @include btn-style($nav-list-2-background);
     text-shadow: 3px 3px 3px $nav-list-1-background;
@@ -44,7 +43,11 @@ body {
     text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
 }
-
+.btn-create {
+    @include btn-style($nav-list-2-background);
+    text-shadow: 3px 3px 3px $nav-list-1-background;
+    border: 2px solid whitesmoke;
+}
 .sidebar{
     @include aside;
     color: #dddbdb;

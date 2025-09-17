@@ -25,5 +25,9 @@ Route::prefix('posts')->controller(PostController::class)->group(function () {
 
 Route::prefix('tech')->controller(TechnologyController::class)->group(function () {
         Route::get('/', 'index')->name('tech.index');
+        Route::get('/create', 'create')->name('tech.create');
+        Route::post('/store', 'store')->name('tech.store');
+        Route::get('/show/{name}', 'show')->name('tech.show');
+
     })->middleware(['auth', 'verified']);
 require __DIR__ . '/auth.php';

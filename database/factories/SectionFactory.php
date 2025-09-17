@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Technology;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class SectionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence(3),
+            'content' => $this->faker->paragraph(),
+            'technology_id' => Technology::factory(), // يرتبط ب
         ];
     }
 }

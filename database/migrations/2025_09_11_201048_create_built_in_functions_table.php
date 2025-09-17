@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('built_in_functions', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // اسم الدالة
+            $table->string('syntax')->nullable();
             $table->text('description')->nullable(); // وصف اختياري
+            $table->text('example')->nullable();
             $table->foreignId('section_id')
                 ->constrained()
-                ->onDelete('cascade'); // الدالة مرتبطة بـ Section
+                ->onDelete('cascade');// Section id
             $table->timestamps();
         });
     }

@@ -17,7 +17,8 @@ class TechnologyFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->word(), // اسم عشوائي
+            'description' => $this->faker->sentence(10), // وصف قصير
         ];
     }
 }

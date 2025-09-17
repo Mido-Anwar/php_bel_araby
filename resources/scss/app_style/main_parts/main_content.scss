@@ -1,11 +1,10 @@
-
 /* maincontent container */
 .maincontent {
     width: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
-
+    text-wrap: wrap;
     gap: 2rem;
     padding: 20px;
     order: 2;
@@ -14,9 +13,9 @@
         @include aside();
         background-color: $nav-list-2-background;
         color: $logo-color;
-        .aside-main-links{
+        .aside-main-links {
             padding: 5px;
-            .link-content{
+            .link-content {
                 background-color: $primary-color;
                 border-radius: 5px;
                 font-weight: 600;

@@ -51,7 +51,11 @@
         border: 2px solid rgba(255, 255, 255, 0.06);
     }
     &::-webkit-scrollbar-thumb:hover {
-        background:rgb(4, 85, 4) // لو الـ compiler مش يعرف darken استبدله بلون ثابت
+        background: rgb(
+            4,
+            85,
+            4
+        ); // لو الـ compiler مش يعرف darken استبدله بلون ثابت
     }
     @media (max-width: 768px) {
         width: 100%;
@@ -59,7 +63,6 @@
         max-height: 300px; /* اسكرول بسيط */
         position: static !important;
     }
-
 }
 
 // card
@@ -80,5 +83,19 @@
         font-size: 0.9rem;
         color: #555;
         overflow-wrap: break-word;
+    }
+}
+
+@mixin dash-table {
+    table {
+        tr {
+            align-items: center;
+            th {
+                text-align: center;
+            }
+            td{
+                text-align: center;
+            }
+        }
     }
 }
