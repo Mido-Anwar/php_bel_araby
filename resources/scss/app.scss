@@ -26,29 +26,30 @@ body {
     background: #dddbdb;
 }
 
-.btn-login {
-    @include btn-style($nav-list-2-background);
+.btn-delete {
+    @include btn-style($btn-background-delete,small);
     text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
+   
 }
 
-.btn-register {
-     @include btn-style($nav-list-2-background);
+.btn-show {
+    @include btn-style($btn-background-show);
     text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
 }
 
 .btn-dashboard {
-    @include btn-style($nav-list-2-background);
+    @include btn-style($nav-list-1-background);
     text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
 }
 .btn-create {
-    @include btn-style($nav-list-2-background);
+    @include btn-style($nav-list-1-background);
     text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
 }
-.sidebar{
+.sidebar {
     @include aside;
     color: #dddbdb;
 }
