@@ -16,8 +16,10 @@ Route::get('/dashboard', function () {
 
 Route::get('/blog', [BlogController::class, 'index'])
     ->name('blog.main');
-Route::get('/learn', [LearnReferenceController::class, 'index'])
-    ->name('learn.main');
+Route::prefix('/docs')->controller(LearnReferenceController::class)->group(function(){
+
+    Route::get('/docs/show/{name}','show')->name('docs.show');
+});
 
 Route::prefix('posts')->controller(PostController::class)->group(function () {
     Route::get('/', 'index')->name('posts.index');

@@ -21,10 +21,9 @@
             <li><a href="#">اتصل بنا</a></li>
         </ul>
         <ul class="nav-list-2">
-            <li><a href="{{ route('learn.main') }} ">php</a></li>
-            <li><a href="{{ route('learn.main') }} ">Javascript</a></li>
-            <li><a href="{{ route('learn.main') }} ">HTML</a></li>
-            <li><a href="{{ route('learn.main') }} ">Css</a></li>
+            @foreach ($technologies as $technology)
+                <li> <a href="{{ route('docs.show',$technology->name) }}">{{ $technology->name }}</a> </li>
+            @endforeach
         </ul>
     </div>
 </header>

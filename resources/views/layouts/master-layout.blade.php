@@ -19,7 +19,7 @@
 
 <body class="">
     <div class="mainContainer">
-        <x-master.header />
+        <x-master.header/>
 
 
         <main class="maincontent" dir="rtl" lang="ar EG">

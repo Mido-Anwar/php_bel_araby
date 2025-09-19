@@ -20,7 +20,6 @@
                             <a href="{{ route('tech.show', $tech->name) }}" class="btn-show">
                                 {{ $tech->name }}
                             </a>
-
                             <form action="{{ route('tech.destroy', $tech->name) }}" method="POST"
                                 onsubmit="return confirm('Are you sure you want to delete this technology?');">
                                 @csrf
@@ -31,7 +30,6 @@
                             </form>
                         </div>
                     @endforeach
-
                 </div>
             </div>
         </div>

@@ -9,12 +9,16 @@ class LearnReferenceController extends Controller
 {
     public function index()
     {
-        $techs = Technology::select("id", "name")
+        $technologies = Technology::select("id", "name")->get();
+        // $technologies = Technology::with(['sections.concepts', 'sections.builtinFunctions'])->find(1);
+        return view('learning_and_references.main', ['technologies' => $technologies]);
+    }
+    public function show($name)
+    {
+        $technology = Technology::select("id", "name")
+            ->where('name', $name)
             ->with(['sections.concepts', 'sections.builtinFunctions'])
-            ->get();
-
-        // $techs = Technology::with(['sections.concepts', 'sections.builtinFunctions'])->find(1);
-
-        return view('learning_and_references.main', ['techs' => $techs]);
+            ->first();
+        return view('learning_and_references.main', ['technology' => $technology]);
     }
 }
