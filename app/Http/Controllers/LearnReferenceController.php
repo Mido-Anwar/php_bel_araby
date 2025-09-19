@@ -15,10 +15,15 @@ class LearnReferenceController extends Controller
     }
     public function show($name)
     {
-        $technology = Technology::select("id", "name")
-            ->where('name', $name)
-            ->with(['sections.concepts', 'sections.builtinFunctions'])
-            ->first();
+      $technology = Technology::where('name', $name)
+    ->with([
+        'sections' => function ($query) {
+            $query->select('id', 'title', 'technology_id');
+        },
+        'sections.concepts:id,section_id,name',
+        'sections.builtinFunctions:id,section_id,name',
+    ])
+    ->firstOrFail(['id', 'name']);
         return view('learning_and_references.main', ['technology' => $technology]);
     }
 }

@@ -12,6 +12,7 @@
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/scss/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
     @else
+    @livewireStyles
         <style>
         </style>
     @endif
@@ -19,7 +20,7 @@
 
 <body class="">
     <div class="mainContainer">
-        <x-master.header/>
+        <x-master.header />
 
 
         <main class="maincontent" dir="rtl" lang="ar EG">
@@ -27,6 +28,7 @@
         </main>
 
         <x-master.footer />
+        @livewireScripts
     </div>
 </body>
 

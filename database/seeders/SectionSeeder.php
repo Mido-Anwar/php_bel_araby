@@ -15,11 +15,12 @@ class SectionSeeder extends Seeder
      */
     public function run(): void
     {
-         // لكل تكنولوجيا نعمل Sections
-        Technology::all()->each(function ($technology) {
-            Section::factory()->count(10)->create([
-                'technology_id' => $technology->id,
-            ]);
-        });
+
+        // لكل تكنولوجيا نعمل Sections
+         Technology::all()->each(function ($technology) {
+             Section::factory()->count(10)->create([
+                 'technology_id' => $technology->id,
+             ]);
+         });
     }
 }
