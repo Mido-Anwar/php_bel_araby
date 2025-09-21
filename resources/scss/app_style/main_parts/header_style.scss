@@ -1,3 +1,6 @@
+@use "../../variables" as *;
+@use "../../reusableElements" as *;
+
 .header {
     width: 100%;
     min-height: 200px;
@@ -40,25 +43,7 @@
         flex: 1; /* ياخد نص المساحة */
     }
 }
-@mixin nav-list($background) {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    flex: 1;
-    background-color: $background;
-    a {
-        font-size: 17px;
-        font-weight: 900;
-        &:hover {
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #333;
-            color: #f9f9f9;
-        }
-    }
-}
+
 .nav-list-1 {
     @include nav-list($nav-list-1-background);
     color: $nav-color-1;

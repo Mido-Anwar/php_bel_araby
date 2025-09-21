@@ -29,7 +29,11 @@ class SectionController extends Controller
      */
     public function store(StoreSectionRequest $request)
     {
-        //
+
+        Section::create($request->validated());
+        return redirect()
+            ->back()
+            ->with('success', 'Section created successfully.');
     }
 
     /**
@@ -37,7 +41,7 @@ class SectionController extends Controller
      */
     public function show(Section $section)
     {
-        //
+        return view('learning_and_references.section.show', compact('section'));
     }
 
     /**

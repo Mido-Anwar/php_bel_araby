@@ -14,7 +14,7 @@ class TechnologyController extends Controller
     public function index()
     {
         $techs = Technology::select('id', 'name')->get();
-        return view('learning_and_references.Technology.index', ['techs' => $techs]);
+        return view('learning_and_references.technology.index', ['techs' => $techs]);
     }
 
     /**
@@ -22,7 +22,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        return view('learning_and_references.Technology.create');
+        return view('learning_and_references.technology.create');
     }
 
     /**
@@ -43,7 +43,14 @@ class TechnologyController extends Controller
     public function show($name)
     {
         $tech = Technology::where('name', $name)->firstOrFail();
-        return view('learning_and_references.Technology.show', compact('tech'));
+             $technology = Technology::where('name', $name)
+    ->with([
+        'sections' => function ($query) {
+            $query->select('id', 'title', 'technology_id');
+        },
+    ])
+    ->firstOrFail(['id', 'name','description']);
+        return view('learning_and_references.technology.show', compact('tech','technology'));
     }
 
     /**
@@ -53,7 +60,7 @@ class TechnologyController extends Controller
     {
         $tech = Technology::where('name', $name)->firstOrFail();
 
-        return view('learning_and_references.Technology.edit', compact('tech'));
+        return view('learning_and_references.technology.edit', compact('tech'));
     }
 
     /**
@@ -65,7 +72,7 @@ class TechnologyController extends Controller
         $tech->update($request->validated());
         return redirect()
             ->route('tech.index')
-            ->with('success', 'Technology created successfully.');
+            ->with('success', 'technology created successfully.');
     }
 
     /**

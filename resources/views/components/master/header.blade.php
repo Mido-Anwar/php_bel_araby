@@ -10,7 +10,7 @@
 
         <div class="logo" dir="rtl">
 
-            <a href="{{ url('/') }}"> php بالعربي</a>
+            <a href="{{ route('home') }}"> php بالعربي</a>
         </div>
     </nav>
     <div class="site-nav">

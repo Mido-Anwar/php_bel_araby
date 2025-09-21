@@ -3,12 +3,13 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\LearnReferenceController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TechnologyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -16,7 +17,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/blog', [BlogController::class, 'index'])
     ->name('blog.main');
-    
+
 Route::prefix('/docs')->controller(LearnReferenceController::class)->group(function(){
     Route::get('/{name}','show')->name('docs.show');
 });
@@ -33,6 +34,15 @@ Route::prefix('tech')->controller(TechnologyController::class)->group(function (
     Route::get('/edit/{name}', 'edit')->name('tech.edit');
     Route::post('/update/{name}', 'update')->name('tech.update');
     Route::delete('/delete/{name}', 'destroy')->name('tech.destroy');
+
+})->middleware(['auth', 'verified']);
+
+Route::prefix('section')->controller(SectionController::class)->group(function () {
+    Route::post('/store', 'store')->name('section.store');
+    Route::get('/show/{section}', 'show')->name('section.show');
+    Route::get('/edit/{section}', 'edit')->name('section.edit');
+    Route::post('/update/{section}', 'update')->name('section.update');
+    Route::delete('/delete/{section}', 'destroy')->name('section.destroy');
 
 })->middleware(['auth', 'verified']);
 require __DIR__ . '/auth.php';

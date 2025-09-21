@@ -21,7 +21,7 @@
     <section class="content">
     <h1>{{ $technology->name }}</h1>
     <p>
-        {{ $technology->description }}
+        {{ $technology->description ?? 'No description available.'   }}
     </p>
 
     </section>

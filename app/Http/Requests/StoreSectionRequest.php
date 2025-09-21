@@ -11,7 +11,7 @@ class StoreSectionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreSectionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['nullable', 'string'],
+            'technology_id' => ['required', 'exists:technologies,id'],
         ];
     }
 }

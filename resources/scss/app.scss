@@ -1,10 +1,12 @@
 @use "variables" as *;
 @use "reusableElements" as *;
-// لو لسه بتستخدم ملفات SCSS تانية
-@import "app_style/main_parts/header_style";
-@import "app_style/main_parts/main_content";
-@import "app_style/main_parts/footer_style";
-@import "app_style/blog/blog";
+
+@use "app_style/main_parts/header_style";
+@use "app_style/main_parts/main_content";
+@use "app_style/main_parts/footer_style";
+
+@use "app_style/blog/blog";
+
 
 * {
     box-sizing: border-box;
@@ -30,13 +32,17 @@ body {
     @include btn-style($btn-background-delete,small);
     text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
-   
+     font-weight: 800;
+    font-size: 1rem;
+
 }
 
 .btn-show {
     @include btn-style($btn-background-show);
     text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
+    font-weight: 800;
+    font-size: 1rem;
 }
 
 .btn-dashboard {

@@ -1,3 +1,6 @@
+@use "../../variables" as *;
+@use "../../reusableElements" as *;
+
 .blog-content {
     width: 100%;
     height: 90vh; // لازم ارتفاع ثابت علشان الـ scroll يشتغل

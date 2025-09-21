@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 class LearnReferenceController extends Controller
 {
-    public function index()
-    {
-        $technologies = Technology::select("id", "name")->get();
-        // $technologies = Technology::with(['sections.concepts', 'sections.builtinFunctions'])->find(1);
-        return view('learning_and_references.main', ['technologies' => $technologies]);
-    }
+    // public function index()
+    // {
+    //    // $technologies = Technology::select("id", "name")->get();
+    //     // $technologies = Technology::with(['sections.concepts', 'sections.builtinFunctions'])->find(1);
+    //     return view('learning_and_references.main');
+    // }
     public function show($name)
     {
       $technology = Technology::where('name', $name)
@@ -23,7 +23,7 @@ class LearnReferenceController extends Controller
         'sections.concepts:id,section_id,name',
         'sections.builtinFunctions:id,section_id,name',
     ])
-    ->firstOrFail(['id', 'name']);
+    ->firstOrFail(['id', 'name','description']);
         return view('learning_and_references.main', ['technology' => $technology]);
     }
 }

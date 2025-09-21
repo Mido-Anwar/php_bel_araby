@@ -115,3 +115,22 @@
     border: 1px solid #ccc;
     border-radius: 6px;
 }
+@mixin nav-list($background) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    background-color: $background;
+    a {
+        font-size: 17px;
+        font-weight: 900;
+        &:hover {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #333;
+            color: #f9f9f9;
+        }
+    }
+}
