@@ -29,7 +29,7 @@ class SectionController extends Controller
      */
     public function store(StoreSectionRequest $request)
     {
-
+        dd($request);
         Section::create($request->validated());
         return redirect()
             ->back()

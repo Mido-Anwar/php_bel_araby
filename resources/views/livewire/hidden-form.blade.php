@@ -6,7 +6,7 @@
 
     @if($open)
         <div class=" mt-2 w-80 bg-white border rounded-lg shadow-lg p-4 z-50 transition-transform">
-            <form method="POST" action="{{ route('section.store') }}">
+            <form method="POST" action="{{ $actionUrl }}">
               @csrf
                 <input type="hidden" name="technology_id" value="{{ $modelId }}">
 

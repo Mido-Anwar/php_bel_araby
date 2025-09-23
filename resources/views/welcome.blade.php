@@ -1,4 +1,5 @@
 <x-master-layout>
+    
     <div  class="sidebar">
             @for ($i = 0; $i < 25; $i++)
 

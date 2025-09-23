@@ -58,7 +58,7 @@
                             Add Sections To {{ Str::upper($technology->name) }}
                         </h2>
 
-                        <livewire:hidden-form :modelId="$technology->id" />
+                        <livewire:hidden-form :actionUrl="'tech/store'" :modelId="$technology->id" />
 
                         @if (session('success'))
                             <div class="mt-3 text-green-600">

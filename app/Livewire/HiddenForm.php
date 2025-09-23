@@ -12,6 +12,7 @@ class HiddenForm extends Component
     public function mount($modelId)
     {
         $this->modelId = $modelId;
+      
     }
 
     public function toggle()
