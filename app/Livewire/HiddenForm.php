@@ -8,11 +8,14 @@ class HiddenForm extends Component
 {
     public bool $open = false;
     public $modelId;
+    public  $actionUrl;
 
-    public function mount($modelId)
+
+    public function mount($modelId, $actionUrl = null)
     {
         $this->modelId = $modelId;
-      
+        $this->actionUrl = route($actionUrl, $modelId ?? null);
+
     }
 
     public function toggle()

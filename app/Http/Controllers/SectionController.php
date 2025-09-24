@@ -29,7 +29,7 @@ class SectionController extends Controller
      */
     public function store(StoreSectionRequest $request)
     {
-        dd($request);
+
         Section::create($request->validated());
         return redirect()
             ->back()
@@ -49,7 +49,7 @@ class SectionController extends Controller
      */
     public function edit(Section $section)
     {
-        //
+        return view('learning_and_references.section.edit', compact('section'));
     }
 
     /**
@@ -57,7 +57,10 @@ class SectionController extends Controller
      */
     public function update(UpdateSectionRequest $request, Section $section)
     {
-        //
+        $section->update($request->validated());
+        return redirect()
+            ->route('section.show', $section->id)
+            ->with('success', 'Section updated successfully.');
     }
 
     /**
@@ -65,6 +68,9 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        //
+        $section->delete();
+        return redirect()
+            ->back()
+            ->with('success', 'Section deleted successfully.');
     }
 }
