@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ConceptController;
 use App\Http\Controllers\LearnReferenceController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TechnologyController;
+use App\Models\Concept;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -43,6 +45,17 @@ Route::prefix('section')->controller(SectionController::class)->group(function (
     Route::get('/edit/{section}', 'edit')->name('section.edit');
     Route::post('/update/{section}', 'update')->name('section.update');
     Route::delete('/delete/{section}', 'destroy')->name('section.destroy');
+
+})->middleware(['auth', 'verified']);
+
+Route::prefix('concept')->controller(ConceptController::class)->group(function () {
+    Route::get('/', 'index')->name('concept.index');
+    Route::get('/create', 'create')->name('concept.create');
+    Route::post('/store', 'store')->name('concept.store');
+    Route::get('/show/{concept}', 'show')->name('concept.show');
+    Route::get('/edit/{concept}', 'edit')->name('concept.edit');
+    Route::post('/update/{concept}', 'update')->name('concept.update');
+    Route::delete('/delete/{concept}', 'destroy')->name('concept.destroy');
 
 })->middleware(['auth', 'verified']);
 require __DIR__ . '/auth.php';
