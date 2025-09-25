@@ -51,17 +51,19 @@
 
                         </div>
                     </div>
-                    <div dir="rtl"
-                        class="my-4 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg border border-gray-200 dark:border-gray-700">
+                    <div style="height: 30rem"
+                        class=" h-40 my-4 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg border border-gray-200 dark:border-gray-700">
 
                         <h2 class="font-bold text-gray-800 dark:text-gray-100 mb-2">
                             Add Sections To {{ Str::upper($technology->name) }}
                         </h2>
 
-                        <livewire:hidden-form :action-url="'section.store'" :model-id="$technology->id" :fields="[
-                            'title' => ['label' => 'Title', 'type' => 'text'],
-                            'content' => ['label' => 'Content', 'type' => 'textarea'],
-                        ]" />
+                        <x-hidden-form :action-url="route('section.store')" :open="false" >
+                            <input type="hidden" name="technology_id" id="" value="{{ $technology->id }}" hidden>
+                            <input type="text" name="title" placeholder="Section title"
+                                class="border rounded p-2 w-full mb-2">
+                            <textarea name="content" placeholder="content" class="border rounded p-2 w-full mb-2"></textarea>
+                        </x-hidden-form>
 
                         @if (session('success'))
                             <div class="mt-3 text-green-600">
