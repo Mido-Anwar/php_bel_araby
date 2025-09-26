@@ -1,14 +1,12 @@
-<div class="relative inline-block w-full" x-data="{ open: @json($open) }">
+<div class="inline-block w-full" x-data="{ open: @json($open) }">
     {{-- Toggle button --}}
-    <button type="button" @click="open = ! open"
-        class="px-4 py-2 bg-gray-600 text-white font-bold rounded">
+    <button type="button" @click="open = ! open" class="px-4 py-2 bg-gray-600 text-white font-bold rounded">
         <span x-show="!open">Add Item</span>
         <span x-show="open">Close Form</span>
     </button>
 
     {{-- Form container --}}
-    <div x-show="open" x-transition
-        class="w-full flex justify-center mt-4">
+    <div x-show="open" x-transition class="w-full flex justify-center mt-4">
         <form method="POST" action="{{ $actionUrl }}" class="w-full form-hidden p-4 rounded shadow">
             @csrf
 

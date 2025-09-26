@@ -11,7 +11,7 @@ class UpdateBuiltInFunctionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateBuiltInFunctionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'syntax' => 'nullable|string',
+            'description' => 'nullable|string',
+            'example' => 'nullable|string',
+            'section_id' => 'required|exists:sections,id',
         ];
     }
 }
