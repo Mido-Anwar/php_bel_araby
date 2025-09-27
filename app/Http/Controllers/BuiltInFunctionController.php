@@ -29,16 +29,17 @@ class BuiltInFunctionController extends Controller
      */
     public function store(StoreBuiltInFunctionRequest $request)
     {
-        //
+        $validated = $request->validated();
+        BuiltInFunction::create($validated);
+        return redirect()
+            ->route('section.show', $validated['section_id'])
+            ->with('success_builtin', 'Built-in function created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(BuiltInFunction $builtInFunction)
-    {
-        //
-    }
+    public function show(BuiltInFunction $builtInFunction) {}
 
     /**
      * Show the form for editing the specified resource.

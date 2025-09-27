@@ -28,11 +28,11 @@
                         </p>
                     </div>
 
-                    {{-- Add Concept Form --}}
+                    {{-- Add concept Form --}}
                     <div
                         class="my-6 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg border border-gray-200 dark:border-gray-700">
                         <h2 class="font-bold text-xl text-gray-800 dark:text-gray-100 mb-4">
-                            Add Concept to <span class="text-indigo-600">{{ Str::upper($section->name) }}</span>
+                            Add Concept to <span class="">{{ Str::upper($section->title) }}</span>
                         </h2>
 
                         <x-hidden-form :action-url="route('concept.store')" :open="false">
@@ -83,30 +83,30 @@
                             </div>
                         </x-hidden-form>
 
-                        @if (session('success'))
+                        @if (session('success_concept'))
                             <div class="mt-6 p-4 bg-green-100 text-green-700 rounded-lg border border-green-300">
-                                {{ session('success') }}
+                                {{ session('success_concept') }}
                             </div>
                         @endif
                     </div>
      <div
                         class="my-6 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg border border-gray-200 dark:border-gray-700">
                         <h2 class="font-bold text-xl text-gray-800 dark:text-gray-100 mb-4">
-                            Add builtin function to <span class="text-indigo-600">{{ Str::upper($section->name) }}</span>
+                            Add builtin function to <span class="">{{ Str::upper($section->title) }}</span>
                         </h2>
 
-                        <x-hidden-form :action-url="route('concept.store')" :open="false">
+                        <x-hidden-form :action-url="route('builtin.store')" :open="false">
                             <input type="hidden" name="section_id" value="{{ $section->id }}">
 
                             <div class="space-y-5">
-                                {{-- Concept Title --}}
+                                {{-- builtinFunction Title --}}
                                 <div>
                                     <label for="name"
                                         class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
-                                        Concept Title
+                                        builtinFunction Title
                                     </label>
                                     <input type="text" id="name" name="name"
-                                        placeholder="Enter concept title"
+                                        placeholder="Enter builtinFunction title"
                                         class="border rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                 </div>
 
@@ -143,9 +143,9 @@
                             </div>
                         </x-hidden-form>
 
-                        @if (session('success'))
+                        @if (session('success_builtin'))
                             <div class="mt-6 p-4 bg-green-100 text-green-700 rounded-lg border border-green-300">
-                                {{ session('success') }}
+                                {{ session('success_builtin') }}
                             </div>
                         @endif
                     </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BuiltInFunctionController;
 use App\Http\Controllers\ConceptController;
 use App\Http\Controllers\LearnReferenceController;
 use App\Http\Controllers\PostController;
@@ -56,6 +57,14 @@ Route::prefix('concept')->controller(ConceptController::class)->group(function (
     Route::get('/edit/{concept}', 'edit')->name('concept.edit');
     Route::post('/update/{concept}', 'update')->name('concept.update');
     Route::delete('/delete/{concept}', 'destroy')->name('concept.destroy');
+
+})->middleware(['auth', 'verified']);
+Route::prefix('builtin-methods')->controller(BuiltInFunctionController::class)->group(function () {
+    Route::post('/store', 'store')->name('builtin.store');
+    Route::get('/show/{concept}', 'show')->name('builtin.show');
+    Route::get('/edit/{concept}', 'edit')->name('builtin.edit');
+    Route::post('/update/{concept}', 'update')->name('builtin.update');
+    Route::delete('/delete/{concept}', 'destroy')->name('builtin.destroy');
 
 })->middleware(['auth', 'verified']);
 require __DIR__ . '/auth.php';
