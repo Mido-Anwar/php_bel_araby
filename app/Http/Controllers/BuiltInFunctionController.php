@@ -39,7 +39,10 @@ class BuiltInFunctionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BuiltInFunction $builtInFunction) {}
+    public function show(BuiltInFunction $builtInFunction) {
+        return view('learning_and_references.section.builtinfuncShow', compact('concept'));
+
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -54,7 +57,11 @@ class BuiltInFunctionController extends Controller
      */
     public function update(UpdateBuiltInFunctionRequest $request, BuiltInFunction $builtInFunction)
     {
-        //
+        $validated = $request->validated();
+        $builtInFunction->update($validated);
+        return redirect()
+            ->route('section.show', $builtInFunction->section_id)
+            ->with('update-success_builtin', 'Built-in function updated successfully.');
     }
 
     /**
@@ -62,6 +69,9 @@ class BuiltInFunctionController extends Controller
      */
     public function destroy(BuiltInFunction $builtInFunction)
     {
-        //
+        $builtInFunction->delete();
+        return redirect()
+            ->route('section.show', $builtInFunction->section_id)
+            ->with('delete-success_builtin', 'Built-in function deleted successfully.');
     }
 }

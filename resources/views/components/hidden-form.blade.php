@@ -1,3 +1,4 @@
+@props(['actionUrl', 'open' => false, 'fields' => []])
 <div class="inline-block w-full" x-data="{ open: @json($open) }">
     {{-- Toggle button --}}
     <button type="button" @click="open = ! open" class="px-4 py-2 bg-gray-600 text-white font-bold rounded">
@@ -7,21 +8,61 @@
 
     {{-- Form container --}}
     <div x-show="open" x-transition class="w-full flex justify-center mt-4">
-        <form method="POST" action="{{ $actionUrl }}" class="w-full form-hidden p-4 rounded shadow">
+        <form action="{{ $actionUrl }}" method="POST" class="space-y-5">
             @csrf
 
-            {{-- Custom content passed from parent (slot) --}}
-            {{ $slot }}
+            @foreach ($fields as $field)
+                <div>
+                    {{-- Label (اختياري) --}}
+                    @if (!empty($field['label']))
+                        <label for="{{ $field['name'] }}"
+                            class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                            {{ $field['label'] }}
+                        </label>
+                    @endif
 
-            {{-- Action buttons --}}
-            <div class="flex justify-end gap-2 mt-4">
-                <button type="button" @click="open = false" class="px-3 py-1 bg-gray-600 border rounded text-white">
-                    Cancel
-                </button>
-                <button type="submit" class="px-3 py-1 bg-gray-600 text-white border rounded">
-                    Save
-                </button>
-            </div>
+                    {{-- Dynamic input types --}}
+                    @switch($field['type'])
+                        @case('textarea')
+                            <textarea id="{{ $field['name'] }}" name="{{ $field['name'] }}" placeholder="{{ $field['placeholder'] ?? '' }}"
+                                rows="{{ $field['rows'] ?? 3 }}"
+                                class="border rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                        @break
+
+                        @case('select')
+                            <select id="{{ $field['name'] }}" name="{{ $field['name'] }}"
+                                class="border rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                @foreach ($field['options'] ?? [] as $option)
+                                    <option value="{{ $option }}">{{ $option }}</option>
+                                @endforeach
+                            </select>
+                        @break
+
+                        @case('checkbox')
+                            <input type="checkbox" id="{{ $field['name'] }}" name="{{ $field['name'] }}"
+                                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                        @break
+
+                        @default
+                            <input type="{{ $field['type'] ?? 'text' }}" id="{{ $field['name'] }}"
+                                name="{{ $field['name'] }}" placeholder="{{ $field['placeholder'] ?? '' }}"
+                                value="{{ $field['value'] ?? '' }}"
+                                class="border rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    @endswitch
+                </div>
+            @endforeach
+
+            {{-- Submit --}}
+            <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                Save
+            </button>
+            <button type="button" @click="open = false"
+                class="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">
+                Cancel
+            </button>
+
         </form>
+
+
     </div>
 </div>

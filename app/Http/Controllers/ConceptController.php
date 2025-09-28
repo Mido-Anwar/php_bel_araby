@@ -30,6 +30,7 @@ class ConceptController extends Controller
     public function store(StoreConceptRequest $request)
     {
         $validated = $request->validated();
+        dd($validated);
         Concept::create($validated);
         return redirect()
             ->route('section.show', $validated['section_id'])
@@ -41,7 +42,7 @@ class ConceptController extends Controller
      */
     public function show(Concept $concept)
     {
-        //
+        return view('learning_and_references.section.conceptShow', compact('concept'));
     }
 
     /**
@@ -57,7 +58,11 @@ class ConceptController extends Controller
      */
     public function update(UpdateConceptRequest $request, Concept $concept)
     {
-        //
+        $validated = $request->validated();
+        $concept->update($validated);
+        return redirect()
+            ->route('section.show', $concept->section_id)
+            ->with('update-success_concept', 'Concept updated successfully.');
     }
 
     /**
@@ -65,6 +70,9 @@ class ConceptController extends Controller
      */
     public function destroy(Concept $concept)
     {
-        //
+        $concept->delete();
+        return redirect()
+            ->route('section.show', $concept->section_id)
+            ->with('delete-success_concept', 'Concept deleted successfully.');
     }
 }
