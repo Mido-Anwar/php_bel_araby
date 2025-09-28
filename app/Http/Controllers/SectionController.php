@@ -33,7 +33,7 @@ class SectionController extends Controller
         Section::create($request->validated());
         return redirect()
             ->back()
-            ->with('success', 'Section created successfully.');
+            ->with('success-section', 'Section created successfully.');
     }
 
     /**
@@ -60,7 +60,7 @@ class SectionController extends Controller
         $section->update($request->validated());
         return redirect()
             ->route('section.show', $section->id)
-            ->with('success', 'Section updated successfully.');
+            ->with('success-section-update', 'Section updated successfully.');
     }
 
     /**

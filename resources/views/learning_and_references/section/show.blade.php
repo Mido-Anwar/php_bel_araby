@@ -19,15 +19,78 @@
                                 {{ Str::upper($section->title) }}
                             </h2>
                             <a href="{{ route('section.edit', $section->id) }}"
-                                class="px-4 py-2 bg-green-600 hover:bg-green-700 transition text-white rounded-lg font-semibold shadow">
+                                class="btn-edit">
                                 ✎ Edit Section
                             </a>
                         </div>
                         <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
                             {{ $section->content }}
                         </p>
+
+                        {{-- Success Message --}}
+                        @if (session('success_section-update'))
+                            <div class="mt-6 p-4 bg-green-100 text-green-700 rounded-lg border border-green-300">
+                                {{ session('success_section-update') }}
+                            </div>
+                        @endif
+                    </div>
+                    {{-- Concepts List --}}
+                    <div
+                        class="my-4 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg border border-gray-200 dark:border-gray-700">
+                        <div class="block mb-4">
+
+                            <h2 class="font-bold text-xl mb-4 text-gray-800 dark:text-gray-100">
+                                {{ Str::upper($section->title) . ' Concepts' }}
+                            </h2>
+
+                            @foreach ($section->concepts as $concept)
+                                <div class="btn-container">
+                                    <a href="{{ route('concept.show', $concept->id) }}" class="btn-show">
+                                        {{ $concept->name }}
+                                    </a>
+                                    <a href="{{ route('concept.edit', $concept->id) }}" class="btn-edit">Edit</a>
+                                    <form action="{{ route('concept.destroy', $concept->id) }}" method="POST"
+                                        onsubmit="return confirm('Are you sure you want to delete this technology?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-delete">
+                                            X
+                                        </button>
+                                    </form>
+                                </div>
+                            @endforeach
+
+                        </div>
                     </div>
 
+                    {{-- BuiltinFunctions List --}}
+                             <div
+                        class="my-4 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg border border-gray-200 dark:border-gray-700">
+                        <div class="block mb-4">
+
+                            <h2 class="font-bold text-xl mb-4 text-gray-800 dark:text-gray-100">
+                                {{ Str::upper($section->title) . ' Builtin Functions' }}
+                            </h2>
+
+                            @foreach ($section->builtinFunctions as $function)
+                                <div class="btn-container">
+                                    <a href="{{ route('builtin.show', $function->id) }}" class="btn-show">
+                                        {{ $function->name }}
+                                    </a>
+                                    <a href="{{ route('builtin.edit', $function->id) }}" class="btn-edit">Edit</a>
+                                    <form action="{{ route('builtin.destroy', $function->id) }}" method="POST"
+                                        onsubmit="return confirm('Are you sure you want to delete this technology?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-delete">
+                                            X
+                                        </button>
+                                    </form>
+                                </div>
+                            @endforeach
+
+                        </div>
+                    </div>
                     {{-- Add concept Form --}}
                     <div
                         class="my-6 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg border border-gray-200 dark:border-gray-700">
@@ -89,7 +152,7 @@
                             </div>
                         @endif
                     </div>
-     <div
+                    <div
                         class="my-6 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg border border-gray-200 dark:border-gray-700">
                         <h2 class="font-bold text-xl text-gray-800 dark:text-gray-100 mb-4">
                             Add builtin function to <span class="">{{ Str::upper($section->title) }}</span>

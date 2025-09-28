@@ -114,6 +114,7 @@
     display: inline-flex;
     border: 1px solid #ccc;
     border-radius: 6px;
+    min-height: 2rem;
 }
 @mixin nav-list($background) {
     width: 100%;

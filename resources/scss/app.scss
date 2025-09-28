@@ -36,7 +36,14 @@ body {
     font-size: 1rem;
 
 }
+.btn-edit {
+    @include btn-style($btn-background-edit,small);
+    text-shadow: 3px 3px 3px $nav-list-1-background;
+    border: 2px solid whitesmoke;
+     font-weight: 800;
+    font-size: 1rem;
 
+}
 .btn-show {
     @include btn-style($btn-background-show);
     text-shadow: 3px 3px 3px $nav-list-1-background;

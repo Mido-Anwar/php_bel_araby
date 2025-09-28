@@ -65,9 +65,9 @@
                             <textarea name="content" placeholder="content" class="border rounded p-2 w-full mb-2"></textarea>
                         </x-hidden-form>
 
-                        @if (session('success'))
+                        @if (session('success-section'))
                             <div class="mt-3 text-green-600">
-                                {{ session('success') }}
+                                {{ session('success-section') }}
                             </div>
                         @endif
 
