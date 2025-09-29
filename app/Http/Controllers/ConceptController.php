@@ -30,7 +30,7 @@ class ConceptController extends Controller
     public function store(StoreConceptRequest $request)
     {
         $validated = $request->validated();
-        dd($validated);
+     
         Concept::create($validated);
         return redirect()
             ->route('section.show', $validated['section_id'])

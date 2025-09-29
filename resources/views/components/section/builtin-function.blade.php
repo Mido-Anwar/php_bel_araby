@@ -1,4 +1,5 @@
-      {{-- BuiltinFunctions List --}}
+    @props(['section'])
+{{-- BuiltinFunctions List --}}
                     <div
                         class="my-6 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-purple-50 to-white dark:from-gray-800 dark:to-gray-900">
 
