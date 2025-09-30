@@ -6,7 +6,7 @@
                 <li>
                     <button wire:click="selectTech({{ $tecnology->id }})"
                         class="text-blue-600 hover:underline">
-                        {{ $technology->name }}assssssssss
+                        {{ $technology->name }}
                     </button>
                 </li>
 

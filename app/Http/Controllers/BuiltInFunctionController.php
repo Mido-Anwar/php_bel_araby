@@ -39,9 +39,8 @@ class BuiltInFunctionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BuiltInFunction $builtInFunction) {
-        return view('learning_and_references.section.builtinfuncShow', compact('concept'));
-
+    public function show(BuiltInFunction $builtInFunction)
+    {
     }
 
     /**
@@ -49,7 +48,7 @@ class BuiltInFunctionController extends Controller
      */
     public function edit(BuiltInFunction $builtInFunction)
     {
-        //
+        return view('learning_and_references.section.builtinfunc-edit', compact('builtInFunction'));
     }
 
     /**
