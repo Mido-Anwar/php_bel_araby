@@ -25,12 +25,14 @@
                     @switch($field['type'])
                         @case('textarea')
                             <textarea id="{{ $field['name'] }}" name="{{ $field['name'] }}" placeholder="{{ $field['placeholder'] ?? '' }}"
-                                rows="{{ $field['rows'] ?? 3 }}"
-                                class="border rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                                rows="{{ $field['rows'] ?? 3 }}" value=""
+                                class="border rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                {{ $field['value'] ?? '' }}
+                            </textarea>
                         @break
 
                         @case('select')
-                            <select id="{{ $field['name'] }}" name="{{ $field['name'] }}"
+                            <select id="{{ $field['name'] }}" name="{{ $field['name'] }}" value="{{ $field['value'] ?? '' }}"
                                 class="border rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                 @foreach ($field['options'] ?? [] as $option)
                                     <option value="{{ $option }}">{{ $option }}</option>
@@ -39,7 +41,8 @@
                         @break
 
                         @case('checkbox')
-                            <input type="checkbox" id="{{ $field['name'] }}" name="{{ $field['name'] }}"
+                            <input type="checkbox" id="{{ $field['name'] }}"
+                                name="{{ $field['name'] }} "value="{{ $field['value'] ?? '' }}"
                                 class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                         @break
 

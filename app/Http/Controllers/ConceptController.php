@@ -61,8 +61,8 @@ class ConceptController extends Controller
         $validated = $request->validated();
         $concept->update($validated);
         return redirect()
-            ->route('section.show', $concept->section_id)
-            ->with('update-success_concept', 'Concept updated successfully.');
+            ->route('concept.edit', $concept->section_id)
+            ->with('success_concept-update', 'Concept updated successfully.');
     }
 
     /**

@@ -59,7 +59,7 @@ class BuiltInFunctionController extends Controller
         $validated = $request->validated();
         $builtInFunction->update($validated);
         return redirect()
-            ->route('section.show', $builtInFunction->section_id)
+            ->route('builtin.edit', $builtInFunction->id)
             ->with('update-success_builtin', 'Built-in function updated successfully.');
     }
 
