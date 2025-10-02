@@ -21,12 +21,17 @@ Route::get('/dashboard', function () {
 Route::get('/blog', [BlogController::class, 'index'])
     ->name('blog.main');
 
-Route::prefix('/docs')->controller(LearnReferenceController::class)->group(function(){
-    Route::get('/{name}','show')->name('docs.show');
+Route::prefix('/docs')->controller(LearnReferenceController::class)->group(function () {
+    Route::get('/{name}', 'show')->name('docs.show');
 });
 
 Route::prefix('posts')->controller(PostController::class)->group(function () {
     Route::get('/', 'index')->name('posts.index');
+    Route::post('/store', 'store')->name('post.store');
+    Route::get('/show/{post}', 'show')->name('post.show');
+    Route::get('/edit/{post}', 'edit')->name('post.edit');
+    Route::post('/update/{post}', 'update')->name('post.update');
+    Route::delete('/delete/{post}', 'destroy')->name('post.destroy');
 })->middleware(['auth', 'verified']);
 
 Route::prefix('tech')->controller(TechnologyController::class)->group(function () {
@@ -37,7 +42,6 @@ Route::prefix('tech')->controller(TechnologyController::class)->group(function (
     Route::get('/edit/{name}', 'edit')->name('tech.edit');
     Route::post('/update/{name}', 'update')->name('tech.update');
     Route::delete('/delete/{name}', 'destroy')->name('tech.destroy');
-
 })->middleware(['auth', 'verified']);
 
 Route::prefix('section')->controller(SectionController::class)->group(function () {
@@ -46,7 +50,6 @@ Route::prefix('section')->controller(SectionController::class)->group(function (
     Route::get('/edit/{section}', 'edit')->name('section.edit');
     Route::post('/update/{section}', 'update')->name('section.update');
     Route::delete('/delete/{section}', 'destroy')->name('section.destroy');
-
 })->middleware(['auth', 'verified']);
 
 Route::prefix('concept')->controller(ConceptController::class)->group(function () {
@@ -57,7 +60,6 @@ Route::prefix('concept')->controller(ConceptController::class)->group(function (
     Route::get('/edit/{concept}', 'edit')->name('concept.edit');
     Route::post('/update/{concept}', 'update')->name('concept.update');
     Route::delete('/delete/{concept}', 'destroy')->name('concept.destroy');
-
 })->middleware(['auth', 'verified']);
 Route::prefix('builtin')->controller(BuiltInFunctionController::class)->group(function () {
     Route::post('/store', 'store')->name('builtin.store');
@@ -65,6 +67,6 @@ Route::prefix('builtin')->controller(BuiltInFunctionController::class)->group(fu
     Route::get('/edit/{builtInFunction}', 'edit')->name('builtin.edit');
     Route::post('/update/{builtInFunction}', 'update')->name('builtin.update');
     Route::delete('/delete/{builtInFunction}', 'destroy')->name('builtin.destroy');
-
 })->middleware(['auth', 'verified']);
+
 require __DIR__ . '/auth.php';

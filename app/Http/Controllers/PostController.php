@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index()
     {
         $posts =Post::select('id','title','body')->get();
-        return view('blog.blogDashboard');
+        return view('blog.blogDashboard',compact('posts'));
     }
 
     /**
@@ -30,7 +30,9 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $post = Post::create($validated);
+        return redirect()->route('posts.index')->with('success stored post', 'Post created successfully.');
     }
 
     /**
