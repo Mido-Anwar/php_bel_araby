@@ -61,6 +61,7 @@ Route::prefix('concept')->controller(ConceptController::class)->group(function (
     Route::post('/update/{concept}', 'update')->name('concept.update');
     Route::delete('/delete/{concept}', 'destroy')->name('concept.destroy');
 })->middleware(['auth', 'verified']);
+
 Route::prefix('builtin')->controller(BuiltInFunctionController::class)->group(function () {
     Route::post('/store', 'store')->name('builtin.store');
     Route::get('/show/{builtInFunction}', 'show')->name('builtin.show');

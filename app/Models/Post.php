@@ -9,6 +9,7 @@ class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
+    protected $fillable = ['title', 'body', 'user_id'];
       // كل Post بيتبع User واحد
     public function user()
     {
