@@ -26,41 +26,45 @@
                                         <td class="px-4 py-4">{{ $post->id }}</td>
                                         <td class="px-4 py-4">{{ $post->title }}</td>
                                         <td class="px-4 py-4 border space-x-4">
-                                            <a class="btn-edit">Edit</a>
-                                            <a class="btn-delete">Delete</a>
+                                            <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
+                                            <a href="{{ route('post.destroy', $post->id) }}"
+                                                class="btn-delete">Delete</a>
                                         </td>
                                     @endforeach
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="p-6 my-2 text-gray-900 dark:text-gray-100">
-                        <x-hidden-form method="POST" action-url="{{ route('post.store') }}" :open="false"
-                            :fields="[
-                                [
-                                    'name' => 'user_id',
-                                    'type' => 'hidden',
-                                    'label' => 'Post Title',
-                                    'placeholder' => 'Enter Post title',
-                                    'value' => auth()->user()->id,
-                                ],
-                                [
-                                    'name' => 'title',
-                                    'type' => 'text',
-                                    'label' => 'Post Title',
-                                    'placeholder' => 'Enter Post title',
-                                ],
-                                [
-                                    'name' => 'body',
-                                    'type' => 'textarea',
-                                    'label' => 'Post Body',
-                                    'placeholder' => 'Write an Post...',
-                                    'rows' => 5,
-                                ],
-                            ]">
+                    <div class="my-3 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+
+                        <div class="p-6 my-2 text-gray-900 dark:text-gray-100">
+                            <x-hidden-form method="POST" btnName="add post" action-url="{{ route('post.store') }}"
+                                :open="false" :fields="[
+                                    [
+                                        'name' => 'user_id',
+                                        'type' => 'hidden',
+                                        'label' => '',
+                                        'placeholder' => 'Enter Post title',
+                                        'value' => auth()->user()->id,
+                                    ],
+                                    [
+                                        'name' => 'title',
+                                        'type' => 'text',
+                                        'label' => 'Post Title',
+                                        'placeholder' => 'Enter Post title',
+                                    ],
+                                    [
+                                        'name' => 'body',
+                                        'type' => 'textarea',
+                                        'label' => 'Post Body',
+                                        'placeholder' => 'Write an Post...',
+                                        'rows' => 5,
+                                    ],
+                                ]">
 
 
-                        </x-hidden-form>
+                            </x-hidden-form>
+                        </div>
                     </div>
                 </div>
             </div>

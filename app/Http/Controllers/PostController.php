@@ -48,7 +48,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-
+        return view('blog.post.post-edit',compact('post'));
     }
 
     /**
@@ -56,7 +56,9 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $validated = $request->validated();
+        $post->update($validated);
+        return redirect()->route('posts.index')->with('success updated post', 'Post updated successfully.');
     }
 
     /**
