@@ -11,14 +11,14 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h1 class="text-3xl font-bold mb-4">{{ $post->title }}</h1>
                     <p class="mb-4">{{ $post->body }}</p>
-                    <a href="{{ route('posts.index',$post->id) }}" class="text-blue-500 hover:underline">Back to Posts</a>
+                    <a href="{{ route('posts.index', $post->id) }}" class="text-blue-500 hover:underline">Back to Posts</a>
                 </div>
             </div>
-               <div class="my-3 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="my-3 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <x-hidden-form method="POST" btnName="edit post" action-url="{{ route('post.update',$post->id) }}" :open="false"
-                        :fields="[
+                    <x-hidden-form method="POST" btnName="edit post" action-url="{{ route('post.update', $post->id) }}"
+                        :open="false" :fields="[
                             [
                                 'name' => 'user_id',
                                 'type' => 'hidden',
@@ -43,6 +43,12 @@
                             ],
                         ]">
                     </x-hidden-form>
+                    {{-- Success Message --}}
+                    @if (session('success-updated-post'))
+                        <div class="mt-6 p-4 bg-green-100 text-green-700 rounded-lg border border-green-300">
+                            {{ session('success-updated-post') }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

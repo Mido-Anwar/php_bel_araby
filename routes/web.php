@@ -7,6 +7,7 @@ use App\Http\Controllers\LearnReferenceController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TechnologyController;
+use App\Http\Controllers\UserController;
 use App\Models\Concept;
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +69,12 @@ Route::prefix('builtin')->controller(BuiltInFunctionController::class)->group(fu
     Route::get('/edit/{builtInFunction}', 'edit')->name('builtin.edit');
     Route::post('/update/{builtInFunction}', 'update')->name('builtin.update');
     Route::delete('/delete/{builtInFunction}', 'destroy')->name('builtin.destroy');
+})->middleware(['auth', 'verified']);
+
+Route::prefix('user')->controller(UserController::class)->group(function () {
+    Route::get('/users', 'index')->name('users.index');
+
+    Route::delete('/delete', 'destroy')->name('user.destroy');
 })->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';
