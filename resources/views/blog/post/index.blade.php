@@ -3,6 +3,9 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Blog') }}
         </h2>
+        <p class="mt-2 text-sm  dark:text-gray-400 max-w-2xl">
+            All blog posts management.
+        </p>
     </x-slot>
 
     <div class="py-12">

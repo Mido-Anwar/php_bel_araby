@@ -42,15 +42,15 @@ class TechnologyController extends Controller
      */
     public function show($name)
     {
-        $tech = Technology::where('name', $name)->firstOrFail();
-             $technology = Technology::where('name', $name)
-    ->with([
-        'sections' => function ($query) {
-            $query->select('id', 'title', 'technology_id');
-        },
-    ])
-    ->firstOrFail(['id', 'name','description']);
-        return view('learning_and_references.technology.show', compact('tech','technology'));
+        // $tech = Technology::where('name', $name)->firstOrFail();
+        $technology = Technology::where('name', $name)
+            ->with([
+                'sections' => function ($query) {
+                    $query->select('id', 'title', 'technology_id');
+                },
+            ])->firstOrFail(['id', 'name', 'description']);
+
+        return view('learning_and_references.technology.show', compact('technology'));
     }
 
     /**

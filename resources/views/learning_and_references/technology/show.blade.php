@@ -3,7 +3,9 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __($technology->name) }}
         </h2>
-
+        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400 max-w-2xl">
+            Technology details and sections management.
+        </p>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -19,7 +21,7 @@
                             </a>
                         </div>
                         <h2 class="font-bold text-gray-800 dark:text-gray-100 mb-2">
-                            {{ Str::upper($tech->name) }}
+                            {{ Str::upper($technology->name) }}
                         </h2>
                         <p class="text-gray-600 dark:text-gray-300 leading-relaxed font-bold text-lg">
                             {{ $technology->description }}
@@ -58,11 +60,9 @@
                             Add Sections To {{ Str::upper($technology->name) }}
                         </h2>
 
-                        <x-hidden-form :action-url="route('section.store')" :open="false" >
-                            <input type="hidden" name="technology_id" id="" value="{{ $technology->id }}" hidden>
-                            <input type="text" name="title" placeholder="Section title"
-                                class="border rounded p-2 w-full mb-2">
-                            <textarea name="content" placeholder="content" class="border rounded p-2 w-full mb-2"></textarea>
+                        <x-hidden-form :action-url="route('section.store')" :open="false"   >
+
+
                         </x-hidden-form>
 
                         @if (session('success-section'))
