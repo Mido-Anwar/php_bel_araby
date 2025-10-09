@@ -6,9 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                 <div class="p-6 text-gray-900 dark:text-gray-100">
+        <x-dashboard-container>
                     <div class="flex justify-between items-center mb-4 break-words">
                         <h2 class="font-bold text-xl text-gray-800 dark:text-gray-100">
                             {{ Str::upper($builtInFunction->name) }}
@@ -59,8 +57,6 @@
                             {{ session('update-success_builtin') }}
                         </div>
                     @endif
-                </div>
-            </div>
-        </div>
+        </x-dashboard-container>
     </div>
 </x-app-layout>

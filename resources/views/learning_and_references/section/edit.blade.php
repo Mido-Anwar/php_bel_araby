@@ -7,9 +7,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+<x-dashboard-container>
                     <form action="{{ route('section.update', $section->id) }}" method="POST" class="space-y-6">
                         @csrf
                         <input type="hidden" name="technology_id" value="{{ $section->technology_id }}">
@@ -36,8 +34,6 @@
                             </button>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
+</x-dashboard-container>
     </div>
 </x-app-layout>
