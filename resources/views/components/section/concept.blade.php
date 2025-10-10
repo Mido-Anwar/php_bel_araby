@@ -52,6 +52,9 @@
         </h2>
 
         <div class="space-y-3">
+            @if ($section->concepts->isEmpty())
+                <p class="text-gray-600 dark:text-gray-300">No concepts added yet.</p>
+            @endif
             @foreach ($section->concepts as $concept)
                 <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
                     <a href="{{ route('concept.show', $concept->id) }}" class="btn-show">{{ $concept->name }}</a>

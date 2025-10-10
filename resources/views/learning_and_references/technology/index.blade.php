@@ -17,12 +17,12 @@
                 </a>
             </div>
 
-            @foreach ($techs as $tech)
+            @foreach ($technologies as $technology)
                 <div class="btn-container">
-                    <a href="{{ route('tech.show', $tech->name) }}" class="btn-show">
-                        {{ $tech->name }}
+                    <a href="{{ route('tech.show', $technology->name) }}" class="btn-show">
+                        {{ $technology->name }}
                     </a>
-                    <form action="{{ route('tech.destroy', $tech->name) }}" method="POST"
+                    <form action="{{ route('tech.destroy', $technology->name) }}" method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this technology?');">
                         @csrf
                         @method('DELETE')
@@ -32,6 +32,21 @@
                     </form>
                 </div>
             @endforeach
+            @if (session('success-delete-technology'))
+                <div class="mt-3 text-red-600">
+                    {{ session('success-delete-technology') }}
+                </div>
+            @endif
+            @if (session('success-created-technology'))
+                <div class="mt-3 text-green-600">
+                    {{ session('success-created-technology') }}
+                </div>
+            @endif
+            @if (session('success-updated-technology'))
+                <div class="mt-3 text-blue-600">
+                    {{ session('success-updated-technology') }}
+                </div>
+            @endif
         </x-dashboard-container>
     </div>
 </x-app-layout>

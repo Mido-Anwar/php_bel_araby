@@ -13,8 +13,8 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        $techs = Technology::select('id', 'name')->get();
-        return view('learning_and_references.technology.index', ['techs' => $techs]);
+        $technologies = Technology::select('id', 'name')->get();
+        return view('learning_and_references.technology.index', ['technologies' => $technologies]);
     }
 
     /**
@@ -34,7 +34,7 @@ class TechnologyController extends Controller
         Technology::create($request->validated());
         return redirect()
             ->route('tech.index')
-            ->with('success', 'Technology created successfully.');
+            ->with('success-created-technology', 'Technology created successfully.');
     }
 
     /**
@@ -58,9 +58,9 @@ class TechnologyController extends Controller
      */
     public function edit($name)
     {
-        $tech = Technology::where('name', $name)->firstOrFail();
+        $technology = Technology::where('name', $name)->firstOrFail();
 
-        return view('learning_and_references.technology.edit', compact('tech'));
+        return view('learning_and_references.technology.edit', compact('technology'));
     }
 
     /**
@@ -72,7 +72,7 @@ class TechnologyController extends Controller
         $tech->update($request->validated());
         return redirect()
             ->route('tech.index')
-            ->with('success', 'technology created successfully.');
+            ->with('success-updated-technology', 'technology updated successfully.');
     }
 
     /**
@@ -84,6 +84,6 @@ class TechnologyController extends Controller
 
         $tech->delete();
 
-        return redirect()->route('tech.index')->with('success', 'Technology deleted successfully!');
+        return redirect()->route('tech.index')->with('success-delete-technology', 'Technology deleted successfully!');
     }
 }

@@ -53,6 +53,9 @@
             </h2>
 
             <div class="space-y-3">
+                @if ($section->builtinFunctions->isEmpty())
+                    <p class="text-gray-600 dark:text-gray-300">No builtin functions added yet.</p>
+                @endif
                 @foreach ($section->builtinFunctions as $function)
                     <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
                         <a href="{{ route('builtin.edit', $function->id) }}" class="btn-show">{{ $function->name }}</a>
