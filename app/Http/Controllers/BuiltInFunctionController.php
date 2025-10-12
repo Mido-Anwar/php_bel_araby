@@ -41,6 +41,8 @@ class BuiltInFunctionController extends Controller
      */
     public function show(BuiltInFunction $builtInFunction)
     {
+        return view('learning_and_references.section.showConceptOrBuiltinFun', compact('builtInFunction'));
+
     }
 
     /**

@@ -30,6 +30,9 @@
                 </div>
             @endif
 
+            {{-- Include Concept or Built-in Function  --}}
+            {{-- from component/section --}}
+           
             <x-section.concept :section="$section" />
             <x-section.builtin-function :section="$section" />
         </x-dashboard-container>
