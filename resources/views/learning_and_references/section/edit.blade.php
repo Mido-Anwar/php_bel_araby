@@ -1,12 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Edit Section') }}
-        </h2>
+        <x-dashboard-head :text="'Edit: ' . $section->title" />
 
-        <p>
-            edit section details and content below.
-        </p>
+        <x-dashboard-paragraph :text="'edit section '" />
 
     </x-slot>
 

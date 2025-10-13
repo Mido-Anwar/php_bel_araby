@@ -1,11 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl  dark:text-gray-200 leading-tight">
-            {{ __('Edit Technology') }}
-        </h2>
-        <p class="mt-2 text-sm  dark:text-gray-400 max-w-2xl">
-            Use the form below to update the technology details. Modify the name and description as needed.
-        </p>
+        <x-dashboard-head :text="'Edit: ' . $technology->name" />
+        <x-dashboard-paragraph :text="'edit technology '" />
     </x-slot>
 
     <div class="py-12">

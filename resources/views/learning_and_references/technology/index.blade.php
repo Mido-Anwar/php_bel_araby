@@ -1,13 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Technologies') }}
-        </h2>
-        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400 max-w-2xl">
-            This section provides a clear overview of your project’s technologies.
-            You can create new technologies, view their details, and delete the ones
-            you no longer need — making it simple to keep everything organized and up to date.
-        </p>
+        <x-dashboard-head :text="'Technologies Overview'" />
+        <x-dashboard-paragraph :text="'manage technologies '" />
     </x-slot>
     <div class="py-12">
         <x-dashboard-container>

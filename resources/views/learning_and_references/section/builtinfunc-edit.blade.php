@@ -1,20 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __($builtInFunction->name) }}
-        </h2>
+        <x-dashboard-head :text="'Edit: ' . $builtInFunction->name" />
+
+        <x-dashboard-paragraph :text="'edit builtin function '" />
     </x-slot>
 
     <div class="py-12">
         <x-dashboard-container>
             <div class="flex justify-between items-center mb-4 break-words">
-                <h2 class="font-bold text-xl text-gray-800 dark:text-gray-100">
-                    {{ Str::upper($builtInFunction->name) }}
-                </h2>
+                <x-dashboard-head :text="$builtInFunction->name" />
             </div>
-            <p class="text-gray-600 dark:text-gray-300 leading-relaxed break-words text-lg">
-                {{ $builtInFunction->description }}
-            </p>
+            <x-dashboard-paragraph :text="$builtInFunction->description" />
             <h2>Builtin Function edit</h2>
             <x-hidden-form :action-url="route('builtin.update', $builtInFunction->id)" :open="false" :fields="[
                 [

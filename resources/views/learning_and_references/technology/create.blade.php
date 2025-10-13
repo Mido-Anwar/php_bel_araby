@@ -1,12 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Create New Technology') }}
-        </h2>
+        <x-dashboard-head :text="'Create New Technology'" />
 
-        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400 max-w-2xl">
-            Use the form below to create a new technology. Provide a name and a brief description to get started.
-        </p>
+        <x-dashboard-paragraph :text="'add new technology '" />
     </x-slot>
 
     <div class="py-12">

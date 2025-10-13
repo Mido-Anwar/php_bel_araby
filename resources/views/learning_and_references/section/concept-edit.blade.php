@@ -1,22 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ 'Edit ' . $concept->name }}
+        <x-dashboard-head :text="'Edit: ' . $concept->name" />
 
-        </h2>
+        <x-dashboard-paragraph :text="'edit concept '" />
     </x-slot>
 
     <div class="py-12">
         <x-dashboard-container>
             <div class="flex justify-between items-center mb-4 break-words">
-                <h2 class="font-bold text-xl text-gray-800 dark:text-gray-100">
-                    {{ Str::upper($concept->name) }}
-                </h2>
+                <x-dashboard-head :text="$concept->name" />
 
             </div>
-            <p class="text-gray-600 dark:text-gray-300 leading-relaxed break-words text-lg">
-                {{ $concept->description }}
-            </p>
+         <x-dashboard-paragraph :text="$concept->description" />
+         
             <h2>concept edit</h2>
             <x-hidden-form :action-url="route('concept.update', $concept->id)" :open="false" :fields="[
                 [
