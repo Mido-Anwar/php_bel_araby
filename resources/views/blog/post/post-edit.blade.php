@@ -5,11 +5,11 @@
     </x-slot>
 
     <div class="py-12">
-        <x-dashboard-contain>
+        <x-dashboard-container>
             {{-- Post Detail --}}
             <x-dashboard-head :text="$post->title" />
             <x-dashboard-paragraph :text="$post->body" />
-            <a href="{{ route('posts.index', $post->id) }}" class="text-blue-500 hover:underline">Back to
+            <a href="{{ route('posts.index', $post->id) }}" class="btn-back">Back to
                 Posts</a>
             </x-dashboard-container>
             <x-dashboard-container>

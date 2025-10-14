@@ -73,8 +73,7 @@ Route::prefix('builtin')->controller(BuiltInFunctionController::class)->group(fu
 
 Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::get('/users', 'index')->name('users.index');
-
     Route::delete('/delete', 'destroy')->name('user.destroy');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified', 'role:super-admin']);
 
 require __DIR__ . '/auth.php';

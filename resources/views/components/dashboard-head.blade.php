@@ -1,4 +1,6 @@
 <h2 dir="{{ textDir($text) }}"
     class="">
-    {{ $text }}
+{{ ucfirst($text) }}
+
+
 </h2>

@@ -57,6 +57,11 @@ body {
     text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
 }
+.btn-back {
+    @include btn-style($btn-background-back);
+    color: $btn-color-back;
+    border: 2px solid whitesmoke;
+}
 .btn-create {
     @include btn-style($nav-list-1-background);
     text-shadow: 3px 3px 3px $nav-list-1-background;
