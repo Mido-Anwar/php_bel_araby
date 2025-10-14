@@ -10,6 +10,8 @@ use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\UserController;
 use App\Models\Concept;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -75,5 +77,6 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::get('/users', 'index')->name('users.index');
     Route::delete('/delete', 'destroy')->name('user.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
+Route::resource('roles', RoleController::class)->middleware(['auth', 'verified', 'role:super-admin']);
 
 require __DIR__ . '/auth.php';
