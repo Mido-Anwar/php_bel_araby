@@ -77,8 +77,8 @@ Route::prefix('builtin')->controller(BuiltInFunctionController::class)->group(fu
 })->middleware(['auth', 'verified']);
 
 Route::prefix('user')->controller(UserController::class)->group(function () {
-    Route::get('/users', 'index')->name('users.index');
-    Route::delete('/delete', 'destroy')->name('user.destroy');
+    Route::get('/', 'index')->name('users.index');
+    Route::delete('/{user}/delete', 'destroy')->name('user.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
 
 Route::prefix('role')->controller(RoleController::class)->group(function () {
