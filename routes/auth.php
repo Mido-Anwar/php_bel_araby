@@ -11,7 +11,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use Spatie\Permission\Models\Role;
 
 
 // Authentication Routes
@@ -38,7 +38,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register')->middleware('role:super-admin');
+        ->name('register')->middleware( 'verified','role:super-admin');
 
     Route::post('register', [RegisteredUserController::class, 'store'])->middleware('role:super-admin');
     Route::get('verify-email', EmailVerificationPromptController::class)

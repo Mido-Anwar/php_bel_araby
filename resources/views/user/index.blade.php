@@ -50,9 +50,10 @@
 
             @foreach ($roles as $role)
                 <div class="btn-container">
-                    <a href="" class="btn-show">
+                    <a href="{{ route('role.create') }}" class="btn-show">
                         {{ $role->name }}
                     </a>
+                    <a href="{{ route('role.edit',$role->id) }}" class="btn-edit">edit</a>
                     <form action="" method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this technology?');">
                         @csrf

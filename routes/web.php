@@ -30,6 +30,7 @@ Route::prefix('/docs')->controller(LearnReferenceController::class)->group(funct
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::prefix('posts')->controller(PostController::class)->group(function () {
     Route::get('/', 'index')->name('posts.index');
     Route::post('/store', 'store')->name('post.store');
@@ -79,8 +80,16 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::get('/users', 'index')->name('users.index');
     Route::delete('/delete', 'destroy')->name('user.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
-Route::resource('role', RoleController::class)->middleware(['auth', 'verified', 'role:super-admin']);
-Route::resource('permission', RoleController::class)->middleware(['auth', 'verified', 'role:super-admin']);
+
+Route::prefix('role')->controller(RoleController::class)->group(function () {
+    Route::get('/create', 'create')->name('role.create');
+    Route::post('/store', 'store')->name('role.store');
+    Route::get('/show/{role}', 'show')->name('role.show');
+    Route::get('/edit/{role}', 'edit')->name('role.edit');
+    Route::post('/update/{role}', 'update')->name('role.update');
+    Route::delete('/delete', 'destroy')->name('role.destroy');
+})->middleware(['auth', 'verified', 'role:super-admin']);
+//Route::resource('permission', RoleController::class)->middleware(['auth', 'verified', 'role:super-admin']);
 
 
 require __DIR__ . '/auth.php';

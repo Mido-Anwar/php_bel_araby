@@ -7,11 +7,11 @@
     <div class="py-12">
         <x-dashboard-container>
             <x-dashboard-head :text="'Add role'" />
-            @if (route('roles.create'))
-                <x-hidden-form :action="route('role.store')" method="POST">
+
+                <x-hidden-form :action-url="route('role.store')" method="POST">
 
                 </x-hidden-form>
-            @endif
+
 
         </x-dashboard-container>
     </div>
