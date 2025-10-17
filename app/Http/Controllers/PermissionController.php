@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
@@ -19,7 +20,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.roleAndPermissionCreate');
     }
 
     /**
@@ -43,7 +44,8 @@ class PermissionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $permission = Permission::findOrFail($id);
+        return view('user.roleAndPermissionEdit', compact('permission'));
     }
 
     /**

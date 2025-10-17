@@ -43,8 +43,11 @@
 
         <x-dashboard-container>
             <div class="my-4 p-5">
-                <a href="" class="btn-create">
+                <a href="{{ route('role.create') }}" class="btn-create">
                     + Create Role
+                </a>
+                <a href="{{ route('permission.create') }}" class="btn-create">
+                    + Create Permission
                 </a>
             </div>
 

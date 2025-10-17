@@ -7,10 +7,15 @@
 
     <div class="py-12">
         <x-dashboard-container>
-            <x-dashboard-head :text="'Edit role'" />
-            @if (route('role.edit', $role->id))
+            @if (request()->routeIs('role.edit', $role->id))
+                <x-dashboard-head :text="'Edit role'" />
+
                 <x-hidden-form :action-url="route('role.update', $role->id)" method="PUT">
-                    
+
+                </x-hidden-form>
+            @elseif (request()->routeIs('permission.edit', $permission->id))
+                <x-dashboard-head :text="'Edit permission'" />
+                <x-hidden-form :action-url="route('permission.update', $permission->id)" method="PUT">
                 </x-hidden-form>
             @endif
         </x-dashboard-container>

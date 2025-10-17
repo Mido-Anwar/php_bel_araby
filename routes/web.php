@@ -90,6 +90,13 @@ Route::prefix('role')->controller(RoleController::class)->group(function () {
     Route::delete('/delete', 'destroy')->name('role.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
 //Route::resource('permission', RoleController::class)->middleware(['auth', 'verified', 'role:super-admin']);
-
+Route::prefix('permission')->controller(RoleController::class)->group(function () {
+    Route::get('/create', 'create')->name('permission.create');
+    Route::post('/store', 'store')->name('permission.store');
+    Route::get('/show/{permission}', 'show')->name('permission.show');
+    Route::get('/edit/{permission}', 'edit')->name('permission.edit');
+    Route::post('/update/{permission}', 'update')->name('permission.update');
+    Route::delete('/delete', 'destroy')->name('permission.destroy');
+})->middleware(['auth', 'verified', 'role:super-admin']);
 
 require __DIR__ . '/auth.php';

@@ -6,13 +6,20 @@
 
     <div class="py-12">
         <x-dashboard-container>
-            <x-dashboard-head :text="'Add role'" />
+
+            @if (request()->routeIs('role.create'))
+                <x-dashboard-head :text="'Add role'" />
 
                 <x-hidden-form :action-url="route('role.store')" method="POST">
 
                 </x-hidden-form>
+            @elseif(request()->routeIs('permission.create'))
+                <x-dashboard-head :text="'Add permission'" />
 
+                <x-hidden-form :action-url="route('permission.store')" method="POST">
 
+                </x-hidden-form>
+            @endif
         </x-dashboard-container>
     </div>
 </x-app-layout>
