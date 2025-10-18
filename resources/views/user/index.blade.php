@@ -42,6 +42,8 @@
 
 
         <x-dashboard-container>
+        <x-dashboard-head :text="'Role & Permission'" />
+
             <div class="my-4 p-5">
                 <a href="{{ route('role.create') }}" class="btn-create">
                     + Create Role

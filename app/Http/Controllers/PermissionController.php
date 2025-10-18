@@ -20,7 +20,8 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('user.roleAndPermissionCreate');
+        $permissions = Permission::select('id', 'name')->get();
+        return view('user.roleAndPermissionCreate', compact('permissions'));
     }
 
     /**
