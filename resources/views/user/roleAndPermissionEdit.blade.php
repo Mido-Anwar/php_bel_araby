@@ -15,15 +15,15 @@
                         'name' => 'user_id',
                         'type' => 'hidden',
                         'label' => '',
-                        'placeholder' => 'Enter Post title',
-                        'value' => auth()->user()->id,
+                        'placeholder' => '',
+                        'value' => '',
                     ],
                     [
-                        'name' => 'title',
+                        'name' => 'name',
                         'type' => 'text',
-                        'label' => 'Post Title',
-                        'placeholder' => 'Enter Post title',
-                        'value' => $post->title,
+                        'label' => 'role name',
+                        'placeholder' => 'Enter role name',
+                        'value' => '',
                     ],
                 ]">
 
@@ -39,11 +39,11 @@
                         'value' => auth()->user()->id,
                     ],
                     [
-                        'name' => 'title',
+                        'name' => 'name',
                         'type' => 'text',
-                        'label' => 'Post Title',
-                        'placeholder' => 'Enter Post title',
-                        'value' => $post->title,
+                        'label' => 'permission name',
+                        'placeholder' => 'Enter permission name',
+                        'value' => '',
                     ],
                 ]">
                 </x-hidden-form>

@@ -8,16 +8,12 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
-    public function index()
-    {
-
-    }
+    public function index() {}
 
     public function create()
     {
-        $roles= Role::select('id','name')->get();
 
-        return view('user.roleAndPermissionCreate', compact('roles'));
+        return view('user.roleAndPermissionCreate');
     }
 
     public function store(Request $request)

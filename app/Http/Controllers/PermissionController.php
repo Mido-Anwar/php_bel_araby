@@ -20,8 +20,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::select('id', 'name')->get();
-        return view('user.roleAndPermissionCreate', compact('permissions'));
+        return view('user.roleAndPermissionCreate');
     }
 
     /**
@@ -62,6 +61,8 @@ class PermissionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $permission = Permission::findById($id);
+        $permission->delete();
+        return view('user.index')->with('delete-permission', 'success permission deleted');
     }
 }

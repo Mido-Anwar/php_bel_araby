@@ -12,20 +12,12 @@
 
                 <x-hidden-form :action-url="route('role.store')" method="POST" :fields="[
                         [
-                            'name' => 'user_id',
-                            'type' => 'hidden',
-                            'label' => '',
-                            'placeholder' => 'Enter Post title',
-                            'value' => auth()->user()->id,
-                        ],
-                        [
                             'name' => 'title',
                             'type' => 'text',
-                            'label' => 'Post Title',
-                            'placeholder' => 'Enter Post title',
-                            'value' => $post->title,
+                            'label' => 'Role Name',
+                            'placeholder' => 'Enter Role Name',
+                            'value' => '',
                         ],]" >
-
                 </x-hidden-form>
             @elseif(request()->routeIs('permission.create'))
                 <x-dashboard-head :text="'Add permission'" />
@@ -35,15 +27,15 @@
                             'name' => 'user_id',
                             'type' => 'hidden',
                             'label' => '',
-                            'placeholder' => 'Enter Post title',
-                            'value' => auth()->user()->id,
+                            'placeholder' => '',
+                            'value' => '',
                         ],
                         [
-                            'name' => 'title',
+                            'name' => 'name',
                             'type' => 'text',
-                            'label' => 'Post Title',
-                            'placeholder' => 'Enter Post title',
-                            'value' => $post->title,
+                            'label' => 'permission name',
+                            'placeholder' => 'Enter permission name',
+                            'value' => '',
                         ],]">
 
                 </x-hidden-form>

@@ -19,7 +19,7 @@
                         <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">Name
                         </th>
                         <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">
-                          email
+                            email
                         </th>
                         <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">Role
                         </th>
@@ -42,25 +42,23 @@
 
 
         <x-dashboard-container>
-        <x-dashboard-head :text="'Role & Permission'" />
+            <x-dashboard-head :text="'Roles'" />
 
             <div class="my-4 p-5">
                 <a href="{{ route('role.create') }}" class="btn-create">
                     + Create Role
                 </a>
-                <a href="{{ route('permission.create') }}" class="btn-create">
-                    + Create Permission
-                </a>
+
             </div>
 
             @foreach ($roles as $role)
                 <div class="btn-container">
-                    <a href="{{ route('role.create') }}" class="btn-show">
+                    <a href="" class="btn-show">
                         {{ $role->name }}
                     </a>
-                    <a href="{{ route('role.edit',$role->id) }}" class="btn-edit">edit</a>
+                    <a href="{{ route('role.edit', $role->id) }}" class="btn-edit">edit</a>
                     <form action="" method="POST"
-                        onsubmit="return confirm('Are you sure you want to delete this technology?');">
+                        onsubmit="return confirm('Are you sure you want to delete this role ?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn-delete">
@@ -69,6 +67,31 @@
                     </form>
                 </div>
             @endforeach
+        </x-dashboard-container>
+        
+        <x-dashboard-container>
+            <x-dashboard-head :text="'Permissions'" />
+            <div class="my-4 p-5">
+                <a href="{{ route('permission.create') }}" class="btn-create">
+                    + Create Permission
+                </a>
+
+            </div>
+            @foreach ($permissions as $permission)
+                <div class="btn-container">
+                    <a href="" class="btn-show">{{ $permission->name }}</a>
+                    <a href="" class="btn-edit">edit</a>
+                    <form action="" method="POST"
+                        onsubmit="return confirm('Are you sure you want to delete this permission ?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn-delete">
+                            X
+                        </button>
+                    </form>
+                </div>
+            @endforeach
+
         </x-dashboard-container>
     </div>
 </x-app-layout>
