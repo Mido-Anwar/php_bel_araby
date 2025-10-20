@@ -34,7 +34,7 @@ class TechnologyController extends Controller
         Technology::create($request->validated());
         return redirect()
             ->route('tech.index')
-            ->with('success-created-technology', 'Technology created successfully.');
+            ->with('success-store-technology', 'Technology created successfully.');
     }
 
     /**
@@ -72,7 +72,7 @@ class TechnologyController extends Controller
         $tech->update($request->validated());
         return redirect()
             ->route('tech.index')
-            ->with('success-updated-technology', 'technology updated successfully.');
+            ->with('success-update-technology', 'technology updated successfully.');
     }
 
     /**

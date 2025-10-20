@@ -33,7 +33,7 @@ class SectionController extends Controller
         Section::create($request->validated());
         return redirect()
             ->back()
-            ->with('success-section', 'Section created successfully.');
+            ->with('success-store-section', 'Section created successfully.');
     }
 
     /**
@@ -60,7 +60,7 @@ class SectionController extends Controller
         $section->update($request->validated());
         return redirect()
             ->route('section.show', $section->id)
-            ->with('success-section-update', 'Section updated successfully.');
+            ->with('success-update-section', 'Section updated successfully.');
     }
 
     /**
@@ -71,6 +71,6 @@ class SectionController extends Controller
         $section->delete();
         return redirect()
             ->back()
-            ->with('success', 'Section deleted successfully.');
+            ->with('success-delete-role', 'Section deleted successfully.');
     }
 }

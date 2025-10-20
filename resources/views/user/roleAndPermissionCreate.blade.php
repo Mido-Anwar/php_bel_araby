@@ -23,13 +23,7 @@
                 <x-dashboard-head :text="'Add permission'" />
 
                 <x-hidden-form :action-url="route('permission.store')" method="POST" :fields="[
-                        [
-                            'name' => 'user_id',
-                            'type' => 'hidden',
-                            'label' => '',
-                            'placeholder' => '',
-                            'value' => '',
-                        ],
+                    
                         [
                             'name' => 'name',
                             'type' => 'text',

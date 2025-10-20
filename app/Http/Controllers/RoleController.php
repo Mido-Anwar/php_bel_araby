@@ -20,7 +20,7 @@ class RoleController extends Controller
     {
 
 
-        return redirect()->route('users.index')->with('success', 'Role created successfully.');
+        return redirect()->route('users.index')->with('success-store-role', 'Role created successfully.');
     }
 
     public function edit(Role $role)
@@ -41,12 +41,12 @@ class RoleController extends Controller
         $role->update(['name' => $request->name]);
         $role->syncPermissions($request->permissions ?? []);
 
-        return redirect()->route('users.index')->with('success', 'Role updated successfully.');
+        return redirect()->route('users.index')->with('success-update-role', 'Role updated successfully.');
     }
 
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect()->route('users.index')->with('success', 'Role deleted successfully.');
+        return redirect()->route('users.index')->with('success-delete-role', 'Role deleted successfully.');
     }
 }

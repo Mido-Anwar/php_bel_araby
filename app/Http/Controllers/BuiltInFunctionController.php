@@ -33,7 +33,7 @@ class BuiltInFunctionController extends Controller
         BuiltInFunction::create($validated);
         return redirect()
             ->route('section.show', $validated['section_id'])
-            ->with('success_builtin', 'Built-in function created successfully.');
+            ->with('success-store-builtinFunction', 'Built-in function created successfully.');
     }
 
     /**
@@ -62,7 +62,7 @@ class BuiltInFunctionController extends Controller
         $builtInFunction->update($validated);
         return redirect()
             ->route('builtin.edit', $builtInFunction->id)
-            ->with('update-success_builtin', 'Built-in function updated successfully.');
+            ->with('success-update-builtinFunction', 'Built-in function updated successfully.');
     }
 
     /**
@@ -73,6 +73,6 @@ class BuiltInFunctionController extends Controller
         $builtInFunction->delete();
         return redirect()
             ->route('section.show', $builtInFunction->section_id)
-            ->with('delete-success_builtin', 'Built-in function deleted successfully.');
+            ->with('success-delete-builtinFunction', 'Built-in function deleted successfully.');
     }
 }

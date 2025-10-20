@@ -34,7 +34,7 @@ class ConceptController extends Controller
         Concept::create($validated);
         return redirect()
             ->route('section.show', $validated['section_id'])
-            ->with('success_concept', 'Concept created successfully.');
+            ->with('success-store-concept', 'Concept created successfully.');
     }
 
     /**
@@ -62,7 +62,7 @@ class ConceptController extends Controller
         $concept->update($validated);
         return redirect()
             ->route('section.show', $validated['section_id'])
-            ->with('success_concept-update', 'Concept updated successfully.');
+            ->with('success-update-concept', 'Concept updated successfully.');
     }
 
     /**
@@ -73,6 +73,6 @@ class ConceptController extends Controller
         $concept->delete();
         return redirect()
             ->route('section.show', $concept->section_id)
-            ->with('delete-success_concept', 'Concept deleted successfully.');
+            ->with('success-delete-concept', 'Concept deleted successfully.');
     }
 }
