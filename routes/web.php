@@ -87,7 +87,7 @@ Route::prefix('role')->controller(RoleController::class)->group(function () {
     Route::get('/show/{role}', 'show')->name('role.show');
     Route::get('/edit/{role}', 'edit')->name('role.edit');
     Route::post('/update/{role}', 'update')->name('role.update');
-    Route::delete('/delete', 'destroy')->name('role.destroy');
+    Route::delete('/delete/{role}', 'destroy')->name('role.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
 //Route::resource('permission', RoleController::class)->middleware(['auth', 'verified', 'role:super-admin']);
 Route::prefix('permission')->controller(RoleController::class)->group(function () {
@@ -96,7 +96,7 @@ Route::prefix('permission')->controller(RoleController::class)->group(function (
     Route::get('/show/{permission}', 'show')->name('permission.show');
     Route::get('/edit/{permission}', 'edit')->name('permission.edit');
     Route::post('/update/{permission}', 'update')->name('permission.update');
-    Route::delete('/delete', 'destroy')->name('permission.destroy');
+    Route::delete('/delete/{permission}', 'destroy')->name('permission.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
 
 require __DIR__ . '/auth.php';

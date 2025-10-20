@@ -57,7 +57,7 @@
                         {{ $role->name }}
                     </a>
                     <a href="{{ route('role.edit', $role->id) }}" class="btn-edit">edit</a>
-                    <form action="" method="POST"
+                    <form action="{{ route('role.destroy',$role->id) }}" method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this role ?');">
                         @csrf
                         @method('DELETE')
@@ -67,8 +67,23 @@
                     </form>
                 </div>
             @endforeach
+              @if (session('success-delete-role'))
+                <div class="mt-3 text-red-600">
+                    {{ session('success-delete-role') }}
+                </div>
+            @endif
+            @if (session('success-create-role'))
+                <div class="mt-3 text-green-600">
+                    {{ session('success-created-role') }}
+                </div>
+            @endif
+            @if (session('success-update-role'))
+                <div class="mt-3 text-blue-600">
+                    {{ session('success-updated-role') }}
+                </div>
+            @endif
         </x-dashboard-container>
-        
+
         <x-dashboard-container>
             <x-dashboard-head :text="'Permissions'" />
             <div class="my-4 p-5">

@@ -12,23 +12,26 @@ class RoleController extends Controller
 
     public function create()
     {
-
-        return view('user.roleAndPermissionCreate');
+        $permissions = Permission::select('id', 'name')->get();
+        return view('user.roleAndPermissionCreate', compact('permissions'));
     }
 
     public function store(Request $request)
     {
-
+        $request->validate([
+            'name' => 'required|unique:roles,name',
+            'permissions' => 'array',
+        ]);
+        $role = Role::create(['name' => $request->name]);
+        $role->syncPermissions($request->permissions ?? []);
 
         return redirect()->route('users.index')->with('success-store-role', 'Role created successfully.');
     }
 
     public function edit(Role $role)
     {
-        $permissions = Permission::all();
-        $rolePermissions = $role->permissions->pluck('id')->toArray();
-
-        return view('user.roleAndPermissionEdit', compact('role', 'permissions', 'rolePermissions'));
+        $permissions = Permission::select('id', 'name')->get();
+        return view('user.roleAndPermissionEdit', compact('role', 'permissions'));
     }
 
     public function update(Request $request, Role $role)

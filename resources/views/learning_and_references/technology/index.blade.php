@@ -31,12 +31,12 @@
                     {{ session('success-delete-technology') }}
                 </div>
             @endif
-            @if (session('success-created-technology'))
+            @if (session('success-create-technology'))
                 <div class="mt-3 text-green-600">
                     {{ session('success-created-technology') }}
                 </div>
             @endif
-            @if (session('success-updated-technology'))
+            @if (session('success-update-technology'))
                 <div class="mt-3 text-blue-600">
                     {{ session('success-updated-technology') }}
                 </div>
