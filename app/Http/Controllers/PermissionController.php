@@ -28,7 +28,13 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:permissions,name',
+        ]);
+
+        Permission::create(['name' => $request->name]);
+
+        return redirect()->route('users.index')->with('success-permission-store', 'success permission created');
     }
 
     /**

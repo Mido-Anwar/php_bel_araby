@@ -32,19 +32,12 @@
                 <x-dashboard-head :text="'Edit permission'" />
                 <x-hidden-form :action-url="route('permission.update', $permission->id)" method="PUT" :fields="[
                     [
-                        'name' => 'user_id',
-                        'type' => 'hidden',
-                        'label' => '',
-                        'placeholder' => 'Enter Post title',
-                        'value' => auth()->user()->id,
-                    ],
-                    [
                         'name' => 'name',
                         'type' => 'text',
                         'label' => 'permission name',
                         'placeholder' => 'Enter permission name',
                         'value' => '',
-                    ],
+                    ]
                 ]">
                 </x-hidden-form>
             @endif

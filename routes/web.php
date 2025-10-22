@@ -11,7 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Models\Concept;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
-
+use App\Http\Controllers\PermissionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -90,7 +90,7 @@ Route::prefix('role')->controller(RoleController::class)->group(function () {
     Route::delete('/delete/{role}', 'destroy')->name('role.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
 //Route::resource('permission', RoleController::class)->middleware(['auth', 'verified', 'role:super-admin']);
-Route::prefix('permission')->controller(RoleController::class)->group(function () {
+Route::prefix('permission')->controller(PermissionController::class)->group(function () {
     Route::get('/create', 'create')->name('permission.create');
     Route::post('/store', 'store')->name('permission.store');
     Route::get('/show/{permission}', 'show')->name('permission.show');
