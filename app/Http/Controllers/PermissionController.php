@@ -34,7 +34,7 @@ class PermissionController extends Controller
 
         Permission::create(['name' => $request->name]);
 
-        return redirect()->route('users.index')->with('success-permission-store', 'success permission created');
+        return redirect()->route('users.index')->with('success-store-permission', 'success permission created');
     }
 
     /**
@@ -59,7 +59,11 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:permissions,name,' . $permission->id,
+        ]);
+        $permission->update(['name' => $request->name]);
+        return redirect()->route('users.index')->with('success-update-permission', 'success permission updated');
     }
 
     /**
@@ -68,6 +72,6 @@ class PermissionController extends Controller
     public function destroy(Permission $permission)
     {
         $permission->delete();
-        return view('user.index')->with('delete-permission', 'success permission deleted');
+        return view('user.index')->with('success-delete-permission', 'success permission deleted');
     }
 }
