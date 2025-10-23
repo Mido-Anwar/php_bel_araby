@@ -95,8 +95,8 @@
             @foreach ($permissions as $permission)
                 <div class="btn-container">
                     <a href="" class="btn-show">{{ $permission->name }}</a>
-                    <a href="" class="btn-edit">edit</a>
-                    <form action="" method="POST"
+                    <a href="{{ route('permission.edit',$permission->id) }}" class="btn-edit">edit</a>
+                    <form action="{{ route('permission.destroy',$permission->id) }}" method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this permission ?');">
                         @csrf
                         @method('DELETE')
