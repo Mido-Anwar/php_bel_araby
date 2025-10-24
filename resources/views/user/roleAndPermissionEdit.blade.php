@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <x-dashboard-container>
-            @if (request()->routeIs('role.edit', $role->id))
+            @if (isset($role) && request()->routeIs('role.edit', $role->id))
                 <x-dashboard-head :text="'Edit role'" />
 
                 <x-hidden-form :action-url="route('role.update', $role->id)" method="PUT" :fields="[
@@ -28,7 +28,7 @@
                     @endforeach
 
                 </x-hidden-form>
-            @elseif (request()->routeIs('permission.edit', $permission->id))
+            @elseif (isset($permission) && request()->routeIs('permission.edit', $permission->id))
                 <x-dashboard-head :text="'Edit permission'" />
                 <x-hidden-form :action-url="route('permission.update', $permission->id)" method="PUT" :fields="[
                     [
@@ -36,8 +36,8 @@
                         'type' => 'text',
                         'label' => 'permission name',
                         'placeholder' => 'Enter permission name',
-                        'value' => '',
-                    ]
+                        'value' => $permission->name,
+                    ],
                 ]">
                 </x-hidden-form>
             @endif

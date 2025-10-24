@@ -89,6 +89,7 @@ Route::prefix('role')->controller(RoleController::class)->group(function () {
     Route::post('/update/{role}', 'update')->name('role.update');
     Route::delete('/delete/{role}', 'destroy')->name('role.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
+
 //Route::resource('permission', RoleController::class)->middleware(['auth', 'verified', 'role:super-admin']);
 Route::prefix('permission')->controller(PermissionController::class)->group(function () {
     Route::get('/create', 'create')->name('permission.create');

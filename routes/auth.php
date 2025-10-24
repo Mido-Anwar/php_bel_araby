@@ -36,12 +36,12 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth','verified', 'role:super-admin')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register')->middleware(['verified', 'role:super-admin']);
+        ->name('register');
 
 
-    Route::post('register', [RegisteredUserController::class, 'store'])->middleware(['role:super-admin']);
+    Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');

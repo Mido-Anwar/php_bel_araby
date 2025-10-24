@@ -1,6 +1,8 @@
 <x-guest-layout>
-    <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6">
-        <div class="w-full max-w-md bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700 transition-transform duration-300 hover:scale-[1.01]">
+    <div
+        class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6">
+        <div
+            class="w-full max-w-md bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700 transition-transform duration-300 hover:scale-[1.01]">
 
             <!-- Header -->
             <div class="text-center mb-8">
@@ -25,12 +27,7 @@
                         </span>
                         <x-text-input id="name"
                             class="block w-full pl-10 pr-3 py-2 rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900/50 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                            type="text"
-                            name="name"
-                            :value="old('name')"
-                            required
-                            autofocus
-                            autocomplete="name" />
+                            type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                     </div>
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
@@ -44,11 +41,7 @@
                         </span>
                         <x-text-input id="email"
                             class="block w-full pl-10 pr-3 py-2 rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900/50 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                            type="email"
-                            name="email"
-                            :value="old('email')"
-                            required
-                            autocomplete="username" />
+                            type="email" name="email" :value="old('email')" required autocomplete="username" />
                     </div>
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
@@ -62,10 +55,7 @@
                         </span>
                         <x-text-input id="password"
                             class="block w-full pl-10 pr-3 py-2 rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900/50 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                            type="password"
-                            name="password"
-                            required
-                            autocomplete="new-password" />
+                            type="password" name="password" required autocomplete="new-password" />
                     </div>
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
@@ -79,14 +69,17 @@
                         </span>
                         <x-text-input id="password_confirmation"
                             class="block w-full pl-10 pr-3 py-2 rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900/50 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                            type="password"
-                            name="password_confirmation"
-                            required
-                            autocomplete="new-password" />
+                            type="password" name="password_confirmation" required autocomplete="new-password" />
                     </div>
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
-
+                <div>
+                    @foreach ($roles as $role)
+                        <label for="role">{{ $role->name }}</label>
+                        <input type="checkbox" name="role" id="" value="{{ $role->name }}">
+                    @endforeach
+                    <x-input-error :messages="$errors->get('role')" class="mt-2" />
+                </div>
                 <!-- Actions -->
                 <div class="flex items-center justify-between">
                     <a href="{{ route('login') }}"
