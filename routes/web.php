@@ -77,6 +77,8 @@ Route::prefix('builtin')->controller(BuiltInFunctionController::class)->group(fu
 
 Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('users.index');
+    Route::get('/{user}/edit', 'edit')->name('user.edit');
+    Route::post('/{user}/update', 'update')->name('user.update');
     Route::delete('/{user}/delete', 'destroy')->name('user.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
 

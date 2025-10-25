@@ -23,6 +23,9 @@
                         </th>
                         <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">Role
                         </th>
+                        <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">
+                            Actions
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -34,11 +37,24 @@
                             <td class="px-4 py-4">
                                 {{ $user->getRoleNames()->first() }}
                             </td>
+                            <td class="px-4 py-4">
+                                <div class="btn-container">
+                                    <a href="{{ route('user.edit', $user->id) }}" class="btn-edit">edit</a>
+                                    <form action="{{ route('user.destroy', $user->id) }}" method="POST"
+                                        onsubmit="return confirm('Are you sure you want to delete this user ?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-delete">
+                                            X
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-                 @if (session('success-delete-user'))
+            @if (session('success-delete-user'))
                 <div class="mt-3 text-red-600">
                     {{ session('success-delete-user') }}
                 </div>
@@ -46,6 +62,11 @@
             @if (session('success-store-user'))
                 <div class="mt-3 text-green-600">
                     {{ session('success-store-user') }}
+                </div>
+            @endif
+              @if (session('success-update-user'))
+                <div class="mt-3 text-blue-600">
+                    {{ session('success-updated-user') }}
                 </div>
             @endif
         </x-dashboard-container>
@@ -67,7 +88,7 @@
                         {{ $role->name }}
                     </a>
                     <a href="{{ route('role.edit', $role->id) }}" class="btn-edit">edit</a>
-                    <form action="{{ route('role.destroy',$role->id) }}" method="POST"
+                    <form action="{{ route('role.destroy', $role->id) }}" method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this role ?');">
                         @csrf
                         @method('DELETE')
@@ -77,7 +98,7 @@
                     </form>
                 </div>
             @endforeach
-              @if (session('success-delete-role'))
+            @if (session('success-delete-role'))
                 <div class="mt-3 text-red-600">
                     {{ session('success-delete-role') }}
                 </div>
@@ -105,8 +126,8 @@
             @foreach ($permissions as $permission)
                 <div class="btn-container">
                     <a href="" class="btn-show">{{ $permission->name }}</a>
-                    <a href="{{ route('permission.edit',$permission->id) }}" class="btn-edit">edit</a>
-                    <form action="{{ route('permission.destroy',$permission->id) }}" method="POST"
+                    <a href="{{ route('permission.edit', $permission->id) }}" class="btn-edit">edit</a>
+                    <form action="{{ route('permission.destroy', $permission->id) }}" method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this permission ?');">
                         @csrf
                         @method('DELETE')

@@ -17,11 +17,31 @@ class UserController extends Controller
         return view('user.index', ['users' => $users , 'roles' => $roles,'permissions'=>$permissions]);
     }
 
-    public function destroy(Request $request)
+    public function edit(User $user)
     {
-        $user = $request->user();
-        $user->delete();
+        $roles = Role::select('id', 'name')->get();
+        return view('user.userEdit', ['user' => $user, 'roles' => $roles]);
+    }
 
-        return redirect()->route('home')->with('status', 'User account deleted successfully.');
+    public function update(User $user, Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'role' => 'required|string|exists:roles,name',
+        ]);
+
+        $user->name = $validatedData['name'];
+        $user->save();
+
+        // Sync user roles
+        $user->syncRoles([$validatedData['role']]);
+
+        return redirect()->route('users.index')->with('success-update-user', 'User information updated successfully.');
+    }
+
+    public function destroy(User $user, Request $request)
+    {
+        $user->delete();
+        return redirect()->route('users.index')->with('success-delete-user', 'User account deleted successfully.');
     }
 }
