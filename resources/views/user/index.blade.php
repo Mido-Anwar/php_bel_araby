@@ -38,6 +38,16 @@
                     @endforeach
                 </tbody>
             </table>
+                 @if (session('success-delete-user'))
+                <div class="mt-3 text-red-600">
+                    {{ session('success-delete-user') }}
+                </div>
+            @endif
+            @if (session('success-store-user'))
+                <div class="mt-3 text-green-600">
+                    {{ session('success-store-user') }}
+                </div>
+            @endif
         </x-dashboard-container>
 
 

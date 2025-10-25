@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BuiltInFunctionController;
 use App\Http\Controllers\ConceptController;

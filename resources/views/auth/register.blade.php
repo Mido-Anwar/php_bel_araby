@@ -1,8 +1,8 @@
 <x-guest-layout>
     <div
-        class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6">
+        class=" w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6">
         <div
-            class="w-full max-w-md bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700 transition-transform duration-300 hover:scale-[1.01]">
+            class="w-1/2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700 transition-transform duration-300 hover:scale-[1.01]">
 
             <!-- Header -->
             <div class="text-center mb-8">
@@ -74,10 +74,19 @@
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
                 <div>
-                    @foreach ($roles as $role)
-                        <label for="role">{{ $role->name }}</label>
-                        <input type="checkbox" name="role" id="" value="{{ $role->name }}">
-                    @endforeach
+                    <x-input-label for="role" :value="__('Select Role')" />
+                    <select name="role" id="role" required
+                        class="w-full rounded-md border-gray-300 dark:border-gray-700
+           dark:bg-gray-900 dark:text-gray-200
+           focus:border-blue-500 focus:ring-blue-500
+           py-2 px-3">
+                        <option value="" disabled selected>Roles</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->name }}">{{ ucfirst($role->name) }}</option>
+                        @endforeach
+                    </select>
+
+
                     <x-input-error :messages="$errors->get('role')" class="mt-2" />
                 </div>
                 <!-- Actions -->

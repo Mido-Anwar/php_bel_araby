@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'string', 'exists:roles,name'],
         ]);
 
         $user = User::create([
@@ -42,11 +44,12 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        $user->assignRole('writer');
+        $user->assignRole($request->role);
         event(new Registered($user));
 
-        Auth::login($user);
 
-        return redirect(route('user.index', absolute: false));
+
+        return redirect(route('users.index', absolute: false))
+            ->with('success-store-user', 'User registered successfully.');
     }
 }
