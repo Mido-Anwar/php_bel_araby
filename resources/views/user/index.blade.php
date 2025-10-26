@@ -54,21 +54,9 @@
                     @endforeach
                 </tbody>
             </table>
-            @if (session('success-delete-user'))
-                <div class="mt-3 text-red-600">
-                    {{ session('success-delete-user') }}
-                </div>
-            @endif
-            @if (session('success-store-user'))
-                <div class="mt-3 text-green-600">
-                    {{ session('success-store-user') }}
-                </div>
-            @endif
-              @if (session('success-update-user'))
-                <div class="mt-3 text-blue-600">
-                    {{ session('success-updated-user') }}
-                </div>
-            @endif
+            <x-message :message="session('success-store-user')" :color="'green'" />
+            <x-message :message="session('success-update-user')" :color="'blue'" />
+            <x-message :message="session('success-delete-user')" :color="'red'" />
         </x-dashboard-container>
 
 
@@ -98,21 +86,9 @@
                     </form>
                 </div>
             @endforeach
-            @if (session('success-delete-role'))
-                <div class="mt-3 text-red-600">
-                    {{ session('success-delete-role') }}
-                </div>
-            @endif
-            @if (session('success-create-role'))
-                <div class="mt-3 text-green-600">
-                    {{ session('success-created-role') }}
-                </div>
-            @endif
-            @if (session('success-update-role'))
-                <div class="mt-3 text-blue-600">
-                    {{ session('success-updated-role') }}
-                </div>
-            @endif
+            <x-message :message="session('success-store-role')" :color="'green'" />
+            <x-message :message="session('success-update-role')" :color="'blue'" />
+            <x-message :message="session('success-delete-role')" :color="'red'" />
         </x-dashboard-container>
 
         <x-dashboard-container>
@@ -137,7 +113,9 @@
                     </form>
                 </div>
             @endforeach
-
+            <x-message :message="session('success-store-permission')" :color="'green'" />
+            <x-message :message="session('success-update-permission')" :color="'blue'" />
+            <x-message :message="session('success-delete-permission')" :color="'red'" />
         </x-dashboard-container>
     </div>
 </x-app-layout>

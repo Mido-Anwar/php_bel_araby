@@ -26,21 +26,10 @@
                     </form>
                 </div>
             @endforeach
-            @if (session('success-delete-technology'))
-                <div class="mt-3 text-red-600">
-                    {{ session('success-delete-technology') }}
-                </div>
-            @endif
-            @if (session('success-create-technology'))
-                <div class="mt-3 text-green-600">
-                    {{ session('success-created-technology') }}
-                </div>
-            @endif
-            @if (session('success-update-technology'))
-                <div class="mt-3 text-blue-600">
-                    {{ session('success-updated-technology') }}
-                </div>
-            @endif
+
+            <x-message :message="session('success-store-technology')" :color="'green'" />
+            <x-message :message="session('success-update-technology')" :color="'blue'" />
+            <x-message :message="session('success-delete-technology')" :color="'red'" />
         </x-dashboard-container>
     </div>
 </x-app-layout>

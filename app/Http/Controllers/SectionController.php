@@ -71,6 +71,6 @@ class SectionController extends Controller
         $section->delete();
         return redirect()
             ->back()
-            ->with('success-delete-role', 'Section deleted successfully.');
+            ->with('success-delete-section', 'Section deleted successfully.');
     }
 }

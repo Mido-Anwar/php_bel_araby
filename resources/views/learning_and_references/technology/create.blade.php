@@ -26,13 +26,6 @@
                 ],
             ]">
             </x-hidden-form>
-            {{-- Success Message --}}
-            @if (session('success-created-tech'))
-                <div class="mt-6 p-4 bg-green-100 text-green-700 rounded-lg border border-green-300">
-                    {{ session('success-created-tech') }}
-                </div>
-            @endif
-
         </x-dashboard-container>
     </div>
 </x-app-layout>

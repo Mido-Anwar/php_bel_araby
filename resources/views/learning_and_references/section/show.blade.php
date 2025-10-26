@@ -16,12 +16,8 @@
             </div>
 
             <x-dashboard-paragraph :text="$section->content" />
-            {{-- Success Message --}}
-            @if (session('success_section-update'))
-                <div class="mt-6 p-4 bg-green-100 text-green-700 rounded-lg border border-green-300">
-                    {{ session('success_section-update') }}
-                </div>
-            @endif
+            {{-- Success update Message --}}
+            <x-message :message="session('success-update-section')" color="blue" />
 
             {{-- Include Concept or Built-in Function  --}}
             {{-- from component/section --}}

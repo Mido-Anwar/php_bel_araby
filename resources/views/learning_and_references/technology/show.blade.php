@@ -11,11 +11,11 @@
                     + Edit Technology
                 </a>
             </div>
-          <x-dashboard-head :text="$technology->name" />
+            <x-dashboard-head :text="$technology->name" />
             <x-dashboard-paragraph :text="$technology->description" />
         </x-dashboard-container>
         <x-dashboard-container>
-           <x-dashboard-head :text="'Sections under ' . $technology->name" />
+            <x-dashboard-head :text="'Sections under ' . $technology->name" />
             <div class="w-1/2">
                 @if ($technology->sections->isEmpty())
                     <x-dashboard-paragraph :text="'No sections available. Please add a section.'" />
@@ -37,6 +37,8 @@
                 @endforeach
 
             </div>
+            <x-message :message="session('success-store-section')" color="green" />
+            <x-message :message="session('success-delete-section')" color="red" />
         </x-dashboard-container>
         <x-dashboard-container>
 
@@ -66,11 +68,7 @@
             ]">
 
             </x-hidden-form>
-            @if (session('success-section'))
-                <div class="mt-3 text-green-600">
-                    {{ session('success-section') }}
-                </div>
-            @endif
+
         </x-dashboard-container>
     </div>
 </x-app-layout>
