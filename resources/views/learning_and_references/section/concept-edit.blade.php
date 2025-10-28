@@ -1,36 +1,36 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-dashboard-head :text="'Edit: ' . $builtInFunction->name" />
+        <x-dashboard-head :text="'Edit: ' . $concept->name" />
 
     </x-slot>
 
     <div class="py-12">
         <x-dashboard-container>
             <div class="flex justify-between items-center mb-4 break-words">
-                <x-dashboard-head :text="$builtInFunction->name" />
+                <x-dashboard-head :text="$concept->name" />
             </div>
-            <x-dashboard-paragraph :text="$builtInFunction->description" />
-            <x-hidden-form :action-url="route('builtin.update', $builtInFunction->id)" :open="false" :fields="[
+            <x-dashboard-paragraph :text="$concept->description" />
+            <x-hidden-form :action-url="route('concept.update', $concept->id)" :open="false" :fields="[
                 [
                     'name' => 'name',
                     'type' => 'text',
                     'label' => 'builtin function Title',
                     'placeholder' => 'Enter builtin function title',
-                    'value' => $builtInFunction->name,
+                    'value' => $concept->name,
                 ],
                 [
                     'name' => 'syntax',
                     'type' => 'textarea',
                     'label' => 'Syntax',
                     'placeholder' => 'Enter syntax',
-                    'value' => $builtInFunction->syntax,
+                    'value' => $concept->syntax,
                 ],
                 [
                     'name' => 'description',
                     'type' => 'textarea',
                     'label' => 'Description',
                     'placeholder' => 'Enter description',
-                    'value' => $builtInFunction->example,
+                    'value' => $concept->example,
                 ],
                 [
                     'name' => 'example',
@@ -38,9 +38,9 @@
                     'label' => 'Example Code',
                     'placeholder' => 'Write an example...',
                     'rows' => 5,
-                    'value' => $builtInFunction->example,
+                    'value' => $concept->example,
                 ],
-                ['name' => 'section_id', 'type' => 'hidden', 'value' => $builtInFunction->section_id],
+                ['name' => 'section_id', 'type' => 'hidden', 'value' => $concept->section_id],
             ]" />
 
             {{-- Success Message --}}

@@ -11,15 +11,12 @@ class DashboardParagraph extends Component
     /**
      * Create a new component instance.
      */
-    public string $text;
+   public ?string $text;
 
-
-    public function __construct(string $text)
-    {
-        $this->text = $text;
-
-    }
-
+public function __construct(?string $text = null)
+{
+    $this->text = $text ?? '';
+}
     /**
      * Get the view / contents that represent the component.
      */
