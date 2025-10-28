@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSectionRequest;
 use App\Http\Requests\UpdateSectionRequest;
 use App\Models\Section;
+use App\Models\Technology;
 
 class SectionController extends Controller
 {
@@ -29,9 +30,12 @@ class SectionController extends Controller
      */
     public function store(StoreSectionRequest $request)
     {
+        $validated = $request->validated();
+        $technology  = Technology::where('id', $validated['technology_id'])->firstOrFail(['name']);
+
         Section::create($request->validated());
         return redirect()
-            ->back()
+            ->route('tech.show', $technology->name)
             ->with('success-store-section', 'Section created successfully.');
     }
 
@@ -56,6 +60,7 @@ class SectionController extends Controller
      */
     public function update(UpdateSectionRequest $request, Section $section)
     {
+
         $section->update($request->validated());
         return redirect()
             ->route('section.show', $section->id)
@@ -67,9 +72,10 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
+        $technology  = Technology::where('id', $section->technology_id)->firstOrFail(['name']);
         $section->delete();
         return redirect()
-            ->back()
+            ->route('tech.show', $technology->name)
             ->with('success-delete-section', 'Section deleted successfully.');
     }
 }
