@@ -41,7 +41,7 @@
 
 
             {{-- Submit --}}
-            <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+            <button type="submit" class="btn-dashboard my-5">
                 Save
             </button>
             <button type="button" @click="open = false"

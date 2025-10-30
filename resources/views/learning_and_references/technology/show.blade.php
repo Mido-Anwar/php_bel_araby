@@ -6,8 +6,7 @@
     <div class="py-12">
         <x-dashboard-container>
             <div class="my-2 flex justify-end">
-                <a href="{{ route('tech.edit', $technology->name) }}" class="px-4 py-2  text-white rounded-md font-bold"
-                    style="background: green;">
+                <a href="{{ route('tech.edit', $technology->name) }}" class="btn-edit">
                     + Edit Technology
                 </a>
             </div>
