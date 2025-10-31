@@ -38,11 +38,7 @@
             ['name' => 'section_id', 'type' => 'hidden', 'value' => $section->id],
         ]" />
 
-        @if (session('success_concept'))
-            <div class="mt-6 p-4 bg-green-100 text-green-700 rounded-lg border border-green-300">
-                {{ session('success_concept') }}
-            </div>
-        @endif
+      <x-message :message="session('success-store-concept')" :color="'green'" />
     </div>
 
     {{-- List Concepts --}}

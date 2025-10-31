@@ -18,18 +18,36 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                        @foreach ($posts as $post)
-                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                        @switch(Auth::user()->role)
+                            @case('super-admin')
+                                {{-- show all posts --}}
+                                @foreach ($posts as $post)
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
 
-                                <td class="px-4 py-4">{{ $post->id }}</td>
-                                <td class="px-4 py-4">{{ $post->title }}</td>
-                                <td class="px-4 py-4 border space-x-4">
-                                    <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
-                                    <a href="{{ route('post.destroy', $post->id) }}" class="btn-delete">Delete</a>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        <td class="px-4 py-4">{{ $post->id }}</td>
+                                        <td class="px-4 py-4">{{ $post->title }}</td>
+                                        <td class="px-4 py-4 border space-x-4">
+                                            <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
+                                            <a href="{{ route('post.destroy', $post->id) }}" class="btn-delete">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @break
 
+                            @default
+                                {{-- show only auth user posts --}}
+                                @foreach ($authUserPosts as $post)
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+
+                                        <td class="px-4 py-4">{{ $post->id }}</td>
+                                        <td class="px-4 py-4">{{ $post->title }}</td>
+                                        <td class="px-4 py-4 border space-x-4">
+                                            <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
+                                            <a href="{{ route('post.destroy', $post->id) }}" class="btn-delete">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                        @endswitch
                     </tbody>
                 </table>
             </div>
@@ -63,11 +81,9 @@
 
             </x-hidden-form>
             {{-- Success Message --}}
-            @if (session('success-stored-post'))
-                <div class="mt-6 p-4 bg-green-100 text-green-700 rounded-lg border border-green-300">
-                    {{ session('success-stored-post') }}
-                </div>
-            @endif
+            <x-message :message="session('success-store-post')" :color="'green'" />
+            <x-message :message="session('success-update-post')" :color="'blue'" />
+            <x-message :message="session('success-delete-post')" :color="'red'" />
         </x-dashboard-container>
     </div>
 </x-app-layout>

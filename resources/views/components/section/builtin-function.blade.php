@@ -39,11 +39,7 @@
                 ['name' => 'section_id', 'type' => 'hidden', 'value' => $section->id],
             ]" />
 
-            @if (session('success_builtin'))
-                <div class="mt-6 p-4 bg-green-100 text-green-700 rounded-lg border border-green-300">
-                    {{ session('success_builtin') }}
-                </div>
-            @endif
+           <x-message :message="session('success-store-builtinFunction')" :color="'green'" />
         </div>
 
         {{-- List Builtin Functions --}}

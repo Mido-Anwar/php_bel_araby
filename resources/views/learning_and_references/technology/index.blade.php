@@ -14,16 +14,19 @@
             @foreach ($technologies as $technology)
                 <div class="btn-container">
                     <a href="{{ route('tech.show', $technology->name) }}" class="btn-show">
-                        {{ $technology->id .  ' :' .$technology->name }}
+                        {{ $technology->id . ' :' . $technology->name }}
                     </a>
-                    <form action="{{ route('tech.destroy', $technology->name) }}" method="POST"
-                        onsubmit="return confirm('Are you sure you want to delete this technology?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn-delete">
-                            X
-                        </button>
-                    </form>
+                    @if (Auth::user()->hasRole('super-admin'))
+                        <form action="{{ route('tech.destroy', $technology->name) }}" method="POST"
+                            onsubmit="return confirm('Are you sure you want to delete this technology?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn-delete">
+                                X
+                            </button>
+                        </form>
+                    @endif
+
                 </div>
             @endforeach
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -13,8 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        $authUserPosts = Auth::user()->posts;
         $posts =Post::select('id','title','body')->get();
-        return view('blog.post.index',compact('posts'));
+        return view('blog.post.index',compact('posts','authUserPosts'));
     }
 
     /**
