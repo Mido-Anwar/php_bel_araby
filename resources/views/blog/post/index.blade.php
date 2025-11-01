@@ -6,48 +6,34 @@
 
     <div class="py-12">
         <x-dashboard-container>
-            <div class="w-full overflow-x-auto">
-                <table class="w-full border border-gray-200 dark:border-gray-700 text-sm">
+            <div class="table-dashboard">
+                <table class="">
                     <thead class="bg-gray-100 dark:bg-gray-800">
                         <tr>
-                            <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">ID</th>
-                            <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">Title
+                            <th>ID</th>
+                            <th>Title
                             </th>
-                            <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">Actions
+                            <th>Actions
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                        @switch(Auth::user()->role)
-                            @case('super-admin')
-                                {{-- show all posts --}}
-                                @foreach ($posts as $post)
-                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <tbody class="">
 
-                                        <td class="px-4 py-4">{{ $post->id }}</td>
-                                        <td class="px-4 py-4">{{ $post->title }}</td>
-                                        <td class="px-4 py-4 border space-x-4">
-                                            <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
-                                            <a href="{{ route('post.destroy', $post->id) }}" class="btn-delete">Delete</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @break
+                        {{-- show all posts --}}
+                        @foreach ($posts as $post)
+                            <tr class="">
 
-                            @default
-                                {{-- show only auth user posts --}}
-                                @foreach ($authUserPosts as $post)
-                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                <td class="">{{ $post->id }}</td>
+                                <td class="">{{ $post->title }}</td>
+                                <td class="">
+                                    <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
+                                    <a href="{{ route('post.destroy', $post->id) }}" class="btn-delete">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        {{-- show only auth user posts --}}
 
-                                        <td class="px-4 py-4">{{ $post->id }}</td>
-                                        <td class="px-4 py-4">{{ $post->title }}</td>
-                                        <td class="px-4 py-4 border space-x-4">
-                                            <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
-                                            <a href="{{ route('post.destroy', $post->id) }}" class="btn-delete">Delete</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                        @endswitch
+
                     </tbody>
                 </table>
             </div>

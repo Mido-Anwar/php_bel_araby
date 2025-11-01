@@ -14,9 +14,18 @@ class PostController extends Controller
      */
     public function index()
     {
+
+        $posts = Post::select('id', 'title', 'body')->get();
         $authUserPosts = Auth::user()->posts;
-        $posts =Post::select('id','title','body')->get();
-        return view('blog.post.index',compact('posts','authUserPosts'));
+
+        if (Auth::user()->hasRole('super-admin')) {
+            $visiblePosts = $posts;
+        } else {
+            $visiblePosts = $authUserPosts;
+        }
+
+
+        return view('blog.post.index')->with('posts', $visiblePosts);
     }
 
     /**
@@ -50,7 +59,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('blog.post.post-edit',compact('post'));
+        return view('blog.post.post-edit', compact('post'));
     }
 
     /**

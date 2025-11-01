@@ -96,20 +96,104 @@
         overflow-wrap: break-word;
     }
 }
+@mixin dash-table($color-1, $color-2: whitesmoke) {
+  table {
+    width: 75rem;
+    border-collapse: collapse; // remove gaps between borders
 
-@mixin dash-table {
-    table {
-        tr {
-            align-items: center;
-            th {
-                text-align: center;
-            }
-            td {
-                text-align: center;
-            }
-        }
+    thead {
+      background-color: $color-1;
+      color: $color-2;
+      padding: 1.5rem;
+      text-transform: uppercase;
+      font-weight: bold;
     }
+
+    tr {
+      border: 1px solid #ccc;
+
+      &:nth-child(even) {
+        background-color: $color-1; // alternate row color
+      }
+
+      th,
+      td {
+        text-align: center;
+        padding: 1.5rem 2rem;
+        font-size: 1rem;
+      }
+
+      th {
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+      }
+
+      td {
+        border: 1px solid #ddd;
+        font-weight: 600;
+        max-width: 30rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  // ✅ Correct Responsive Section
+  @media (max-width: 768px) {
+    table {
+      width: 100%;
+      border: 0;
+
+      thead {
+        display: none; // hide table header on small screens
+      }
+
+      tbody {
+        display: block;
+        width: 100%;
+      }
+
+      tr {
+        display: block;
+        margin-bottom: 1.5rem;
+        border: 1px solid #ccc;
+        border-radius: 0.75rem;
+        background-color: #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border: none;
+        border-bottom: 1px solid #eee;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+        font-size: 0.95rem;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        // add label before each cell using data-label
+        &::before {
+          content: attr(data-label);
+          font-weight: 700;
+          color: $color-1;
+          margin-right: 1rem;
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
 }
+
+
+
 .btn-container {
     display: inline-flex;
     border: 1px solid #ccc;
@@ -136,7 +220,7 @@
     }
 }
 
-.form-hidden{
+.form-hidden {
     background-color: #2b384f;
     font-weight: bold;
 }

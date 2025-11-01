@@ -71,3 +71,7 @@ body {
     @include aside;
     color: #dddbdb;
 }
+.table-dashboard {
+    @include dash-table($nav-list-1-background, $nav-color-1);
+
+}

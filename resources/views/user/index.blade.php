@@ -12,32 +12,32 @@
                     + Create New User
                 </a>
             </div>
-            <table class="w-full border border-gray-200 dark:border-gray-700 text-sm">
-                <thead class="bg-gray-100 dark:bg-gray-800">
+            <table class="table-dashboard">
+                <thead class="">
                     <tr>
-                        <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">ID</th>
-                        <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">Name
+                        <th class="">ID</th>
+                        <th class="">Name
                         </th>
-                        <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">
+                        <th class="">
                             email
                         </th>
-                        <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">Role
+                        <th class="">Role
                         </th>
-                        <th class="px-4 py-2 text-left font-medium text-gray-700 dark:text-gray-300">
+                        <th class="">
                             Actions
                         </th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody class="">
                     @foreach ($users as $user)
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                            <td class="px-4 py-4">{{ $user->id }}</td>
-                            <td class="px-4 py-4">{{ $user->name }}</td>
-                            <td class="px-4 py-4">{{ $user->email }}</td>
-                            <td class="px-4 py-4">
+                        <tr class="">
+                            <td class="">{{ $user->id }}</td>
+                            <td class="">{{ $user->name }}</td>
+                            <td class="">{{ $user->email }}</td>
+                            <td class="">
                                 {{ $user->getRoleNames()->first() }}
                             </td>
-                            <td class="px-4 py-4">
+                            <td class="">
                                 <div class="btn-container">
                                     <a href="{{ route('user.edit', $user->id) }}" class="btn-edit">edit</a>
                                     <form action="{{ route('user.destroy', $user->id) }}" method="POST"
