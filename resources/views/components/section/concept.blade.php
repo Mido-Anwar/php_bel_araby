@@ -55,12 +55,14 @@
                 <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
                     <a href="{{ route('concept.show', $concept->id) }}" class="btn-show">{{ $concept->name }}</a>
                     <a href="{{ route('concept.edit', $concept->id) }}" class="btn-edit">Edit</a>
+                    @if(Auth::user()->hasRole('super-admin'))
                     <form action="{{ route('concept.destroy', $concept->id) }}" method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this concept?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn-delete">X</button>
                     </form>
+                    @endif
                 </div>
             @endforeach
         </div>

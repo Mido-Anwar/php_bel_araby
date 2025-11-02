@@ -56,12 +56,14 @@
                     <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
                         <a href="{{ route('builtin.show', $function->id) }}" class="btn-show">{{ $function->name }}</a>
                         <a href="{{ route('builtin.edit', $function->id) }}" class="btn-edit">Edit</a>
+                        @if(Auth::user()->hasRole('super-admin'))
                         <form action="{{ route('builtin.destroy', $function->id) }}" method="POST"
                             onsubmit="return confirm('Are you sure you want to delete this function?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn-delete">X</button>
                         </form>
+                        @endif
                     </div>
                 @endforeach
             </div>
