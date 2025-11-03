@@ -31,7 +31,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                        {{-- show only auth user posts --}}
+                        
 
 
                     </tbody>
