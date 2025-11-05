@@ -17,7 +17,7 @@
             <x-dashboard-head :text="'Sections under ' . $technology->name" />
             <div class="w-1/2">
                 @if ($technology->sections->isEmpty())
-                    <x-dashboard-paragraph :text="'No sections available. Please add a section.'" />
+                    <x-dashboard-paragraph :text="'No sections available.'" />
                 @endif
                 @foreach ($technology->sections as $section)
                     <div class="btn-container">

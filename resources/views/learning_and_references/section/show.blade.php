@@ -18,7 +18,8 @@
             <x-dashboard-paragraph :text="$section->content" />
             {{-- Success update Message --}}
             <x-message :message="session('success-update-section')" color="blue" />
-
+        </x-dashboard-container>
+        <x-dashboard-container>
             {{-- Include Concept or Built-in Function  --}}
             {{-- from component/section --}}
 

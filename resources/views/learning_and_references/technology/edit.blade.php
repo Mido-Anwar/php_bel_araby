@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <x-dashboard-head :text="'Edit: ' . $technology->name" />
-        <x-dashboard-paragraph :text="'edit technology '" />
+        <x-dashboard-paragraph :text="'edit technology name &  description'" />
     </x-slot>
 
     <div class="py-12">
