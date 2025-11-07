@@ -44,11 +44,7 @@
             ]" />
 
             {{-- Success Message --}}
-            @if (session('update-success_builtin'))
-                <div class="mt-6 p-4 bg-green-100 text-green-700 rounded-lg border border-green-300">
-                    {{ session('update-success_builtin') }}
-                </div>
-            @endif
+            <x-message :message="session('success-update-concept')" :color="'blue'" />
         </x-dashboard-container>
     </div>
 </x-app-layout>
