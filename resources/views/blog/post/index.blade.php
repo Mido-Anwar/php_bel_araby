@@ -6,10 +6,10 @@
 
     <div class="py-12">
         <x-dashboard-container>
-            <div class="table-dashboard">
+            <div class="dashboard-table">
                 <table class="">
-                    <thead class="bg-gray-100 dark:bg-gray-800">
-                        <tr>
+                    <thead class="">
+                        <tr class="">
                             <th>ID</th>
                             <th>Title
                             </th>
@@ -21,17 +21,17 @@
 
                         {{-- show all posts --}}
                         @foreach ($posts as $post)
-                            <tr class="">
+                            <tr class="border">
 
-                                <td class="">{{ $post->id }}</td>
-                                <td class="">{{ $post->title }}</td>
-                                <td class="">
+                                <td class="p-3">{{ $post->id }}</td>
+                                <td class="p-3">{{ $post->title }}</td>
+                                <td class="p-3">
                                     <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
                                     <a href="{{ route('post.destroy', $post->id) }}" class="btn-delete">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
-                        
+
 
 
                     </tbody>

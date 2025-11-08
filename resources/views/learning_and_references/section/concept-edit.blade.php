@@ -43,8 +43,7 @@
                 ['name' => 'section_id', 'type' => 'hidden', 'value' => $concept->section_id],
             ]" />
 
-            {{-- Success Message --}}
-            <x-message :message="session('success-update-concept')" :color="'blue'" />
+
         </x-dashboard-container>
     </div>
 </x-app-layout>

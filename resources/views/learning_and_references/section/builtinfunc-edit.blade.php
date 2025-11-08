@@ -43,9 +43,6 @@
                 ['name' => 'section_id', 'type' => 'hidden', 'value' => $builtInFunction->section_id],
             ]" />
 
-            {{-- Success Message --}}
-            <x-message :message="session('success-update-builtinFunction')" :color="'blue'" />
-
         </x-dashboard-container>
     </div>
 </x-app-layout>

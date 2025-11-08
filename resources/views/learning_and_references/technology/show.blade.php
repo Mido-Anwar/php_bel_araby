@@ -24,15 +24,15 @@
                         <a href="{{ route('section.show', $section->id) }}" class="btn-show">
                             {{ $section->title }}
                         </a>
-                        @if(Auth::user()->hasRole('super-admin'))
-                        <form action="{{ route('section.destroy', $section->id) }}" method="POST"
-                            onsubmit="return confirm('Are you sure you want to delete this technology?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn-delete">
-                                X
-                            </button>
-                        </form>
+                        @if (Auth::user()->hasRole('super-admin'))
+                            <form action="{{ route('section.destroy', $section->id) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this technology?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-delete">
+                                    X
+                                </button>
+                            </form>
                         @endif
                     </div>
                 @endforeach
