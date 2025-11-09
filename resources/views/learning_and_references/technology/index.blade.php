@@ -4,12 +4,13 @@
         <x-dashboard-paragraph :text="'manage technologies '" />
     </x-slot>
     <div class="py-12">
-        <x-dashboard-container>
-            <div class="my-4 p-5">
+              <div class="my-4 p-5">
                 <a href="{{ route('tech.create') }}" class="btn-create">
                     + Create Technology
                 </a>
             </div>
+        <x-dashboard-container>
+
 
             @foreach ($technologies as $technology)
                 <div class="btn-container">
