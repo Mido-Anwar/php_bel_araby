@@ -1,14 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <x-dashboard-head :text="'Technologies Overview'" />
-        <x-dashboard-paragraph :text="'manage technologies '" />
     </x-slot>
     <div class="py-12">
-              <div class="my-4 p-5">
-                <a href="{{ route('tech.create') }}" class="btn-create">
-                    + Create Technology
-                </a>
-            </div>
+        <div class="my-4 p-5">
+            <a href="{{ route('tech.create') }}" class="btn-create">
+                + Create Technology
+            </a>
+        </div>
+        <x-dashboard-paragraph :text="'manage technologies '" />
+
         <x-dashboard-container>
 
 

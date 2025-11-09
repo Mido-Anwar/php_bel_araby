@@ -101,23 +101,13 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    justify-content: center;
-    align-items: center;
     padding: 1rem;
 
-    > * {
-        // كل الأبناء جوه الـ .bg-child
-        &:nth-child(1) {
-            background-color: $bg-color;
-        }
-        // &:nth-child(2) {
-        //     background-color: #ffd6a5;
-        // }
-    }
+ 
 }
 .btn-container {
     display: inline-flex;
-   
+
     border-radius: 6px;
     min-height: 2rem;
 }

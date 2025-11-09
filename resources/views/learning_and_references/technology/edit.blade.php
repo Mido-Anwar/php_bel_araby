@@ -1,12 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <x-dashboard-head :text="'Edit: ' . $technology->name" />
-        <x-dashboard-paragraph :text="'edit technology name &  description'" />
     </x-slot>
 
     <div class="py-12">
+        <x-dashboard-paragraph :text="'edit technology name &  description'" />
         <x-dashboard-container>
-
             <x-hidden-form :action-url="route('tech.update', $technology->name)" :open="true" :fields="[
                 [
                     'name' => 'name',

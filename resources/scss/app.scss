@@ -76,7 +76,11 @@ body {
         border-collapse: collapse;
         width: 80rem;
         tr {
-            td,
+            td{
+               border: 1px solid black;
+                padding: 1rem;
+               
+            }
             th {
                 border: 1px solid black;
                 padding: 1rem;
@@ -84,4 +88,12 @@ body {
             }
         }
     }
+}
+
+.dashboard-paragraph {
+    width: 60rem;
+    text-overflow: ellipsis;
+    padding: 1rem;
+    font-size: 0.90rem;
+    border: 2px solid $dashboard-bg-color;
 }

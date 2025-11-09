@@ -1,13 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <x-dashboard-head :text="'Create New Technology'" />
-
-        <x-dashboard-paragraph :text="'add new technology '" />
     </x-slot>
 
     <div class="py-12">
+        <x-dashboard-paragraph :text="'add new technology '" />
         <x-dashboard-container>
-
             <x-hidden-form :action-url="route('tech.store')" :open="false" :fields="[
                 [
                     'name' => 'name',

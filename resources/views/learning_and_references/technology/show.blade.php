@@ -1,43 +1,41 @@
 <x-app-layout>
     <x-slot name="header">
         <x-dashboard-head :text="$technology->name" />
-        <x-dashboard-paragraph :text="'technology details and its sections '" />
     </x-slot>
-    <div class="py-12">
+
+    <div class="p-4">
         <x-dashboard-container>
-            <div class="my-2 flex justify-end">
-                <a href="{{ route('tech.edit', $technology->name) }}" class="btn-edit">
-                    + Edit Technology
-                </a>
-            </div>
-            <x-dashboard-head :text="$technology->name" />
-            <x-dashboard-paragraph :text="$technology->description" />
+        <div class="btn-container">
+            <a href="{{ route('tech.edit', $technology->name) }}" class="btn-edit">
+                + Edit Technology
+            </a>
+        </div>
+        <x-dashboard-head :text="$technology->name" />
+        <x-dashboard-paragraph :text="$technology->description" />
         </x-dashboard-container>
         <x-dashboard-container>
-            <x-dashboard-head :text="'Sections under ' . $technology->name" />
-            <div class="w-1/2">
-                @if ($technology->sections->isEmpty())
-                    <x-dashboard-paragraph :text="'No sections available.'" />
-                @endif
-                @foreach ($technology->sections as $section)
-                    <div class="btn-container">
-                        <a href="{{ route('section.show', $section->id) }}" class="btn-show">
-                            {{ $section->title }}
-                        </a>
-                        @if (Auth::user()->hasRole('super-admin'))
-                            <form action="{{ route('section.destroy', $section->id) }}" method="POST"
-                                onsubmit="return confirm('Are you sure you want to delete this technology?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn-delete">
-                                    X
-                                </button>
-                            </form>
-                        @endif
-                    </div>
-                @endforeach
 
-            </div>
+            @if ($technology->sections->isEmpty())
+                <x-dashboard-paragraph :text="'No sections available.'" />
+            @endif
+            @foreach ($technology->sections as $section)
+                <div class="btn-container">
+                    <a href="{{ route('section.show', $section->id) }}" class="btn-show">
+                        {{ $section->title }}
+                    </a>
+                    @if (Auth::user()->hasRole('super-admin'))
+                        <form action="{{ route('section.destroy', $section->id) }}" method="POST"
+                            onsubmit="return confirm('Are you sure you want to delete this technology?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn-delete">
+                                X
+                            </button>
+                        </form>
+                    @endif
+                </div>
+            @endforeach
+
             <x-message :message="session('success-store-section')" color="green" />
             <x-message :message="session('success-delete-section')" color="red" />
         </x-dashboard-container>
