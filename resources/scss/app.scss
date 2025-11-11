@@ -17,6 +17,8 @@ body {
     font-family: system-ui, sans-serif;
     color: #222;
 }
+
+// Main container styles for main page not dashboard
 .mainContainer {
     min-height: 100vh;
     width: 100%;
@@ -26,32 +28,48 @@ body {
     align-items: center;
     background: #dddbdb;
 }
+ // Dashboard container styles
+.dashboard-container {
+    @include dashboard-container($dashboard-bg-color);
+}
 
+// Buttons styles
+.btn-container {
+    display: inline-flex;
+    border-radius: 6px;
+    min-height: 2rem;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    background-color: orangered;
+    border: 2px solid rgb(161, 8, 8);
+}
 .btn-delete {
     @include btn-style($btn-background-delete, small);
-    text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
     font-weight: 800;
     font-size: 1rem;
 }
 .btn-edit {
     @include btn-style($btn-background-edit, small);
-    text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
     font-weight: 800;
     font-size: 1rem;
 }
 .btn-show {
     @include btn-style($btn-background-show);
-    text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
     font-weight: 800;
     font-size: 1rem;
 }
-
+.btn-create {
+    @include btn-style($btn-background-show);
+    padding: 1rem;
+    border: 2px solid whitesmoke;
+    font-weight: 800;
+    font-size: 1rem;
+}
 .btn-dashboard {
     @include btn-style($nav-list-1-background);
-    text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
 }
 .btn-back {
@@ -61,16 +79,18 @@ body {
 }
 .btn-create {
     @include btn-style($nav-list-1-background);
-    text-shadow: 3px 3px 3px $nav-list-1-background;
     border: 2px solid whitesmoke;
 }
+// end Buttons styles
+    // Sidebar styles
 .sidebar {
     @include aside;
     color: #dddbdb;
 }
-.dashboard-container {
-    @include dashboard-container($dashboard-bg-color);
-}
+
+// end Sidebar styles
+
+    // Dashboard styles elements
 .dashboard-table {
     table {
         border-collapse: collapse;
@@ -79,7 +99,7 @@ body {
             td{
                border: 1px solid black;
                 padding: 1rem;
-               
+
             }
             th {
                 border: 1px solid black;
@@ -97,3 +117,5 @@ body {
     font-size: 0.90rem;
     border: 2px solid $dashboard-bg-color;
 }
+
+// end Dashboard styles elements

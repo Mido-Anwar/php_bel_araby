@@ -3,7 +3,7 @@
         <x-dashboard-head :text="'Technologies Overview'" />
     </x-slot>
     <div class="py-12">
-        <div class="my-4 p-5">
+        <div class="">
             <a href="{{ route('tech.create') }}" class="btn-create">
                 + Create Technology
             </a>

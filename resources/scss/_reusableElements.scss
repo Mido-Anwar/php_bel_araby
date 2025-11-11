@@ -4,14 +4,12 @@
 @mixin btn-style($bg-color, $size: normal) {
     background-color: $bg-color;
     color: #fff;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 12px 24px;
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
     text-align: center;
-    min-width: 150px;
+    align-content: center;
+    min-width: 100px;
     min-height: 30px;
     margin: 0;
     @if $size == "small" {
@@ -19,14 +17,6 @@
         min-width: 50px;
         min-height: 30px;
         font-size: 14px;
-    }
-    &:hover {
-        background-color: color.scale($bg-color, $lightness: -10%);
-        transform: translateY(-2px);
-    }
-
-    &:active {
-        transform: scale(0.97);
     }
 }
 
@@ -100,17 +90,15 @@
 @mixin dashboard-container($bg-color) {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
     gap: 1rem;
     padding: 1rem;
-
- 
+    background-color: $bg-color;
+    border-radius: 1rem;
 }
-.btn-container {
-    display: inline-flex;
 
-    border-radius: 6px;
-    min-height: 2rem;
-}
 @mixin nav-list($background) {
     width: 100%;
     display: flex;

@@ -63,7 +63,7 @@
         <x-dashboard-container>
             <x-dashboard-head :text="'Roles'" />
 
-            <div class="my-4 p-5">
+            <div class="">
                 <a href="{{ route('role.create') }}" class="btn-create">
                     + Create Role
                 </a>
