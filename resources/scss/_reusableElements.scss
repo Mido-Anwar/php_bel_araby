@@ -10,6 +10,9 @@
     align-content: center;
     min-width: fit-content;
     min-height: 30px;
+    border: 2px solid whitesmoke;
+    font-weight: 800;
+    font-size: 1rem;
     @if $size == "small" {
         padding: 12px 24px;
         min-width: 50px;

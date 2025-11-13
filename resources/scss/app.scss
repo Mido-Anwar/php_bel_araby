@@ -28,7 +28,7 @@ body {
     align-items: center;
     background: #dddbdb;
 }
- // Dashboard container styles
+// Dashboard container styles
 .dashboard-container {
     @include dashboard-container($dashboard-bg-color);
 }
@@ -45,46 +45,28 @@ body {
 }
 .btn-delete {
     @include btn-style($btn-background-delete, small);
-    border: 2px solid whitesmoke;
-    font-weight: 800;
-    font-size: 1rem;
 }
 .btn-edit {
     @include btn-style($btn-background-edit, small);
-    border: 2px solid whitesmoke;
-    font-weight: 800;
-    font-size: 1rem;
 }
 .btn-show {
     @include btn-style($btn-background-show);
-    border: 2px solid whitesmoke;
-    font-weight: 800;
-    font-size: 1rem;
 }
 .btn-create {
     @include btn-style($btn-background-show);
     padding: 1rem;
-    border: 2px solid whitesmoke;
-    font-weight: 800;
-    font-size: 1rem;
 }
 .btn-dashboard {
     @include btn-style($nav-list-1-background);
-    border: 2px solid whitesmoke;
-     font-weight: 800;
-    font-size: 1rem;
 }
 .btn-back {
     @include btn-style($btn-background-back);
-    color: $btn-color-back;
-    border: 2px solid whitesmoke;
 }
 .btn-create {
     @include btn-style($nav-list-1-background);
-    border: 2px solid whitesmoke;
 }
 // end Buttons styles
-    // Sidebar styles
+// Sidebar styles
 .sidebar {
     @include aside;
     color: #dddbdb;
@@ -92,16 +74,15 @@ body {
 
 // end Sidebar styles
 
-    // Dashboard styles elements
+// Dashboard styles elements
 .dashboard-table {
     table {
         border-collapse: collapse;
         width: 80rem;
         tr {
-            td{
-               border: 1px solid black;
+            td {
+                border: 1px solid black;
                 padding: 1rem;
-
             }
             th {
                 border: 1px solid black;
@@ -116,7 +97,7 @@ body {
     width: 60rem;
     text-overflow: ellipsis;
     padding: 1rem;
-    font-size: 0.90rem;
+    font-size: 0.9rem;
     border: 2px solid $dashboard-bg-color;
 }
 
