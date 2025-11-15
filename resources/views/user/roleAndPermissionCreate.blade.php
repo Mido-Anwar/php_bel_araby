@@ -4,7 +4,7 @@
         <x-dashboard-paragraph :text="'Create Role & Permission'" />
     </x-slot>
 
-    <div class="py-12">
+
         <x-dashboard-container>
 
             @if (request()->routeIs('role.create'))
@@ -46,5 +46,5 @@
                 </x-hidden-form>
             @endif
         </x-dashboard-container>
-    </div>
+   
 </x-app-layout>

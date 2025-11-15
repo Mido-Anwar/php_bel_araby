@@ -2,7 +2,7 @@
     <x-slot name="header">
         <x-dashboard-head :text="'Technologies Overview'" />
     </x-slot>
-    <div class="py-12">
+
         <div class="">
             <a href="{{ route('tech.create') }}" class="btn-create">
                 + Create Technology
@@ -36,5 +36,5 @@
             <x-message :message="session('success-update-technology')" :color="'blue'" />
             <x-message :message="session('success-delete-technology')" :color="'red'" />
         </x-dashboard-container>
-    </div>
+   
 </x-app-layout>

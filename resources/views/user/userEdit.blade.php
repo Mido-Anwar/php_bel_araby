@@ -4,7 +4,7 @@
         <x-dashboard-paragraph :text="'Modify user information and roles.'" />
     </x-slot>
 
-    <div class="py-12">
+
 
         <x-dashboard-container>
             <form action="{{ route('user.update', $user->id) }}" method="POST" class="space-y-6">
@@ -30,5 +30,5 @@
             </form>
 
         </x-dashboard-container>
-    </div>
+   
 </x-app-layout>

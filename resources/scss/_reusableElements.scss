@@ -12,12 +12,10 @@
     min-height: 30px;
     border: 2px solid whitesmoke;
     font-weight: 800;
-    font-size: 1rem;
+    padding: 12px 24px;
     @if $size == "small" {
-        padding: 12px 24px;
-        min-width: 50px;
-        min-height: 30px;
-        font-size: 14px;
+
+
     }
 }
 
@@ -90,14 +88,17 @@
 
 @mixin dashboard-container($bg-color) {
     display: flex;
+    width: 100%;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 1rem;
+margin: 12px 0;
     gap: 1rem;
     padding: 1rem;
     background-color: $bg-color;
     border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 @mixin nav-list($background) {

@@ -1,3 +1,3 @@
-<h2 dir="{{ textDir($text) }}" class="p-2 bg-gray-200 rounded-md text-xl font-semibold mb-4">
+<h2 dir="{{ textDir($text) }}" class="p-2 w-1/3 bg-gray-200 rounded-md text-xl font-semibold mb-4">
     {{ ucfirst($text) }}
 </h2>

@@ -5,7 +5,7 @@
         <x-dashboard-paragraph :text="'Edit Role & Permission'" />
     </x-slot>
 
-    <div class="py-12">
+
         <x-dashboard-container>
             @if (isset($role) && request()->routeIs('role.edit', $role->id))
                 <x-dashboard-head :text="'Edit role'" />
@@ -42,6 +42,6 @@
                 </x-hidden-form>
             @endif
         </x-dashboard-container>
-    </div>
+   
 
 </x-app-layout>

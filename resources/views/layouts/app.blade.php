@@ -30,7 +30,7 @@
         @endisset
 
         <!-- Page Content -->
-        <main>
+        <main class="p-3">
             {{ $slot }}
         </main>
         @livewireScripts
