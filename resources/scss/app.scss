@@ -55,7 +55,7 @@ body {
 }
 .btn-create {
     @include btn-style($btn-background-show);
-  
+
 }
 .btn-dashboard {
     @include btn-style($nav-list-1-background);
@@ -103,3 +103,18 @@ body {
 }
 
 // end Dashboard styles elements
+.slot-container {
+  width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: rgb(95, 93, 93);
+    border-radius: 1rem;
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+}
