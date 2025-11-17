@@ -8,14 +8,15 @@
 
             {{-- Section Card --}}
 
-            <div class="flex justify-between items-center mb-4">
+         <x-slot name="div">
                 <x-dashboard-head :text="$section->title" />
                 <a href="{{ route('section.edit', $section->id) }}" class="btn-edit">
                     ✎ Edit Section
                 </a>
-            </div>
+
 
             <x-dashboard-paragraph :text="$section->content" />
+            </x-slot>
             {{-- Success update Message --}}
             <x-message :message="session('success-update-section')" color="blue" />
         </x-dashboard-container>

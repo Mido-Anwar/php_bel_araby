@@ -14,7 +14,31 @@
                 + Create New User
             </a>
         </x-slot>
-
+        <table class="dashboard-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                    <tr>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ implode(', ', $user->getRoleNames()->toArray()) }}</td>
+                        <td>
+                            <a href="{{ route('user.edit', $user->id) }}" class="btn-edit">Edit</a>
+                            <x-delete-form :action-url="route('user.destroy', $user->id)" />
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
         <x-message :message="session('success-store-user')" :color="'green'" />
         <x-message :message="session('success-update-user')" :color="'blue'" />
         <x-message :message="session('success-delete-user')" :color="'red'" />
@@ -24,7 +48,7 @@
     <x-dashboard-container>
         <x-slot name="div">
             <x-dashboard-head :text="'Roles'" />
-               <a href="{{ route('role.create') }}" class="btn-create">
+            <a href="{{ route('role.create') }}" class="btn-create">
                 + Create Role
             </a>
         </x-slot>
@@ -37,14 +61,7 @@
                     {{ $role->name }}
                 </a>
                 <a href="{{ route('role.edit', $role->id) }}" class="btn-edit">edit</a>
-                <form action="{{ route('role.destroy', $role->id) }}" method="POST"
-                    onsubmit="return confirm('Are you sure you want to delete this role ?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn-delete">
-                        X
-                    </button>
-                </form>
+                <x-delete-form :action-url="route('role.destroy', $role->id)" />
             </div>
         @endforeach
         <x-message :message="session('success-store-role')" :color="'green'" />
@@ -55,7 +72,7 @@
     <x-dashboard-container>
 
         <x-slot name="div">
-        <x-dashboard-head :text="'Permissions'" />
+            <x-dashboard-head :text="'Permissions'" />
 
             <a href="{{ route('permission.create') }}" class="btn-create">
                 + Create Permission
@@ -66,14 +83,7 @@
             <div class="btn-container">
                 <a href="" class="btn-show">{{ $permission->name }}</a>
                 <a href="{{ route('permission.edit', $permission->id) }}" class="btn-edit">edit</a>
-                <form action="{{ route('permission.destroy', $permission->id) }}" method="POST"
-                    onsubmit="return confirm('Are you sure you want to delete this permission ?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn-delete">
-                        X
-                    </button>
-                </form>
+                <x-delete-form :action-url="route('permission.destroy', $permission->id)" />
             </div>
         @endforeach
         <x-message :message="session('success-store-permission')" :color="'green'" />

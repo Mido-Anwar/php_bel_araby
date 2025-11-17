@@ -3,18 +3,21 @@
 // Mixin قابل لإعادة الاستخدام
 @mixin btn-style($bg-color, $size: normal) {
     background-color: $bg-color;
+    display: inline-block;
     color: #fff;
     border-radius: 8px;
     cursor: pointer;
     text-align: center;
     align-content: center;
-    min-width: fit-content;
+    min-width:70px;
     min-height: 30px;
     border: 2px solid whitesmoke;
     font-weight: 800;
-    padding: 12px 24px;
+    padding: 8px 8px;
     @if $size == "small" {
+         min-width: 50px;
     }
+
 }
 
 // reusable aside

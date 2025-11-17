@@ -7,5 +7,8 @@
 
         </div>
     @endisset
+    <div>
     {{ $slot }}
+
+    </div>
 </div>

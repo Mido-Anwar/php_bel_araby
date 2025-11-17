@@ -22,14 +22,9 @@
                     {{ $technology->id . ' :' . $technology->name }}
                 </a>
                 @if (Auth::user()->hasRole('super-admin'))
-                    <form action="{{ route('tech.destroy', $technology->name) }}" method="POST"
-                        onsubmit="return confirm('Are you sure you want to delete this technology?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn-delete">
-                            X
-                        </button>
-                    </form>
+
+                    <x-delete-form :action-url="route('tech.destroy', $technology->id)" />
+                @else
                 @endif
 
             </div>
