@@ -7,8 +7,8 @@
 
         </div>
     @endisset
-    <div>
-    {{ $slot }}
+    <div style="display:inline-block;" class="mx-3">
+        {{ $slot }}
 
     </div>
 </div>

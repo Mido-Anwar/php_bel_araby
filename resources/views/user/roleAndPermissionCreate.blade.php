@@ -1,15 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <x-dashboard-head :text="'Role & Permission Management'" />
-        <x-dashboard-paragraph :text="'Create Role & Permission'" />
     </x-slot>
 
 
         <x-dashboard-container>
 
             @if (request()->routeIs('role.create'))
-                <x-dashboard-head :text="'Add role'" />
-
+            <x-slot name="div">
+                <x-dashboard-head :text="'Add Role'" />
+            </x-slot>
                 <x-hidden-form :action-url="route('role.store')" method="POST" :fields="[
                     [
                         'name' => 'name',
@@ -31,8 +31,9 @@
 
                 </x-hidden-form>
             @elseif(request()->routeIs('permission.create'))
-                <x-dashboard-head :text="'Add permission'" />
-
+            <x-slot name="div">
+                <x-dashboard-head :text="'Add Permission'" />
+            </x-slot>
                 <x-hidden-form :action-url="route('permission.store')" method="POST" :fields="[
                     [
                         'name' => 'name',
@@ -46,5 +47,5 @@
                 </x-hidden-form>
             @endif
         </x-dashboard-container>
-   
+
 </x-app-layout>

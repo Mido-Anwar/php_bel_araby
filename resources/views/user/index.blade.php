@@ -9,7 +9,7 @@
     <x-dashboard-container>
 
         <x-slot name="div">
-            <x-dashboard-head :text="'Users'" />
+            <x-dashboard-head :text="'Users Data Table'" />
             <a href="{{ route('register') }}" class="btn-dashboard">
                 + Create New User
             </a>
@@ -19,7 +19,6 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Email</th>
                     <th>Roles</th>
                     <th>Actions</th>
                 </tr>
@@ -28,8 +27,8 @@
                 @foreach ($users as $user)
                     <tr>
                         <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->name . ' , '. $user->email}}</td>
+
                         <td>{{ implode(', ', $user->getRoleNames()->toArray()) }}</td>
                         <td>
                             <a href="{{ route('user.edit', $user->id) }}" class="btn-edit">Edit</a>
@@ -51,9 +50,9 @@
             <a href="{{ route('role.create') }}" class="btn-create">
                 + Create Role
             </a>
+            <x-dashboard-paragraph :text="'Manage user roles to control access and permissions within the application.'" />
+
         </x-slot>
-
-
 
         @foreach ($roles as $role)
             <div class="btn-container">
@@ -77,8 +76,9 @@
             <a href="{{ route('permission.create') }}" class="btn-create">
                 + Create Permission
             </a>
-
+            <x-dashboard-paragraph :text="'permissions under roles '" />
         </x-slot>
+
         @foreach ($permissions as $permission)
             <div class="btn-container">
                 <a href="" class="btn-show">{{ $permission->name }}</a>
