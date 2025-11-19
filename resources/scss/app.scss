@@ -95,6 +95,8 @@ table {
         tr {
             td {
                 border: 1px solid black;
+                text-overflow: ellipsis;
+              
             }
             th {
                 border: 1px solid black;

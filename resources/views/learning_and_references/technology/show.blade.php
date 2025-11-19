@@ -5,12 +5,14 @@
 
 
     <x-dashboard-container>
+
+
         <x-slot name="div">
+        <x-dashboard-head :text="$technology->name" />
+
             <a href="{{ route('tech.edit', $technology->name) }}" class="btn-edit">
                 + Edit Technology
             </a>
-
-            <x-dashboard-head :text="$technology->name" />
             <x-dashboard-paragraph :text="$technology->description" />
         </x-slot>
     </x-dashboard-container>

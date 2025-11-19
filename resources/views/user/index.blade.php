@@ -13,6 +13,7 @@
             <a href="{{ route('register') }}" class="btn-dashboard">
                 + Create New User
             </a>
+            <x-dashboard-paragraph :text="'Manage application users, their roles, and permissions from this interface.'" />
         </x-slot>
         <table class="dashboard-table">
             <thead>

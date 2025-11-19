@@ -1,9 +1,10 @@
 @props(['section'])
 {{-- Concepts List --}}
 <x-dashboard-container>
-    <h2 class="font-bold text-xl text-gray-800 dark:text-gray-100 mb-4">
-        Add Concept to <span class="">{{ Str::upper($section->title) }}</span>
-    </h2>
+    <x-slot name="div">
+        <x-dashboard-head :text="Str::upper($section->title) . ' Concepts'" />
+        <x-dashboard-paragraph :text="'Add new concept to the section: ' . $section->title" />
+    </x-slot>
 
     <x-hidden-form :action-url="route('concept.store')" :open="false" :fields="[
         [
@@ -39,9 +40,9 @@
 
 {{-- List Concepts --}}
 <x-dashboard-container>
-    <h2 class="font-bold text-xl mb-4 text-gray-800 dark:text-gray-100">
-        {{ Str::upper($section->title) }} Concepts
-    </h2>
+    <x-slot name="div">
+        <x-dashboard-head :text="Str::upper($section->title) . ' Concepts List'" />
+    </x-slot>
 
 
     @if ($section->concepts->isEmpty())

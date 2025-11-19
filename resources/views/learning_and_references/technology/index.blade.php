@@ -3,17 +3,14 @@
         <x-dashboard-head :text="'Technologies Overview'" />
     </x-slot>
 
-
-
-
-
-
     <x-dashboard-container>
         <x-slot name="div">
-        <x-dashboard-head :text="'Technologies'" />
+            <x-dashboard-head :text="'Technologies'" />
+
             <a href="{{ route('tech.create') }}" class="btn-create">
                 + Create Technology
             </a>
+            <x-dashboard-paragraph :text="'Manage the list of technologies used in learning and reference materials.'" />
         </x-slot>
 
         @foreach ($technologies as $technology)
@@ -22,7 +19,6 @@
                     {{ $technology->id . ' :' . $technology->name }}
                 </a>
                 @if (Auth::user()->hasRole('super-admin'))
-
                     <x-delete-form :action-url="route('tech.destroy', $technology->id)" />
                 @else
                 @endif

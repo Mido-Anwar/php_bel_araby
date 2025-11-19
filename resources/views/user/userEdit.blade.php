@@ -1,12 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
         <x-dashboard-head :text="'Edit User'" />
-        <x-dashboard-paragraph :text="'Modify user information and roles.'" />
+
     </x-slot>
 
 
 
         <x-dashboard-container>
+            <x-slot name="div">
+                <x-dashboard-head :text="'Edit User Details'" />
+                        <x-dashboard-paragraph :text="'Modify user information and roles.'" />
+            </x-slot>
             <form action="{{ route('user.update', $user->id) }}" method="POST" class="space-y-6">
                 @csrf
                 <div>
@@ -30,5 +34,5 @@
             </form>
 
         </x-dashboard-container>
-   
+
 </x-app-layout>
