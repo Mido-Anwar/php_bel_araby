@@ -36,9 +36,7 @@
     ]" />
 
     <x-message :message="session('success-store-concept')" :color="'green'" />
-</x-dashboard-container>
-
-{{-- List Concepts --}}
+    {{-- List Concepts --}}
 <x-dashboard-container>
     <x-slot name="div">
         <x-dashboard-head :text="Str::upper($section->title) . ' Concepts List'" />
@@ -63,3 +61,6 @@
         </div>
     @endforeach
 </x-dashboard-container>
+</x-dashboard-container>
+
+

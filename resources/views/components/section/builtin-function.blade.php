@@ -36,9 +36,7 @@
         ]" />
 
         <x-message :message="session('success-store-builtinFunction')" :color="'green'" />
-    </x-dashboard-container>
-
-    {{-- List Builtin Functions --}}
+          {{-- List Builtin Functions --}}
     <x-dashboard-container>
         <x-slot name="div">
             <x-dashboard-head :text="Str::upper($section->title) . ' Builtin Functions List'" />
@@ -64,3 +62,6 @@
             </div>
         @endforeach
     </x-dashboard-container>
+    </x-dashboard-container>
+
+
