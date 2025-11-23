@@ -42,13 +42,7 @@
         <x-dashboard-container>
             <x-hidden-form method="POST" btnName="add post" action-url="{{ route('post.store') }}" :open="false"
                 :fields="[
-                    [
-                        'name' => 'user_id',
-                        'type' => 'hidden',
-                        'label' => '',
-                        'placeholder' => 'Enter Post title',
-                        'value' => auth()->user()->id,
-                    ],
+              
                     [
                         'name' => 'title',
                         'type' => 'text',

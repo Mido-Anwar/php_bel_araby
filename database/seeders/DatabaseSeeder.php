@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
- use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,20 +13,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-    //     User::factory(10)->create();
 
-    $this->call(RolesAndPermissionsSeeder::class);
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-       // $this->call(PostSeeder::class);
 
-        //        $this->call([
-        //     TechnologySeeder::class,
-        //     SectionSeeder::class,
-        //     ConceptSeeder::class,
-        //     BuiltInFunctionSeeder::class,
-        // ]);
+        $this->call(RolesAndPermissionsSeeder::class);
+        $user = User::factory()->create([
+            'name' => 'mido anwar',
+            'email' => 'mimianwar33@hotmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        $user->assignRole('super-admin');
+      //  $this->call(PostSeeder::class);
+//
+      //  $this->call([
+      //      TechnologySeeder::class,
+      //      SectionSeeder::class,
+      //      ConceptSeeder::class,
+      //      BuiltInFunctionSeeder::class,
+       // ]);
     }
 }

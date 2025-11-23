@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id(); // primary key
             $table->string('title'); // عنوان البوست
             $table->text('body'); // المحتوى
-            $table->string('image')->nullable();
-            // مسار الصورة (مثلاً storage/posts/abc.jpg)
-            // nullable = ممكن يبقى مفيش صورة
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            // ربط البوست باليوزر
+            // ربط البوست باليوزر — العمود قابل للـ NULL، وحذف الكيان الرئيسي يزيل البوست
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade');            // ربط البوست باليوزر
             $table->boolean('is_published')->default(false); // حالة النشر
             $table->timestamps(); // created_at, updated_at
             $table->softDeletes(); // deleted_at (soft delete)

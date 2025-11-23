@@ -42,7 +42,15 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $validated = $request->validated();
-        $post = Post::create($validated);
+        $post = Post::create([
+            'title' => $validated['title'],
+            'body' => $validated['body'],
+            'user_id' => Auth::id(),
+        ]);
+        if ($request->hasFile('featured_image')) {
+            $post->addMediaFromRequest('featured_image')
+                ->toMediaCollection('featured');
+        }
         return redirect()->route('posts.index')->with('success-store-post', 'Post created successfully.');
     }
 
@@ -68,7 +76,20 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
         $validated = $request->validated();
-        $post->update($validated);
+        $post->update([
+            'title' => $validated['title'],
+            'body' => $validated['body'],
+            'user_id' => Auth::id(),
+        ]);
+
+        if ($request->boolean('remove_image')) {
+            $post->clearMediaCollection('featured'); // يحذف الصورة
+        }
+
+        if ($request->hasFile('featured_image')) {
+            $post->addMediaFromRequest('featured_image')
+                ->toMediaCollection('featured'); // سيستبدل القديمة
+        }
         return redirect()->route('posts.index')->with('success-update-post', 'Post updated successfully.');
     }
 
@@ -77,6 +98,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->clearMediaCollection('featured');
         $post->delete();
         return redirect()->route('posts.index')->with('success-delete-post', 'Post deleted successfully.');
     }
