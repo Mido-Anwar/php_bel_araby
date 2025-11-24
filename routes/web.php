@@ -32,6 +32,7 @@ Route::get('/dashboard', function () {
 
 Route::prefix('posts')->controller(PostController::class)->group(function () {
     Route::get('/', 'index')->name('posts.index');
+    Route::get('/create', 'create')->name('post.create');
     Route::post('/store', 'store')->name('post.store');
     Route::get('/show/{post}', 'show')->name('post.show');
     Route::get('/edit/{post}', 'edit')->name('post.edit');
