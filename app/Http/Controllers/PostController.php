@@ -41,6 +41,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+
         $validated = $request->validated();
         $post = Post::create([
             'title' => $validated['title'],
@@ -49,7 +50,7 @@ class PostController extends Controller
         ]);
         if ($request->hasFile('featured_image')) {
             $post->addMediaFromRequest('featured_image')
-                ->toMediaCollection('featured');
+                ->toMediaCollection('featured_image'); // <- مهم التطابق هنا
         }
         return redirect()->route('posts.index')->with('success-store-post', 'Post created successfully.');
     }

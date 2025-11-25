@@ -1,7 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
         <x-dashboard-head :text="'Blog Posts Overview'" />
-
     </x-slot>
 
 
@@ -18,6 +17,9 @@
                         <th>ID</th>
                         <th>Title
                         </th>
+                        <th>
+                            Featured Image
+                        </th>
                         <th>Actions
                         </th>
                     </tr>
@@ -31,8 +33,12 @@
                             <td class="p-3">{{ $post->id }}</td>
                             <td class="p-3">{{ $post->title }}</td>
                             <td class="p-3">
+<img src="{{ $post->getFirstMediaUrl('featured_image','thumb') }}" alt="">
+
+                            </td>
+                            <td class="p-3">
                                 <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
-                                <a href="{{ route('post.destroy', $post->id) }}" class="btn-delete">Delete</a>
+                                <x-delete-form :action-url="route('post.destroy', $post->id)" />
                             </td>
                         </tr>
                     @endforeach
@@ -42,13 +48,13 @@
                 </tbody>
             </table>
         </div>
-
+        {{-- Success Message --}}
+        <x-message :message="session('success-store-post')" :color="'green'" />
+        <x-message :message="session('success-update-post')" :color="'blue'" />
+        <x-message :message="session('success-delete-post')" :color="'red'" />
     </x-dashboard-container>
 
-    {{-- Success Message --}}
-    <x-message :message="session('success-store-post')" :color="'green'" />
-    <x-message :message="session('success-update-post')" :color="'blue'" />
-    <x-message :message="session('success-delete-post')" :color="'red'" />
+
 
 
 </x-app-layout>
