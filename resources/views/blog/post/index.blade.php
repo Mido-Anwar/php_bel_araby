@@ -2,8 +2,6 @@
     <x-slot name="header">
         <x-dashboard-head :text="'Blog Posts Overview'" />
     </x-slot>
-
-
     <x-dashboard-container>
         <x-slot name="div">
             <x-dashboard-head :text="'Blog Posts Table'" />
@@ -33,7 +31,7 @@
                             <td class="p-3">{{ $post->id }}</td>
                             <td class="p-3">{{ $post->title }}</td>
                             <td class="p-3">
-<img src="{{ $post->getFirstMediaUrl('featured_image','thumb') }}" alt="">
+                                <img src="{{ $post->getFirstMediaUrl('featured_image', 'thumb') }}" alt="">
 
                             </td>
                             <td class="p-3">
