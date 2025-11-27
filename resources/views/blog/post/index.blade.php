@@ -32,7 +32,6 @@
                             <td class="p-3">{{ $post->title }}</td>
                             <td class="p-3">
                                 <img src="{{ $post->getFirstMediaUrl('featured_image', 'thumb') }}" alt="">
-
                             </td>
                             <td class="p-3">
                                 <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
