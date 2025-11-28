@@ -35,6 +35,7 @@
                             </td>
                             <td class="p-3">
                                 <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
+                        {{-- delete form --}}
                                 <x-delete-form :action-url="route('post.destroy', $post->id)" />
                             </td>
                         </tr>
