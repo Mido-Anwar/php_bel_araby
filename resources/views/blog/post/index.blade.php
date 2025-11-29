@@ -6,7 +6,7 @@
         <x-slot name="div">
             <x-dashboard-head :text="'Blog Posts Table'" />
             <a href="{{ route('post.create') }}" class="btn-create">create post</a>
-            <x-dashboard-paragraph :text="'manage blog posts '" />
+            <x-dashboard-paragraph :text="'manage blog  add & delete posts'" />
         </x-slot>
         <div class="dashboard-table">
             <table class="">
