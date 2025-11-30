@@ -48,10 +48,7 @@ class PostController extends Controller
             'body' => $validated['body'],
             'user_id' => Auth::id(),
         ]);
-        if ($request->hasFile('featured_image')) {
-            $post->addMediaFromRequest('featured_image')
-                ->toMediaCollection('featured_image'); // <- مهم التطابق هنا
-        }
+ 
         return redirect()->route('posts.index')->with('success-store-post', 'Post created successfully.');
     }
 

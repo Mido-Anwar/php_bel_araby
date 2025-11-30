@@ -27,9 +27,8 @@
                     required>{{ old('content') }}</textarea>
                 <x-input-error :messages="$errors->get('content')" class="mt-2" />
             </div>
-            <x-input-label for="featured_image" :value="'Post Image'" />
-            <input type="file" name="featured_image" id="" accept="image/*">
-            <div class="flex items-center gap-4">
+            <x-input-label for="image" :value="'Post Image'" />
+            <input type="file" name="images[]" class="form-control" multiple accept="image/*">            <div class="flex items-center gap-4">
                 <x-primary-button>{{ __('Create Post') }}</x-primary-button>
 
             </div>

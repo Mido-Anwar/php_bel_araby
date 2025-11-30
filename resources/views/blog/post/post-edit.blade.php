@@ -7,12 +7,11 @@
     <div class="py-12">
         <x-dashboard-container>
             {{-- Post Detail --}}
-            <x-dashboard-head :text="$post->title" />
-            <x-dashboard-paragraph :text="$post->body" />
-            <a href="{{ route('posts.index', $post->id) }}" class="btn-back">Back to
-                Posts</a>
-        </x-dashboard-container>
-        <x-dashboard-container>
+            <x-slot name="div">
+                <x-dashboard-head :text="$post->title" />
+              
+                <x-dashboard-paragraph :text="$post->body" />
+            </x-slot>
 
             <x-hidden-form method="POST" btnName="edit post" action-url="{{ route('post.update', $post->id) }}"
                 :open="false" :fields="[
