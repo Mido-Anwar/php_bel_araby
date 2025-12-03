@@ -8,6 +8,7 @@
             <a href="{{ route('post.create') }}" class="btn-create">create post</a>
             <x-dashboard-paragraph :text="'manage blog  add & delete posts'" />
         </x-slot>
+        {{-- posts table --}}
         <div class="dashboard-table">
             <table class="">
                 <thead class="">
