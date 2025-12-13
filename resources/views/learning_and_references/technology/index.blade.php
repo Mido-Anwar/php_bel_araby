@@ -7,7 +7,7 @@
         <x-slot name="div">
             <x-dashboard-head :text="'Technologies'" />
 
-            <a href="{{ route('tech.create') }}" class="btn-create">
+            <a href="{{ route('technology.create') }}" class="btn-create">
                 + Create Technology
             </a>
             <x-dashboard-paragraph :text="'Manage the list of technologies used in learning and reference materials.'" />
@@ -15,11 +15,11 @@
 
         @foreach ($technologies as $technology)
             <div class="btn-container">
-                <a href="{{ route('tech.show', $technology->name) }}" class="btn-show">
+                <a href="{{ route('technology.show', $technology->name) }}" class="btn-show">
                     {{ $technology->id . ' :' . $technology->name }}
                 </a>
                 @if (Auth::user()->hasRole('super-admin'))
-                    <x-delete-form :action-url="route('tech.destroy', $technology->id)" />
+                    <x-delete-form :action-url="route('technology.destroy', $technology->id)" />
                 @else
                 @endif
 

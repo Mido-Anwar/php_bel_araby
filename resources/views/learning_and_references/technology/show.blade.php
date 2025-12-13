@@ -10,7 +10,7 @@
         <x-slot name="div">
         <x-dashboard-head :text="$technology->name" />
 
-            <a href="{{ route('tech.edit', $technology->name) }}" class="btn-edit">
+            <a href="{{ route('technology.edit', $technology->name) }}" class="btn-edit">
                 + Edit Technology
             </a>
             <x-dashboard-paragraph :text="$technology->description" />

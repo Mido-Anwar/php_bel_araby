@@ -40,14 +40,14 @@ Route::prefix('posts')->controller(PostController::class)->group(function () {
     Route::delete('/delete/{post}', 'destroy')->name('post.destroy');
 })->middleware(['auth', 'verified']);
 
-Route::prefix('tech')->controller(TechnologyController::class)->group(function () {
-    Route::get('/', 'index')->name('tech.index');
-    Route::get('/create', 'create')->name('tech.create');
-    Route::post('/store', 'store')->name('tech.store');
-    Route::get('/show/{name}', 'show')->name('tech.show');
-    Route::get('/edit/{name}', 'edit')->name('tech.edit');
-    Route::post('/update/{name}', 'update')->name('tech.update');
-    Route::delete('/delete/{name}', 'destroy')->name('tech.destroy');
+Route::prefix('technology')->controller(TechnologyController::class)->group(function () {
+    Route::get('/', 'index')->name('technology.index');
+    Route::get('/create', 'create')->name('technology.create');
+    Route::post('/store', 'store')->name('technology.store');
+    Route::get('/show/{name}', 'show')->name('technology.show');
+    Route::get('/edit/{name}', 'edit')->name('technology.edit');
+    Route::post('/update/{name}', 'update')->name('technology.update');
+    Route::delete('/delete/{name}', 'destroy')->name('technology.destroy');
 })->middleware(['auth', 'verified']);
 
 Route::prefix('section')->controller(SectionController::class)->group(function () {

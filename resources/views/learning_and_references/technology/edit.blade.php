@@ -9,7 +9,7 @@
             <x-dashboard-head :text="'Edit Technology Details'" />
             <x-dashboard-paragraph :text="'Update the information for the technology below.'" />
         </x-slot>
-            <x-hidden-form :action-url="route('tech.update', $technology->name)" :open="true" :fields="[
+            <x-hidden-form :action-url="route('technology.update', $technology->name)" :open="true" :fields="[
                 [
                     'name' => 'name',
                     'type' => 'text',

@@ -6,9 +6,9 @@
         <x-dashboard-container>
         <x-slot name="div">
             <x-dashboard-head :text="'Add Technology'" />
-            <x-dashboard-paragraph :text="'Fill in the details below to add a new technology to the learning and reference materials.'" />
+            <x-dashboard-paragraph :text="'Fill in the details below to add a new technology to the learning and reference materials and add home page article .'" />
         </x-slot>
-            <x-hidden-form :action-url="route('tech.store')" :open="false" :fields="[
+            <x-hidden-form :action-url="route('technology.store')" :open="false" :fields="[
                 [
                     'name' => 'name',
                     'type' => 'text',

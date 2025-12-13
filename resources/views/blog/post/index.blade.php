@@ -4,6 +4,7 @@
     </x-slot>
     <x-dashboard-container>
         {{-- div --}}
+        
         <x-slot name="div">
             <x-dashboard-head :text="'Blog Posts Table'" />
             <a href="{{ route('post.create') }}" class="btn-create">create post</a>
