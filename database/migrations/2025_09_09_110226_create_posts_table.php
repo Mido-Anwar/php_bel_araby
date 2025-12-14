@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id(); // primary key
             $table->string('title'); // عنوان البوست
-            $table->text('body'); // المحتوى
+            $table->text('content'); // المحتوى
+            $table->string('image')->nullable(); // الصورة
             // ربط البوست باليوزر — العمود قابل للـ NULL، وحذف الكيان الرئيسي يزيل البوست
             $table->foreignId('user_id')
                 ->nullable()

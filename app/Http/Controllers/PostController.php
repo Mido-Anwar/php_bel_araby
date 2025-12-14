@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::select('id', 'title', 'body')->get();
+        $posts = Post::select('id', 'title', 'content', 'image')->get();
         $authUserPosts = Auth::user()->posts;
 
         if (Auth::user()->hasRole('super-admin')) {
@@ -43,12 +43,17 @@ class PostController extends Controller
     {
 
         $validated = $request->validated();
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('posts', 'public');
+        }
+
         $post = Post::create([
             'title' => $validated['title'],
-            'body' => $validated['body'],
+            'content' => $validated['content'],
+            'image' => $validated['image'] ?? null,
             'user_id' => Auth::id(),
         ]);
- 
+
         return redirect()->route('posts.index')->with('success-store-post', 'Post created successfully.');
     }
 
@@ -76,17 +81,16 @@ class PostController extends Controller
         $validated = $request->validated();
         $post->update([
             'title' => $validated['title'],
-            'body' => $validated['body'],
+            'content' => $validated['content'],
             'user_id' => Auth::id(),
         ]);
 
-        if ($request->boolean('remove_image')) {
-            $post->clearMediaCollection('featured'); // يحذف الصورة
-        }
-
-        if ($request->hasFile('featured_image')) {
-            $post->addMediaFromRequest('featured_image')
-                ->toMediaCollection('featured'); // سيستبدل القديمة
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($post->image) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($post->image);
+            }
+            $post->update(['image' => $request->file('image')->store('posts', 'public')]);
         }
         return redirect()->route('posts.index')->with('success-update-post', 'Post updated successfully.');
     }
@@ -96,7 +100,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->clearMediaCollection('featured');
+        if ($post->image) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($post->image);
+        }
         $post->delete();
         return redirect()->route('posts.index')->with('success-delete-post', 'Post deleted successfully.');
     }

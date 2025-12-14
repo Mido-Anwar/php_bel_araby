@@ -23,10 +23,8 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'body' => 'required|string',
-            'images.*' => 'image|max:5120' // 5MB
-
-
+            'content' => 'required|string',
+            'image' => 'nullable|image|max:10240', // 10MB
         ];
     }
 }

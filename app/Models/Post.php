@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
-    use HasFactory;
-    protected $fillable = ['title', 'body', 'user_id'];
+    use HasFactory, \Illuminate\Database\Eloquent\SoftDeletes;
+    protected $fillable = ['title', 'content', 'image', 'user_id'];
 
 
     // كل Post بيتبع User واحد

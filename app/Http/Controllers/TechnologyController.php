@@ -33,7 +33,7 @@ class TechnologyController extends Controller
 
         Technology::create($request->validated());
         return redirect()
-            ->route('tech.index')
+            ->route('technology.index')
             ->with('success-store-technology', 'Technology created successfully.');
     }
 
@@ -71,7 +71,7 @@ class TechnologyController extends Controller
         $tech = Technology::where('name', $name)->firstOrFail();
         $tech->update($request->validated());
         return redirect()
-            ->route('tech.index')
+            ->route('technology.index')
             ->with('success-update-technology', 'technology updated successfully.');
     }
 
@@ -84,6 +84,6 @@ class TechnologyController extends Controller
 
         $tech->delete();
 
-        return redirect()->route('tech.index')->with('success-delete-technology', 'Technology deleted successfully!');
+        return redirect()->route('technology.index')->with('success-delete-technology', 'Technology deleted successfully!');
     }
 }

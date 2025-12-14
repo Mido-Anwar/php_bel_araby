@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     public function index(){
-        $posts = Post::select('id','title','body')->get();
+        $posts = Post::select('id','title','content','image')->get();
         return view('blog.main',['posts' => $posts]);
     }
 }
