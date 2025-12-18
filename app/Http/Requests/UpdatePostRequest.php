@@ -25,6 +25,7 @@ class UpdatePostRequest extends FormRequest
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'image' => 'nullable|image|max:10240',
+            'is_published' => 'nullable|boolean',
 
 
         ];

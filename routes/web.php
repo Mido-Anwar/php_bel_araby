@@ -18,8 +18,12 @@ Route::get('/', function () {
 
 
 
-Route::get('/blog', [BlogController::class, 'index'])
-    ->name('blog.main');
+Route::prefix('/blog' )->controller(BlogController::class)->group(function () {
+    Route::get('/', 'index')->name('blog.main');
+    Route::get('/{post}', 'show')->name('blog.show');
+
+});
+  
 
 Route::prefix('/docs')->controller(LearnReferenceController::class)->group(function () {
     Route::get('/{name}', 'show')->name('docs.show');
@@ -37,6 +41,8 @@ Route::prefix('posts')->controller(PostController::class)->group(function () {
     Route::get('/show/{post}', 'show')->name('post.show');
     Route::get('/edit/{post}', 'edit')->name('post.edit');
     Route::post('/update/{post}', 'update')->name('post.update');
+    Route::post('/publish/{post}','publish')->name('post.publish');
+    Route::post('/unpublish/{post}','unpublish')->name('post.unpublish');
     Route::delete('/delete/{post}', 'destroy')->name('post.destroy');
 })->middleware(['auth', 'verified']);
 

@@ -40,6 +40,19 @@
                             <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
                             {{-- delete form --}}
                             <x-delete-form :action-url="route('post.destroy', $post->id)" />
+                          @if ($post->is_published)
+                                <form action="{{ route('post.unpublish', $post->id) }}" method="POST" >
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn-unpublish">Unpublish</button>
+                            </form>
+                       @else
+                                <form action="{{ route('post.publish', $post->id) }}" method="POST" >
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn-publish">Publish</button>
+                            </form>
+                          @endif                  
                         </td>
                     </tr>
                     @endforeach
@@ -53,6 +66,7 @@
         <x-message :message="session('success-store-post')" :color="'green'" />
         <x-message :message="session('success-update-post')" :color="'blue'" />
         <x-message :message="session('success-delete-post')" :color="'red'" />
+        <x-message :message="session('success-publish-post')" :color="'green'" />
     </x-dashboard-container>
 
 

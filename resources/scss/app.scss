@@ -65,6 +65,12 @@ body {
 .btn-create {
     @include btn-style($nav-list-1-background);
 }
+.btn-publish {
+    @include btn-style('orange', small);
+}
+.btn-unpublish {
+    @include btn-style('blue', small);
+}
 // end Buttons styles
 // Sidebar styles
 .sidebar {

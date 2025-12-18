@@ -10,10 +10,11 @@ class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory, \Illuminate\Database\Eloquent\SoftDeletes;
-    protected $fillable = ['title', 'content', 'image', 'user_id'];
+    protected $fillable = ['title', 'content', 'image', 'user_id','is_published'];
 
 
-    // كل Post بيتبع User واحد
+
+// post has one user
     public function user()
     {
         return $this->belongsTo(User::class);

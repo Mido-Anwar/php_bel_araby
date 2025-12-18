@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::select('id', 'title', 'content', 'image')->get();
+        $posts = Post::select('id', 'title', 'content', 'image', 'is_published')->get();
         $authUserPosts = Auth::user()->posts;
 
         if (Auth::user()->hasRole('super-admin')) {
@@ -93,6 +93,21 @@ class PostController extends Controller
             $post->update(['image' => $request->file('image')->store('posts', 'public')]);
         }
         return redirect()->route('posts.index')->with('success-update-post', 'Post updated successfully.');
+    }
+
+    public function publish(Post $post)
+    {
+        $post->update([
+            'is_published' => true,
+        ]);
+        return redirect()->route('posts.index')->with('success-publish-post', 'Post published successfully.');
+    }
+    public function unpublish(Post $post)
+    {
+        $post->update([
+            'is_published' => false,
+        ]);
+        return redirect()->route('posts.index')->with('success-unpublish-post', 'Post unpublished successfully.');
     }
 
     /**
