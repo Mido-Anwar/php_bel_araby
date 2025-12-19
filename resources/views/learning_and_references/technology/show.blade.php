@@ -6,7 +6,6 @@
 
     <x-dashboard-container>
 
-
         <x-slot name="div">
             <x-dashboard-head :text="$technology->name" />
 
@@ -37,29 +36,28 @@
         <x-message :message="session('success-store-section')" color="green" />
         <x-message :message="session('success-delete-section')" color="red" />
     </x-dashboard-container>
-    <x-dashboard-container>
-        <x-slot name="div">
-            <x-dashboard-head :text="'Add New Section to ' . $technology->name" />
-        </x-slot>
-        <x-hidden-form :action-url="route('section.store')" :open="false">
 
-            <input type="hidden" name="technology_id" value="{{ $technology->id }}">
-            <div>
-                <x-input-label for="title" :value="'Section Title'" />
-                <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" required autofocus />
-                <x-input-error :messages="$errors->get('title')" class="mt-2" />
-            </div>
-            <div>
-                <x-input-label for="content" :value="'Section Content'" />
-                <textarea id="content" name="content" rows="5"
-                    class="mt-1 block w-full border-gray-300
+
+    <x-dashboard-head :text="'Add New Section to ' . $technology->name" />
+
+    <x-hidden-form :action-url="route('section.store')" :open="false" :btnName="'Add Section'" :formBtnName="'Add Section'">
+
+        <input type="hidden" name="technology_id" value="{{ $technology->id }}">
+        <div>
+            <x-input-label for="title" :value="'Section Title'" />
+            <input type="text" name="title" id="title" required autofocus>
+            <x-input-error :messages="$errors->get('title')" class="mt-2" />
+        </div>
+        <div>
+            <x-input-label for="content" :value="'Section Content'" />
+            <textarea id="content" name="content" rows="5"
+                class="mt-1 block w-full border-gray-300
                 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                    required></textarea>
-                <x-input-error :messages="$errors->get('content')" class="mt-2" />
-            </div>
+                required></textarea>
+            <x-input-error :messages="$errors->get('content')" class="mt-2" />
+        </div>
 
-        </x-hidden-form>
+    </x-hidden-form>
 
-    </x-dashboard-container>
 
 </x-app-layout>

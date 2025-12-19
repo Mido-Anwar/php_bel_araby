@@ -2,7 +2,7 @@
     <div
         class=" w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6">
         <div
-            class="w-1/2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700 transition-transform duration-300 hover:scale-[1.01]">
+            class="w-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700 transition-transform duration-300 hover:scale-[1.01]">
 
             <!-- Header -->
             <div class="text-center mb-8">

@@ -7,15 +7,14 @@
     </x-slot>
 
 
-    <x-dashboard-container>
         <x-slot name="div">
             <x-dashboard-head :text="'Edit Section Details'" />
             <x-dashboard-paragraph :text="'Update the information for the section below.'" />
         </x-slot>
-        <x-hidden-form :action-url="route('section.update', $section->id)" :open="true" >
+        <x-hidden-form :action-url="route('section.update', $section->id)" :open="true" :btnName="'Edit Section'"  :formBtnName="'Update Section'" >
             <div>
                 <x-input-label for="title" :value="'Section Title'" />
-                <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" value="{{ old('title', $section->title) }}" required autofocus />
+                <input type="text" name="title" id="title" value="{{ $section->title }}" required autofocus>
                 <x-input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
             <div>
@@ -29,6 +28,6 @@
             <input type="hidden" name="technology_id" value="{{ $section->technology_id }}">
         </x-hidden-form>
 
-    </x-dashboard-container>
+    
 
 </x-app-layout>

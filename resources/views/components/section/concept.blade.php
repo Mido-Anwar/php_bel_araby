@@ -1,12 +1,12 @@
 @props(['section'])
 {{-- Concepts List --}}
-<div
+<div>
     <x-slot name="div">
     <x-dashboard-head :text="Str::upper($section->title) . ' Concepts'" />
     <x-dashboard-paragraph :text="'Add new concept to the section: ' . $section->title" />
     </x-slot>
-
-    <x-hidden-form :action-url="route('concept.store')" :open="false">
+    <x-dashboard-head :text="'Add New Concept'" />
+    <x-hidden-form :action-url="route('concept.store')" :open="false" :formBtnName="'Add New Concept'">
         <div>
             <x-input-label for="name" :value="'Concept Name'" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" required autofocus />
