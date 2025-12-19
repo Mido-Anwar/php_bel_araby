@@ -66,10 +66,13 @@ body {
     @include btn-style($nav-list-1-background);
 }
 .btn-publish {
-    @include btn-style('orange', small);
+    @include btn-style($btn-background-publish);
+    color: $primary-color;
 }
 .btn-unpublish {
-    @include btn-style('blue', small);
+    @include btn-style($btn-background-unpublish);
+    color: $btn-background-publish;
+    
 }
 // end Buttons styles
 // Sidebar styles
@@ -136,4 +139,15 @@ table {
     @media (max-width: 768px) {
         width: 100%;
     }
+}
+.article{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: #dddbdb;
+    padding: 1rem;
+    border-radius: 1rem;
+ 
 }

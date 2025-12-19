@@ -4,7 +4,7 @@
     </x-slot>
     <x-dashboard-container>
         {{-- div --}}
-        
+
         <x-slot name="div">
             <x-dashboard-head :text="'Blog Posts Table'" />
             <a href="{{ route('post.create') }}" class="btn-create">create post</a>
@@ -21,6 +21,7 @@
                         <th>
                             Featured Image
                         </th>
+                        <th>Published</th>
                         <th>Actions
                         </th>
                     </tr>
@@ -37,27 +38,26 @@
                             <img src="{{ asset('storage/' . $post->image) }}" alt="" class="w-20 h-20">
                         </td>
                         <td class="p-3">
+                            @if ($post->is_published)
+                            <form action="{{ route('post.unpublish', $post->id) }}" method="POST">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn-unpublish" title="Hide post from users">Hide</button>
+                            </form>
+                            @else
+                            <form action="{{ route('post.publish', $post->id) }}" method="POST">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" onblur="alert('Post published successfully')" class="btn-publish" title="Publish post to users">Publish</button>
+                            </form> @endif
+                        </td>
+                        <td class="p-3">
                             <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
                             {{-- delete form --}}
                             <x-delete-form :action-url="route('post.destroy', $post->id)" />
-                          @if ($post->is_published)
-                                <form action="{{ route('post.unpublish', $post->id) }}" method="POST" >
-                                @csrf
-                                @method('POST')
-                                <button type="submit" class="btn-unpublish">Unpublish</button>
-                            </form>
-                       @else
-                                <form action="{{ route('post.publish', $post->id) }}" method="POST" >
-                                @csrf
-                                @method('POST')
-                                <button type="submit" class="btn-publish">Publish</button>
-                            </form>
-                          @endif                  
                         </td>
                     </tr>
                     @endforeach
-
-
 
                 </tbody>
             </table>
@@ -66,10 +66,8 @@
         <x-message :message="session('success-store-post')" :color="'green'" />
         <x-message :message="session('success-update-post')" :color="'blue'" />
         <x-message :message="session('success-delete-post')" :color="'red'" />
-        <x-message :message="session('success-publish-post')" :color="'green'" />
+        <x-message :message="session('success-publish-post')" :color="'rgb(255, 140, 0)'" />
+        <x-message :message="session('success-unpublish-post')" :color="'black'" />
     </x-dashboard-container>
-
-
-
 
 </x-app-layout>

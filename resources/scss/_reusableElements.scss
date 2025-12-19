@@ -11,9 +11,10 @@
     align-content: center;
     min-width:70px;
     min-height: 30px;
-    border: 2px solid whitesmoke;
+    border: 2px solid rgb(32, 30, 30);
     font-weight: 800;
     padding: 8px 8px;
+    margin: 2px;
     @if $size == "small" {
          min-width: 50px;
     }

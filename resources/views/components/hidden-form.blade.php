@@ -10,33 +10,7 @@
     <div x-show="open" x-transition class="w-full p-1 bg-slate-500 flex justify-center mt-4">
         <form action="{{ $actionUrl }}" method="POST" class="w-full p-3 space-y-5">
             @csrf
-            @foreach ($fields as $field)
-                <div>
-                    {{-- Label (اختياري) --}}
-                    @if (!empty($field['label']))
-                        <label for="{{ $field['name'] }}"
-                            class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
-                            {{ $field['label'] }}
-                        </label>
-                    @endif
 
-                    {{-- Dynamic input types --}}
-                    @switch($field['type'])
-                        @case('textarea')
-                            <textarea id="{{ $field['name'] }}" name="{{ $field['name'] }}" placeholder="{{ $field['placeholder'] ?? '' }}"
-                                rows="{{ $field['rows'] ?? 3 }}" value=""
-                                class="border rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                {{ $field['value'] ?? '' }}
-                            </textarea>
-                        @break
-
-                        @default
-                            <input type="{{ $field['type'] ?? 'text' }}" id="{{ $field['name'] }}" name="{{ $field['name'] }}"
-                                placeholder="{{ $field['placeholder'] ?? '' }}" value="{{ $field['value'] ?? '' }}"
-                                class="border rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    @endswitch
-                </div>
-            @endforeach
             {{ $slot }}
 
 

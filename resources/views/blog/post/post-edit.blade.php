@@ -18,9 +18,8 @@
 
             <div>
                 <x-input-label for="title" :value="'Post Title'" />
-                <x-text-input id="title" name="title" type="text" value="{{ $post->title }}" class="mt-1 block
-                w-full"
-                    :value="old('title')" required autofocus />
+                <input  id="title" name="title" type="text" value="{{ $post->title }}" class="mt-1 block
+                w-full" required autofocus />
                 <x-input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
             <div>

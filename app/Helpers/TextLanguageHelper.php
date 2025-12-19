@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('detectLanguage')) {
+if (!function_exists('textDir')) {
     function textDir($text)
     {
         $arabicCount = preg_match_all('/[\p{Arabic}]/u', $text);

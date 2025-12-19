@@ -1,7 +1,7 @@
 <x-master-layout>
-    <div class="flex flex-col gap-4 bg-gray-200 p-4 rounded">
-        <h1>{{$post->title}}</h1>
-        <img style="width: 200px; height: 200px; object-fit: cover;" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
-        <p>{{$post->content}}</p>
+    <div class="article">
+        <h1 dir="{{ textDir($post->title) }}"style="align-self: {{ textDir($post->title) == 'rtl' ? 'flex-start' : 'flex-end' }};">{{$post->title}}</h1>
+        <img style="width:500px; height: 500px; object-fit: cover;" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
+        <p dir="{{ textDir($post->content) }}">{{$post->content}}</p>
     </div>
 </x-master-layout>

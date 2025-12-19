@@ -35,7 +35,7 @@ class SectionController extends Controller
 
         Section::create($request->validated());
         return redirect()
-            ->route('tech.show', $technology->name)
+            ->route('technology.show', $technology->name)
             ->with('success-store-section', 'Section created successfully.');
     }
 
@@ -75,7 +75,7 @@ class SectionController extends Controller
         $technology  = Technology::where('id', $section->technology_id)->firstOrFail(['name']);
         $section->delete();
         return redirect()
-            ->route('tech.show', $technology->name)
+            ->route('technology.show', $technology->name)
             ->with('success-delete-section', 'Section deleted successfully.');
     }
 }
