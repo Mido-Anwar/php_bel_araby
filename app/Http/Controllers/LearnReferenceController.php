@@ -20,8 +20,8 @@ class LearnReferenceController extends Controller
         'sections' => function ($query) {
             $query->select('id', 'title', 'technology_id');
         },
-        'sections.concepts:id,section_id,name',
-        'sections.builtinFunctions:id,section_id,name',
+        'sections.concepts:id,name,syntax,example,description',
+        'sections.builtinFunctions:id,name,syntax,example,description',
     ])
     ->firstOrFail(['id', 'name','description']);
         return view('learning_and_references.main', ['technology' => $technology]);
