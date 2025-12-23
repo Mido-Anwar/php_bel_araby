@@ -50,7 +50,7 @@ Route::prefix('technology')->controller(TechnologyController::class)->group(func
     Route::get('/', 'index')->name('technology.index');
     Route::get('/create', 'create')->name('technology.create');
     Route::post('/store', 'store')->name('technology.store');
-    Route::get('/show/{id}', 'show')->name('technology.show');
+    Route::get('/show/{technology}', 'show')->name('technology.show');
     Route::get('/edit/{technology}', 'edit')->name('technology.edit');
     Route::post('/update/{technology}', 'update')->name('technology.update');
     Route::delete('/delete/{technology}', 'destroy')->name('technology.destroy');

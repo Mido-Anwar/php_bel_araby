@@ -44,7 +44,7 @@ class SectionController extends Controller
      */
     public function show(Section $section)
     {
-        return view('docs.technology.section.show', compact('section'));
+        return view('docs.technology.section.section-show', compact('section'));
     }
 
     /**
@@ -52,7 +52,7 @@ class SectionController extends Controller
      */
     public function edit(Section $section)
     {
-        return view('docs.technology.section.edit', compact('section'));
+        return view('docs.technology.section.section-edit', compact('section'));
     }
 
     /**

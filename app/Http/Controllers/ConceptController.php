@@ -21,7 +21,7 @@ class ConceptController extends Controller
      */
     public function create()
     {
-        //
+        return view('docs.section.concept.concept-create');
     }
 
     /**
@@ -42,7 +42,7 @@ class ConceptController extends Controller
      */
     public function show(Concept $concept)
     {
-        return view('docs.section.showConceptOrBuiltinFun', compact('concept'));
+        return view('docs.section.concept.concept-show', compact('concept'));
     }
 
     /**
@@ -50,7 +50,7 @@ class ConceptController extends Controller
      */
     public function edit(Concept $concept)
     {
-        return view('docs.section.concept-edit', compact('concept'));
+        return view('docs.section.concept.concept-edit', compact('concept'));
     }
 
     /**

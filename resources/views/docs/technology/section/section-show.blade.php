@@ -22,7 +22,15 @@
             {{-- Include Concept or Built-in Function  --}}
             {{-- from component/section --}}
 
-            <x-section.concept :section="$section" />
+       <x-dashboard-container>
+        <x-slot name="div">
+            <x-dashboard-head :text="'Concepts'" />
+            <a href="{{ route('concept.create', $section->id) }}" class="btn-create">
+                ✎ Add Concept to Section
+            </a>
+            <x-dashboard-paragraph :text="'Concepts in this section'" />
+        </x-slot>
+       </x-dashboard-container>
             <x-message :message="session('success-update-concept')" :color="'blue'" />
             <x-message :message="session('success-delete-concept')" :color="'red'" />
        
