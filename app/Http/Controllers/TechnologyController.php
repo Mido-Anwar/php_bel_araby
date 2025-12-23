@@ -14,7 +14,7 @@ class TechnologyController extends Controller
     public function index()
     {
         $technologies = Technology::select('id', 'name')->get();
-        return view('learning_and_references.technology.index', ['technologies' => $technologies]);
+        return view('docs.technology.index', ['technologies' => $technologies]);
     }
 
     /**
@@ -22,7 +22,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        return view('learning_and_references.technology.create');
+        return view('docs.technology.create');
     }
 
     /**
@@ -48,9 +48,12 @@ class TechnologyController extends Controller
                 'sections' => function ($query) {
                     $query->select('id', 'title', 'technology_id');
                 },
+                'builtInFunctions' => function ($query) {
+                    $query->select('id', 'name',  'technology_id');
+                },
             ])->firstOrFail(['id', 'name', 'description']);
 
-        return view('learning_and_references.technology.show', compact('technology'));
+        return view('docs.technology.show', compact('technology'));
     }
 
     /**
@@ -60,7 +63,7 @@ class TechnologyController extends Controller
     {
         $technology = Technology::where('name', $name)->firstOrFail();
 
-        return view('learning_and_references.technology.edit', compact('technology'));
+        return view('docs.technology.edit', compact('technology'));
     }
 
     /**

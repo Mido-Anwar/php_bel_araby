@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBuiltInFunctionRequest;
 use App\Http\Requests\UpdateBuiltInFunctionRequest;
 use App\Models\BuiltInFunction;
-
+use App\Models\Technology;
 class BuiltInFunctionController extends Controller
 {
     /**
@@ -19,9 +19,9 @@ class BuiltInFunctionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Technology $technology)
     {
-        //
+        return view('docs.technology.builtinfunction.create', compact('technology'));
     }
 
     /**
@@ -32,7 +32,7 @@ class BuiltInFunctionController extends Controller
         $validated = $request->validated();
         BuiltInFunction::create($validated);
         return redirect()
-            ->route('section.show', $validated['section_id'])
+            ->route('technology.show', $validated['technology_id'])
             ->with('success-store-builtinFunction', 'Built-in function created successfully.');
     }
 
@@ -41,8 +41,7 @@ class BuiltInFunctionController extends Controller
      */
     public function show(BuiltInFunction $builtInFunction)
     {
-        return view('learning_and_references.section.showConceptOrBuiltinFun', compact('builtInFunction'));
-
+        return view('docs.technology.builtinfunction.show', compact('builtInFunction'));
     }
 
     /**
@@ -50,7 +49,7 @@ class BuiltInFunctionController extends Controller
      */
     public function edit(BuiltInFunction $builtInFunction)
     {
-        return view('learning_and_references.section.builtinfunc-edit', compact('builtInFunction'));
+        return view('docs.technology.builtinfunction.edit', compact('builtInFunction'));
     }
 
     /**
@@ -61,7 +60,7 @@ class BuiltInFunctionController extends Controller
         $validated = $request->validated();
         $builtInFunction->update($validated);
         return redirect()
-            ->route('section.show', $builtInFunction->section_id)
+            ->route('technology.show', $builtInFunction->technology_id)
             ->with('success-update-builtinFunction', 'Built-in function updated successfully.');
     }
 
@@ -72,7 +71,7 @@ class BuiltInFunctionController extends Controller
     {
         $builtInFunction->delete();
         return redirect()
-            ->route('section.show', $builtInFunction->section_id)
+            ->route('technology.show', $builtInFunction->technology_id)
             ->with('success-delete-builtinFunction', 'Built-in function deleted successfully.');
     }
 }

@@ -17,4 +17,8 @@ class Technology extends Model
     public function sections():HasMany{
       return $this->hasMany(Section::class);
     }
+    public function builtinFunctions(): HasMany
+    {
+        return $this->hasMany(BuiltInFunction::class);
+    }
 }

@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('built_in_functions', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // اسم الدالة
-            $table->string('syntax')->nullable();
-            $table->text('description')->nullable(); // وصف اختياري
+            $table->string('name');
+            $table->string('tag_name');
+            $table->text('syntax')->nullable();
+            $table->text('description')->nullable();
             $table->text('example')->nullable();
-            $table->foreignId('section_id')
+            $table->foreignId('technology_id')
                 ->constrained()
-                ->onDelete('cascade');// Section id
+                ->onDelete('cascade');// Technology id
             $table->timestamps();
         });
     }

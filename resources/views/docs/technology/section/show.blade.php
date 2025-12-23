@@ -25,7 +25,7 @@
             <x-section.concept :section="$section" />
             <x-message :message="session('success-update-concept')" :color="'blue'" />
             <x-message :message="session('success-delete-concept')" :color="'red'" />
-            <x-section.builtin-function :section="$section" />
+       
             <x-message :message="session('success-update-builtinFunction')" :color="'blue'" />
             <x-message :message="session('success-delete-builtinFunction')" :color="'red'" />
       

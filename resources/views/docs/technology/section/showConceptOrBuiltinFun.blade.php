@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        @if (route('concept.show', $concept->id))
+        @if (isset($concept))
             <x-dashboard-head :text="$concept->name" />
-        @elseif (route('builtin.show', $builtinFunction->id))
+        @elseif (isset($builtinFunction))
             <x-dashboard-head :text="$builtinFunction->name" />
         @endif
 
@@ -11,20 +11,20 @@
 
     <x-dashboard-container>
         {{-- Section Card --}}
-        @if (route('concept.show', $concept->id))
+        @if ( isset($builtinFunction))
             <x-slot name="div">
                 <x-dashboard-head :text="$concept->name" />
 
                 <x-dashboard-paragraph :text="$concept->syntax" />
             </x-slot>
-        @elseif (route('builtin.show', $builtinFunction->id))
+        @elseif (isset($concept))
             <x-slot name="div">
-                <x-dashboard-head :text="$builtinFunction->name" />
+                <x-dashboard-head :text="$concept->name" />
 
-                <x-dashboard-paragraph :text="$builtinFunction->syntax" />
+                <x-dashboard-paragraph :text="$concept->syntax" />
             </x-slot>
         @endif
-
     </x-dashboard-container>
+
     </div>
 </x-app-layout>

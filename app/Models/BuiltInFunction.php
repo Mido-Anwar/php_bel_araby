@@ -10,10 +10,10 @@ class BuiltInFunction extends Model
 {
     /** @use HasFactory<\Database\Factories\BuiltInFunctionFactory> */
     use HasFactory;
- protected $fillable = ['name', 'syntax', 'description', 'example', 'section_id'];
+ protected $fillable = ['name','tag_name', 'syntax', 'description', 'example', 'technology_id'];
 
-    public function section(): BelongsTo
+    public function technology(): BelongsTo
     {
-        return $this->belongsTo(Section::class);
+        return $this->belongsTo(Technology::class);
     }
 }

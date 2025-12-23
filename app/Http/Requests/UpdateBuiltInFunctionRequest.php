@@ -23,10 +23,11 @@ class UpdateBuiltInFunctionRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'tag_name' => 'required|string|max:255',
             'syntax' => 'nullable|string',
             'description' => 'nullable|string',
             'example' => 'nullable|string',
-            'section_id' => 'required|exists:sections,id',
+            'technology_id' => 'required|exists:technologies,id',
         ];
     }
 }

@@ -42,7 +42,7 @@ class ConceptController extends Controller
      */
     public function show(Concept $concept)
     {
-        return view('learning_and_references.section.showConceptOrBuiltinFun', compact('concept'));
+        return view('docs.section.showConceptOrBuiltinFun', compact('concept'));
     }
 
     /**
@@ -50,7 +50,7 @@ class ConceptController extends Controller
      */
     public function edit(Concept $concept)
     {
-        return view('learning_and_references.section.concept-edit', compact('concept'));
+        return view('docs.section.concept-edit', compact('concept'));
     }
 
     /**

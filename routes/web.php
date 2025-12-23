@@ -50,7 +50,7 @@ Route::prefix('technology')->controller(TechnologyController::class)->group(func
     Route::get('/', 'index')->name('technology.index');
     Route::get('/create', 'create')->name('technology.create');
     Route::post('/store', 'store')->name('technology.store');
-    Route::get('/show/{name}', 'show')->name('technology.show');
+    Route::get('/show/{technology}', 'show')->name('technology.show');
     Route::get('/edit/{name}', 'edit')->name('technology.edit');
     Route::post('/update/{name}', 'update')->name('technology.update');
     Route::delete('/delete/{name}', 'destroy')->name('technology.destroy');
@@ -74,12 +74,13 @@ Route::prefix('concept')->controller(ConceptController::class)->group(function (
     Route::delete('/delete/{concept}', 'destroy')->name('concept.destroy');
 })->middleware(['auth', 'verified']);
 
-Route::prefix('builtin')->controller(BuiltInFunctionController::class)->group(function () {
-    Route::post('/store', 'store')->name('builtin.store');
-    Route::get('/show/{builtInFunction}', 'show')->name('builtin.show');
-    Route::get('/edit/{builtInFunction}', 'edit')->name('builtin.edit');
-    Route::post('/update/{builtInFunction}', 'update')->name('builtin.update');
-    Route::delete('/delete/{builtInFunction}', 'destroy')->name('builtin.destroy');
+Route::prefix('builtinfunction')->controller(BuiltInFunctionController::class)->group(function () {
+    Route::get('/create/{technology}', 'create')->name('builtinfunction.create');
+    Route::post('/store', 'store')->name('builtinfunction.store');
+    Route::get('/show/{builtInFunction}', 'show')->name('builtinfunction.show');
+    Route::get('/edit/{builtInFunction}', 'edit')->name('builtinfunction.edit');
+    Route::post('/update/{builtInFunction}', 'update')->name('builtinfunction.update');
+    Route::delete('/delete/{builtInFunction}', 'destroy')->name('builtinfunction.destroy');
 })->middleware(['auth', 'verified']);
 
 Route::prefix('user')->controller(UserController::class)->group(function () {

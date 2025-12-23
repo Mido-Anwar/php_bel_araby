@@ -23,8 +23,5 @@ class Section extends Model
     {
         return $this->hasMany(Concept::class);
     }
-    public function builtinFunctions(): HasMany
-    {
-        return $this->hasMany(BuiltInFunction::class);
-    }
+  
 }

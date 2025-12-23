@@ -44,7 +44,7 @@ class SectionController extends Controller
      */
     public function show(Section $section)
     {
-        return view('learning_and_references.section.show', compact('section'));
+        return view('docs.technology.section.show', compact('section'));
     }
 
     /**
@@ -52,7 +52,7 @@ class SectionController extends Controller
      */
     public function edit(Section $section)
     {
-        return view('learning_and_references.section.edit', compact('section'));
+        return view('docs.technology.section.edit', compact('section'));
     }
 
     /**
@@ -63,7 +63,7 @@ class SectionController extends Controller
 
         $section->update($request->validated());
         return redirect()
-            ->route('section.show', $section->id)
+            ->route('technology.show', $section->technology_id)
             ->with('success-update-section', 'Section updated successfully.');
     }
 
