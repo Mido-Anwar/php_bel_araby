@@ -50,10 +50,10 @@ Route::prefix('technology')->controller(TechnologyController::class)->group(func
     Route::get('/', 'index')->name('technology.index');
     Route::get('/create', 'create')->name('technology.create');
     Route::post('/store', 'store')->name('technology.store');
-    Route::get('/show/{technology}', 'show')->name('technology.show');
-    Route::get('/edit/{name}', 'edit')->name('technology.edit');
-    Route::post('/update/{name}', 'update')->name('technology.update');
-    Route::delete('/delete/{name}', 'destroy')->name('technology.destroy');
+    Route::get('/show/{id}', 'show')->name('technology.show');
+    Route::get('/edit/{technology}', 'edit')->name('technology.edit');
+    Route::post('/update/{technology}', 'update')->name('technology.update');
+    Route::delete('/delete/{technology}', 'destroy')->name('technology.destroy');
 })->middleware(['auth', 'verified']);
 
 Route::prefix('section')->controller(SectionController::class)->group(function () {
@@ -75,6 +75,7 @@ Route::prefix('concept')->controller(ConceptController::class)->group(function (
 })->middleware(['auth', 'verified']);
 
 Route::prefix('builtinfunction')->controller(BuiltInFunctionController::class)->group(function () {
+  // param technology_id is required for create new built-in function follow technology
     Route::get('/create/{technology}', 'create')->name('builtinfunction.create');
     Route::post('/store', 'store')->name('builtinfunction.store');
     Route::get('/show/{builtInFunction}', 'show')->name('builtinfunction.show');

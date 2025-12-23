@@ -71,7 +71,7 @@
                 {{ $builtinfunction->name }}
             </a>
             @if (Auth::user()->hasRole('super-admin'))
-            <x-delete-form :action-url="route('builtinfunction.destroy', $builtinfunction->id)" />
+            <x-delete-form :action-url="route('builtinfunction.destroy', $builtinfunction)" />
             @endif
         </div>
         @endforeach

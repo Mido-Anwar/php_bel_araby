@@ -60,10 +60,11 @@ class SectionController extends Controller
      */
     public function update(UpdateSectionRequest $request, Section $section)
     {
-
-        $section->update($request->validated());
+        $validated = $request->validated();
+     
+        $section->update($validated);
         return redirect()
-            ->route('technology.show', $section->technology_id)
+            ->route('section.show', $section->id)
             ->with('success-update-section', 'Section updated successfully.');
     }
 
