@@ -40,52 +40,47 @@ class TechnologyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($name)
+    public function show(Technology $technology)
     {
-        // $tech = Technology::where('name', $name)->firstOrFail();
-        $technology = Technology::where('name', $name)
-            ->with([
-                'sections' => function ($query) {
-                    $query->select('id', 'title', 'technology_id');
-                },
-                'builtInFunctions' => function ($query) {
-                    $query->select('id', 'name',  'technology_id');
-                },
-            ])->firstOrFail(['id', 'name', 'description']);
-
+        $technology->load([
+            'sections' => function ($query) {
+                $query->select('id', 'title', 'technology_id');
+            },
+            'builtInFunctions' => function ($query) {
+                $query->select('id', 'name',  'technology_id');
+            },
+        ]);
         return view('docs.technology.technology-show', compact('technology'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($name)
+    public function edit(Technology $technology)
     {
-        $technology = Technology::where('name', $name)->firstOrFail();
-
         return view('docs.technology.technology-edit', compact('technology'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTechnologyRequest $request, $name)
+    public function update(UpdateTechnologyRequest $request, Technology $technology)
     {
-        $tech = Technology::where('name', $name)->firstOrFail();
-        $tech->update($request->validated());
+      $validated = $request->validated();
+      $technology->update($validated);
         return redirect()
-            ->route('technology.index')
+            ->route('technology.show', $technology->id)
             ->with('success-update-technology', 'technology updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($name)
+    public function destroy(Technology $technology)
     {
-        $tech = Technology::where('name', $name)->firstOrFail();
+          
 
-        $tech->delete();
+        $technology->delete();
 
         return redirect()->route('technology.index')->with('success-delete-technology', 'Technology deleted successfully!');
     }

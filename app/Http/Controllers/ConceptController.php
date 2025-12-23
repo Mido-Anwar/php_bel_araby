@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreConceptRequest;
 use App\Http\Requests\UpdateConceptRequest;
 use App\Models\Concept;
-
+use App\Models\Section;
 class ConceptController extends Controller
 {
     /**
@@ -19,9 +19,9 @@ class ConceptController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Section $section)
     {
-        return view('docs.section.concept.concept-create');
+        return view('docs.technology.section.concept.concept-create', compact('section'));
     }
 
     /**
@@ -42,7 +42,7 @@ class ConceptController extends Controller
      */
     public function show(Concept $concept)
     {
-        return view('docs.section.concept.concept-show', compact('concept'));
+        return view('docs.technology.section.concept.concept-show', compact('concept'));
     }
 
     /**
@@ -50,7 +50,7 @@ class ConceptController extends Controller
      */
     public function edit(Concept $concept)
     {
-        return view('docs.section.concept.concept-edit', compact('concept'));
+        return view('docs.technology.section.concept.concept-edit', compact('concept'));
     }
 
     /**

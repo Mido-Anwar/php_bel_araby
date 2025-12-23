@@ -9,7 +9,7 @@
         <x-dashboard-paragraph :text="'Update the information for the technology below.'" />
     </x-slot>
 
-    <x-hidden-form :action-url="route('technology.update', $technology->name)" :open="false" :btnName="'Edit Technology'" :formBtnName="'Update Technology'">
+    <x-hidden-form :action-url="route('technology.update', $technology->id)" :open="false" :btnName="'Edit Technology'" :formBtnName="'Update Technology'">
 
         <div>
             <x-input-label for="name" :value="'Technology Name'" />

@@ -66,7 +66,7 @@ Route::prefix('section')->controller(SectionController::class)->group(function (
 
 Route::prefix('concept')->controller(ConceptController::class)->group(function () {
     Route::get('/', 'index')->name('concept.index');
-    Route::get('/create', 'create')->name('concept.create');
+    Route::get('/create/{section}', 'create')->name('concept.create');
     Route::post('/store', 'store')->name('concept.store');
     Route::get('/show/{concept}', 'show')->name('concept.show');
     Route::get('/edit/{concept}', 'edit')->name('concept.edit');

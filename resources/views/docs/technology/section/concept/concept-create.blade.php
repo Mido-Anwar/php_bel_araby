@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-dashboard-head :text="'Concept'" />
+        <x-dashboard-head :text="'add new Concept to section : ' . $section->title" />
     </x-slot>
 
     <x-hidden-form :action-url="route('concept.store')" :open="false" :formBtnName="'Add New Concept'">

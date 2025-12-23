@@ -1,6 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <x-dashboard-head :text="'Builtin Function : ' . $builtInFunction->name" />
+        
+        <x-message :message="session('success-update-builtinFunction')" color="blue" />
     </x-slot>
 
     <x-dashboard-container>

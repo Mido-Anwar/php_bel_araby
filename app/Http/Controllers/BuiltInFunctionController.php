@@ -59,11 +59,10 @@ class BuiltInFunctionController extends Controller
      */
     public function update(UpdateBuiltInFunctionRequest $request, BuiltInFunction $builtInFunction)
     {
-        $technology  = Technology::where('id', $builtInFunction->technology_id)->firstOrFail(['name']);
         $validated = $request->validated();
         $builtInFunction->update($validated);
         return redirect()
-            ->route('technology.show', $technology->name)
+            ->route('builtinfunction.show', $builtInFunction->id)
             ->with('success-update-builtinFunction', 'Built-in function updated successfully.');
     }
 

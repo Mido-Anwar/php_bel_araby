@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-dashboard-head :text="'Edit: ' . $concept->name" />
+        <x-dashboard-head :text="'Edit Concept : ' . $concept->name" />
 
     </x-slot>
 
@@ -41,7 +41,7 @@
                 required>{{ $concept->example }}</textarea>
             <x-input-error :messages="$errors->get('example')" class="mt-2" />
         </div>
-        <input type="hidden" name="section_id" value="{{ $concept->section->id }}">
+        <input type="hidden" name="section_id" value="{{ $concept->section_id }}">
 
     </x-hidden-form>
 

@@ -1,6 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <x-dashboard-head :text="$technology->name" />
+        <x-message :message="session('success-update-technology')" color="blue" />
+        <x-message :message="session('success-store-section')" color="green" />
+        <x-message :message="session('success-delete-section')" color="red" />
+        <x-message :message="session('success-store-builtinFunction')" color="green" />
+        <x-message :message="session('success-delete-builtinFunction')" color="red" />
     </x-slot>
 
 
@@ -9,7 +14,7 @@
         <x-slot name="div">
             <x-dashboard-head :text="$technology->name" />
 
-            <a href="{{ route('technology.edit', $technology->name) }}" class="btn-edit">
+            <a href="{{ route('technology.edit', $technology->id) }}" class="btn-edit">
                 + Edit Technology
             </a>
             <x-dashboard-paragraph :text="$technology->description" />
@@ -52,8 +57,6 @@
         </div>
         @endforeach
 
-        <x-message :message="session('success-store-section')" color="green" />
-        <x-message :message="session('success-delete-section')" color="red" />
     </x-dashboard-container>
     <x-dashboard-container>
         <x-slot name="div">
@@ -75,7 +78,6 @@
             @endif
         </div>
         @endforeach
-        <x-message :message="session('success-store-section')" color="green" />
-        <x-message :message="session('success-delete-section')" color="red" />
+
     </x-dashboard-container>
 </x-app-layout>

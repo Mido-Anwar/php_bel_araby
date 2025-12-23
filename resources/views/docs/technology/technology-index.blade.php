@@ -15,7 +15,7 @@
 
         @foreach ($technologies as $technology)
             <div class="btn-container">
-                <a href="{{ route('technology.show', $technology->name) }}" class="btn-show">
+                <a href="{{ route('technology.show', $technology->id) }}" class="btn-show">
                     {{ $technology->id . ' :' . $technology->name }}
                 </a>
                 @if (Auth::user()->hasRole('super-admin'))
