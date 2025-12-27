@@ -17,10 +17,8 @@ class LearnReferenceController extends Controller
     {
         $technology = Technology::where('name', $name)
             ->with([
-                'sections' => function ($query) {
-                    $query->select('id', 'title', 'technology_id');
-                },
-                'sections.concepts:id,name,syntax,example,description',
+                'sections:id,title,content,technology_id',
+                'sections.concepts:id,section_id,name,syntax,example,description',
                 'builtinFunctions:id,name,syntax,example,description,technology_id',
             ])
             ->firstOrFail(['id', 'name', 'description']);

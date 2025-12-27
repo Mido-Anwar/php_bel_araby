@@ -31,11 +31,9 @@ class SectionController extends Controller
     public function store(StoreSectionRequest $request)
     {
         $validated = $request->validated();
-        $technology  = Technology::where('id', $validated['technology_id'])->firstOrFail(['name']);
-
         Section::create($request->validated());
         return redirect()
-            ->route('technology.show', $technology->name)
+            ->route('technology.show', $validated['technology_id'])
             ->with('success-store-section', 'Section created successfully.');
     }
 
@@ -73,10 +71,9 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        $technology  = Technology::where('id', $section->technology_id)->firstOrFail(['name']);
         $section->delete();
         return redirect()
-            ->route('technology.show', $technology->name)
+            ->route('technology.show', $section->technology_id)
             ->with('success-delete-section', 'Section deleted successfully.');
     }
 }

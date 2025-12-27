@@ -7,32 +7,31 @@ use Livewire\Component;
 
 class TechnologyTutorial extends Component
 {
-        public $technology;
+    public $technology;
     public $current = null;
 
     public function mount($name)
     {
         $this->technology = Technology::where('name', $name)
             ->with([
+                'builtinfunctions:id,name,syntax,example,description',
                 'sections:id,title,content,technology_id',
                 'sections.concepts:id,section_id,name,syntax,example,description',
-                'sections.builtinFunctions:id,section_id,name,syntax,example,description',
+
             ])
-            ->firstOrFail(['id','name','description']);
+            ->firstOrFail(['id', 'name', 'description']);
     }
 
     public function selectItem($type, $id)
     {
-        if($type === 'section') {
+        if ($type === 'section') {
             $this->current = $this->technology->sections->firstWhere('id', $id);
-        }
-        if ($type === 'concept') {
+        } elseif ($type === 'concept') {
             $this->current = $this->technology->sections
-                ->flatMap->concepts
+                ->flatMap(fn($section) => $section->concepts)
                 ->firstWhere('id', $id);
         } elseif ($type === 'function') {
-            $this->current = $this->technology->sections
-                ->flatMap->builtinFunctions
+            $this->current = $this->technology->builtinfunctions
                 ->firstWhere('id', $id);
         }
     }
