@@ -3,6 +3,24 @@ $primary-color: #2196F3; // Blue
 $text-color: #333;
 $bg-light: #f1f1f1;
 
+
+
+.content-block {
+    display: none;
+}
+
+.content-block.active {
+    display: block;
+}
+
+.tutorial-accordion-body {
+    display: none;
+}
+
+.tutorial-accordion-body.show {
+    display: block;
+}
+
 .tutorial-container {
     display: flex;
     min-height: 100vh;

@@ -13,15 +13,14 @@ class LearnReferenceController extends Controller
     //     // $technologies = Technology::with(['sections.concepts', 'sections.builtinFunctions'])->find(1);
     //     return view('docs.main');
     // }
+    /**
+     *  show of main page review the technology
+     * @param mixed $name
+     * @return \Illuminate\Contracts\View\View
+     */
     public function show($name)
     {
-        $technology = Technology::where('name', $name)
-            ->with([
-                'sections:id,title,content,technology_id',
-                'sections.concepts:id,section_id,name,syntax,example,description',
-                'builtinFunctions:id,name,syntax,example,description,technology_id',
-            ])
-            ->firstOrFail(['id', 'name', 'description']);
+        $technology = Technology::where('name', $name)->firstOrFail(['id', 'name', 'description']);
         return view('docs.main', ['technology' => $technology]);
     }
 }
