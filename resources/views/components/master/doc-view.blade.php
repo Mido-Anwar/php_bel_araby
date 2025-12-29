@@ -1,14 +1,7 @@
 <div class="doc-view">
-
-    <div class="content">
-        <h1>PHP</h1>
-        <p>{{ $technology->description }}</p>
-    </div>
-
     <div class="sidebar">
-
         @foreach ($technology->sections as $section)
-            <div class="section">
+            <div class="sections">
 
                 <button class="section-btn" data-target="sec-{{ $section->id }}">
                     {{ $section->title }}
@@ -29,5 +22,10 @@
             </div>
         @endforeach
 
+    </div>
+
+    <div class="content">
+        <h1>{{ $technology->name }}</h1>
+        <p>{{ $technology->description }}</p>
     </div>
 </div>

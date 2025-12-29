@@ -14,8 +14,6 @@
     padding: 0;
 }
 
-
-
 // Main container styles for main page not dashboard
 .mainContainer {
     min-height: 100vh;
@@ -26,7 +24,7 @@
     align-items: center;
     background: #dddbdb;
 }
-.doc-view{
+.doc-view {
     width: 100%;
     padding: 1rem;
     background-color: #f9f9f9;
@@ -34,14 +32,38 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
     display: flex;
-    flex-flow: row-reverse;
     gap: 2%;
-    .content{
-        width:70%;
+    .content {
+        width: 70%;
     }
-    .aside-bar{
+    .sidebar {
+        @include aside;
         width: 28%;
+        font-weight: bold;
+        .section-body {
+            display: none;
+            padding-left: 15px;
+        }
 
+        .section-body.show {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 5px;
+            background-color: $primary-color;
+
+        }
+
+        .section-btn {
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            color: black;
+            background-color: #e0e0e0;
+
+            padding: 8px;
+            border: 1px solid #605f5f;
+        }
     }
 }
 
@@ -98,7 +120,6 @@
 .btn-unpublish {
     @include btn-style($btn-background-unpublish);
     color: $btn-background-publish;
-
 }
 
 // end Buttons styles
@@ -135,7 +156,6 @@ table {
             td {
                 border: 1px solid black;
                 text-overflow: ellipsis;
-
             }
 
             th {
@@ -182,7 +202,6 @@ table {
     background-color: #dddbdb;
     padding: 1rem;
     border-radius: 1rem;
-
 }
 
 // W3Schools-like Layout Styles
