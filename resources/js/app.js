@@ -13,30 +13,26 @@ document.addEventListener('focusin', (e) => {
   }
 });
 
+document.addEventListener('DOMContentLoaded', function () {
 
-document.addEventListener('DOMContentLoaded', () => {
+    // 1. امسك كل أزرار الأقسام
+    const buttons = document.querySelectorAll('.section-btn');
 
-    // Accordion toggle
-    document.querySelectorAll('[data-accordion]').forEach(button => {
-        button.addEventListener('click', () => {
-            const id = button.dataset.accordion;
-            document.getElementById(id).classList.toggle('show');
+    // 2. لف عليهم واحد واحد
+    buttons.forEach(function (btn) {
+
+        btn.addEventListener('click', function () {
+
+            // 3. اقرأ target من data-target
+            const targetId = btn.getAttribute('data-target');
+
+            // 4. هات الـ div اللي هنفتحها
+            const body = document.getElementById(targetId);
+
+            // 5. افتح / اقفل
+            body.classList.toggle('show');
         });
-    });
 
-    // Show content
-    document.querySelectorAll('[data-content]').forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
-
-            document.querySelectorAll('.content-block')
-                .forEach(el => el.classList.remove('active'));
-
-            const id = link.dataset.content;
-            document.getElementById(id).classList.add('active');
-
-            window.scrollTo(0, 0);
-        });
     });
 
 });
