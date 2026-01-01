@@ -8,15 +8,15 @@
                 </button>
 
                 @if ($section->concepts->count() > 0)
-                    <div class="section-body" id="sec-{{ $section->id }}">
+                    <ul class="section-body" id="sec-{{ $section->id }}">
 
                         @foreach ($section->concepts as $concept)
-                            <a href="#">
+                            <li href="#">
                                 {{ $concept->name }}
-                            </a>
+                            </li>
                         @endforeach
 
-                    </div>
+                    </ul>
                 @endif
 
             </div>

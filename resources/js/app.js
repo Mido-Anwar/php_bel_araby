@@ -13,26 +13,14 @@ document.addEventListener('focusin', (e) => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.section-btn');
+    if (!btn) return;
 
-    // 1. امسك كل أزرار الأقسام
-    const buttons = document.querySelectorAll('.section-btn');
+    const targetId = btn.dataset.target;
+    const body = document.getElementById(targetId);
 
-    // 2. لف عليهم واحد واحد
-    buttons.forEach(function (btn) {
-
-        btn.addEventListener('click', function () {
-
-            // 3. اقرأ target من data-target
-            const targetId = btn.getAttribute('data-target');
-
-            // 4. هات الـ div اللي هنفتحها
-            const body = document.getElementById(targetId);
-
-            // 5. افتح / اقفل
-            body.classList.toggle('show');
-        });
-
-    });
-
+    if (body) {
+        body.classList.toggle('show');
+    }
 });
