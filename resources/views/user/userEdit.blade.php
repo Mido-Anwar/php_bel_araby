@@ -26,5 +26,4 @@
         </select>
     
     </x-hidden-form>
-
 </x-app-layout>

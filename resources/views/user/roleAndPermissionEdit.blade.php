@@ -42,7 +42,4 @@
         </div>
     </x-hidden-form>
     @endif
-
-
-
 </x-app-layout>
