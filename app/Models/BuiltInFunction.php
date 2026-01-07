@@ -19,7 +19,7 @@ class BuiltInFunction extends Model
 {
     /** @use HasFactory<\Database\Factories\BuiltInFunctionFactory> */
     use HasFactory;
- protected $fillable = ['name','tag_name', 'syntax', 'description', 'example', 'technology_id'];
+    protected $fillable = ['title', 'tag_name', 'description', 'technology_id'];
 
     public function technology(): BelongsTo
     {

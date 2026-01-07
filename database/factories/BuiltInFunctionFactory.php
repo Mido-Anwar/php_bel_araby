@@ -18,9 +18,10 @@ class BuiltInFunctionFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->word(),
+            'title' => $this->faker->word(),
+            'tag_name' => $this->faker->word(),
             'description' => $this->faker->sentence(12),
-            'section_id' => Section::factory(),
+            'technology_id' => \App\Models\Technology::factory(),
         ];
     }
 }

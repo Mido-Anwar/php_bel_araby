@@ -20,7 +20,7 @@ class PostSeeder extends Seeder
         for ($i = 1; $i <= 20; $i++) {
             Post::create([
                 'title'        => "Demo Post $i",
-                'body'         => Str::random(200), // نص عشوائي
+                'content'      => Str::random(200), // نص عشوائي
                 'image'        => "posts/sample$i.jpg", // مسار صورة تجريبية
                 'user_id'      => $user->id,
                 'is_published' => (bool)rand(0, 1), // عشوائي Published or Draft

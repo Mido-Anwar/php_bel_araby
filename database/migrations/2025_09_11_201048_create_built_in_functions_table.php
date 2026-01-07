@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('built_in_functions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->string('tag_name');
-            $table->text('syntax')->nullable();
-            $table->text('description')->nullable();
-            $table->text('example')->nullable();
+            $table->longText('description')->nullable();
             $table->foreignId('technology_id')
                 ->constrained()
-                ->onDelete('cascade');// Technology id
+                ->onDelete('cascade'); // Technology id
             $table->timestamps();
         });
     }

@@ -18,7 +18,6 @@ class SectionFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => rand(1, 4),
             'title' => $this->faker->words(3, true),  // عنوان قصير
             'content' => $this->faker->text(150),     // نص عشوائي بطول ~150 حرف
             'technology_id' => null,  //

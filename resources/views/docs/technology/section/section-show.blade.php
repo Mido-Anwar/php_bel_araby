@@ -44,7 +44,7 @@
         </x-slot>
         @foreach($section->concepts as $concept)
         <div class="btn-container">
-            <a href="{{ route('concept.show', $concept->id) }}" class="btn-show">{{ $concept->name }}</a> <a href="{{ route('concept.edit', $concept->id) }}" class="btn-edit">
+            <a href="{{ route('concept.show', $concept->id) }}" class="btn-show">{{ $concept->title }}</a> <a href="{{ route('concept.edit', $concept->id) }}" class="btn-edit">
                 ✎ Edit
             </a>
             <form action="{{ route('concept.destroy', $concept->id) }}" method="POST">

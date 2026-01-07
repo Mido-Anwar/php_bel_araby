@@ -22,10 +22,8 @@ class StoreConceptRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'syntax' => 'nullable|string',
+            'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'example' => 'nullable|string',
             'section_id' => 'required|exists:sections,id',
         ];
     }

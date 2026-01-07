@@ -11,7 +11,7 @@ class Concept extends Model
     /** @use HasFactory<\Database\Factories\ConceptFactory> */
     use HasFactory;
 
-        protected $fillable = ['name', 'syntax', 'description', 'example', 'section_id'];
+    protected $fillable = ['title', 'description', 'section_id'];
     public function section(): BelongsTo
 
     {

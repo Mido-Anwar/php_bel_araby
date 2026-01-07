@@ -18,7 +18,7 @@ class ConceptFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->word(),
+            'title' => $this->faker->word(),
             'description' => $this->faker->sentence(8),
             'section_id' => Section::factory(), // يرتبط بـ Section
         ];

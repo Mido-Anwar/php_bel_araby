@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-dashboard-head :text="$concept->name" />
+        <x-dashboard-head :text="$concept->title" />
     </x-slot>
 
 
@@ -9,14 +9,12 @@
         {{-- Section article --}}
 
         <x-slot name="div">
-            <x-dashboard-head :text="$concept->name" />
+            <x-dashboard-head :text="$concept->title" />
             <a href="{{ route('concept.edit', $concept->id) }}" class="btn-edit">
                 ✎ Edit Section
             </a>
-            <x-dashboard-paragraph :text="$concept->syntax" />
             <x-dashboard-paragraph :text="$concept->description" />
-            <x-dashboard-paragraph :text="$concept->example" />
-            
+
         </x-slot>
     </x-dashboard-container>
 

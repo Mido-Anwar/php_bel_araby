@@ -1,25 +1,25 @@
 <div class="doc-view">
     <div class="sidebar">
         @foreach ($technology->sections as $section)
-            <div class="sections">
+        <div class="sections">
 
-                <button class="section-btn" data-target="sec-{{ $section->id }}">
-                    {{ $section->title }}
-                </button>
+            <button class="section-btn" data-target="sec-{{ $section->id }}">
+                {{ $section->title }}
+            </button>
 
-                @if ($section->concepts->count() > 0)
-                    <ul class="section-body" id="sec-{{ $section->id }}">
+            @if ($section->concepts->count() > 0)
+            <ul class="section-body" id="sec-{{ $section->id }}">
 
-                        @foreach ($section->concepts as $concept)
-                            <li href="#">
-                                {{ $concept->name }}
-                            </li>
-                        @endforeach
+                @foreach ($section->concepts as $concept)
+                <li href="#">
+                    {{ $concept->title }}
+                </li>
+                @endforeach
 
-                    </ul>
-                @endif
+            </ul>
+            @endif
 
-            </div>
+        </div>
         @endforeach
 
     </div>

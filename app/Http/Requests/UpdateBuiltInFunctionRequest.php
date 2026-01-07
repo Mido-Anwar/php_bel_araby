@@ -22,11 +22,9 @@ class UpdateBuiltInFunctionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'tag_name' => 'required|string|max:255',
-            'syntax' => 'nullable|string',
             'description' => 'nullable|string',
-            'example' => 'nullable|string',
             'technology_id' => 'required|exists:technologies,id',
         ];
     }

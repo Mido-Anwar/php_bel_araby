@@ -13,6 +13,10 @@ class BuiltInFunctionSeeder extends Seeder
      */
     public function run(): void
     {
-    
+        \App\Models\Technology::all()->each(function ($technology) {
+            BuiltInFunction::factory()->count(10)->create([
+                'technology_id' => $technology->id,
+            ]);
+        });
     }
 }

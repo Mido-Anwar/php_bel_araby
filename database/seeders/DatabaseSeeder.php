@@ -19,17 +19,17 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'mido anwar',
             'email' => 'mimianwar33@hotmail.com',
-            'password' => bcrypt('12345678'),
+            'password' => bcrypt('123456789'),
         ]);
 
         $user->assignRole('super-admin');
-      //  $this->call(PostSeeder::class);
-//
-      //  $this->call([
-      //      TechnologySeeder::class,
-      //      SectionSeeder::class,
-      //      ConceptSeeder::class,
-      //      BuiltInFunctionSeeder::class,
-       // ]);
+        $this->call(PostSeeder::class);
+
+        $this->call([
+            TechnologySeeder::class,
+            SectionSeeder::class,
+            ConceptSeeder::class,
+            BuiltInFunctionSeeder::class,
+        ]);
     }
 }
