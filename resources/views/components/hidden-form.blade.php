@@ -7,8 +7,8 @@
     </button>
 
     {{-- Form container --}}
-    <div x-show="open" x-transition class="w-full p-1  flex justify-center mt-4">
-        <form action="{{ $actionUrl }}" method="POST" class="w-full p-3 space-y-5" enctype="multipart/form-data" >
+    <div x-show="open" x-transition class="">
+        <form action="{{ $actionUrl }}" method="POST" class="" enctype="multipart/form-data" >
             @csrf
 
             {{ $slot }}

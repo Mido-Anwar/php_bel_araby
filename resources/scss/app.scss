@@ -71,7 +71,63 @@
 .dashboard-container {
     @include dashboard-container($dashboard-bg-color);
 }
+.form-container {
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: column;
+    width: 100%;
+    color: black;
+
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        flex-direction: column;
+        width: 80%;
+        background-color: #919090;
+        border-radius: 1rem;
+        color: black;
+
+        label {
+            color: black;
+            font-weight: bold;
+            align-self: flex-start;
+        }
+
+        div {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap:0.5rem;
+          
+        }
+
+        input[type="text"] {
+            color: black;
+            background-color: white;
+            width: 70%;
+            border-radius: 1rem;
+            align-self: flex-start;
+
+        }
+
+        textarea {
+            color: black;
+            background-color: white;
+            width: 90%;
+            align-self: start;
+        }
+
+    }
+
+
+}
 // Buttons styles-
 .btn-container {
     display: inline-flex;
