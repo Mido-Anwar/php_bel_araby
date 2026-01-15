@@ -47,7 +47,7 @@ class TechnologyController extends Controller
                 $query->select('id', 'title', 'technology_id');
             },
             'builtInFunctions' => function ($query) {
-                $query->select('id', 'name',  'technology_id');
+                $query->select('id', 'title', 'technology_id');
             },
         ]);
         return view('docs.technology.technology-show', compact('technology'));
@@ -78,7 +78,7 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-          
+
 
         $technology->delete();
 

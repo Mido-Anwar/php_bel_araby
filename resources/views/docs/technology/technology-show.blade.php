@@ -71,7 +71,7 @@
         @foreach ($technology->builtinfunctions as $builtinfunction)
         <div class="btn-container">
             <a href="{{ route('builtinfunction.show', $builtinfunction->id) }}" class="btn-show">
-                {{ $builtinfunction->name }}
+                {{ $builtinfunction->title }}
             </a>
             @if (Auth::user()->hasRole('super-admin'))
             <x-delete-form :action-url="route('builtinfunction.destroy', $builtinfunction)" />
