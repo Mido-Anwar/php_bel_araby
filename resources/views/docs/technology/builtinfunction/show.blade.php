@@ -4,7 +4,7 @@
 
         <x-message :message="session('success-update-builtinFunction')" color="blue" />
     </x-slot>
-
+ {{-- show content --}}
     <x-dashboard-container>
         <x-slot name="div">
             <x-dashboard-head :text="$builtInFunction->title" />
