@@ -105,7 +105,7 @@
             align-items: center;
             flex-direction: column;
             gap:0.5rem;
-          
+
         }
 
         input[type="text"] {
@@ -136,8 +136,9 @@
     min-height: 2rem;
     padding: 0.5rem;
     gap: 0.5rem;
-    background-color: rgb(208, 207, 207);
-    border: 2px solid rgb(56, 56, 56);
+    background-color: rgb(125, 93, 93);
+    border: 1px solid rgb(56, 56, 56);
+      transform: translateY(3px);
 }
 
 .btn-delete {
