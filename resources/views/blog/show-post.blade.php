@@ -1,4 +1,5 @@
 <x-master-layout>
+    {{-- post view page  --}}
     <div class="article">
         <h1 dir="{{ textDir($post->title) }}"style="align-self: {{ textDir($post->title) == 'rtl' ? 'flex-start' : 'flex-end' }};">{{$post->title}}</h1>
         <img style="width:500px; height: 500px; object-fit: cover;" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
