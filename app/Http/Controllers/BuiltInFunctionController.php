@@ -10,7 +10,9 @@ use App\Models\Technology;
 class BuiltInFunctionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the built-in functions.
+     *
+     * @return void
      */
     public function index()
     {
@@ -18,7 +20,10 @@ class BuiltInFunctionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new built-in function for a specific technology.
+     *
+     * @param  \App\Models\Technology  $technology
+     * @return \Illuminate\View\View
      */
     public function create(Technology $technology)
     {
@@ -26,7 +31,10 @@ class BuiltInFunctionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created built-in function in storage.
+     *
+     * @param  \App\Http\Requests\StoreBuiltInFunctionRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreBuiltInFunctionRequest $request)
     {
@@ -39,7 +47,10 @@ class BuiltInFunctionController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified built-in function.
+     *
+     * @param  \App\Models\BuiltInFunction  $builtInFunction
+     * @return \Illuminate\View\View
      */
     public function show(BuiltInFunction $builtInFunction)
     {
@@ -47,7 +58,10 @@ class BuiltInFunctionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified built-in function.
+     *
+     * @param  \App\Models\BuiltInFunction  $builtInFunction
+     * @return \Illuminate\View\View
      */
     public function edit(BuiltInFunction $builtInFunction)
     {
@@ -55,7 +69,11 @@ class BuiltInFunctionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified built-in function in storage.
+     *
+     * @param  \App\Http\Requests\UpdateBuiltInFunctionRequest  $request
+     * @param  \App\Models\BuiltInFunction  $builtInFunction
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateBuiltInFunctionRequest $request, BuiltInFunction $builtInFunction)
     {
@@ -67,7 +85,10 @@ class BuiltInFunctionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified built-in function from storage.
+     *
+     * @param  \App\Models\BuiltInFunction  $builtInFunction
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(BuiltInFunction $builtInFunction)
     {

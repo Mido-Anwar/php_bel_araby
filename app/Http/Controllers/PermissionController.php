@@ -8,7 +8,9 @@ use Spatie\Permission\Models\Permission;
 class PermissionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the permissions.
+     *
+     * @return void
      */
     public function index()
     {
@@ -16,7 +18,9 @@ class PermissionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new permission.
+     *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -24,7 +28,10 @@ class PermissionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created permission in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -38,7 +45,10 @@ class PermissionController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified permission.
+     *
+     * @param  \Spatie\Permission\Models\Permission  $permission
+     * @return void
      */
     public function show(Permission $permission)
     {
@@ -46,7 +56,10 @@ class PermissionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified permission.
+     *
+     * @param  \Spatie\Permission\Models\Permission  $permission
+     * @return \Illuminate\View\View
      */
     public function edit(Permission $permission)
     {
@@ -55,7 +68,11 @@ class PermissionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified permission in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Spatie\Permission\Models\Permission  $permission
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Permission $permission)
     {
@@ -67,7 +84,10 @@ class PermissionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified permission from storage.
+     *
+     * @param  \Spatie\Permission\Models\Permission  $permission
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Permission $permission)
     {

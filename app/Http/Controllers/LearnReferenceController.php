@@ -14,9 +14,10 @@ class LearnReferenceController extends Controller
     //     return view('docs.main');
     // }
     /**
-     *  show of main page review the technology
-     * @param mixed $name
-     * @return \Illuminate\Contracts\View\View
+     * Show of main page review the technology.
+     *
+     * @param  string  $name
+     * @return \Illuminate\View\View
      */
     public function show($name)
     {

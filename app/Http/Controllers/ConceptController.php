@@ -6,10 +6,13 @@ use App\Http\Requests\StoreConceptRequest;
 use App\Http\Requests\UpdateConceptRequest;
 use App\Models\Concept;
 use App\Models\Section;
+
 class ConceptController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the concepts.
+     *
+     * @return void
      */
     public function index()
     {
@@ -17,7 +20,10 @@ class ConceptController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new concept for a specific section.
+     *
+     * @param  \App\Models\Section  $section
+     * @return \Illuminate\View\View
      */
     public function create(Section $section)
     {
@@ -25,7 +31,10 @@ class ConceptController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created concept in storage.
+     *
+     * @param  \App\Http\Requests\StoreConceptRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreConceptRequest $request)
     {
@@ -38,7 +47,10 @@ class ConceptController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified concept.
+     *
+     * @param  \App\Models\Concept  $concept
+     * @return \Illuminate\View\View
      */
     public function show(Concept $concept)
     {
@@ -46,7 +58,10 @@ class ConceptController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified concept.
+     *
+     * @param  \App\Models\Concept  $concept
+     * @return \Illuminate\View\View
      */
     public function edit(Concept $concept)
     {
@@ -54,7 +69,11 @@ class ConceptController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified concept in storage.
+     *
+     * @param  \App\Http\Requests\UpdateConceptRequest  $request
+     * @param  \App\Models\Concept  $concept
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateConceptRequest $request, Concept $concept)
     {
@@ -66,7 +85,10 @@ class ConceptController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified concept from storage.
+     *
+     * @param  \App\Models\Concept  $concept
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Concept $concept)
     {

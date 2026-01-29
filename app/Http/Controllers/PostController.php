@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the posts.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -29,7 +31,9 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new post.
+     *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -37,7 +41,10 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created post in storage.
+     *
+     * @param  \App\Http\Requests\StorePostRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StorePostRequest $request)
     {
@@ -58,7 +65,10 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified post.
+     *
+     * @param  \App\Models\Post  $post
+     * @return void
      */
     public function show(Post $post)
     {
@@ -66,7 +76,10 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified post.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\View\View
      */
     public function edit(Post $post)
     {
@@ -74,7 +87,11 @@ class PostController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified post in storage.
+     *
+     * @param  \App\Http\Requests\UpdatePostRequest  $request
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
@@ -95,6 +112,12 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('success-update-post', 'Post updated successfully.');
     }
 
+    /**
+     * Publish the specified post.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function publish(Post $post)
     {
         $post->update([
@@ -102,6 +125,12 @@ class PostController extends Controller
         ]);
         return redirect()->route('posts.index')->with('success-publish-post', 'Post published successfully.');
     }
+    /**
+     * Unpublish the specified post.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function unpublish(Post $post)
     {
         $post->update([
@@ -111,7 +140,10 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified post from storage.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Post $post)
     {

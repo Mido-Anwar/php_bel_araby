@@ -10,7 +10,9 @@ use App\Models\Technology;
 class SectionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the sections.
+     *
+     * @return void
      */
     public function index()
     {
@@ -18,7 +20,9 @@ class SectionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new section.
+     *
+     * @return void
      */
     public function create()
     {
@@ -26,7 +30,10 @@ class SectionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created section in storage.
+     *
+     * @param  \App\Http\Requests\StoreSectionRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreSectionRequest $request)
     {
@@ -38,7 +45,10 @@ class SectionController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified section.
+     *
+     * @param  \App\Models\Section  $section
+     * @return \Illuminate\View\View
      */
     public function show(Section $section)
     {
@@ -46,7 +56,10 @@ class SectionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified section.
+     *
+     * @param  \App\Models\Section  $section
+     * @return \Illuminate\View\View
      */
     public function edit(Section $section)
     {
@@ -54,12 +67,16 @@ class SectionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified section in storage.
+     *
+     * @param  \App\Http\Requests\UpdateSectionRequest  $request
+     * @param  \App\Models\Section  $section
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateSectionRequest $request, Section $section)
     {
         $validated = $request->validated();
-     
+
         $section->update($validated);
         return redirect()
             ->route('section.show', $section->id)
@@ -67,7 +84,10 @@ class SectionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified section from storage.
+     *
+     * @param  \App\Models\Section  $section
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Section $section)
     {

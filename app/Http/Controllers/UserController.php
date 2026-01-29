@@ -9,20 +9,38 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    /**
+     * Display a listing of the users.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $users = User::select('id', 'name', 'email')->with('roles')->get();
         $roles = Role::select('id', 'name')->get();
-        $permissions = Permission::select('id','name')->get();
-        return view('user.index', ['users' => $users , 'roles' => $roles,'permissions'=>$permissions]);
+        $permissions = Permission::select('id', 'name')->get();
+        return view('user.index', ['users' => $users, 'roles' => $roles, 'permissions' => $permissions]);
     }
 
+    /**
+     * Show the form for editing the specified user.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\View\View
+     */
     public function edit(User $user)
     {
         $roles = Role::select('id', 'name')->get();
         return view('user.userEdit', ['user' => $user, 'roles' => $roles]);
     }
 
+    /**
+     * Update the specified user in storage.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(User $user, Request $request)
     {
         $validatedData = $request->validate([
@@ -39,6 +57,13 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success-update-user', 'User information updated successfully.');
     }
 
+    /**
+     * Remove the specified user from storage.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(User $user, Request $request)
     {
         $user->delete();

@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BuiltInFunctionController;
 use App\Http\Controllers\ConceptController;
@@ -18,14 +19,24 @@ Route::get('/', function () {
 
 
 
-Route::prefix('/blog' )->controller(BlogController::class)->group(function () {
+/**
+ * Blog Routes
+ * Handles the display of blog posts for public viewing.
+ */
+Route::prefix('/blog')->controller(BlogController::class)->group(function () {
+    // Main blog page listing posts
     Route::get('/', 'index')->name('blog.main');
+    // Show a specific blog post
     Route::get('/{post}', 'show')->name('blog.show');
-
 });
-  
 
+
+/**
+ * Documentation Routes
+ * Handles the display of technology documentation references.
+ */
 Route::prefix('/docs')->controller(LearnReferenceController::class)->group(function () {
+    // Show documentation for a specific technology
     Route::get('/{name}', 'show')->name('docs.show');
 });
 
@@ -34,6 +45,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+/**
+ * Post Management Routes
+ * Handles CRUD operations for blog posts.
+ * specific for Admin or authorized users
+ */
 Route::prefix('posts')->controller(PostController::class)->group(function () {
     Route::get('/', 'index')->name('posts.index');
     Route::get('/create', 'create')->name('post.create');
@@ -41,11 +57,17 @@ Route::prefix('posts')->controller(PostController::class)->group(function () {
     Route::get('/show/{post}', 'show')->name('post.show');
     Route::get('/edit/{post}', 'edit')->name('post.edit');
     Route::post('/update/{post}', 'update')->name('post.update');
-    Route::post('/publish/{post}','publish')->name('post.publish');
-    Route::post('/unpublish/{post}','unpublish')->name('post.unpublish');
+    // Publish a post to make it visible to the public
+    Route::post('/publish/{post}', 'publish')->name('post.publish');
+    // Unpublish a post to hide it from the public
+    Route::post('/unpublish/{post}', 'unpublish')->name('post.unpublish');
     Route::delete('/delete/{post}', 'destroy')->name('post.destroy');
 })->middleware(['auth', 'verified']);
 
+/**
+ * Technology Management Routes
+ * Handles CRUD operations for Technologies.
+ */
 Route::prefix('technology')->controller(TechnologyController::class)->group(function () {
     Route::get('/', 'index')->name('technology.index');
     Route::get('/create', 'create')->name('technology.create');
@@ -56,6 +78,10 @@ Route::prefix('technology')->controller(TechnologyController::class)->group(func
     Route::delete('/delete/{technology}', 'destroy')->name('technology.destroy');
 })->middleware(['auth', 'verified']);
 
+/**
+ * Section Management Routes
+ * Handles CRUD operations for Sections within a Technology.
+ */
 Route::prefix('section')->controller(SectionController::class)->group(function () {
     Route::post('/store', 'store')->name('section.store');
     Route::get('/show/{section}', 'show')->name('section.show');
@@ -64,6 +90,10 @@ Route::prefix('section')->controller(SectionController::class)->group(function (
     Route::delete('/delete/{section}', 'destroy')->name('section.destroy');
 })->middleware(['auth', 'verified']);
 
+/**
+ * Concept Management Routes
+ * Handles CRUD operations for Concepts within a Section.
+ */
 Route::prefix('concept')->controller(ConceptController::class)->group(function () {
     Route::get('/', 'index')->name('concept.index');
     Route::get('/create/{section}', 'create')->name('concept.create');
@@ -74,8 +104,12 @@ Route::prefix('concept')->controller(ConceptController::class)->group(function (
     Route::delete('/delete/{concept}', 'destroy')->name('concept.destroy');
 })->middleware(['auth', 'verified']);
 
+/**
+ * Built-in Function Management Routes
+ * Handles CRUD operations for Built-in Functions within a Technology.
+ */
 Route::prefix('builtinfunction')->controller(BuiltInFunctionController::class)->group(function () {
-  // param technology_id is required for create new built-in function follow technology
+    // param technology_id is required for create new built-in function follow technology
     Route::get('/create/{technology}', 'create')->name('builtinfunction.create');
     Route::post('/store', 'store')->name('builtinfunction.store');
     Route::get('/show/{builtInFunction}', 'show')->name('builtinfunction.show');
@@ -84,6 +118,11 @@ Route::prefix('builtinfunction')->controller(BuiltInFunctionController::class)->
     Route::delete('/delete/{builtInFunction}', 'destroy')->name('builtinfunction.destroy');
 })->middleware(['auth', 'verified']);
 
+/**
+ * User Management Routes
+ * Handles CRUD operations for Users.
+ * Accessible only by super-admin.
+ */
 Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('users.index');
     Route::get('/{user}/edit', 'edit')->name('user.edit');
@@ -91,6 +130,11 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::delete('/{user}/delete', 'destroy')->name('user.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
 
+/**
+ * Role Management Routes
+ * Handles CRUD operations for Roles.
+ * Accessible only by super-admin.
+ */
 Route::prefix('role')->controller(RoleController::class)->group(function () {
     Route::get('/create', 'create')->name('role.create');
     Route::post('/store', 'store')->name('role.store');
@@ -101,6 +145,11 @@ Route::prefix('role')->controller(RoleController::class)->group(function () {
 })->middleware(['auth', 'verified', 'role:super-admin']);
 
 //Route::resource('permission', RoleController::class)->middleware(['auth', 'verified', 'role:super-admin']);
+/**
+ * Permission Management Routes
+ * Handles CRUD operations for Permissions.
+ * Accessible only by super-admin.
+ */
 Route::prefix('permission')->controller(PermissionController::class)->group(function () {
     Route::get('/create', 'create')->name('permission.create');
     Route::post('/store', 'store')->name('permission.store');

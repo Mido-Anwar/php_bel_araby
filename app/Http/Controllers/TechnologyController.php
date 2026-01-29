@@ -9,7 +9,9 @@ use App\Models\Technology;
 class TechnologyController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the technologies.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -18,7 +20,9 @@ class TechnologyController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new technology.
+     *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -26,7 +30,10 @@ class TechnologyController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created technology in storage.
+     *
+     * @param  \App\Http\Requests\StoreTechnologyRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreTechnologyRequest $request)
     {
@@ -38,7 +45,10 @@ class TechnologyController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified technology with its sections and built-in functions.
+     *
+     * @param  \App\Models\Technology  $technology
+     * @return \Illuminate\View\View
      */
     public function show(Technology $technology)
     {
@@ -54,7 +64,10 @@ class TechnologyController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified technology.
+     *
+     * @param  \App\Models\Technology  $technology
+     * @return \Illuminate\View\View
      */
     public function edit(Technology $technology)
     {
@@ -62,19 +75,26 @@ class TechnologyController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified technology in storage.
+     *
+     * @param  \App\Http\Requests\UpdateTechnologyRequest  $request
+     * @param  \App\Models\Technology  $technology
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateTechnologyRequest $request, Technology $technology)
     {
-      $validated = $request->validated();
-      $technology->update($validated);
+        $validated = $request->validated();
+        $technology->update($validated);
         return redirect()
             ->route('technology.show', $technology->id)
             ->with('success-update-technology', 'technology updated successfully.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified technology from storage.
+     *
+     * @param  \App\Models\Technology  $technology
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Technology $technology)
     {
