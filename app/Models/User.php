@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+
+/**
+ * User model representing authenticated users in the application.
+ * Extends Laravel's Authenticatable class and includes role management via Spatie Permission package.
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -45,7 +50,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    // الـ User ممكن يكون عنده Posts كتير
+
+    /**
+     * Get the posts associated with the user.
+     * A user can have many posts.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function posts()
     {
         return $this->hasMany(Post::class);
