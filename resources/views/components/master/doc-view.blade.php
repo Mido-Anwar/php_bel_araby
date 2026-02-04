@@ -38,6 +38,7 @@
 </div>
 
 <script>
+ // JavaScript to handle concept button clicks and toggle content display
     document.addEventListener('DOMContentLoaded', function() {
         const conceptButtons = document.querySelectorAll('.concept-btn');
         const techDescription = document.getElementById('tech-description');
