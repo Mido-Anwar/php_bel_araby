@@ -43,7 +43,7 @@ Route::prefix('/docs')->controller(LearnReferenceController::class)->group(funct
 // dashboard & Authenticated Routes control panel of app - only for logged in users
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified','role:super-admin'])->name('dashboard');
 
 /**
  * Post Management Routes
@@ -76,7 +76,7 @@ Route::prefix('technology')->controller(TechnologyController::class)->group(func
     Route::get('/edit/{technology}', 'edit')->name('technology.edit');
     Route::post('/update/{technology}', 'update')->name('technology.update');
     Route::delete('/delete/{technology}', 'destroy')->name('technology.destroy');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified', 'role:super-admin|admin']);
 
 /**
  * Section Management Routes
@@ -88,7 +88,7 @@ Route::prefix('section')->controller(SectionController::class)->group(function (
     Route::get('/edit/{section}', 'edit')->name('section.edit');
     Route::post('/update/{section}', 'update')->name('section.update');
     Route::delete('/delete/{section}', 'destroy')->name('section.destroy');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified', 'role:super-admin']);
 
 /**
  * Concept Management Routes
@@ -102,7 +102,7 @@ Route::prefix('concept')->controller(ConceptController::class)->group(function (
     Route::get('/edit/{concept}', 'edit')->name('concept.edit');
     Route::post('/update/{concept}', 'update')->name('concept.update');
     Route::delete('/delete/{concept}', 'destroy')->name('concept.destroy');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified', 'role:super-admin']);
 
 /**
  * Built-in Function Management Routes
@@ -116,7 +116,7 @@ Route::prefix('builtinfunction')->controller(BuiltInFunctionController::class)->
     Route::get('/edit/{builtInFunction}', 'edit')->name('builtinfunction.edit');
     Route::post('/update/{builtInFunction}', 'update')->name('builtinfunction.update');
     Route::delete('/delete/{builtInFunction}', 'destroy')->name('builtinfunction.destroy');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified', 'role:super-admin']);
 
 /**
  * User Management Routes
