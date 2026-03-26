@@ -18,7 +18,9 @@ Route::get('/', function () {
 })->name('home');
 
 
-
+Route::get('/test', function () {
+    return view('test');
+});
 /**
  * Blog Routes
  * Handles the display of blog posts for public viewing.
