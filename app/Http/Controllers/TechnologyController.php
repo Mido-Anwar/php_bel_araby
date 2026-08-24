@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTechnologyRequest;
 use App\Http\Requests\UpdateTechnologyRequest;
 use App\Models\Technology;
+use Illuminate\Support\Facades\Cache;
 
 class TechnologyController extends Controller
 {
@@ -15,7 +16,9 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        $technologies = Technology::select('id', 'name')->get();
+        $technologies = Cache::remember('technologies', 3600, function () {
+            return Technology::select('id', 'name')->get();
+        });
         return view('docs.technology.technology-index', ['technologies' => $technologies]);
     }
 
