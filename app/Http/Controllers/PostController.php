@@ -17,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::select('id', 'title', 'content', 'image', 'is_published')->get();
+        $posts = Post::select('id', 'title', 'content','is_published')->get();
         $authUserPosts = Auth::user()->posts;
 
         if (Auth::user()->hasRole('super-admin')) {
@@ -50,17 +50,25 @@ class PostController extends Controller
     {
 
         $validated = $request->validated();
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('posts', 'public');
-        }
+
 
         $post = Post::create([
             'title' => $validated['title'],
             'content' => $validated['content'],
-            'image' => $validated['image'] ?? null,
             'user_id' => Auth::id(),
         ]);
+   if ($request->hasFile('image')) {
+        $file = $request->file('image');
 
+        $path = $file->store('posts', 'public');
+
+        $post->image()->create([
+            'file_path' => $path,
+            'file_name' => $file->getClientOriginalName(),
+            'mime_type' => $file->getClientMimeType(),
+            'file_size' => $file->getSize(),
+        ]);
+    }
         return redirect()->route('posts.index')->with('success-store-post', 'Post created successfully.');
     }
 
@@ -101,14 +109,6 @@ class PostController extends Controller
             'content' => $validated['content'],
             'user_id' => Auth::id(),
         ]);
-
-        if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if ($post->image) {
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($post->image);
-            }
-            $post->update(['image' => $request->file('image')->store('posts', 'public')]);
-        }
         return redirect()->route('posts.index')->with('success-update-post', 'Post updated successfully.');
     }
 
@@ -147,9 +147,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if ($post->image) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($post->image);
-        }
+
         $post->delete();
         return redirect()->route('posts.index')->with('success-delete-post', 'Post deleted successfully.');
     }

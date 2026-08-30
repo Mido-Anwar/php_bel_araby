@@ -40,7 +40,10 @@
                             <td class="p-3">{{ $post->id }}</td>
                             <td class="p-3">{{ $post->title }}</td>
                             <td class="p-3">
-                                <img src="{{ asset('storage/' . $post->image) }}" alt="" class="w-20 h-20">
+                                @if ($post->image)
+                                    <img src="{{ $post->image->url }}" alt="{{ $post->title }}"
+                                        style="max-width: 100%;">
+                                @endif
                             </td>
                             <td class="p-3">
                                 @if ($post->is_published)
