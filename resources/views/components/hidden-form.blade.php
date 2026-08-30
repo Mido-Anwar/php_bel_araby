@@ -1,23 +1,16 @@
-@props(['actionUrl', 'open' => false, 'fields' => [], 'btnName' => 'Open Form', 'formBtnName' => 'Submit'])
-<div class="form-container" x-data="{ open: @json($open) }">
-    {{-- Toggle button --}}
-    <button type="button" @click="open = ! open" class="btn-dashboard" style="align-self: start;">
-        <span x-show="!open">{{ $btnName ?? 'Open Form ' }}</span>
-        <span x-show="open">Close Form</span>
-    </button>
-
+@props(['actionUrl', 'fields' => [], 'btnName' => 'Open Form', 'formBtnName' => 'Submit'])
+<div class="form-container">
     {{-- Form container --}}
-    <div x-show="open" x-transition class="">
-        <form action="{{ $actionUrl }}" method="POST" class="" enctype="multipart/form-data" >
-            @csrf
 
-            {{ $slot }}
+    <form action="{{ $actionUrl }}" method="POST" class="" enctype="multipart/form-data">
+        @csrf
 
+        {{ $slot }}
 
-            {{-- Submit --}}
-            <button type="submit" class="btn-dashboard my-5">
-               {{$formBtnName ?? 'Submit'}}
-            </button>        
-        </form>
-    </div>
+        {{-- Submit --}}
+        <button type="submit" class="btn-dashboard my-5">
+            {{ $formBtnName ?? 'Submit' }}
+        </button>
+    </form>
+
 </div>

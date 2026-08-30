@@ -8,7 +8,7 @@
             <x-dashboard-paragraph :text="'fill in the details to create a new blog post.'" />
         </x-slot>
 
-   
+
         <x-hidden-form :action-url="route('post.store')" :open="false" :btnName="'Create Post'" :formBtnName="'Create Post'">
 
 
@@ -26,7 +26,7 @@
                 <x-input-error :messages="$errors->get('content')" class="mt-2" />
             </div>
             <x-input-label for="image" :value="'Post Image'" />
-            <input type="file" name="image" class="form-control" accept="image/*">
+          <input type="file" name="image" id="">
             <x-input-error :messages="$errors->get('image')" class="mt-2" />
 
         </x-hidden-form>
