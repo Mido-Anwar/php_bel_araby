@@ -96,6 +96,7 @@
 @mixin dashboard-container($bg-color) {
     display: flex;
     width: 100%;
+    min-height: 100rem;
     flex-direction: column;
     // flex-wrap: wrap;
     justify-content: center;

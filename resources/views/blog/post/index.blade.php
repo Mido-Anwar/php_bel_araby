@@ -42,7 +42,7 @@
                             <td class="p-3">
                                 @if ($post->image)
                                     <img src="{{ $post->image->url }}" alt="{{ $post->title }}"
-                                        style="max-width: 100%;">
+                                        style="width:150px; ">
                                 @endif
                             </td>
                             <td class="p-3">
