@@ -11,7 +11,7 @@
                     <ul class="section-body" id="sec-{{ $section->id }}">
 
                         @foreach ($section->concepts as $concept)
-                            <li class="concept-btn" data-concept-id="{{ $concept->id }}"
+                            <li  class="concept-btn" data-concept-id="{{ $concept->id }}"
                                 data-title="{{ $concept->title }}" data-description="{{ $concept->description }}">
                                 {{ $concept->title }}
                             </li>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="content">
-        <h1>{{ $technology->name }}</h1>
+        <h1>{{ $technology->name}}</h1>
         <div id="tech-description">
             <p>{{ $technology->description }}</p>
         </div>
