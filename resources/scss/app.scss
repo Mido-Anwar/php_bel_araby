@@ -13,11 +13,6 @@
     padding: 0;
 }
 
-
-
-
-
-
 // Main container styles for main page not dashboard
 .mainContainer {
     min-height: 100vh;
@@ -56,7 +51,6 @@
             gap: 10px;
             padding: 5px;
             background-color: $primary-color;
-
         }
 
         .section-btn {
@@ -73,116 +67,55 @@
 }
 // docs page list
 
-
-// Dashboard container styles
+// Dashboard container styles and elements inside it
 .dashboard-container {
-    @include dashboard-container($dashboard-bg-color);
-}
-.form-container {
-
     display: flex;
+    width: 100%;
+    flex-direction: column;
+    // flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    margin: 12px 0;
     gap: 1rem;
-    flex-direction: column;
-    width: 100%;
-    color: black;
-
-    form {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        flex-direction: column;
-        width: 80%;
-        border-radius: 1rem;
     padding: 1rem;
-
-        label {
-            color: black;
-            font-weight: bold;
-            align-self: flex-start;
-        }
-
-        div {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap:0.5rem;
-
-        }
-
-        input[type="text"] {
-            color: black;
-            background-color: white;
-            width: 70%;
-            border-radius: 1rem;
-            align-self: flex-start;
-
-        }
-
-        textarea {
-            color: black;
-            background-color: white;
-            width: 90%;
-            align-self: start;
-        }
+    background-color: $dashboard-bg-color;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+.small-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: rgb(146, 143, 143);
+    border-radius: 1rem;
+    min-width: 300px;
+    color: rgb(24, 23, 23);
+    font-weight: bold;
+    font-size: 1.3rem;
+    @media (max-width: 768px) {
+        width: 90%;
+    font-size: 1rem;
 
     }
-
-
-}
-// Buttons styles-
-.btn-container {
-    display: inline-flex;
-    border-radius: 6px;
-    margin: 12px 0;
-    min-height: 2rem;
-    padding: 0.5rem;
-    gap: 0.5rem;
-    background-color: rgb(125, 93, 93);
-    border: 1px solid rgb(56, 56, 56);
-      transform: translateY(3px);
 }
 
-.btn-delete {
-    @include btn-style($btn-background-delete, small);
-}
+// end Dashboard container styles
+// Buttons styles
 
+.btn-create {
+    @include button(rgb(32, 19, 206), white);
+}
 .btn-edit {
-    @include btn-style($btn-background-edit, small);
+    @include button(rgb(19, 206, 32), white);
 }
-
-.btn-show {
-    @include btn-style($btn-background-show);
+.btn-delete {
+    @include button(rgb(206, 19, 19), white);
 }
-
-.btn-create {
-    @include btn-style($btn-background-show);
-}
-
-.btn-dashboard {
-    @include btn-style($nav-list-1-background);
-}
-
-.btn-back {
-    @include btn-style($btn-background-back);
-}
-
-.btn-create {
-    @include btn-style($nav-list-1-background);
-}
-
-.btn-publish {
-    @include btn-style($btn-background-publish);
-    color: $primary-color;
-}
-
-.btn-unpublish {
-    @include btn-style($btn-background-unpublish);
-    color: $btn-background-publish;
+.btn-update {
+    @include button(rgb(19, 206, 32), white);
 }
 
 // end Buttons styles
@@ -266,5 +199,3 @@ table {
     padding: 1rem;
     border-radius: 1rem;
 }
-
-

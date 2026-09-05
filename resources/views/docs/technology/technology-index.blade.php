@@ -14,7 +14,7 @@
         </x-slot>
 
         @foreach ($technologies as $technology)
-            <div class="btn-container">
+            <div class="small-container">
                 <a href="{{ route('technology.show', $technology->id) }}" class="btn-show">
                     {{ $technology->id . ' :' . $technology->name }}
                 </a>

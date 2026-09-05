@@ -1,26 +1,5 @@
 @use "sass:color";
 
-// Mixin قابل لإعادة الاستخدام
-@mixin btn-style($bg-color, $size: normal) {
-    background-color: $bg-color;
-    display: inline-block;
-    color: #fff;
-    border-radius: 8px;
-    cursor: pointer;
-    text-align: center;
-    align-content: center;
-    min-width: 70px;
-    min-height: 30px;
-    border: 2px solid rgb(32, 30, 30);
-    font-weight: 800;
-    padding: 8px 8px;
-    margin: 2px;
-
-    @if $size =="small" {
-        min-width: 50px;
-    }
-
-}
 
 // reusable aside
 @mixin aside {
@@ -93,22 +72,15 @@
     }
 }
 
-@mixin dashboard-container($bg-color) {
-    display: flex;
-    width: 100%;
-    min-height: 100rem;
-    flex-direction: column;
-    // flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin: 12px 0;
-    gap: 1rem;
-    padding: 1rem;
-    background-color: $bg-color;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow-x: auto;
-
+@mixin button($background, $color) {
+    background-color: $background;
+    color: $color;
+    font-weight: bold;
+    border: 2px solid rgb(184, 180, 180);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 @mixin nav-list($background) {

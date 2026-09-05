@@ -17,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::select('id', 'title', 'content','is_published')->get();
+        $posts = Post::select('id', 'title', 'content', 'is_published')->get();
         $authUserPosts = Auth::user()->posts;
 
         if (Auth::user()->hasRole('super-admin')) {
@@ -57,18 +57,18 @@ class PostController extends Controller
             'content' => $validated['content'],
             'user_id' => Auth::id(),
         ]);
-   if ($request->hasFile('image')) {
-        $file = $request->file('image');
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
 
-        $path = $file->store('posts', 'public');
+            $path = $file->store('posts', 'public');
 
-        $post->image()->create([
-            'file_path' => $path,
-            'file_name' => $file->getClientOriginalName(),
-            'mime_type' => $file->getClientMimeType(),
-            'file_size' => $file->getSize(),
-        ]);
-    }
+            $post->image()->create([
+                'file_path' => $path,
+                'file_name' => $file->getClientOriginalName(),
+                'mime_type' => $file->getClientMimeType(),
+                'file_size' => $file->getSize(),
+            ]);
+        }
         return redirect()->route('posts.index')->with('success-store-post', 'Post created successfully.');
     }
 

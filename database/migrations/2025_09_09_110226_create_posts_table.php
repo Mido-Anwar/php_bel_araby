@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id(); // primary key
             $table->string('title'); // عنوان البوست
             $table->text('content'); // المحتوى
-            $table->string('image')->nullable(); // الصورة
             // ربط البوست باليوزر — العمود قابل للـ NULL، وحذف الكيان الرئيسي يزيل البوست
             $table->foreignId('user_id')
                 ->nullable()

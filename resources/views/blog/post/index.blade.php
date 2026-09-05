@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-dashboard-head :text="'Blog Posts Overview'" />
+        <x-dashboard-head :text="'Blog Posts Table'" />
     </x-slot>
     <x-dashboard-container>
         {{-- div --}}

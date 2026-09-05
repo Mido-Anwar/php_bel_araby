@@ -21,7 +21,6 @@ class PostSeeder extends Seeder
             Post::create([
                 'title'        => "Demo Post $i",
                 'content'      => Str::random(200), // نص عشوائي
-                'image'        => "posts/sample$i.jpg", // مسار صورة تجريبية
                 'user_id'      => $user->id,
                 'is_published' => (bool)rand(0, 1), // عشوائي Published or Draft
             ]);
