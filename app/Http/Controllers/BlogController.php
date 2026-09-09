@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller
 {
@@ -14,8 +15,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $posts = Post::select('id', 'title', 'image')->where('is_published', true)->get();
-        return view('blog.main', ['posts' => $posts]);
+     $posts = Cache::remember('posts.all', 3600, function () {
+            return Post::with('image')->latest()->get();
+        });        return view('blog.main', ['posts' => $posts]);
     }
     /**
      * Display the specified blog post.

@@ -6,6 +6,8 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -17,7 +19,9 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::select('id', 'title', 'content', 'is_published')->get();
+        $posts = Cache::remember('posts.all', 3600, function () {
+            return Post::with('image')->latest()->get();
+        });
         $authUserPosts = Auth::user()->posts;
 
         if (Auth::user()->hasRole('super-admin')) {
@@ -109,6 +113,24 @@ class PostController extends Controller
             'content' => $validated['content'],
             'user_id' => Auth::id(),
         ]);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            // Delete the old image if it exists
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image->file_path);
+            }
+
+            $path = $file->store('posts', 'public');
+
+            $post->image()->create(
+                [
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'mime_type' => $file->getClientMimeType(),
+                    'file_size' => $file->getSize(),
+                ]
+            );
+        }
         return redirect()->route('posts.index')->with('success-update-post', 'Post updated successfully.');
     }
 
@@ -147,6 +169,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if ($post->image) {
+            Storage::disk('public')->delete($post->image->file_path);
+            $post->image()->delete();
+        }
 
         $post->delete();
         return redirect()->route('posts.index')->with('success-delete-post', 'Post deleted successfully.');

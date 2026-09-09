@@ -13,7 +13,7 @@
         </x-slot>
 
         <form action="{{ route('post.update', $post->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
-
+            @csrf
             <div>
                 <x-input-label for="title" :value="'Post Title'" />
                 <input id="title" name="title" type="text" value="{{ $post->title }}"

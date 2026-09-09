@@ -65,7 +65,11 @@
                             <td class="p-3">
                                 <a href="{{ route('post.edit', $post->id) }}" class="btn-edit">Edit</a>
                                 {{-- delete form --}}
-                                <x-delete-form :action-url="route('post.destroy', $post->id)" />
+                               <form action="{{ route('post.destroy',$post->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-delete" title="Delete post">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
