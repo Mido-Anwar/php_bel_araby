@@ -85,6 +85,7 @@ Route::prefix('technology')->controller(TechnologyController::class)->group(func
  * Handles CRUD operations for Sections within a Technology.
  */
 Route::prefix('section')->controller(SectionController::class)->group(function () {
+    Route::get('/create/{technology}', 'create')->name('section.create');
     Route::post('/store', 'store')->name('section.store');
     Route::get('/show/{section}', 'show')->name('section.show');
     Route::get('/edit/{section}', 'edit')->name('section.edit');

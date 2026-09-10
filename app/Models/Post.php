@@ -31,7 +31,6 @@ class Post extends Model
     protected static function booted(): void
     {
         static::saved(fn() => Cache::forget('posts.all'));
-        static::updated(fn() => Cache::forget('posts.all'));
         static::deleted(fn() => Cache::forget('posts.all'));
         static::restored(fn() => Cache::forget('posts.all'));
         static::forceDeleted(fn() => Cache::forget('posts.all'));
@@ -49,10 +48,7 @@ class Post extends Model
     public function deleteAttachedImage(): void
     {
         if ($this->image) {
-            // 1. مسح الملف الفعلي من storage/app/public
             Storage::disk('public')->delete($this->image->file_path);
-
-            // 2. مسح السجل من جدول media
             $this->image()->delete();
         }
     }

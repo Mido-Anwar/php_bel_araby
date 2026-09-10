@@ -116,7 +116,9 @@
 .btn-update {
     @include button(rgb(19, 206, 32), white);
 }
-
+.btn-show {
+    @include button(rgb(129, 129, 167), white);
+}
 // end Buttons styles
 // Sidebar styles
 .sidebar {

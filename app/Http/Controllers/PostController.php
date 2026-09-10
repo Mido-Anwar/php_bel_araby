@@ -7,7 +7,6 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -18,20 +17,19 @@ class PostController extends Controller
      */
     public function index()
     {
-
         $posts = Cache::remember('posts.all', 3600, function () {
-            return Post::with('image')->latest()->get();
+            return Post::with(['image', 'user'])->latest()->get();
         });
-        $authUserPosts = Auth::user()->posts;
 
-        if (Auth::user()->hasRole('super-admin')) {
+        $user = Auth::user();
+        // view the posts based on the user's role
+        if ($user->hasRole('super-admin')) {
             $visiblePosts = $posts;
         } else {
-            $visiblePosts = $authUserPosts;
+            $visiblePosts = $posts->where('user_id', $user->id);
         }
 
-
-        return view('blog.post.index')->with('posts', $visiblePosts);
+        return view('blog.post.index', ['posts' => $visiblePosts]);
     }
 
     /**
@@ -52,18 +50,16 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-
         $validated = $request->validated();
 
-
         $post = Post::create([
-            'title' => $validated['title'],
+            'title'   => $validated['title'],
             'content' => $validated['content'],
             'user_id' => Auth::id(),
         ]);
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-
             $path = $file->store('posts', 'public');
 
             $post->image()->create([
@@ -73,6 +69,7 @@ class PostController extends Controller
                 'file_size' => $file->getSize(),
             ]);
         }
+
         return redirect()->route('posts.index')->with('success-store-post', 'Post created successfully.');
     }
 
@@ -108,29 +105,26 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
         $validated = $request->validated();
-        $post->update([
-            'title' => $validated['title'],
-            'content' => $validated['content'],
-            'user_id' => Auth::id(),
-        ]);
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            // Delete the old image if it exists
-            if ($post->image) {
-                Storage::disk('public')->delete($post->image->file_path);
-            }
 
+        $post->update([
+            'title'   => $validated['title'],
+            'content' => $validated['content'],
+        ]);
+
+        if ($request->hasFile('image')) {
+            $post->deleteAttachedImage();
+
+            $file = $request->file('image');
             $path = $file->store('posts', 'public');
 
-            $post->image()->create(
-                [
-                    'file_path' => $path,
-                    'file_name' => $file->getClientOriginalName(),
-                    'mime_type' => $file->getClientMimeType(),
-                    'file_size' => $file->getSize(),
-                ]
-            );
+            $post->image()->create([
+                'file_path' => $path,
+                'file_name' => $file->getClientOriginalName(),
+                'mime_type' => $file->getClientMimeType(),
+                'file_size' => $file->getSize(),
+            ]);
         }
+
         return redirect()->route('posts.index')->with('success-update-post', 'Post updated successfully.');
     }
 
@@ -145,8 +139,10 @@ class PostController extends Controller
         $post->update([
             'is_published' => true,
         ]);
+
         return redirect()->route('posts.index')->with('success-publish-post', 'Post published successfully.');
     }
+
     /**
      * Unpublish the specified post.
      *
@@ -158,6 +154,7 @@ class PostController extends Controller
         $post->update([
             'is_published' => false,
         ]);
+
         return redirect()->route('posts.index')->with('success-unpublish-post', 'Post unpublished successfully.');
     }
 
@@ -169,11 +166,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if ($post->image) {
-            Storage::disk('public')->delete($post->image->file_path);
-            $post->image()->delete();
-        }
-
         $post->delete();
         return redirect()->route('posts.index')->with('success-delete-post', 'Post deleted successfully.');
     }

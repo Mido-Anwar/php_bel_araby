@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSectionRequest;
 use App\Http\Requests\UpdateSectionRequest;
 use App\Models\Section;
 use App\Models\Technology;
+use Illuminate\Support\Facades\Cache;
 
 class SectionController extends Controller
 {
@@ -24,9 +25,10 @@ class SectionController extends Controller
      *
      * @return void
      */
-    public function create()
+    public function create(Technology $technology)
     {
-        //
+
+        return view('docs.technology.section.section-create', compact('technology'));
     }
 
     /**
