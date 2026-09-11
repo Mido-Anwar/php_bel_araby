@@ -18,7 +18,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Cache::remember('posts.all', 3600, function () {
-            return Post::with(['image', 'user'])->latest()->get();
+            return Post::select('id', 'title','user_id', 'is_published')->with(['image', 'user'])->latest()->get();
         });
 
         $user = Auth::user();

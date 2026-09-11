@@ -82,6 +82,42 @@
     border-radius: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow-x: auto;
+
+    form {
+        min-width: 80%;
+        border: 1px solid #181717;
+        padding: 1rem;
+        // التنسيق المشترك للـ Input والـ Textarea
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            outline: none;
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s;
+
+            &:focus {
+                border-color: #3b82f6;
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+            }
+
+            &::placeholder {
+                color: #94a3b8;
+            }
+        }
+
+        // خصائص إضافية للـ Textarea فقط
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+    }
 }
 .small-container {
     display: flex;
@@ -117,7 +153,10 @@
     @include button(rgb(19, 206, 32), white);
 }
 .btn-show {
-    @include button(rgb(129, 129, 167), white);
+    @include button(rgb(33, 33, 36), white);
+}
+.btn-cancel {
+    @include button(rgb(206, 19, 19), white);
 }
 // end Buttons styles
 // Sidebar styles

@@ -15,12 +15,11 @@ return new class extends Migration
             $table->id(); // primary key
             $table->string('title'); // عنوان البوست
             $table->text('content'); // المحتوى
-            // ربط البوست باليوزر — العمود قابل للـ NULL، وحذف الكيان الرئيسي يزيل البوست
             $table->foreignId('user_id')
                 ->nullable()
                 ->constrained()
                 ->onDelete('cascade');            // ربط البوست باليوزر
-            $table->boolean('is_published')->default(false); // حالة النشر
+            $table->boolean('is_published')->default(false)->index(); // حالة النشر
             $table->timestamps(); // created_at, updated_at
             $table->softDeletes(); // deleted_at (soft delete)
         });

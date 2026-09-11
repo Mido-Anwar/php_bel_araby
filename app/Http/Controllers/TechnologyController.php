@@ -16,8 +16,10 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        $technologies = Cache::remember('technologies', 3600, function () {
-            return Technology::select('id', 'name')->get();
+        $technologies = Cache::remember('technologies.all', 3600, function () {
+            return Technology::select('id', 'name')
+                ->latest()
+                ->get();
         });
         return view('docs.technology.technology-index', ['technologies' => $technologies]);
     }

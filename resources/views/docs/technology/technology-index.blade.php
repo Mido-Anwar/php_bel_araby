@@ -16,7 +16,7 @@
         @foreach ($technologies as $technology)
             <div class="small-container">
                 <a href="{{ route('technology.show', $technology->id) }}" class="btn-show">
-                    {{ $technology->id . ' :' . $technology->name }}
+                    {{ $loop->iteration . ' : ' . $technology->name }}
                 </a>
                 @if (Auth::user()->hasRole('super-admin'))
                     <x-delete-form :action-url="route('technology.destroy', $technology->id)" />

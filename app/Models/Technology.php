@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Technology model representing programming technologies or languages.
@@ -24,15 +25,25 @@ class Technology extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','description'];
+    protected $fillable = ['name', 'description'];
+    // Enable automatic cache clearing after database transactions
+    protected $afterCommit = true;
 
+    // cache invalidation for posts when created, updated, or deleted
+    protected static function booted(): void
+    {
+        static::saved(fn() => Cache::forget('technologies.all'));
+        static::deleted(fn() => Cache::forget('technologies.all'));
+
+    }
     /**
      * Get the sections associated with the technology.
      *
      * @return HasMany
      */
-    public function sections():HasMany{
-      return $this->hasMany(Section::class);
+    public function sections(): HasMany
+    {
+        return $this->hasMany(Section::class);
     }
 
     /**
@@ -45,3 +56,4 @@ class Technology extends Model
         return $this->hasMany(BuiltInFunction::class);
     }
 }
+
