@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * BuiltInFunction model representing built-in functions for a technology.
@@ -29,6 +30,17 @@ class BuiltInFunction extends Model
      * @var array
      */
     protected $fillable = ['title', 'tag_name', 'description', 'technology_id'];
+
+    // Enable automatic cache clearing after database transactions
+    protected $afterCommit = true;
+
+    // cache invalidation for posts when created, updated, or deleted
+    protected static function booted(): void
+    {
+        static::saved(fn() => Cache::forget('built_in_functions.all'));
+        static::deleted(fn() => Cache::forget('built_in_functions.all'));
+    }
+
 
     /**
      * Get the technology that owns the built-in function.

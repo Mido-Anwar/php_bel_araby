@@ -83,7 +83,11 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow-x: auto;
 
-    form {
+
+
+}
+// end Dashboard container styles and elements inside it
+.form-style {
         min-width: 80%;
         border: 1px solid #181717;
         padding: 1rem;
@@ -118,7 +122,6 @@
             resize: vertical;
         }
     }
-}
 .small-container {
     display: flex;
     justify-content: space-between;
@@ -177,6 +180,7 @@ table {
         td {
             border: 1px solid black;
             padding: 0.5rem;
+
         }
 
         th {

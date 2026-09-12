@@ -30,7 +30,7 @@
             <x-dashboard-paragraph :text="'No sections available.'" />
         @endif
         @foreach ($technology->sections as $section)
-            <div class="btn-container">
+            <div class="small-container">
                 <a href="{{ route('section.show', $section->id) }}" class="btn-show">
                     {{ $section->title }}
                 </a>
@@ -51,7 +51,7 @@
             <x-dashboard-paragraph :text="'No sections available.'" />
         @endif
         @foreach ($technology->builtinfunctions as $builtinfunction)
-            <div class="btn-container">
+            <div class="small-container">
                 <a href="{{ route('builtinfunction.show', $builtinfunction->id) }}" class="btn-show">
                     {{ $builtinfunction->title }}
                 </a>

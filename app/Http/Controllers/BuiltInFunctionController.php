@@ -39,10 +39,9 @@ class BuiltInFunctionController extends Controller
     public function store(StoreBuiltInFunctionRequest $request)
     {
         $validated = $request->validated();
-        $technology  = Technology::where('id', $validated['technology_id'])->firstOrFail(['name']);
         BuiltInFunction::create($validated);
         return redirect()
-            ->route('technology.show', $technology->name)
+            ->route('technology.show', $validated['technology_id'])
             ->with('success-store-builtinFunction', 'Built-in function created successfully.');
     }
 
@@ -92,10 +91,9 @@ class BuiltInFunctionController extends Controller
      */
     public function destroy(BuiltInFunction $builtInFunction)
     {
-        $technology  = Technology::where('id', $builtInFunction->technology_id)->firstOrFail(['name']);
         $builtInFunction->delete();
         return redirect()
-            ->route('technology.show', $technology->name)
+            ->route('technology.show', $builtInFunction->technology->id)
             ->with('success-delete-builtinFunction', 'Built-in function deleted successfully.');
     }
 }

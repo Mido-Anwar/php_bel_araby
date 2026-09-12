@@ -57,14 +57,17 @@ class TechnologyController extends Controller
      */
     public function show(Technology $technology)
     {
-        $technology->load([
-            'sections' => function ($query) {
-                $query->select('id', 'title', 'technology_id');
-            },
-            'builtInFunctions' => function ($query) {
-                $query->select('id', 'title', 'technology_id');
-            },
-        ]);
+        $technologies = Cache::remember('dashboard.technologies.all', 3600, function () {
+            return Technology::select('id', 'name', 'description')
+                ->with([
+                    'sections:id,title,technology_id',
+                    'builtInFunctions:id,title,technology_id',
+                ])
+                ->latest()
+                ->get();
+        });
+
+
         return view('docs.technology.technology-show', compact('technology'));
     }
 

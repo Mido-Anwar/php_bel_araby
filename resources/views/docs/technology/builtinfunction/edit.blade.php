@@ -10,11 +10,13 @@
     <x-dashboard-container>
 
         <x-slot name="div">
-            <x-dashboard-head :text="'Edit Builtin Function'" />
+            <x-dashboard-head :text="$builtInFunction->technology->name . ' - ' . $builtInFunction->title" />
         </x-slot>
 
     </x-dashboard-container>
-    <x-hidden-form :action-url="route('builtinfunction.update', $builtInFunction->id)" :open="false" :btnName="'Edit Builtin Function'" :formBtnName="'Update Builtin Function'">
+    <form action="{{ route('builtinfunction.update', $builtInFunction->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4 form-style">
+        @csrf
+
         <div>
             <x-input-label for="title" :value="'Builtin Function Title'" />
             <input type="text" name="title" id="title" value="{{ $builtInFunction->title }}" required autofocus>
@@ -36,7 +38,15 @@
         </div>
         <input type="hidden" name="technology_id" value="{{ $builtInFunction->technology->id }}">
 
-    </x-hidden-form>
+
+        <div class="mt-4">
+            <x-primary-button>
+                {{ __('Update Builtin Function') }}
+            </x-primary-button>
+
+            <a href="{{ route('technology.show', $builtInFunction->technology->id) }}" class="btn-cancel">Cancel</a>
+        </div>
+    </form>
 
 
 </x-app-layout>
