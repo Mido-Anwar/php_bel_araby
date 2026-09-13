@@ -3,7 +3,10 @@
         <x-dashboard-head :text="'add new Concept to section : ' . $section->title" />
     </x-slot>
 
-    <x-hidden-form :action-url="route('concept.store')" :open="false" :formBtnName="'Add New Concept'">
+    <form action="{{ route('concept.store') }}" method="POST" class="space-y-4 form-style" enctype="multipart/form-data">
+        @csrf
+
+
         <div>
             <x-input-label for="title" :value="'Concept Title'" />
             <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" required autofocus />
@@ -19,6 +22,14 @@
         </div>
         <input type="hidden" name="section_id" value="{{ $section->id }}">
 
-    </x-hidden-form>
+        <div>
+            <x-primary-button>
+                {{ __('Add New Concept') }}
+            </x-primary-button>
+
+            <a href="{{ route('section.show', $section->id) }}" class="btn-cancel">Cancel</a>
+        </div>
+
+    </form>
 
 </x-app-layout>

@@ -27,15 +27,23 @@ class Post extends Model
     // Enable automatic cache clearing after database transactions
     protected $afterCommit = true;
 
-    // cache invalidation for posts when created, updated, or deleted
+// Cache invalidation for posts when created, updated, restored, or deleted
     protected static function booted(): void
     {
-        static::saved(fn() => Cache::forget('posts.all'));
-        static::deleted(fn() => Cache::forget('posts.all'));
-        static::restored(fn() => Cache::forget('posts.all'));
-        static::forceDeleted(fn() => Cache::forget('posts.all'));
+        static::saved(function (Post $post) {
+            static::clearPostCache($post);
+        });
+
+        static::deleted(function (Post $post) {
+            static::clearPostCache($post);
+        });
+
+        static::restored(function (Post $post) {
+            static::clearPostCache($post);
+        });
 
         static::forceDeleted(function (Post $post) {
+            static::clearPostCache($post);
             $post->deleteAttachedImage();
         });
 
@@ -44,6 +52,18 @@ class Post extends Model
                 $post->deleteAttachedImage();
             }
         });
+    }
+
+    /**
+     * Clear all related cache keys for this post.
+     */
+    protected static function clearPostCache(Post $post): void
+    {
+        // Clear global blog posts list
+        Cache::forget('posts.all');
+
+        // Clear individual post detail cache
+        Cache::forget("posts.show.{$post->id}");
     }
     public function deleteAttachedImage(): void
     {

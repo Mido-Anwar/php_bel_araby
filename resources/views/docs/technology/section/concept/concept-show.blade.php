@@ -10,9 +10,6 @@
 
         <x-slot name="div">
             <x-dashboard-head :text="$concept->title" />
-            <a href="{{ route('concept.edit', $concept->id) }}" class="btn-edit">
-                ✎ Edit Section
-            </a>
             <x-dashboard-paragraph :text="$concept->description" />
 
         </x-slot>

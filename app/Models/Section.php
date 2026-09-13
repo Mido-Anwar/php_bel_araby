@@ -27,12 +27,33 @@ class Section extends Model
     // Enable automatic cache clearing after database transactions
     protected $afterCommit = true;
 
-    // cache invalidation for posts when created, updated, or deleted
+
+
+    // Cache invalidation for sections when created, updated, or deleted
     protected static function booted(): void
     {
-        static::saved(fn() => Cache::forget('sections.all'));
-        static::deleted(fn() => Cache::forget('sections.all'));
+        static::saved(function (Section $section) {
+            static::clearSectionCache($section);
+        });
 
+        static::deleted(function (Section $section) {
+            static::clearSectionCache($section);
+        });
+    }
+
+    /**
+     * Clear all related cache keys for this section.
+     */
+    protected static function clearSectionCache(Section $section): void
+    {
+        // Clear global sections list
+        Cache::forget('sections.all');
+
+        // Clear individual section cache
+        Cache::forget("sections.show.{$section->id}");
+
+        // Clear parent technology cache so updated sections reflect on the technology page
+        Cache::forget("technologies.show.{$section->technology_id}");
     }
     /**
      * Get the technology that owns the section.

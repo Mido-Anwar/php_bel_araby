@@ -11,7 +11,7 @@
         </x-slot>
 
 
-        <form method="POST" class="space-y-6" action="{{ route('post.store') }}" enctype="multipart/form-data">
+        <form method="POST" class="space-y-6 form-style" action="{{ route('post.store') }}" enctype="multipart/form-data">
             @csrf
 
             <div>
@@ -66,9 +66,10 @@
                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
             </div>
 
-            <button type="submit" class="btn-create">Create
-                Post
-            </button>
+            <div class="flex items-center gap-4">
+                <x-primary-button>{{ __('Create Post') }}</x-primary-button>
+                <a href="{{ route('posts.index') }}" class="btn-cancel">Cancel</a>
+            </div>
 
         </form>
     </x-dashboard-container>

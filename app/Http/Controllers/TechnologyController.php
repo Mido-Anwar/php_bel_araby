@@ -21,7 +21,8 @@ class TechnologyController extends Controller
                 ->latest()
                 ->get();
         });
-        return view('docs.technology.technology-index', ['technologies' => $technologies]);
+
+        return view('docs.technology.technology-index', compact('technologies'));
     }
 
     /**
@@ -42,8 +43,8 @@ class TechnologyController extends Controller
      */
     public function store(StoreTechnologyRequest $request)
     {
-
         Technology::create($request->validated());
+
         return redirect()
             ->route('technology.index')
             ->with('success-store-technology', 'Technology created successfully.');
@@ -57,18 +58,15 @@ class TechnologyController extends Controller
      */
     public function show(Technology $technology)
     {
-        $technologies = Cache::remember('dashboard.technologies.all', 3600, function () {
-            return Technology::select('id', 'name', 'description')
-                ->with([
-                    'sections:id,title,technology_id',
-                    'builtInFunctions:id,title,technology_id',
-                ])
-                ->latest()
-                ->get();
+        // Cache the specific technology with its relations
+        $technologyData = Cache::remember("technologies.show.{$technology->id}", 3600, function () use ($technology) {
+            return $technology->load([
+                'sections:id,title,technology_id',
+                'builtinFunctions:id,title,technology_id',
+            ]);
         });
 
-
-        return view('docs.technology.technology-show', compact('technology'));
+        return view('docs.technology.technology-show', ['technology' => $technologyData]);
     }
 
     /**
@@ -93,9 +91,10 @@ class TechnologyController extends Controller
     {
         $validated = $request->validated();
         $technology->update($validated);
+
         return redirect()
             ->route('technology.show', $technology->id)
-            ->with('success-update-technology', 'technology updated successfully.');
+            ->with('success-update-technology', 'Technology updated successfully.');
     }
 
     /**
@@ -106,10 +105,10 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-
-
         $technology->delete();
 
-        return redirect()->route('technology.index')->with('success-delete-technology', 'Technology deleted successfully!');
+        return redirect()
+            ->route('technology.index')
+            ->with('success-delete-technology', 'Technology deleted successfully!');
     }
 }

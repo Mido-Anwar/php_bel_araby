@@ -24,36 +24,35 @@
 
 
     <x-dashboard-container>
-        <x-slot name="div">
-            <x-dashboard-head :text="'Concepts'" />
-            <a href="{{ route('concept.create', $section->id) }}" class="btn-create">
-                ✎ Add Concept to Section
-            </a>
 
-        </x-slot>
-
-    </x-dashboard-container>
-    <x-dashboard-container>
-        @if($section->concepts->isEmpty())
-        <x-slot name="div">
-            <x-dashboard-paragraph :text="'No Concepts in this section'" />
-        </x-slot>
+        @if ($section->concepts->isEmpty())
+            <x-slot name="div">
+                <x-dashboard-paragraph :text="'No Concepts in this section'" />
+                <a href="{{ route('concept.create', $section->id) }}" class="btn-create">
+                    ✎ Add Concept to Section
+                </a>
+            </x-slot>
         @else
-        <x-slot name="div">
-            <x-dashboard-paragraph :text="'Concepts in this section'" />
-        </x-slot>
-        @foreach($section->concepts as $concept)
-        <div class="btn-container">
-            <a href="{{ route('concept.show', $concept->id) }}" class="btn-show">{{ $concept->title }}</a> <a href="{{ route('concept.edit', $concept->id) }}" class="btn-edit">
-                ✎ Edit
-            </a>
-            <form action="{{ route('concept.destroy', $concept->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn-delete">X</button>
-            </form>
-        </div>
-        @endforeach
+            <x-slot name="div">
+                <a href="{{ route('concept.create', $section->id) }}" class="btn-create">
+                    ✎ Add Concept to Section
+                </a>
+                <x-dashboard-paragraph :text="'Concepts in this section'" />
+            </x-slot>
+            @foreach ($section->concepts as $concept)
+                <div class="small-container">
+                    <a href="{{ route('concept.show', $concept->id) }}" class="btn-show">{{ $concept->title }}</a>
+                    <a href="{{ route('concept.edit', $concept->id) }}" class="btn-edit">
+                        ✎ Edit
+                    </a>
+                    <form action="{{ route('concept.destroy', $concept->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn-delete">X</button>
+                    </form>
+                </div>
+            @endforeach
         @endif
     </x-dashboard-container>
+
 </x-app-layout>

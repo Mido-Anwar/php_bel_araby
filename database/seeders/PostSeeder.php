@@ -13,17 +13,13 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        // لازم يكون عندنا Users عشان posts ترتبط بيهم
-        $user = User::first() ?? User::factory()->create();
-
-        // توليد 10 بوستات تجريبية
-        for ($i = 1; $i <= 20; $i++) {
-            Post::create([
-                'title'        => "Demo Post $i",
-                'content'      => Str::random(200), // نص عشوائي
-                'user_id'      => $user->id,
-                'is_published' => (bool)rand(0, 1), // عشوائي Published or Draft
-            ]);
-        }
+        Post::factory(10)->create([
+            'title'        => fake()->sentence(6),
+            'content'      => fake()->paragraphs(4, true),
+            'is_published' => fake()->boolean(80), // 80% منشور و 20% مسودة
+            'user_id'      => User::query()->inRandomOrder()->value('id') ?? User::factory()->create()->id,
+            'created_at'   => fake()->dateTimeBetween('-6 months', 'now'),
+            'updated_at'   => now(),
+        ]);
     }
 }

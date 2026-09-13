@@ -29,12 +29,28 @@ class Technology extends Model
     // Enable automatic cache clearing after database transactions
     protected $afterCommit = true;
 
-    // cache invalidation for posts when created, updated, or deleted
+    // Cache invalidation for technologies when created, updated, or deleted
     protected static function booted(): void
     {
-        static::saved(fn() => Cache::forget('technologies.all'));
-        static::deleted(fn() => Cache::forget('technologies.all'));
+        static::saved(function (Technology $technology) {
+            static::clearTechnologyCache($technology);
+        });
 
+        static::deleted(function (Technology $technology) {
+            static::clearTechnologyCache($technology);
+        });
+    }
+
+    /**
+     * Clear all related cache keys for this technology.
+     */
+    protected static function clearTechnologyCache(Technology $technology): void
+    {
+        // Clear global technology list (e.g. used in Navbar dropdowns)
+        Cache::forget('technologies.all');
+
+        // Clear individual technology view cache
+        Cache::forget("technologies.show.{$technology->id}");
     }
     /**
      * Get the sections associated with the technology.
@@ -56,4 +72,3 @@ class Technology extends Model
         return $this->hasMany(BuiltInFunction::class);
     }
 }
-

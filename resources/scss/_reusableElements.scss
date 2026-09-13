@@ -73,14 +73,42 @@
 }
 
 @mixin button($background, $color) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background-color: $background;
     color: $color;
     font-weight: bold;
     border: 2px solid rgb(184, 180, 180);
     padding: 10px 20px;
+    font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    text-align: center;
+    user-select: none;
+
+    /* Extra Small Devices / Phones (up to 480px) */
+    @media (max-width: 480px) {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 0.875rem;
+        border-radius: 4px;
+    }
+
+    /* Tablets (481px to 768px) */
+    @media (min-width: 481px) and (max-width: 768px) {
+        padding: 9px 16px;
+        font-size: 0.95rem;
+    }
+
+    /* Desktop Hover Effects (769px and above) */
+    @media (min-width: 769px) {
+        &:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+    }
 }
 
 @mixin nav-list($background) {

@@ -12,10 +12,13 @@ use Spatie\Permission\Traits\HasRoles;
  * User model representing authenticated users in the application.
  * Extends Laravel's Authenticatable class and includes role management via Spatie Permission package.
  */
+/**
+ * @method bool hasRole(string|array $roles, string|null $guard = null)
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable,HasRoles;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.

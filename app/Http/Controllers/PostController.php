@@ -5,39 +5,41 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\View\View;
 
 class PostController extends Controller
 {
     /**
-     * Display a listing of the posts.
+     * Display a listing of the posts based on user role.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
-        $posts = Cache::remember('posts.all', 3600, function () {
-            return Post::select('id', 'title','user_id', 'is_published')->with(['image', 'user'])->latest()->get();
-        });
-
         $user = Auth::user();
-        // view the posts based on the user's role
-        if ($user->hasRole('super-admin')) {
-            $visiblePosts = $posts;
-        } else {
-            $visiblePosts = $posts->where('user_id', $user->id);
+
+        $query = Post::select('id', 'title', 'user_id', 'is_published', 'created_at')
+            ->with(['image', 'user:id,name'])
+            ->latest();
+        // check if user is super-admin
+        if (! $user->hasRole('super-admin')) {
+            $query->where('user_id', $user->id);
         }
 
-        return view('blog.post.index', ['posts' => $visiblePosts]);
+        $posts = $query->paginate(10);
+
+        return view('blog.post.index', compact('posts'));
     }
 
     /**
      * Show the form for creating a new post.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         return view('blog.post.post-create');
     }
@@ -45,10 +47,10 @@ class PostController extends Controller
     /**
      * Store a newly created post in storage.
      *
-     * @param  \App\Http\Requests\StorePostRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param StorePostRequest $request
+     * @return RedirectResponse
      */
-    public function store(StorePostRequest $request)
+    public function store(StorePostRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -59,51 +61,52 @@ class PostController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $path = $file->store('posts', 'public');
-
-            $post->image()->create([
-                'file_path' => $path,
-                'file_name' => $file->getClientOriginalName(),
-                'mime_type' => $file->getClientMimeType(),
-                'file_size' => $file->getSize(),
-            ]);
+            $this->handleImageUpload($request, $post);
         }
 
-        return redirect()->route('posts.index')->with('success-store-post', 'Post created successfully.');
+        return redirect()
+            ->route('posts.index')
+            ->with('success-store-post', 'Post created successfully.');
     }
 
     /**
-     * Display the specified post.
+     * Display the specified post (Direct Query without cache).
      *
-     * @param  \App\Models\Post  $post
-     * @return void
+     * @param Post $post
+     * @return View
      */
-    public function show(Post $post)
+    public function show(Post $post): View
     {
-        //
+        // استرجاع أحدث بيانات للمقال والعلاقات بدون كاش لضمان الدقة
+        $post->load(['image', 'user:id,name']);
+
+        return view('blog.post.post-show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified post.
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\View\View
+     * @param Post $post
+     * @return View
      */
-    public function edit(Post $post)
+    public function edit(Post $post): View
     {
+        $this->authorizeOwnerOrAdmin($post);
+
         return view('blog.post.post-edit', compact('post'));
     }
 
     /**
      * Update the specified post in storage.
      *
-     * @param  \App\Http\Requests\UpdatePostRequest  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\RedirectResponse
+     * @param UpdatePostRequest $request
+     * @param Post $post
+     * @return RedirectResponse
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post): RedirectResponse
     {
+        $this->authorizeOwnerOrAdmin($post);
+
         $validated = $request->validated();
 
         $post->update([
@@ -113,60 +116,102 @@ class PostController extends Controller
 
         if ($request->hasFile('image')) {
             $post->deleteAttachedImage();
-
-            $file = $request->file('image');
-            $path = $file->store('posts', 'public');
-
-            $post->image()->create([
-                'file_path' => $path,
-                'file_name' => $file->getClientOriginalName(),
-                'mime_type' => $file->getClientMimeType(),
-                'file_size' => $file->getSize(),
-            ]);
+            $this->handleImageUpload($request, $post);
         }
 
-        return redirect()->route('posts.index')->with('success-update-post', 'Post updated successfully.');
+        return redirect()
+            ->route('posts.index')
+            ->with('success-update-post', 'Post updated successfully.');
     }
 
     /**
      * Publish the specified post.
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Post $post
+     * @return RedirectResponse
      */
-    public function publish(Post $post)
+    public function publish(Post $post): RedirectResponse
     {
+        $this->authorizeOwnerOrAdmin($post);
+
         $post->update([
             'is_published' => true,
         ]);
 
-        return redirect()->route('posts.index')->with('success-publish-post', 'Post published successfully.');
+        return redirect()
+            ->route('posts.index')
+            ->with('success-publish-post', 'Post published successfully.');
     }
 
     /**
      * Unpublish the specified post.
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Post $post
+     * @return RedirectResponse
      */
-    public function unpublish(Post $post)
+    public function unpublish(Post $post): RedirectResponse
     {
+        $this->authorizeOwnerOrAdmin($post);
+
         $post->update([
             'is_published' => false,
         ]);
 
-        return redirect()->route('posts.index')->with('success-unpublish-post', 'Post unpublished successfully.');
+        return redirect()
+            ->route('posts.index')
+            ->with('success-unpublish-post', 'Post unpublished successfully.');
     }
 
     /**
      * Remove the specified post from storage.
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Post $post
+     * @return RedirectResponse
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post): RedirectResponse
     {
+        $this->authorizeOwnerOrAdmin($post);
+
+        // Clean up physically attached image if present
+        $post->deleteAttachedImage();
         $post->delete();
-        return redirect()->route('posts.index')->with('success-delete-post', 'Post deleted successfully.');
+
+        return redirect()
+            ->route('posts.index')
+            ->with('success-delete-post', 'Post deleted successfully.');
+    }
+
+    /**
+     * Helper method to handle post image upload and relation creation.
+     *
+     * @param Request $request
+     * @param Post $post
+     * @return void
+     */
+    private function handleImageUpload(Request $request, Post $post): void
+    {
+        $file = $request->file('image');
+        $path = $file->store('posts', 'public');
+
+        $post->image()->create([
+            'file_path' => $path,
+            'file_name' => $file->getClientOriginalName(),
+            'file_type' => $file->getClientMimeType(),
+            'file_size' => $file->getSize(),
+        ]);
+    }
+
+    /**
+     * Helper method to check if current user is owner or super-admin.
+     *
+     * @param Post $post
+     * @return void
+     */
+    private function authorizeOwnerOrAdmin(Post $post): void
+    {
+        $user = Auth::user();
+        if ($user->id !== $post->user_id && ! $user->hasRole('super-admin')) {
+            abort(403, 'Unauthorized action.');
+        }
     }
 }

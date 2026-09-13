@@ -10,7 +10,7 @@
         </x-slot>
 
         <form action="{{ route('technology.update', $technology->id) }}" method="POST" enctype="multipart/form-data"
-            class="mt-6 space-y-6">
+            class="mt-6 space-y-6 form-style">
 
             @csrf
 
@@ -27,7 +27,7 @@
                     required>{{ old('description', $technology->description) }}</textarea>
                 <x-input-error :messages="$errors->get('description')" class="mt-2" />
             </div>
-        
+
             <div class="flex items-center gap-4">
                 <x-primary-button>{{ __('Update Technology') }}</x-primary-button>
                 <a href="{{ route('technology.index') }}" class="btn-cancel">Cancel</a>

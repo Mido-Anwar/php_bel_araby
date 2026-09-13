@@ -4,14 +4,13 @@
 
     </x-slot>
 
-
-
     <x-slot name="div">
         <x-dashboard-head :text="$concept->title" />
         <x-dashboard-paragraph :text="$concept->description" />
     </x-slot>
-    <x-hidden-form :action-url="route('concept.update', $concept->id)" :open="false" :btnName="'Edit Concept'" :formBtnName="'Update Concept'">
 
+    <form action="{{ route('concept.update', $concept->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4 form-style">
+        @csrf
         <div>
             <x-input-label for="title" :value="'Concept Title'" />
             <input type="text" name="title" id="title" value="{{ $concept->title }}" required autofocus>
@@ -27,6 +26,13 @@
         </div>
         <input type="hidden" name="section_id" value="{{ $concept->section_id }}">
 
-    </x-hidden-form>
+        <div>
+            <x-primary-button>
+                {{ __('Update Concept') }}
+            </x-primary-button>
+            <a href="{{ route('section.show', $concept->section_id) }}" class="btn-cancel">Cancel</a>
+        </div>
+
+    </form>
 
 </x-app-layout>

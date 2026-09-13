@@ -5,12 +5,14 @@
     </x-slot>
 
 
-
+    <x-message :message="session('success-store-user')" :color="'green'" />
+    <x-message :message="session('success-update-user')" :color="'blue'" />
+    <x-message :message="session('success-delete-user')" :color="'red'" />
     <x-dashboard-container>
 
         <x-slot name="div">
             <x-dashboard-head :text="'Users Data Table'" />
-            <a href="{{ route('register') }}" class="btn-dashboard">
+            <a href="{{ route('register') }}" class="btn-create">
                 + Create New User
             </a>
             <x-dashboard-paragraph :text="'Manage application users, their roles, and permissions from this interface.'" />
@@ -28,7 +30,7 @@
                 @foreach ($users as $user)
                     <tr>
                         <td>{{ $user->id }}</td>
-                        <td>{{ $user->name . ' , '. $user->email}}</td>
+                        <td>{{ $user->name . ' , ' . $user->email }}</td>
 
                         <td>{{ implode(', ', $user->getRoleNames()->toArray()) }}</td>
                         <td>
@@ -39,12 +41,12 @@
                 @endforeach
             </tbody>
         </table>
-        <x-message :message="session('success-store-user')" :color="'green'" />
-        <x-message :message="session('success-update-user')" :color="'blue'" />
-        <x-message :message="session('success-delete-user')" :color="'red'" />
+
     </x-dashboard-container>
 
-
+    <x-message :message="session('success-store-role')" :color="'green'" />
+    <x-message :message="session('success-update-role')" :color="'blue'" />
+    <x-message :message="session('success-delete-role')" :color="'red'" />
     <x-dashboard-container>
         <x-slot name="div">
             <x-dashboard-head :text="'Roles'" />
@@ -56,7 +58,7 @@
         </x-slot>
 
         @foreach ($roles as $role)
-            <div class="btn-container">
+            <div class="small-container">
                 <a href="" class="btn-show">
                     {{ $role->name }}
                 </a>
@@ -64,11 +66,11 @@
                 <x-delete-form :action-url="route('role.destroy', $role->id)" />
             </div>
         @endforeach
-        <x-message :message="session('success-store-role')" :color="'green'" />
-        <x-message :message="session('success-update-role')" :color="'blue'" />
-        <x-message :message="session('success-delete-role')" :color="'red'" />
-    </x-dashboard-container>
 
+    </x-dashboard-container>
+    <x-message :message="session('success-store-permission')" :color="'green'" />
+    <x-message :message="session('success-update-permission')" :color="'blue'" />
+    <x-message :message="session('success-delete-permission')" :color="'red'" />
     <x-dashboard-container>
 
         <x-slot name="div">
@@ -81,15 +83,13 @@
         </x-slot>
 
         @foreach ($permissions as $permission)
-            <div class="btn-container">
+            <div class="small-container">
                 <a href="" class="btn-show">{{ $permission->name }}</a>
                 <a href="{{ route('permission.edit', $permission->id) }}" class="btn-edit">edit</a>
                 <x-delete-form :action-url="route('permission.destroy', $permission->id)" />
             </div>
         @endforeach
-        <x-message :message="session('success-store-permission')" :color="'green'" />
-        <x-message :message="session('success-update-permission')" :color="'blue'" />
-        <x-message :message="session('success-delete-permission')" :color="'red'" />
+
     </x-dashboard-container>
 
 </x-app-layout>

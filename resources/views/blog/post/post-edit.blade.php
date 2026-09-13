@@ -32,7 +32,7 @@
                 <x-input-error :messages="$errors->get('content')" class="mt-2" />
             </div>
             <x-input-label for="image" :value="'Post Image'" />
-            <img src="{{ $post->image->url }}" alt="{{ $post->title }}" style="width:150px; ">
+            <img src="{{ $post->image->url ?? null }}" alt="{{ $post->title }}" style="width:150px; ">
 
             <div x-data="{ fileName: '', previewUrl: null }" class="mt-1">
                 <label for="image"

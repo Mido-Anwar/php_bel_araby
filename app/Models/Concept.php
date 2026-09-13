@@ -24,12 +24,31 @@ class Concept extends Model
    // Enable automatic cache clearing after database transactions
     protected $afterCommit = true;
 
-    // cache invalidation for posts when created, updated, or deleted
+// Cache invalidation for concepts when created, updated, or deleted
     protected static function booted(): void
     {
-        static::saved(fn() => Cache::forget('concepts.all'));
-        static::deleted(fn() => Cache::forget('concepts.all'));
+        static::saved(function (Concept $concept) {
+            static::clearConceptCache($concept);
+        });
 
+        static::deleted(function (Concept $concept) {
+            static::clearConceptCache($concept);
+        });
+    }
+
+    /**
+     * Clear all related cache keys for this concept.
+     */
+    protected static function clearConceptCache(Concept $concept): void
+    {
+        // Clear global concepts list if cached
+        Cache::forget('concepts.all');
+
+        // Clear parent section cache so updated concepts appear immediately on section page
+        Cache::forget("sections.show.{$concept->section_id}");
+
+        // Clear individual concept cache if requested directly
+        Cache::forget("concepts.show.{$concept->id}");
     }
     /**
      * Get the section that owns the concept.

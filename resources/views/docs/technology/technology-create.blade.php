@@ -8,7 +8,8 @@
             <x-dashboard-head :text="'Add Technology'" />
             <x-dashboard-paragraph :text="'Fill in the details below to add a new technology to the learning and reference materials and add home page article .'" />
         </x-slot>
-        <form action="{{ route('technology.store') }}" method="POST" enctype="multipart/form-data" class="mt-6 space-y-6">
+        <form action="{{ route('technology.store') }}" method="POST" enctype="multipart/form-data"
+            class="mt-6 space-y-6 form-style">
             <div>
                 <x-input-label for="name" :value="'Technology Name'" />
                 <input type="text" name="name" id="name" required autofocus>

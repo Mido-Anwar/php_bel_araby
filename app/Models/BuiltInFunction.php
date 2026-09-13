@@ -37,8 +37,28 @@ class BuiltInFunction extends Model
     // cache invalidation for posts when created, updated, or deleted
     protected static function booted(): void
     {
-        static::saved(fn() => Cache::forget('built_in_functions.all'));
-        static::deleted(fn() => Cache::forget('built_in_functions.all'));
+        static::saved(function (BuiltInFunction $function) {
+            static::clearFunctionCache($function);
+        });
+
+        static::deleted(function (BuiltInFunction $function) {
+            static::clearFunctionCache($function);
+        });
+    }
+
+    /**
+     * Clear all related cache keys for this built-in function.
+     */
+    protected static function clearFunctionCache(BuiltInFunction $function): void
+    {
+        // Clear global functions list
+        Cache::forget('built_in_functions.all');
+
+        // Clear individual function cache
+        Cache::forget("built_in_functions.show.{$function->id}");
+
+        // Clear parent technology cache so newly added functions appear on technology docs/dictionary page
+        Cache::forget("technologies.show.{$function->technology_id}");
     }
 
 
