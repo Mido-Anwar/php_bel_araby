@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\BuiltInFunctionController;
 use App\Http\Controllers\ConceptController;
 use App\Http\Controllers\LearnReferenceController;
 use App\Http\Controllers\PostController;
@@ -12,15 +11,17 @@ use App\Models\Concept;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Models\Post;
 
 Route::get('/', function () {
-    return view('welcome');
+    $latestPosts = Post::latest()->take(3)->get();
+    return view('welcome', compact('latestPosts'));
 })->name('home');
 
 
 Route::get('/about', function () {
     return view('about');
-})->name('about');  
+})->name('about');
 /**
  * Blog Routes
  * Handles the display of blog posts for public viewing.

@@ -23,7 +23,7 @@
         <x-master.header />
 
 
-        <main class="min-h-screen bg-slate-950 text-[#f3ebeb] antialiased" lang="ar" dir="rtl">
+        <main class=" min-h-[calc(100vh-80px)] bg-slate-950 text-[#f3ebeb] antialiased" lang="ar" dir="rtl">
             {{ $slot }}
         </main>
 

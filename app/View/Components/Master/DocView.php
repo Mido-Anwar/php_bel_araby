@@ -12,24 +12,21 @@ class DocView extends Component
     /**
      * Create a new component instance.
      */
-    public $name;
-    public function __construct($name)
-    {
-        $this->name = $name;
-    }
+    public function __construct(
+        public Technology $technology
+    ) {}
 
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        $technology = Technology::where('name', $this->name)
-            ->with([
-                'sections:id,title,content,technology_id',
-                'sections.concepts:id,section_id,name,syntax,example,description',
-                'builtinFunctions:id,name,syntax,example,description,technology_id',
-            ])
-            ->firstOrFail(['id', 'name', 'description']);
-        return view('components.master.doc-view', compact('technology'));
+        // التأكد من جلب العلاقات المطلوبة بكفاءة عالية
+        $this->technology->loadMissing([
+            'sections:id,title,description,slug,technology_id',
+            'sections.concepts:id,section_id,title,slug,description,type,syntax,return_type',
+        ]);
+
+        return view('components.master.doc-view');
     }
 }
