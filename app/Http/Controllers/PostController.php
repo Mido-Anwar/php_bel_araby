@@ -19,15 +19,11 @@ class PostController extends Controller
      */
     public function index(): View
     {
-        $user = Auth::user();
+
 
         $query = Post::select('id', 'title', 'user_id', 'is_published', 'created_at')
             ->with(['image', 'user:id,name'])
             ->latest();
-        // check if user is super-admin
-        if (! $user->hasRole('super-admin')) {
-            $query->where('user_id', $user->id);
-        }
 
         $posts = $query->paginate(10);
 

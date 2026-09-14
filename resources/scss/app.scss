@@ -84,111 +84,10 @@
     overflow-x: auto;
 }
 // end Dashboard container styles and elements inside it
-.form-style {
-    min-width: 80%;
-    border: 1px solid #181717;
-    padding: 1rem;
-    // التنسيق المشترك للـ Input والـ Textarea
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    textarea {
-        width: 100%;
-        padding: 10px 14px;
-        font-size: 15px;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        outline: none;
-        transition:
-            border-color 0.2s,
-            box-shadow 0.2s;
 
-        &:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-        }
-
-        &::placeholder {
-            color: #94a3b8;
-        }
-    }
-
-    // خصائص إضافية للـ Textarea فقط
-    textarea {
-        min-height: 100px;
-        resize: vertical;
-    }
-}
-.small-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 1rem auto;
-    padding: 0.75rem 1rem;
-
-    background-color: #1e1e24;
-    border-radius: 1rem;
-    width: 100%;
-    max-width: 480px;
-
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 1.2rem;
-
-    border: 3px solid transparent;
-    background-image:
-        linear-gradient(#1e1e24, #1e1e24),
-        linear-gradient(135deg, #ff007f, #7928ca, #0284c7, #10b981);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-    transition: all 0.3s ease-in-out;
-
-    /* Extra Small Devices / Phones (up to 480px) */
-    @media (max-width: 480px) {
-        font-size: 0.95rem;
-        padding: 0.5rem 0.75rem;
-        border-radius: 0.75rem;
-        gap: 0.25rem;
-    }
-
-    /* Tablets (481px to 768px) */
-    @media (min-width: 481px) and (max-width: 768px) {
-        font-size: 1.1rem;
-        padding: 0.65rem 0.85rem;
-        max-width: 90%;
-    }
-
-    /* Desktop and larger screens (769px and above) */
-    @media (min-width: 769px) {
-        font-size: 1.3rem;
-        padding: 0.75rem 1.25rem;
-    }
-}
 
 // end Dashboard container styles
-// Buttons styles
 
-.btn-create {
-    @include button(rgb(32, 19, 206), white);
-}
-.btn-edit {
-    @include button(rgb(19, 206, 32), white);
-}
-.btn-delete {
-    @include button(rgb(206, 19, 19), white);
-}
-.btn-update {
-    @include button(rgb(19, 206, 32), white);
-}
-.btn-show {
-    @include button(rgb(33, 33, 36), white);
-}
-.btn-cancel {
-    @include button(rgb(206, 19, 19), white);
-}
 // end Buttons styles
 // Sidebar styles
 .sidebar {
@@ -198,39 +97,7 @@
 
 // end Sidebar styles
 
-// Dashboard styles elements
 
-table {
-    background-color: #dddbdb;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-
-    tr {
-        td {
-            border: 1px solid black;
-            padding: 0.5rem;
-        }
-
-        th {
-            border: 1px solid black;
-            padding: 0.5rem;
-            font-size: 1rem;
-            text-wrap: wrap;
-        }
-    }
-
-    @media (max-width: 768px) {
-        tr {
-            td {
-                border: 1px solid black;
-                text-overflow: ellipsis;
-            }
-
-            th {
-                border: 1px solid black;
-            }
-        }
-    }
-}
 
 .dashboard-paragraph {
     width: fit-content;
