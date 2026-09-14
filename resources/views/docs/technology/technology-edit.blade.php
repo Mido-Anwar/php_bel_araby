@@ -29,7 +29,6 @@
                 <!-- Form Body -->
                 <form action="{{ route('technology.update', $technology->id) }}" method="POST" class="p-6 sm:p-8 space-y-6">
                     @csrf
-                    @method('PUT')
 
                     <!-- Field: Name -->
                     <div class="space-y-2">

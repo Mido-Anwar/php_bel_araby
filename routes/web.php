@@ -115,6 +115,8 @@ Route::prefix('concept')->controller(ConceptController::class)->group(function (
  */
 Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('users.index');
+    Route::get('/create', 'create')->name('user.create');
+    Route::post('/store', 'store')->name('user.store');
     Route::get('/{user}/edit', 'edit')->name('user.edit');
     Route::post('/{user}/update', 'update')->name('user.update');
     Route::delete('/{user}/delete', 'destroy')->name('user.destroy');

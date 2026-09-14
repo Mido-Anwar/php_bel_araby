@@ -8,21 +8,13 @@ use App\Models\Concept;
 use App\Models\Section;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-
+use Illuminate\Support\Str;
 class ConceptController extends Controller
 {
     /**
      * Display a listing of the concepts.
      */
-    public function index(): View
-    {
-        $concepts = Concept::select('id', 'title', 'slug', 'type', 'section_id')
-            ->with('section:id,title,technology_id', 'section.technology:id,name')
-            ->latest()
-            ->get();
-
-        return view('docs.technology.section.concept.concept-index', compact('concepts'));
-    }
+    public function index() {}
 
     /**
      * Show the form for creating a new concept for a specific section.
@@ -43,7 +35,7 @@ class ConceptController extends Controller
             $validated['syntax'] = null;
             $validated['return_type'] = null;
         }
-
+        $validated['slug'] = Str::slug($request->title);
         Concept::create($validated);
 
         return redirect()

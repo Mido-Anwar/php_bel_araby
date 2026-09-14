@@ -23,7 +23,8 @@ class UpdateConceptRequest extends FormRequest
      */
     public function rules(): array
     {
-        $conceptId = $this->route('concept')->id;
+        $concept = $this->route('concept');
+        $conceptId = is_object($concept) ? $concept->id : $concept;
 
         return [
             'section_id'  => 'required|exists:sections,id',

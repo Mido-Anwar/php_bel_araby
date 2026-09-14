@@ -17,14 +17,9 @@ class SectionController extends Controller
      *
      * @return View
      */
-    public function index(): View
+    public function index()
     {
-        $sections = Section::select('id', 'title', 'slug', 'technology_id')
-            ->with('technology:id,name')
-            ->latest()
-            ->get();
 
-        return view('docs.technology.section.section-index', compact('sections'));
     }
 
     /**

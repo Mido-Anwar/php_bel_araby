@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+
 class StoreConceptRequest extends FormRequest
 {
     /**
@@ -27,8 +28,8 @@ class StoreConceptRequest extends FormRequest
             'title'       => 'required|string|max:255|unique:concepts,title',
             'description' => 'required|string',
             'type'        => 'required|in:concept,function',
-            'syntax'      => 'required_if:type,function|nullable|string',
-            'return_type' => 'required_if:type,function|nullable|string|max:255',
+            'syntax'      => 'nullable|string',
+            'return_type' => 'nullable|string|max:255',
         ];
     }
 
