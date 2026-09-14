@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique(); // اسم التكنولوجيا
-            $table->text('description')->nullable(); // وصف اختياري
+
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
+
             $table->timestamps();
+
+            $table->index('slug');
         });
     }
 

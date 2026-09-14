@@ -23,7 +23,7 @@ class Section extends Model
      *
      * @var array
      */
-    protected $fillable = ['title',  'content', 'technology_id'];
+    protected $fillable = ['title', 'slug','description' , 'technology_id'];
     // Enable automatic cache clearing after database transactions
     protected $afterCommit = true;
 

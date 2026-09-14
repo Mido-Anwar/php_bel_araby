@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class UpdateSectionRequest extends FormRequest
 {
@@ -15,16 +18,36 @@ class UpdateSectionRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        if ($this->filled('title') && ! $this->filled('slug')) {
+            $this->merge([
+                'slug' => Str::slug($this->input('title')),
+            ]);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
+        $sectionId = $this->route('section')?->id ?? $this->route('section');
+
         return [
+            'technology_id' => ['required', 'integer', 'exists:technologies,id'],
             'title' => ['required', 'string', 'max:255'],
-            'content' => ['nullable', 'string'],
-            'technology_id' => ['required', 'exists:technologies,id'],
+            'description' => ['nullable', 'string'],
+            'slug' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('sections', 'slug')->ignore($sectionId),
+            ],
         ];
     }
 }

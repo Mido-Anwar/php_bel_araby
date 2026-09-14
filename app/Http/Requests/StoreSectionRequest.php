@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class StoreSectionRequest extends FormRequest
 {
@@ -15,16 +17,29 @@ class StoreSectionRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        if ($this->filled('title') && ! $this->filled('slug')) {
+            $this->merge([
+                'slug' => Str::slug($this->input('title')),
+            ]);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
+            'technology_id' => ['required', 'integer', 'exists:technologies,id'],
             'title' => ['required', 'string', 'max:255'],
-            'content' => ['nullable', 'string'],
-            'technology_id' => ['required', 'exists:technologies,id'],
+            'description' => ['nullable', 'string'],
+            'slug' => ['required', 'string', 'max:255', 'unique:sections,slug'],
         ];
     }
 }

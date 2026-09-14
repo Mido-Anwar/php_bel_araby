@@ -29,7 +29,6 @@ class DatabaseSeeder extends Seeder
             TechnologySeeder::class,
             SectionSeeder::class,
             ConceptSeeder::class,
-            BuiltInFunctionSeeder::class,
         ]);
     }
 }

@@ -13,12 +13,18 @@ return new class extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); // عنوان السيكشن
-            $table->text('content')->nullable(); // محتوى اختياري
+
             $table->foreignId('technology_id')
                 ->constrained()
                 ->onDelete('cascade');
+
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
+
             $table->timestamps();
+
+            $table->index(['technology_id', 'slug']);
         });
     }
 

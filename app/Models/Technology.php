@@ -25,7 +25,7 @@ class Technology extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'slug', 'description'];
     // Enable automatic cache clearing after database transactions
     protected $afterCommit = true;
 
@@ -62,13 +62,5 @@ class Technology extends Model
         return $this->hasMany(Section::class);
     }
 
-    /**
-     * Get the built-in functions associated with the technology.
-     *
-     * @return HasMany
-     */
-    public function builtinFunctions(): HasMany
-    {
-        return $this->hasMany(BuiltInFunction::class);
-    }
+
 }

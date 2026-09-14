@@ -7,8 +7,8 @@ use App\Http\Requests\UpdateSectionRequest;
 use App\Models\Section;
 use App\Models\Technology;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class SectionController extends Controller
 {
@@ -19,27 +19,25 @@ class SectionController extends Controller
      */
     public function index(): View
     {
-        $sections = Cache::remember('sections.all', 3600, function () {
-            return Section::select('id', 'title', 'technology_id')
-                ->with('technology:id,name')
-                ->latest()
-                ->get();
-        });
+        $sections = Section::select('id', 'title', 'slug', 'technology_id')
+            ->with('technology:id,name')
+            ->latest()
+            ->get();
 
         return view('docs.technology.section.section-index', compact('sections'));
     }
 
     /**
-     * Show the form for creating a new section.
+     * Show the form for creating a new section for a specific technology.
      *
      * @param Technology $technology
      * @return View
      */
-    public function create(Technology $technology): View
+
+    public function create(Technology $technology)
     {
         return view('docs.technology.section.section-create', compact('technology'));
     }
-
     /**
      * Store a newly created section in storage.
      *
@@ -57,22 +55,19 @@ class SectionController extends Controller
     }
 
     /**
-     * Display the specified section with its concepts.
+     * Display the specified section with its related concepts.
      *
      * @param Section $section
      * @return View
      */
     public function show(Section $section): View
     {
-        // Cache the specific section with its related concepts
-        $sectionData = Cache::remember("sections.show.{$section->id}", 3600, function () use ($section) {
-            return $section->load([
-                'technology:id,name',
-                'concepts:id,title,section_id',
-            ]);
-        });
+        $section->load([
+            'technology:id,name',
+            'concepts:id,title,slug,type,section_id',
+        ]);
 
-        return view('docs.technology.section.section-show', ['section' => $sectionData]);
+        return view('docs.technology.section.section-show', ['section' => $section]);
     }
 
     /**

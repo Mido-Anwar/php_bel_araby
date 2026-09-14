@@ -5,58 +5,73 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
-/**
- * Concept model representing concepts within a section.
- * Each concept belongs to a section.
- */
+use Illuminate\Support\Collection;
+
 class Concept extends Model
 {
-    /** @use HasFactory<\Database\Factories\ConceptFactory> */
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['title', 'description', 'section_id'];
-   // Enable automatic cache clearing after database transactions
-    protected $afterCommit = true;
+    protected $fillable = [
+        'section_id',
+        'title',
+        'slug',
+        'description',
+        'type',
+        'syntax',
+        'return_type',
+    ];
 
-// Cache invalidation for concepts when created, updated, or deleted
-    protected static function booted(): void
+    protected static function boot(): void
     {
+        parent::boot();
+
         static::saved(function (Concept $concept) {
-            static::clearConceptCache($concept);
+            $concept->clearCache();
         });
 
         static::deleted(function (Concept $concept) {
-            static::clearConceptCache($concept);
+            $concept->clearCache();
         });
     }
 
-    /**
-     * Clear all related cache keys for this concept.
-     */
-    protected static function clearConceptCache(Concept $concept): void
-    {
-        // Clear global concepts list if cached
-        Cache::forget('concepts.all');
-
-        // Clear parent section cache so updated concepts appear immediately on section page
-        Cache::forget("sections.show.{$concept->section_id}");
-
-        // Clear individual concept cache if requested directly
-        Cache::forget("concepts.show.{$concept->id}");
-    }
-    /**
-     * Get the section that owns the concept.
-     *
-     * @return BelongsTo
-     */
     public function section(): BelongsTo
     {
         return $this->belongsTo(Section::class);
+    }
+
+    public function scopeOnlyConcepts(Builder $query): Builder
+    {
+        return $query->where('type', 'concept');
+    }
+
+    public function scopeOnlyFunctions(Builder $query): Builder
+    {
+        return $query->where('type', 'function');
+    }
+
+    public static function getCachedBySection(int $sectionId, ?string $type = null): Collection
+    {
+        $cacheKey = $type
+            ? "section_{$sectionId}_concepts_{$type}"
+            : "section_{$sectionId}_concepts_all";
+
+        return Cache::rememberForever($cacheKey, function () use ($sectionId, $type) {
+            $query = static::where('section_id', $sectionId);
+
+            if ($type && in_array($type, ['concept', 'function'])) {
+                $query->where('type', $type);
+            }
+
+            return $query->get();
+        });
+    }
+
+    public function clearCache(): void
+    {
+        Cache::forget("section_{$this->section_id}_concepts_all");
+        Cache::forget("section_{$this->section_id}_concepts_concept");
+        Cache::forget("section_{$this->section_id}_concepts_function");
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class UpdateConceptRequest extends FormRequest
 {
@@ -21,10 +23,24 @@ class UpdateConceptRequest extends FormRequest
      */
     public function rules(): array
     {
+        $conceptId = $this->route('concept')->id;
+
         return [
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'section_id' => 'required|exists:sections,id',
+            'section_id'  => 'required|exists:sections,id',
+            'title'       => ['required', 'string', 'max:255', Rule::unique('concepts', 'title')->ignore($conceptId)],
+            'description' => 'required|string',
+            'type'        => 'required|in:concept,function',
+            'syntax'      => 'required_if:type,function|nullable|string',
+            'return_type' => 'required_if:type,function|nullable|string|max:255',
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        if ($this->has('title')) {
+            $this->merge([
+                'slug' => Str::slug($this->title),
+            ]);
+        }
     }
 }

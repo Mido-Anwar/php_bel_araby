@@ -2,7 +2,9 @@
     <x-slot name="header">
         <x-dashboard-head :text="'Technologies Overview'" />
     </x-slot>
-
+    <x-message :message="session('success-store-technology')" :color="'green'" />
+    <x-message :message="session('success-update-technology')" :color="'blue'" />
+    <x-message :message="session('success-delete-technology')" :color="'red'" />
     <x-dashboard-container>
 
         @if ($technologies->isEmpty())
@@ -32,9 +34,6 @@
                 </div>
             @endforeach
         @endif
-        <x-message :message="session('success-store-technology')" :color="'green'" />
-        <x-message :message="session('success-update-technology')" :color="'blue'" />
-        <x-message :message="session('success-delete-technology')" :color="'red'" />
-    </x-dashboard-container>
 
+    </x-dashboard-container>
 </x-app-layout>

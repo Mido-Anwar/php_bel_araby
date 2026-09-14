@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Support\Str;
 class StoreConceptRequest extends FormRequest
 {
     /**
@@ -19,12 +19,25 @@ class StoreConceptRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'section_id' => 'required|exists:sections,id',
+            'section_id'  => 'required|exists:sections,id',
+            'title'       => 'required|string|max:255|unique:concepts,title',
+            'description' => 'required|string',
+            'type'        => 'required|in:concept,function',
+            'syntax'      => 'required_if:type,function|nullable|string',
+            'return_type' => 'required_if:type,function|nullable|string|max:255',
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        if ($this->has('title')) {
+            $this->merge([
+                'slug' => Str::slug($this->title),
+            ]);
+        }
     }
 }

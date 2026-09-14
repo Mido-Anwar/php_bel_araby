@@ -18,7 +18,7 @@
             <a href="{{ route('section.edit', $section->id) }}" class="btn-edit">
                 ✎ Edit Section
             </a>
-            <x-dashboard-paragraph :text="$section->content" />
+            <x-dashboard-paragraph :text="$section->description" />
         </x-slot>
     </x-dashboard-container>
 

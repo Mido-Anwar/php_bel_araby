@@ -13,12 +13,23 @@ return new class extends Migration
     {
         Schema::create('concepts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->longText('description')->nullable();
+
             $table->foreignId('section_id')
                 ->constrained()
-                ->onDelete('cascade'); //Section id
+                ->onDelete('cascade');
+
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->longText('description');
+
+            $table->enum('type', ['concept', 'function'])->default('concept');
+
+            $table->text('syntax')->nullable();
+            $table->string('return_type')->nullable();
+
             $table->timestamps();
+
+            $table->index(['section_id', 'type']);
         });
     }
 

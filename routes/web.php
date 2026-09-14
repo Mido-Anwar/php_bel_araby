@@ -107,19 +107,6 @@ Route::prefix('concept')->controller(ConceptController::class)->group(function (
     Route::delete('/delete/{concept}', 'destroy')->name('concept.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
 
-/**
- * Built-in Function Management Routes
- * Handles CRUD operations for Built-in Functions within a Technology.
- */
-Route::prefix('builtinfunction')->controller(BuiltInFunctionController::class)->group(function () {
-    // param technology_id is required for create new built-in function follow technology
-    Route::get('/create/{technology}', 'create')->name('builtinfunction.create');
-    Route::post('/store', 'store')->name('builtinfunction.store');
-    Route::get('/show/{builtInFunction}', 'show')->name('builtinfunction.show');
-    Route::get('/edit/{builtInFunction}', 'edit')->name('builtinfunction.edit');
-    Route::post('/update/{builtInFunction}', 'update')->name('builtinfunction.update');
-    Route::delete('/delete/{builtInFunction}', 'destroy')->name('builtinfunction.destroy');
-})->middleware(['auth', 'verified', 'role:super-admin']);
 
 /**
  * User Management Routes
