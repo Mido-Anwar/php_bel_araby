@@ -1,11 +1,4 @@
-@use "variables" as *;
-@use "reusableElements" as *;
 
-@use "app_style/main_parts/header_style";
-@use "app_style/main_parts/main_content";
-@use "app_style/main_parts/footer_style";
-
-@use "app_style/blog/blog";
 
 * {
     box-sizing: border-box;
@@ -13,70 +6,5 @@
     padding: 0;
 }
 
-// Main container styles for main page not dashboard
-.mainContainer {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #dddbdb;
-}
 
-.doc-view {
-    width: 100%;
-    padding: 1rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
-    display: flex;
-    gap: 2%;
-    .content {
-        width: 70%;
-    }
-    .sidebar {
-        @include aside;
-        width: 28%;
-        font-weight: bold;
-        .section-body {
-            display: none;
-            padding-left: 15px;
-        }
-
-        .section-body.show {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding: 5px;
-            background-color: $primary-color;
-        }
-
-        .section-btn {
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            color: black;
-            background-color: #e0e0e0;
-
-            padding: 8px;
-            border: 1px solid #605f5f;
-        }
-    }
-}
-// docs page list
-
-
-// end Dashboard container styles and elements inside it
-
-
-// end Dashboard container styles
-
-// end Buttons styles
-// Sidebar styles
-.sidebar {
-    @include aside;
-    color: #dddbdb;
-}
 

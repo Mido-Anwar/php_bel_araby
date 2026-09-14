@@ -12,18 +12,18 @@
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/scss/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
     @else
-    @livewireStyles
+        @livewireStyles
         <style>
         </style>
     @endif
 </head>
 
 <body class="">
-    <div class="mainContainer">
+    <div class="">
         <x-master.header />
 
 
-        <main class="maincontent" dir="rtl" lang="ar EG">
+        <main class="min-h-screen bg-slate-950 text-[#f3ebeb] antialiased" lang="ar" dir="rtl">
             {{ $slot }}
         </main>
 
