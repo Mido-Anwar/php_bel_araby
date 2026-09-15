@@ -11,17 +11,16 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Role;
 
 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
 
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
+    Route::get('logintowhiscrashowapp', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('logintowhiscrashowapp', [AuthenticatedSessionController::class, 'store']);
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');

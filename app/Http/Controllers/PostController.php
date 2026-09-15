@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Helpers\ImageHelper;
 
 class PostController extends Controller
 {
@@ -179,7 +180,7 @@ class PostController extends Controller
     }
 
     /**
-     * Helper method to handle post image upload and relation creation.
+     * Helper method to handle post image upload, WebP conversion, and SEO optimization.
      *
      * @param Request $request
      * @param Post $post
@@ -188,13 +189,26 @@ class PostController extends Controller
     private function handleImageUpload(Request $request, Post $post): void
     {
         $file = $request->file('image');
-        $path = $file->store('posts', 'public');
 
+        // Convert and process image using native GD Helper
+        $uploadData = ImageHelper::convertAndStoreToWebp(
+            file: $file,
+            folder: 'posts',
+            seoName: $post->title
+        );
+
+        // Delete existing media record and physical file if updating
+        if ($post->image) {
+            $post->image->delete();
+        }
+
+        // Associate new optimized media record with the post
         $post->image()->create([
-            'file_path' => $path,
+            'file_path' => $uploadData['file_path'],
             'file_name' => $file->getClientOriginalName(),
-            'file_type' => $file->getClientMimeType(),
-            'file_size' => $file->getSize(),
+            'alt_text'  => $post->title,
+            'mime_type' => $uploadData['mime_type'],
+            'file_size' => $uploadData['file_size'],
         ]);
     }
 

@@ -74,17 +74,25 @@
                                 <td class="px-6 py-4">
                                     <div
                                         class="w-12 h-12 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-700/50 shrink-0">
-                                        @if ($post->image && ($post->image->url ?? $post->image->path))
-                                            <img src="{{ $post->image->url ?? asset('storage/' . $post->image->path) }}"
-                                                alt="{{ $post->title }}" class="w-full h-full object-cover">
+                                        @if ($post->image)
+                                            <img src="{{ asset('storage/' . $post->image->file_path) }}"
+                                                alt="{{ $post->image->alt_text }}" loading="lazy"
+                                                class="w-full h-auto rounded-lg object-cover">
                                         @else
-                                            <div class="w-full h-full flex items-center justify-center text-gray-400">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
+                                            {{-- Placeholder SVG مدمج --}}
+                                            <div
+                                                class="w-full h-52 flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 rounded-xl border border-gray-200/50 dark:border-gray-700/50">
+                                                <svg class="w-10 h-10 mb-3 text-emerald-600 dark:text-emerald-400 opacity-80"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="1.5"
                                                         d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M4 8h16M4 8a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V8z" />
                                                 </svg>
+                                                <!-- عرض عنوان المقال هنا كـ Cover افتراضي -->
+                                                <span
+                                                    class="text-sm font-bold text-gray-700 dark:text-gray-300 line-clamp-2 leading-tight">
+                                                    {{ $post->title }}
+                                                </span>
                                             </div>
                                         @endif
                                     </div>
@@ -178,33 +186,34 @@
                                         @endif
                                         <!-- Edit -->
                                         @if (Auth::user()->hasRole('super-admin') || Auth::id() === $post->user_id)
-                                        <a href="{{ route('post.edit', $post) }}"
-                                            class="p-2 rounded-lg text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/50 transition-colors"
-                                            title="تعديل">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                            </svg>
-                                        </a>
-
-                                        <!-- Delete -->
-                                        <form action="{{ route('post.destroy', $post) }}" method="POST"
-                                            onsubmit="return confirm('هل أنت تأكد من حذف هذا المنشور؟');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="p-2 rounded-lg text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/50 transition-colors"
-                                                title="حذف">
+                                            <a href="{{ route('post.edit', $post) }}"
+                                                class="p-2 rounded-lg text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/50 transition-colors"
+                                                title="تعديل">
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                 </svg>
-                                            </button>
-                                        </form>
-                                         @endif
+                                            </a>
+
+                                            <!-- Delete -->
+                                            <form action="{{ route('post.destroy', $post) }}" method="POST"
+                                                onsubmit="return confirm('هل أنت تأكد من حذف هذا المنشور؟');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="p-2 rounded-lg text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/50 transition-colors"
+                                                    title="حذف">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

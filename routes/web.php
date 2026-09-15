@@ -20,7 +20,8 @@ Route::get('/', function () {
 
 
 Route::get('/about', function () {
-    return view('about');
+    $title = "about us";
+    return view('about', ['title' => $title]);
 })->name('about');
 /**
  * Blog Routes
