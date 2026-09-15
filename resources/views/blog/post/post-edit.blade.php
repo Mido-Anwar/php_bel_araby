@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :title="$title">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Edit Post') }}
@@ -34,7 +34,7 @@
                 <form action="{{ route('post.update', $post->id) }}" method="POST" enctype="multipart/form-data"
                     class="p-6 sm:p-8 space-y-6">
                     @csrf
-                   
+
 
                     <!-- Field: Post Title -->
                     <div class="space-y-2">

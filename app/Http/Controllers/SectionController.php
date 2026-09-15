@@ -31,7 +31,8 @@ class SectionController extends Controller
 
     public function create(Technology $technology)
     {
-        return view('docs.technology.section.section-create', compact('technology'));
+        $title = 'إضافة قسم جديد';
+        return view('docs.technology.section.section-create', compact('technology', 'title'));
     }
     /**
      * Store a newly created section in storage.
@@ -73,7 +74,8 @@ class SectionController extends Controller
      */
     public function edit(Section $section): View
     {
-        return view('docs.technology.section.section-edit', compact('section'));
+        $title = 'تعديل القسم';
+        return view('docs.technology.section.section-edit', compact('section', 'title'));
     }
 
     /**

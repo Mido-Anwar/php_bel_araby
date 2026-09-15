@@ -21,7 +21,8 @@ class ConceptController extends Controller
      */
     public function create(Section $section): View
     {
-        return view('docs.technology.section.concept.concept-create', compact('section'));
+        $title = 'إضافة مفهوم جديد';
+        return view('docs.technology.section.concept.concept-create', compact('section', 'title'));
     }
 
     /**
@@ -61,7 +62,8 @@ class ConceptController extends Controller
      */
     public function edit(Concept $concept): View
     {
-        return view('docs.technology.section.concept.concept-edit', compact('concept'));
+        $title = 'تعديل المفهوم';
+        return view('docs.technology.section.concept.concept-edit', compact('concept' , 'title'));
     }
 
     /**

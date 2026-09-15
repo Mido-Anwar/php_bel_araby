@@ -23,18 +23,20 @@ class UserController extends Controller
      */
     public function index()
     {
+        $title = 'المستخدمون والصلاحيات';
         $users = User::select('id', 'name', 'email')->with('roles')->get();
         $roles = Role::select('id', 'name')->get();
         $permissions = Permission::select('id', 'name')->get();
-        return view('user.index', ['users' => $users, 'roles' => $roles, 'permissions' => $permissions]);
+        return view('user.index', ['users' => $users, 'roles' => $roles, 'permissions' => $permissions , 'title' => $title]);
     }
   /**
      * Display the registration view.
      */
     public function create(): View
     {
+        $title = 'إضافة مستخدم جديد';
         $roles = Role::select('id', 'name')->get();
-        return view('user.user-create', ['roles' => $roles]);
+        return view('user.user-create', ['roles' => $roles , 'title' => $title]);
     }
 
 
@@ -78,8 +80,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $title = 'تعديل المستخدم للادمن';
         $roles = Role::select('id', 'name')->get();
-        return view('user.user-edit', ['user' => $user, 'roles' => $roles]);
+        return view('user.user-edit', ['user' => $user, 'roles' => $roles , 'title' => $title]);
     }
 
     /**

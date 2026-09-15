@@ -15,11 +15,12 @@ class TechnologyController extends Controller
      */
     public function index(): View
     {
+        $title = 'التقنيات المتاحة';
         $technologies = Technology::select('id', 'name', 'slug')
             ->latest()
             ->get();
 
-        return view('docs.technology.technology-index', compact('technologies'));
+        return view('docs.technology.technology-index', compact('technologies', 'title'));
     }
 
     /**
@@ -47,12 +48,13 @@ class TechnologyController extends Controller
      */
     public function show(Technology $technology): View
     {
+        $title = 'تعديل التقنية و اضافة اقسام';
         $technology->load([
             'sections:id,title,technology_id',
             'sections.concepts:id,title,slug,type,section_id',
         ]);
 
-        return view('docs.technology.technology-show', ['technology' => $technology]);
+        return view('docs.technology.technology-show', ['technology' => $technology, 'title' => $title]);
     }
 
     /**

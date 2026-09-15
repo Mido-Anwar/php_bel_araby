@@ -1,4 +1,4 @@
-<app-layout>
+<app-layout :title="$title">
     <x-slot name="header">
         <x-dashboard-head :text="$post->title" />
     </x-slot>

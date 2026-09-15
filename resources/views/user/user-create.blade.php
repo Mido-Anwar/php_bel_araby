@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout   :title="$title">
     <x-slot name="header">
         <div class="flex items-center gap-3">
             <div class="p-2.5 bg-blue-500/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-xl">

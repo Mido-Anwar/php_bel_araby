@@ -1,4 +1,6 @@
+
 <x-master-layout>
+
     <div dir="rtl"
         class="relative overflow-hidden py-16 lg:py-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center min-h-[calc(100vh-80px)]">
 

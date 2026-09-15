@@ -14,12 +14,13 @@ class BlogController extends Controller
      */
     public function index()
     {
+        $title = 'المدونة';
         $posts = Post::with('image')
             ->where('is_published', true)
             ->latest()
             ->get();
 
-        return view('blog.main', ['posts' => $posts]);
+        return view('blog.main', ['posts' => $posts, 'title' => $title]);
     }
 
     /**
@@ -30,8 +31,9 @@ class BlogController extends Controller
      */
     public function show(Post $post)
     {
+        $title = $post->title;
         $post->load('image');
 
-        return view('blog.show-post', ['post' => $post]);
+        return view('blog.show-post', ['post' => $post , 'title' => $title]);
     }
 }

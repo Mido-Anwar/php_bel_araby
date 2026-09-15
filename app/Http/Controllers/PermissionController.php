@@ -24,7 +24,8 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('user.roleAndPermissionCreate');
+        $title = 'إضافة صلاحية جديدة';
+        return view('user.roleAndPermissionCreate', compact('title'));
     }
 
     /**
@@ -63,8 +64,8 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-
-        return view('user.roleAndPermissionEdit', compact('permission'));
+        $title = 'تعديل الصلاحية';
+        return view('user.roleAndPermissionEdit', compact('permission', 'title'));
     }
 
     /**

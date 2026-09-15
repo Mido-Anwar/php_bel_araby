@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :title="$title">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Edit Concept') }}
@@ -33,7 +33,7 @@
                 <form action="{{ route('concept.update', $concept->id) }}" method="POST" class="p-6 sm:p-8 space-y-6">
                     @csrf
 
-                    <input type="hidden" name="section_id" value="{{ $concept->section_id }}"> 
+                    <input type="hidden" name="section_id" value="{{ $concept->section_id }}">
                     <!-- Field: Type Selection -->
                     <div class="space-y-2">
                         <x-input-label for="type" :value="'Concept Type'"

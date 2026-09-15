@@ -1,4 +1,4 @@
-<x-master-layout>
+<x-master-layout :title="$title">
     <div dir="rtl"
         class="relative overflow-hidden py-16 lg:py-24 px-4 sm:px-6 lg:px-8 flex items-center justify-center min-h-[calc(100vh-80px)]">
 

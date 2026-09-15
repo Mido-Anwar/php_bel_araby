@@ -22,8 +22,9 @@ class RoleController extends Controller
      */
     public function create()
     {
+        $title = 'إضافة دور جديد';
         $permissions = Permission::select('id', 'name')->get();
-        return view('user.roleAndPermissionCreate', compact('permissions'));
+        return view('user.roleAndPermissionCreate', compact('permissions'   , 'title'));
     }
 
     /**
@@ -52,8 +53,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        $title = 'تعديل الدور';
         $permissions = Permission::select('id', 'name')->get();
-        return view('user.roleAndPermissionEdit', compact('role', 'permissions'));
+        return view('user.roleAndPermissionEdit', compact('role', 'permissions', 'title'));
     }
 
     /**

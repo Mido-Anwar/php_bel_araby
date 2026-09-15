@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :title="$title">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Create New Concept') }}
@@ -44,8 +44,10 @@
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
                         <select id="type" name="type"
                             class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm">
-                            <option value="concept" {{ old('type') == 'concept' ? 'selected' : '' }}>Concept (مفهوم عام / شرح)</option>
-                            <option value="function" {{ old('type') == 'function' ? 'selected' : '' }}>Built-in Function (دالة جاهزة)</option>
+                            <option value="concept" {{ old('type') == 'concept' ? 'selected' : '' }}>Concept (مفهوم عام
+                                / شرح)</option>
+                            <option value="function" {{ old('type') == 'function' ? 'selected' : '' }}>Built-in Function
+                                (دالة جاهزة)</option>
                         </select>
                         <x-input-error :messages="$errors->get('type')" class="mt-1 text-xs" />
                     </div>

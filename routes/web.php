@@ -45,8 +45,9 @@ Route::prefix('/docs')->controller(LearnReferenceController::class)->group(funct
 
 // dashboard & Authenticated Routes control panel of app - only for logged in users
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified','role:super-admin|writer' ])->name('dashboard');
+    $title = 'لوحة التحكم';
+    return view('dashboard', compact('title'));
+})->middleware(['auth', 'verified', 'role:super-admin|writer'])->name('dashboard');
 
 /**
  * Post Management Routes

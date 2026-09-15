@@ -19,7 +19,7 @@ class PostController extends Controller
      */
     public function index(): View
     {
-
+        $title = 'ادارة المنشورات';
 
         $query = Post::select('id', 'title', 'user_id', 'is_published', 'created_at')
             ->with(['image', 'user:id,name'])
@@ -27,7 +27,7 @@ class PostController extends Controller
 
         $posts = $query->paginate(10);
 
-        return view('blog.post.index', compact('posts'));
+        return view('blog.post.index', compact('posts', 'title'));
     }
 
     /**
@@ -37,7 +37,8 @@ class PostController extends Controller
      */
     public function create(): View
     {
-        return view('blog.post.post-create');
+        $title = 'إضافة منشور جديد';
+        return view('blog.post.post-create', compact('title'));
     }
 
     /**
@@ -88,8 +89,8 @@ class PostController extends Controller
     public function edit(Post $post): View
     {
         $this->authorizeOwnerOrAdmin($post);
-
-        return view('blog.post.post-edit', compact('post'));
+        $title = 'تعديل المنشور';
+        return view('blog.post.post-edit', compact('post', 'title'));
     }
 
     /**
