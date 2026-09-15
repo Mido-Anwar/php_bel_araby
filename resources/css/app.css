@@ -5,18 +5,4 @@
 
 
 
-[x-cloak] { display: none; }
-.section-body {
-    display: none;
-    padding-left: 15px;
-}
 
-.section-body.show {
-    display: block;
-}
-
-.section-btn {
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-}

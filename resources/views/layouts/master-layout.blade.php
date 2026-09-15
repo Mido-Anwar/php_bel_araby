@@ -2,11 +2,35 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" lang="ar">
 
 <head>
+<!-- الأساسيات لمحركات البحث -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Master PHP in Arabic with easy-to-follow tutorials, real-world examples,
-           and practical tips — covering everything from beginner basics to advanced techniques.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- العنوان والوصف (SEO) -->
+    <title>{{ config('app.name', 'اسم موقعك') }} - الصفحة الرئيسية</title>
+    <meta name="description" content="اكتشف أحدث المقالات، التقنيات، والأدوات البرمجية المطورة خصيصاً لتسهيل تجربتك ومتابعة أجدد التقنيات البرمجية." />
+    <meta name="keywords" content="برمجة, تطوير الويب, لارافيل, تكنولوجيات, مقالات برمجية, Web Development, Laravel" />
+    <meta name="author" content="اسمك أو اسم الفريق" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook / LinkedIn (عند مشاركة الرابط) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="{{ config('app.name', 'اسم موقعك') }} - المنصة التقنية الحديثة">
+    <meta property="og:description" content="تابع أحدث التقنيات والمقالات البرمجية المتطورة المصممة بأحدث معايير الويب.">
+    <meta property="og:image" content="{{ asset('images/og-cover.jpg') }}"> <!-- ضع رابط صورة بارزة للموقع هنا -->
+    <meta property="og:locale" content="ar_AR">
+
+    <!-- Twitter Card (عند مشاركة الرابط على تويتر/X) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="{{ config('app.name', 'اسم موقعك') }} - المنصة التقنية الحديثة">
+    <meta name="twitter:description" content="تابع أحدث التقنيات والمقالات البرمجية المتطورة المصممة بأحدث معايير الويب.">
+    <meta name="twitter:image" content="{{ asset('images/og-cover.jpg') }}">
+
+    <!-- Canonical URL (لمنع محركات البحث من اعتبار المحتوى مكرراً) -->
+    <link rel="canonical" href="{{ url()->current() }}" />
     <title>{{ config('app.name') }}</title>
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
