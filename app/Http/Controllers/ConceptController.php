@@ -8,20 +8,16 @@ use App\Models\Concept;
 use App\Models\Section;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use Illuminate\Support\Str;
+
 class ConceptController extends Controller
 {
-    /**
-     * Display a listing of the concepts.
-     */
-    public function index() {}
-
     /**
      * Show the form for creating a new concept for a specific section.
      */
     public function create(Section $section): View
     {
         $title = 'إضافة مفهوم جديد';
+
         return view('docs.technology.section.concept.concept-create', compact('section', 'title'));
     }
 
@@ -32,15 +28,9 @@ class ConceptController extends Controller
     {
         $validated = $request->validated();
 
-        if (($validated['type'] ?? 'concept') === 'concept') {
-            $validated['syntax'] = null;
-            $validated['return_type'] = null;
-        }
-        $validated['slug'] = Str::slug($request->title);
         Concept::create($validated);
 
-        return redirect()
-            ->route('section.show', $validated['section_id'])
+        return to_route('section.show', $validated['section_id'])
             ->with('success-store-concept', 'Concept created successfully.');
     }
 
@@ -50,8 +40,8 @@ class ConceptController extends Controller
     public function show(Concept $concept): View
     {
         $concept->load([
-            'section:id,title,technology_id',
-            'section.technology:id,name',
+            'section:id,title,slug,technology_id',
+            'section.technology:id,name,slug',
         ]);
 
         return view('docs.technology.section.concept.concept-show', ['concept' => $concept]);
@@ -63,7 +53,8 @@ class ConceptController extends Controller
     public function edit(Concept $concept): View
     {
         $title = 'تعديل المفهوم';
-        return view('docs.technology.section.concept.concept-edit', compact('concept' , 'title'));
+
+        return view('docs.technology.section.concept.concept-edit', compact('concept', 'title'));
     }
 
     /**
@@ -73,15 +64,9 @@ class ConceptController extends Controller
     {
         $validated = $request->validated();
 
-        if (($validated['type'] ?? 'concept') === 'concept') {
-            $validated['syntax'] = null;
-            $validated['return_type'] = null;
-        }
-
         $concept->update($validated);
 
-        return redirect()
-            ->route('section.show', $concept->section_id)
+        return to_route('section.show', $concept->section_id)
             ->with('success-update-concept', 'Concept updated successfully.');
     }
 
@@ -91,10 +76,10 @@ class ConceptController extends Controller
     public function destroy(Concept $concept): RedirectResponse
     {
         $sectionId = $concept->section_id;
+
         $concept->delete();
 
-        return redirect()
-            ->route('section.show', $sectionId)
+        return to_route('section.show', $sectionId)
             ->with('success-delete-concept', 'Concept deleted successfully.');
     }
 }

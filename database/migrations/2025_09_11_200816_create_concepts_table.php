@@ -16,10 +16,10 @@ return new class extends Migration
 
             $table->foreignId('section_id')
                 ->constrained()
-                ->onDelete('cascade');
+                ->cascadeOnDelete();
 
             $table->string('title');
-            $table->string('slug')->unique();
+            $table->string('slug');
             $table->longText('description');
 
             $table->enum('type', ['concept', 'function'])->default('concept');
@@ -29,7 +29,9 @@ return new class extends Migration
 
             $table->timestamps();
 
+            $table->unique(['section_id', 'slug']);
             $table->index(['section_id', 'type']);
+              $table->softDeletes();
         });
     }
 

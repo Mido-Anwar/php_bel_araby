@@ -16,15 +16,16 @@ return new class extends Migration
 
             $table->foreignId('technology_id')
                 ->constrained()
-                ->onDelete('cascade');
+                ->cascadeOnDelete();
 
             $table->string('title');
-            $table->string('slug')->unique();
+            $table->string('slug');
             $table->text('description')->nullable();
 
             $table->timestamps();
 
-            $table->index(['technology_id', 'slug']);
+            $table->unique(['technology_id', 'slug']);
+              $table->softDeletes();
         });
     }
 

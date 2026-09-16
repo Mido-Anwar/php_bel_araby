@@ -27,7 +27,7 @@
                     <span>تعديل التقنية</span>
                 </a>
 
-                <a href="{{ route('section.create', $technology->id) }}"
+                <a href="{{ route('section.create', $technology) }}"
                    class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-xl shadow-md shadow-amber-500/20 active:scale-[0.98] transition-all duration-200">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -95,7 +95,7 @@
                         <h4 class="text-lg font-bold text-gray-900 dark:text-white">لا توجد أقسام مضافة بعد</h4>
                         <p class="text-sm text-gray-500 dark:text-gray-400">أنشئ أول قسم لهذه التقنية لتتمكن من تنظيم المفاهيم والأكواد بداخله.</p>
                     </div>
-                    <a href="{{ route('section.create', $technology->id) }}"
+                    <a href="{{ route('section.create', $technology) }}"
                        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-sm font-semibold shadow-lg shadow-amber-500/20 transition-all">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -122,7 +122,7 @@
                                     </span>
                                 </div>
 
-                                <a href="{{ route('section.show', $section->id) }}" class="block">
+                                <a href="{{ route('section.show', $section) }}" class="block">
                                     <h4 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
                                         {{ $section->title }}
                                     </h4>
@@ -137,7 +137,7 @@
 
                             <!-- Card Footer Actions -->
                             <div class="pt-4 border-t border-gray-100 dark:border-gray-700/50 flex items-center justify-between">
-                                <a href="{{ route('section.show', $section->id) }}"
+                                <a href="{{ route('section.show', $section) }}"
                                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-600 dark:text-amber-400 hover:underline">
                                     <span>تصفح القسم</span>
                                     <svg class="w-3.5 h-3.5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,7 +146,7 @@
                                 </a>
 
                                 <div class="flex items-center gap-1">
-                                    <a href="{{ route('section.edit', $section->id) }}"
+                                    <a href="{{ route('section.edit', $section) }}"
                                        class="p-1.5 text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
                                        title="تعديل القسم">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -156,7 +156,7 @@
                                     </a>
 
                                     @if (Auth::user()->hasRole('super-admin'))
-                                        <x-delete-form :action-url="route('section.destroy', $section->id)" />
+                                        <x-delete-form :action-url="route('section.destroy', $section)" />
                                     @endif
                                 </div>
                             </div>

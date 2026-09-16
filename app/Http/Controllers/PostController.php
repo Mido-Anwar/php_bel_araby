@@ -22,7 +22,7 @@ class PostController extends Controller
     {
         $title = 'ادارة المنشورات';
 
-        $query = Post::select('id', 'title', 'user_id', 'is_published', 'created_at')
+        $query = Post::select('id', 'title', 'user_id','slug', 'is_published', 'created_at')
             ->with(['image', 'user:id,name'])
             ->latest();
 

@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
-
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 /**
  * Section model representing sections within a technology.
  * Each section belongs to a technology and can have multiple concepts.
@@ -16,17 +17,34 @@ use Illuminate\Support\Facades\Cache;
 class Section extends Model
 {
     /** @use HasFactory<\Database\Factories\SectionFactory> */
-    use HasFactory;
+    use HasFactory,HasSlug,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['title', 'slug','description' , 'technology_id'];
+    protected $fillable = ['title', 'slug', 'description', 'technology_id'];
     // Enable automatic cache clearing after database transactions
     protected $afterCommit = true;
 
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug')
+            ->usingLanguage('ar')
+            ->doNotGenerateSlugsOnUpdate()
+            ->preventOverwrite();
+    }
+
+    /**
+     * استخدام الـ slug في الـ Route Model Binding
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
 
     // Cache invalidation for sections when created, updated, or deleted
@@ -39,6 +57,15 @@ class Section extends Model
         static::deleted(function (Section $section) {
             static::clearSectionCache($section);
         });
+        static::deleting(function (Section $section) {
+            if (! $section->isForceDeleting()) {
+                $section->concepts()->each(fn($concept) => $concept->delete());
+            }
+        });
+
+        static::restoring(function (Section $section) {
+            $section->concepts()->onlyTrashed()->restore();
+        });
     }
 
     /**
@@ -46,14 +73,13 @@ class Section extends Model
      */
     protected static function clearSectionCache(Section $section): void
     {
-        // Clear global sections list
         Cache::forget('sections.all');
-
-        // Clear individual section cache
         Cache::forget("sections.show.{$section->id}");
-
-        // Clear parent technology cache so updated sections reflect on the technology page
         Cache::forget("technologies.show.{$section->technology_id}");
+
+        foreach (['all', 'concept', 'function'] as $type) {
+            Cache::forget(Concept::cacheKey($section->id, $type));
+        }
     }
     /**
      * Get the technology that owns the section.

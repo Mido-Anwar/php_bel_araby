@@ -8,41 +8,26 @@ use App\Models\Section;
 use App\Models\Technology;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 
 class SectionController extends Controller
 {
     /**
-     * Display a listing of the sections.
-     *
-     * @return View
-     */
-    public function index()
-    {
-
-    }
-
-    /**
      * Show the form for creating a new section for a specific technology.
-     *
-     * @param Technology $technology
-     * @return View
      */
-
-    public function create(Technology $technology)
+    public function create(Technology $technology): View
     {
         $title = 'إضافة قسم جديد';
+
         return view('docs.technology.section.section-create', compact('technology', 'title'));
     }
+
     /**
      * Store a newly created section in storage.
-     *
-     * @param StoreSectionRequest $request
-     * @return RedirectResponse
      */
     public function store(StoreSectionRequest $request): RedirectResponse
     {
         $validated = $request->validated();
+
         Section::create($validated);
 
         return redirect()
@@ -52,42 +37,35 @@ class SectionController extends Controller
 
     /**
      * Display the specified section with its related concepts.
-     *
-     * @param Section $section
-     * @return View
      */
     public function show(Section $section): View
     {
+        $title = $section->title;
         $section->load([
-            'technology:id,name',
-            'concepts:id,title,slug,type,section_id',
+            'technology:id,name,slug',
+            'concepts:id,section_id,title,slug,type,description',
         ]);
 
-        return view('docs.technology.section.section-show', ['section' => $section]);
+        return view('docs.technology.section.section-show', compact('title','section'));
     }
 
     /**
      * Show the form for editing the specified section.
-     *
-     * @param Section $section
-     * @return View
      */
     public function edit(Section $section): View
     {
         $title = 'تعديل القسم';
+
         return view('docs.technology.section.section-edit', compact('section', 'title'));
     }
 
     /**
      * Update the specified section in storage.
-     *
-     * @param UpdateSectionRequest $request
-     * @param Section $section
-     * @return RedirectResponse
      */
     public function update(UpdateSectionRequest $request, Section $section): RedirectResponse
     {
         $validated = $request->validated();
+
         $section->update($validated);
 
         return redirect()
@@ -97,13 +75,11 @@ class SectionController extends Controller
 
     /**
      * Remove the specified section from storage.
-     *
-     * @param Section $section
-     * @return RedirectResponse
      */
     public function destroy(Section $section): RedirectResponse
     {
         $technologyId = $section->technology_id;
+
         $section->delete();
 
         return redirect()

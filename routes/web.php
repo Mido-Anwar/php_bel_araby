@@ -62,9 +62,7 @@ Route::prefix('posts')->controller(PostController::class)->group(function () {
     Route::get('/show/{post}', 'show')->name('post.show');
     Route::get('/edit/{post}', 'edit')->name('post.edit');
     Route::post('/update/{post}', 'update')->name('post.update');
-    // Publish a post to make it visible to the public
     Route::post('/publish/{post}', 'publish')->name('post.publish');
-    // Unpublish a post to hide it from the public
     Route::post('/unpublish/{post}', 'unpublish')->name('post.unpublish');
     Route::delete('/delete/{post}', 'destroy')->name('post.destroy');
 })->middleware(['auth', 'verified']);

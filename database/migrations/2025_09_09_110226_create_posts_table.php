@@ -6,28 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id(); // primary key
-            $table->string('title'); // عنوان البوست
-            $table->text('content'); // المحتوى
+            $table->id();
+
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->longText('content');
+
             $table->foreignId('user_id')
                 ->nullable()
                 ->constrained()
-                ->onDelete('cascade');            // ربط البوست باليوزر
-            $table->boolean('is_published')->default(false)->index(); // حالة النشر
-            $table->timestamps(); // created_at, updated_at
-            $table->softDeletes(); // deleted_at (soft delete)
+                ->nullOnDelete();
+
+            $table->boolean('is_published')->default(false);
+
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->index(['is_published', 'created_at']);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('posts');

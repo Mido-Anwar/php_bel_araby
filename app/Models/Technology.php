@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 /**
  * Technology model representing programming technologies or languages.
@@ -18,7 +21,7 @@ use Illuminate\Support\Facades\Cache;
 class Technology extends Model
 {
     /** @use HasFactory<\Database\Factories\TechnologyFactory> */
-    use HasFactory;
+    use HasFactory, SoftDeletes, HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +31,23 @@ class Technology extends Model
     protected $fillable = ['name', 'slug', 'description'];
     // Enable automatic cache clearing after database transactions
     protected $afterCommit = true;
+      public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug')
+            ->usingLanguage('ar')
+            ->doNotGenerateSlugsOnUpdate()
+            ->preventOverwrite();
+    }
+
+    /**
+     * استخدام الـ slug في الـ Route Model Binding
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     // Cache invalidation for technologies when created, updated, or deleted
     protected static function booted(): void
@@ -38,6 +58,17 @@ class Technology extends Model
 
         static::deleted(function (Technology $technology) {
             static::clearTechnologyCache($technology);
+        });
+        static::deleting(function (Technology $tech) {
+            if (! $tech->isForceDeleting()) {
+                // soft delete للأبناء
+                $tech->sections()->each(fn($section) => $section->delete());
+            }
+        });
+
+        static::restored(function (Technology $tech) {
+            $tech->sections()->onlyTrashed()->restore();
+            // + concepts
         });
     }
 
@@ -61,6 +92,4 @@ class Technology extends Model
     {
         return $this->hasMany(Section::class);
     }
-
-
 }

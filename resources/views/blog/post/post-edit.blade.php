@@ -31,7 +31,7 @@
                 </div>
 
                 <!-- Form Body -->
-                <form action="{{ route('post.update', $post->id) }}" method="POST" enctype="multipart/form-data"
+                <form action="{{ route('post.update', $post) }}" method="POST" enctype="multipart/form-data"
                     class="p-6 sm:p-8 space-y-6">
                     @csrf
 

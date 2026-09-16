@@ -30,7 +30,7 @@
                 </div>
 
                 <!-- Form Body -->
-                <form action="{{ route('concept.update', $concept->id) }}" method="POST" class="p-6 sm:p-8 space-y-6">
+                <form action="{{ route('concept.update', $concept) }}" method="POST" class="p-6 sm:p-8 space-y-6">
                     @csrf
 
                     <input type="hidden" name="section_id" value="{{ $concept->section_id }}">

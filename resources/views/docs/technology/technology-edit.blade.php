@@ -27,7 +27,7 @@
                 </div>
 
                 <!-- Form Body -->
-                <form action="{{ route('technology.update', $technology->id) }}" method="POST" class="p-6 sm:p-8 space-y-6">
+                <form action="{{ route('technology.update', $technology) }}" method="POST" class="p-6 sm:p-8 space-y-6">
                     @csrf
 
                     <!-- Field: Name -->

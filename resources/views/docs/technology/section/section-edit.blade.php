@@ -32,7 +32,7 @@
                 </div>
 
                 <!-- Form Body -->
-                <form action="{{ route('section.update', $section->id) }}" method="POST" class="p-6 sm:p-8 space-y-6">
+                <form action="{{ route('section.update', $section) }}" method="POST" class="p-6 sm:p-8 space-y-6">
                     @csrf
 
                     <!-- Hidden Foreign Key -->

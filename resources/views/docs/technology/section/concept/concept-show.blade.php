@@ -15,7 +15,7 @@
                     <span>رجوع للمؤشر</span>
                 </a>
 
-                <a href="{{ route('concept.edit', $concept->id) }}"
+                <a href="{{ route('concept.edit', $concept) }}"
                    class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 hover:bg-amber-100 dark:hover:bg-amber-900/50 rounded-lg border border-amber-200 dark:border-amber-800/50 transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
@@ -120,7 +120,7 @@
 
                         <!-- Management Actions -->
                         <div class="pt-2 space-y-2">
-                            <a href="{{ route('concept.edit', $concept->id) }}"
+                            <a href="{{ route('concept.edit', $concept) }}"
                                class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm shadow-lg shadow-amber-500/20 transition-all duration-200">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
@@ -129,7 +129,7 @@
                             </a>
 
                             <!-- Delete Option -->
-                            <form action="{{ route('concept.destroy', $concept->id) }}" method="POST" onsubmit="return confirm('هل أنت تأكد من رغبتك في حذف هذا المفهوم؟');">
+                            <form action="{{ route('concept.destroy', $concept) }}" method="POST" onsubmit="return confirm('هل أنت تأكد من رغبتك في حذف هذا المفهوم؟');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"

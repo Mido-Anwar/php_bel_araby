@@ -8,6 +8,9 @@ use App\Models\Technology;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
+
+
+
 class TechnologyController extends Controller
 {
     /**
@@ -28,7 +31,8 @@ class TechnologyController extends Controller
      */
     public function create(): View
     {
-        return view('docs.technology.technology-create');
+        $title = 'انشاء مقالة جديدة';
+        return view('docs.technology.technology-create',compact('title'));
     }
 
     /**
@@ -50,11 +54,11 @@ class TechnologyController extends Controller
     {
         $title = 'تعديل التقنية و اضافة اقسام';
         $technology->load([
-            'sections:id,title,technology_id',
+            'sections:id,title,slug,technology_id',
             'sections.concepts:id,title,slug,type,section_id',
         ]);
 
-        return view('docs.technology.technology-show', ['technology' => $technology, 'title' => $title]);
+        return view('docs.technology.technology-show', compact('technology', 'title'));
     }
 
     /**
@@ -62,6 +66,7 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology): View
     {
+        $title = 'تعديل التقنية';
         return view('docs.technology.technology-edit', compact('technology'));
     }
 

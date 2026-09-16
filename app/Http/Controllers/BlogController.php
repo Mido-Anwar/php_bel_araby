@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
+
 class BlogController extends Controller
 {
     /**
@@ -14,13 +15,16 @@ class BlogController extends Controller
     public function index()
     {
         $title = "المدونة";
-        $page = request()->get("page", 1);
-        $posts = Cache::remember("blog_posts_page_{$page}", 3600, function () {
-            return Post::with("image")
-                ->where("is_published", true)
+        $page  = request()->integer("page", 1);
+
+        $posts = Cache::remember(
+            Post::CACHE_PREFIX . $page,
+            Post::CACHE_TTL,
+            fn() => Post::with("image:id,mediable_id,mediable_type,file_path")
+                ->published()
                 ->latest()
-                ->paginate(12);
-        });
+                ->paginate(Post::PER_PAGE)
+        );
 
         return view("blog.main", ["posts" => $posts, "title" => $title]);
     }

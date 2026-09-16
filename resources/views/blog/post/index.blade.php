@@ -66,7 +66,7 @@
                     <tbody class="divide-y divide-gray-100 dark:divide-gray-700/60">
                         @forelse ($posts as $post)
                             <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors">
-                                <td class="px-6 py-4 font-bold text-gray-400 dark:text-gray-500">
+                                <td class="px-6 py-4 font-bold text-gray-500 dark:text-gray-500">
                                     {{ $post->id }}
                                 </td>
 
@@ -145,7 +145,7 @@
                                         @if (Auth::user()->hasRole('super-admin'))
                                             @if ($post->is_published)
                                                 <!-- Unpublish Form -->
-                                                <form action="{{ route('post.unpublish', $post->id) }}" method="POST"
+                                                <form action="{{ route('post.unpublish', $post) }}" method="POST"
                                                     class="inline"
                                                     onsubmit="return confirm('هل أنت متأكد من رغبتك في إخفاء هذا المنشور؟');">
                                                     @csrf
@@ -163,7 +163,7 @@
                                                 </form>
                                             @else
                                                 <!-- Publish Form -->
-                                                <form action="{{ route('post.publish', $post->id) }}" method="POST"
+                                                <form action="{{ route('post.publish', $post) }}" method="POST"
                                                     class="inline"
                                                     onsubmit="return confirm('هل أنت متأكد من رغبتك في نشر هذا المنشور؟');">
                                                     @csrf

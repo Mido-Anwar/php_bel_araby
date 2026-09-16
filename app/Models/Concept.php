@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Concept extends Model
 {
-    use HasFactory;
+    use HasFactory,HasSlug,SoftDeletes;
 
     protected $fillable = [
         'section_id',
@@ -23,17 +26,28 @@ class Concept extends Model
         'return_type',
     ];
 
-    protected static function boot(): void
+    protected $afterCommit = true;
+    public function getSlugOptions(): SlugOptions
     {
-        parent::boot();
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug')
+            ->usingLanguage('ar')
+            ->doNotGenerateSlugsOnUpdate()
+            ->preventOverwrite();
+    }
 
-        static::saved(function (Concept $concept) {
-            $concept->clearCache();
-        });
-
-        static::deleted(function (Concept $concept) {
-            $concept->clearCache();
-        });
+    /**
+     * استخدام الـ slug في الـ Route Model Binding
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+    protected static function booted(): void
+    {
+        static::saved(fn(Concept $concept) => $concept->clearCache());
+        static::deleted(fn(Concept $concept) => $concept->clearCache());
     }
 
     public function section(): BelongsTo
@@ -51,17 +65,22 @@ class Concept extends Model
         return $query->where('type', 'function');
     }
 
+    public static function cacheKey(int $sectionId, string $type = 'all'): string
+    {
+        return "section_{$sectionId}_concepts_{$type}";
+    }
+
     public static function getCachedBySection(int $sectionId, ?string $type = null): Collection
     {
-        $cacheKey = $type
-            ? "section_{$sectionId}_concepts_{$type}"
-            : "section_{$sectionId}_concepts_all";
+        $key = self::cacheKey($sectionId, $type ?? 'all');
 
-        return Cache::rememberForever($cacheKey, function () use ($sectionId, $type) {
+        return Cache::remember($key, 3600, function () use ($sectionId, $type) {
             $query = static::where('section_id', $sectionId);
 
-            if ($type && in_array($type, ['concept', 'function'])) {
-                $query->where('type', $type);
+            if ($type === 'concept') {
+                $query->onlyConcepts();
+            } elseif ($type === 'function') {
+                $query->onlyFunctions();
             }
 
             return $query->get();
@@ -70,8 +89,14 @@ class Concept extends Model
 
     public function clearCache(): void
     {
-        Cache::forget("section_{$this->section_id}_concepts_all");
-        Cache::forget("section_{$this->section_id}_concepts_concept");
-        Cache::forget("section_{$this->section_id}_concepts_function");
+        foreach (['all', 'concept', 'function'] as $type) {
+            Cache::forget(self::cacheKey($this->section_id, $type));
+        }
+
+        Cache::forget("sections.show.{$this->section_id}");
+
+        if ($this->section) {
+            Cache::forget("technologies.show.{$this->section->technology_id}");
+        }
     }
 }

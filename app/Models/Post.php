@@ -4,48 +4,70 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
-/**
- * Post model representing blog posts or articles in the application.
- * Includes soft deletes for data preservation.
- */
 class Post extends Model
 {
+    use HasFactory, SoftDeletes, HasSlug;
 
-    /** @use HasFactory<\Database\Factories\PostFactory> */
-    use HasFactory, \Illuminate\Database\Eloquent\SoftDeletes;
+    // ─── Cache Configuration ───
+    public const CACHE_PREFIX = 'blog.posts.published.page.';
+    public const CACHE_TTL    = 3600;
+    public const PER_PAGE     = 12;
+
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+        'user_id',
+        'is_published',
+    ];
+
+    protected $casts = [
+        'is_published' => 'boolean',
+    ];
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * إعدادات spatie/laravel-sluggable
      */
-    protected $fillable = ['title', 'content',  'user_id', 'is_published'];
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug')
+            ->usingLanguage('ar')
+            ->doNotGenerateSlugsOnUpdate()
+            ->preventOverwrite();
+    }
 
-    // Enable automatic cache clearing after database transactions
-    protected $afterCommit = true;
+    /**
+     * استخدام الـ slug في الـ Route Model Binding
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
-// Cache invalidation for posts when created, updated, restored, or deleted
     protected static function booted(): void
     {
-        static::saved(function (Post $post) {
-            static::clearPostCache($post);
+        static::creating(function (Post $post) {
+            if (Auth::check() && empty($post->user_id)) {
+                $post->user_id = Auth::id();
+            }
         });
 
-        static::deleted(function (Post $post) {
-            static::clearPostCache($post);
-        });
-
-        static::restored(function (Post $post) {
-            static::clearPostCache($post);
-        });
-
-        static::forceDeleted(function (Post $post) {
-            static::clearPostCache($post);
-            $post->deleteAttachedImage();
-        });
+        static::saved(fn (Post $post) => static::clearPostCache($post));
+        static::deleted(fn (Post $post) => static::clearPostCache($post));
+        static::restored(fn (Post $post) => static::clearPostCache($post));
+        static::forceDeleted(fn (Post $post) => static::clearPostCache($post));
 
         static::deleting(function (Post $post) {
             if ($post->isForceDeleting()) {
@@ -54,41 +76,40 @@ class Post extends Model
         });
     }
 
-    /**
-     * Clear all related cache keys for this post.
-     */
     protected static function clearPostCache(Post $post): void
     {
-        // Clear global blog posts list
         Cache::forget('posts.all');
-
-        // Clear individual post detail cache
         Cache::forget("posts.show.{$post->id}");
-    }
-    public function deleteAttachedImage(): void
-    {
-        if ($this->image) {
-            Storage::disk('public')->delete($this->image->file_path);
-            $this->image()->delete();
+
+        foreach (range(1, 50) as $page) {
+            Cache::forget(self::CACHE_PREFIX . $page);
         }
     }
 
-    /**
-     * Get the user that owns the post.
-     * A post belongs to one user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
+    public function deleteAttachedImage(): void
+    {
+        if ($image = $this->image()->first()) {
+            Storage::disk('public')->delete($image->file_path);
+            $image->delete();
+        }
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', true);
+    }
+
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    public function image()
+
+    public function image(): MorphOne
     {
         return $this->morphOne(Media::class, 'mediable');
     }
 
-    public function gallery()
+    public function gallery(): MorphMany
     {
         return $this->morphMany(Media::class, 'mediable');
     }

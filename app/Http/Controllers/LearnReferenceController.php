@@ -23,6 +23,6 @@ class LearnReferenceController extends Controller
     {
         $technology = Technology::where('name', $name)->firstOrFail(['id', 'name', 'description']);
         $title = $technology->name;
-        return view('docs.main', ['technology' => $technology , 'title' => $title]);
+        return view('docs.main', ['technology' => $technology, 'title' => $title]);
     }
 }
