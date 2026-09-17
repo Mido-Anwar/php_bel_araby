@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Helpers\ImageHelper;
+use Illuminate\Support\Facades\Storage;
+
 
 class PostController extends Controller
 {
@@ -22,7 +24,7 @@ class PostController extends Controller
     {
         $title = 'ادارة المنشورات';
 
-        $query = Post::select('id', 'title', 'user_id','slug', 'is_published', 'created_at')
+        $query = Post::select('id', 'title', 'user_id', 'slug', 'is_published', 'created_at')
             ->with(['image', 'user:id,name'])
             ->latest();
 
@@ -190,25 +192,25 @@ class PostController extends Controller
     {
         $file = $request->file('image');
 
-        // Convert and process image using native GD Helper
         $uploadData = ImageHelper::convertAndStoreToWebp(
             file: $file,
             folder: 'posts',
-            seoName: $post->title
+            seoName: $post->title,
         );
 
-        // Delete existing media record and physical file if updating
         if ($post->image) {
-            $post->image->delete();
+            Storage::disk('public')->delete($post->image->file_path);
+            $post->image->forceDelete();
         }
 
-        // Associate new optimized media record with the post
         $post->image()->create([
             'file_path' => $uploadData['file_path'],
             'file_name' => $file->getClientOriginalName(),
             'alt_text'  => $post->title,
             'mime_type' => $uploadData['mime_type'],
             'file_size' => $uploadData['file_size'],
+            'width'     => $uploadData['width'] ?? null,
+            'height'    => $uploadData['height'] ?? null,
         ]);
     }
 

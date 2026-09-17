@@ -39,15 +39,19 @@
             @if ($post->image)
                 <div
                     class="mb-10 rounded-2xl overflow-hidden border border-slate-800 shadow-lg bg-slate-800 max-h-[500px] flex items-center justify-center">
-                    <img src="{{ $post->image->url }}" alt="{{ $post->title }}"
-                        class="w-full h-full max-h-[500px] object-cover hover:scale-[1.02] transition-transform duration-500">
+                    <img src="{{ asset('storage/' . $post->image->file_path) }}" alt="{{ $post->image->alt_text }}"
+                        loading="lazy" class="w-full h-auto rounded-lg object-cover">
                 </div>
             @endif
 
             <!-- محتوى المقال (Content) مع دعم الاتجاه والتنسيق -->
             <div dir="{{ textDir($post->content) }}"
-                class="prose prose-invert prose-yellow max-w-none text-slate-300 text-base sm:text-lg leading-loose space-y-6">
-                {!! nl2br(e($post->content)) !!}
+                class="prose prose-invert prose-yellow max-w-full text-slate-300 text-base sm:text-lg leading-loose space-y-6
+            break-words overflow-x-auto
+            prose-pre:overflow-x-auto prose-pre:max-w-full
+            prose-img:max-w-full prose-img:h-auto
+            prose-table:max-w-full">
+                {!! $post->content !!}
             </div>
 
             <!-- فاصل سفلي -->

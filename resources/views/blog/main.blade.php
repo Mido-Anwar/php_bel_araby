@@ -58,7 +58,7 @@
                         <!-- Card Action -->
                         <div
                             class="pt-4 border-t border-gray-100 dark:border-gray-700/60 flex items-center justify-between">
-                            <a href="{{ route('blog.show', $post->id) }}"
+                            <a href="{{ route('blog.show', $post) }}"
                                 class="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                                 <span>Read More</span>
                                 <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor"

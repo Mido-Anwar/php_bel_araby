@@ -18,7 +18,7 @@
 
             <!-- Header Quick Actions -->
             <div class="flex items-center gap-2">
-                <a href="{{ route('technology.edit', $technology->id) }}"
+                <a href="{{ route('technology.edit', $technology) }}"
                    class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/80 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-200">
                     <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -156,7 +156,7 @@
                                     </a>
 
                                     @if (Auth::user()->hasRole('super-admin'))
-                                        <x-delete-form :action-url="route('section.destroy', $section)" />
+                                        <x-delete-form :action-url="route('section.destroy', $section,$technology)" />
                                     @endif
                                 </div>
                             </div>

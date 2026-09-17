@@ -24,14 +24,11 @@ class SectionController extends Controller
     /**
      * Store a newly created section in storage.
      */
-    public function store(StoreSectionRequest $request): RedirectResponse
+    public function store(StoreSectionRequest $request, Technology $technology): RedirectResponse
     {
-        $validated = $request->validated();
+        $technology->sections()->create($request->validated());
 
-        Section::create($validated);
-
-        return redirect()
-            ->route('technology.show', $validated['technology_id'])
+        return to_route('technology.show', $technology)
             ->with('success-store-section', 'Section created successfully.');
     }
 
@@ -46,7 +43,7 @@ class SectionController extends Controller
             'concepts:id,section_id,title,slug,type,description',
         ]);
 
-        return view('docs.technology.section.section-show', compact('title','section'));
+        return view('docs.technology.section.section-show', compact('title', 'section'));
     }
 
     /**
@@ -68,22 +65,19 @@ class SectionController extends Controller
 
         $section->update($validated);
 
-        return redirect()
-            ->route('section.show', $section->id)
+        return
+            to_route('section.show', $section)
             ->with('success-update-section', 'Section updated successfully.');
     }
 
     /**
      * Remove the specified section from storage.
      */
-    public function destroy(Section $section): RedirectResponse
+    public function destroy(Section $section)
     {
-        $technologyId = $section->technology_id;
-
+        $technology = $section->technology;
         $section->delete();
-
-        return redirect()
-            ->route('technology.show', $technologyId)
-            ->with('success-delete-section', 'Section deleted successfully.');
+        return to_route('technology.show', $technology)
+            ->with('success-deleted-section', 'Section deleted successfully.');
     }
 }

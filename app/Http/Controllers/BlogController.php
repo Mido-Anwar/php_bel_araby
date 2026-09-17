@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\View\View;
+
+
 
 class BlogController extends Controller
 {
@@ -12,21 +15,21 @@ class BlogController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(): View
     {
-        $title = "المدونة";
-        $page  = request()->integer("page", 1);
+        $start = microtime(true);
+        $title = 'المدونة';
+        $page  = request()->integer('page', 1);
 
-        $posts = Cache::remember(
-            Post::CACHE_PREFIX . $page,
-            Post::CACHE_TTL,
-            fn() => Post::with("image:id,mediable_id,mediable_type,file_path")
-                ->published()
-                ->latest()
-                ->paginate(Post::PER_PAGE)
-        );
+        $posts = Post::select('id', 'title', 'slug', 'created_at', 'is_published')
+            ->with('image:id,mediable_id,mediable_type,file_path,alt_text')
+            ->published()
+            ->latest()
+            ->paginate(Post::PER_PAGE);
 
-        return view("blog.main", ["posts" => $posts, "title" => $title]);
+        $loadTime = round((microtime(true) - $start) * 1000, 2);
+        logger()->info("Blog index load: {$loadTime}ms");
+        return view('blog.main', compact('posts', 'title'));
     }
 
     /**

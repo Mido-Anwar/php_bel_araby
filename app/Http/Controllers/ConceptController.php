@@ -24,13 +24,12 @@ class ConceptController extends Controller
     /**
      * Store a newly created concept in storage.
      */
-    public function store(StoreConceptRequest $request): RedirectResponse
+    public function store(StoreConceptRequest $request, Section $section): RedirectResponse
     {
-        $validated = $request->validated();
 
-        Concept::create($validated);
+        $section->concepts()->create($request->validated());
 
-        return to_route('section.show', $validated['section_id'])
+        return to_route('section.show', $section)
             ->with('success-store-concept', 'Concept created successfully.');
     }
 
@@ -39,12 +38,13 @@ class ConceptController extends Controller
      */
     public function show(Concept $concept): View
     {
+        $title = $concept->title;
         $concept->load([
             'section:id,title,slug,technology_id',
             'section.technology:id,name,slug',
         ]);
 
-        return view('docs.technology.section.concept.concept-show', ['concept' => $concept]);
+        return view('docs.technology.section.concept.concept-show', compact('title','concept'));
     }
 
     /**
@@ -63,10 +63,11 @@ class ConceptController extends Controller
     public function update(UpdateConceptRequest $request, Concept $concept): RedirectResponse
     {
         $validated = $request->validated();
+        $section = $concept->section;
 
         $concept->update($validated);
 
-        return to_route('section.show', $concept->section_id)
+        return to_route('section.show', $section)
             ->with('success-update-concept', 'Concept updated successfully.');
     }
 
@@ -75,11 +76,11 @@ class ConceptController extends Controller
      */
     public function destroy(Concept $concept): RedirectResponse
     {
-        $sectionId = $concept->section_id;
+        $section = $concept->section;
 
         $concept->delete();
 
-        return to_route('section.show', $sectionId)
+        return to_route('section.show', $section)
             ->with('success-delete-concept', 'Concept deleted successfully.');
     }
 }

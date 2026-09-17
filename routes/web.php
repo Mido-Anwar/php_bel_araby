@@ -41,7 +41,7 @@ Route::prefix('/blog')->controller(BlogController::class)->group(function () {
  */
 Route::prefix('/docs')->controller(LearnReferenceController::class)->group(function () {
     // Show documentation for a specific technology
-    Route::get('/{name}', 'show')->name('docs.show');
+    Route::get('/{technology}', 'show')->name('docs.show');
 });
 
 // dashboard & Authenticated Routes control panel of app - only for logged in users
@@ -86,14 +86,14 @@ Route::prefix('technology')->controller(TechnologyController::class)->group(func
  * Handles CRUD operations for Sections within a Technology.
  */
 Route::prefix('section')->controller(SectionController::class)->group(function () {
-    Route::get('/create/{technology}', 'create')->name('section.create');
-    Route::post('/store', 'store')->name('section.store');
+    Route::get('/create/{technology}','create')->name('section.create');
+    Route::post('/store/{technology}','store')->name('section.store');
     Route::get('/show/{section}', 'show')->name('section.show');
     Route::get('/edit/{section}', 'edit')->name('section.edit');
     Route::post('/update/{section}', 'update')->name('section.update');
     Route::delete('/delete/{section}', 'destroy')->name('section.destroy');
-})->middleware(['auth', 'verified', 'role:super-admin']);
 
+})->middleware(['auth', 'verified', 'role:super-admin']);
 /**
  * Concept Management Routes
  * Handles CRUD operations for Concepts within a Section.
@@ -101,7 +101,7 @@ Route::prefix('section')->controller(SectionController::class)->group(function (
 Route::prefix('concept')->controller(ConceptController::class)->group(function () {
     Route::get('/', 'index')->name('concept.index');
     Route::get('/create/{section}', 'create')->name('concept.create');
-    Route::post('/store', 'store')->name('concept.store');
+    Route::post('/store/{section}', 'store')->name('concept.store');
     Route::get('/show/{concept}', 'show')->name('concept.show');
     Route::get('/edit/{concept}', 'edit')->name('concept.edit');
     Route::post('/update/{concept}', 'update')->name('concept.update');

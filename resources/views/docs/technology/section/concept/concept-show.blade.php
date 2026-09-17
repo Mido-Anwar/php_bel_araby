@@ -7,7 +7,7 @@
 
             <!-- Quick Actions Header Buttons -->
             <div class="flex items-center gap-2">
-                <a href="{{ route('section.show', $concept->section_id) }}"
+                <a href="{{ route('section.show', $concept->section) }}"
                    class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
                     <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
@@ -66,7 +66,7 @@
                         @if($concept->syntax)
                             <div class="px-6 py-4 bg-gray-900 text-amber-300 border-b border-gray-800 flex items-center justify-between gap-4 font-mono text-sm sm:text-base overflow-x-auto">
                                 <div class="flex items-center gap-3">
-                                    <span class="text-xs uppercase tracking-wider text-gray-500 select-none">Syntax</span>
+                                    <span class="text-xl tracking-wider text-gray-300 select-none">Syntax</span>
                                     <code class="text-amber-400 font-medium">{{ $concept->syntax }}</code>
                                 </div>
                             </div>
