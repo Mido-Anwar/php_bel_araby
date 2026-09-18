@@ -50,8 +50,8 @@
                     <div class="space-y-2">
                         <x-input-label for="content" :value="'Post Content'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
-                        <textarea id="content" name="content" rows="6" placeholder="Write the full content of your post here..."
-                            class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm resize-y"
+                        <textarea dir="rtl" name="content" data-editor rows="20"
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100"
                             required>{{ old('content') }}</textarea>
                         <x-input-error :messages="$errors->get('content')" class="mt-1 text-xs" />
                     </div>

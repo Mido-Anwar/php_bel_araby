@@ -9,8 +9,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 
-
-
 class TechnologyController extends Controller
 {
     /**
@@ -18,12 +16,15 @@ class TechnologyController extends Controller
      */
     public function index(): View
     {
-        $title = 'التقنيات المتاحة';
-        $technologies = Technology::select('id', 'name', 'slug')
+        $title = "التقنيات المتاحة";
+        $technologies = Technology::select("id", "name", "slug")
             ->latest()
             ->get();
 
-        return view('docs.technology.technology-index', compact('technologies', 'title'));
+        return view(
+            "docs.technology.technology-index",
+            compact("technologies", "title"),
+        );
     }
 
     /**
@@ -31,8 +32,8 @@ class TechnologyController extends Controller
      */
     public function create(): View
     {
-        $title = 'انشاء مقالة جديدة';
-        return view('docs.technology.technology-create', compact('title'));
+        $title = "انشاء مقالة جديدة";
+        return view("docs.technology.technology-create", compact("title"));
     }
 
     /**
@@ -42,8 +43,10 @@ class TechnologyController extends Controller
     {
         Technology::create($request->validated());
 
-        return to_route('technology.index')
-            ->with('success-store-technology', 'Technology created successfully.');
+        return to_route("technology.index")->with(
+            "success-store-technology",
+            "Technology created successfully.",
+        );
     }
 
     /**
@@ -53,10 +56,13 @@ class TechnologyController extends Controller
     {
         $title = $technology->name;
         $technology->load([
-            'sections:id,title,slug,technology_id',
-            'sections.concepts:id,title,slug,type,section_id',
+            "sections:id,title,slug,technology_id",
+            "sections.concepts:id,title,slug,type,section_id",
         ]);
-        return view('docs.technology.technology-show', compact('technology', 'title'));
+        return view(
+            "docs.technology.technology-show",
+            compact("technology", "title"),
+        );
     }
 
     /**
@@ -64,21 +70,27 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology): View
     {
-        $title = 'تعديل التقنية';
-        return view('docs.technology.technology-edit', compact('technology', 'title'));
+        $title = "تعديل التقنية";
+        return view(
+            "docs.technology.technology-edit",
+            compact("technology", "title"),
+        );
     }
 
     /**
      * Update the specified technology in storage.
      */
-    public function update(UpdateTechnologyRequest $request, Technology $technology): RedirectResponse
-    {
+    public function update(
+        UpdateTechnologyRequest $request,
+        Technology $technology,
+    ): RedirectResponse {
         $validated = $request->validated();
         $technology->update($validated);
 
-        return
-            to_route('technology.show', $technology)
-            ->with('success-update-technology', 'Technology updated successfully.');
+        return to_route("technology.show", $technology)->with(
+            "success-update-technology",
+            "Technology updated successfully.",
+        );
     }
 
     /**
@@ -88,7 +100,9 @@ class TechnologyController extends Controller
     {
         $technology->delete();
 
-        return to_route('technology.index')
-            ->with('success-delete-technology', 'Technology deleted successfully!');
+        return to_route("technology.index")->with(
+            "success-delete-technology",
+            "Technology deleted successfully!",
+        );
     }
 }

@@ -13,7 +13,6 @@ use Illuminate\Validation\Rules;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\DB;
 
-
 class UserController extends Controller
 {
     /**
@@ -23,55 +22,67 @@ class UserController extends Controller
      */
     public function index()
     {
-        $title = 'المستخدمون والصلاحيات';
-        $users = User::select('id', 'name', 'email')->with('roles')->get();
-        $roles = Role::select('id', 'name')->get();
-        $permissions = Permission::select('id', 'name')->get();
-        return view('user.index', ['users' => $users, 'roles' => $roles, 'permissions' => $permissions , 'title' => $title]);
+        $title = "المستخدمون والصلاحيات";
+        $users = User::select("id", "name", "email")->with("roles")->get();
+        $roles = Role::select("id", "name")->get();
+        $permissions = Permission::select("id", "name")->get();
+        return view("user.index", [
+            "users" => $users,
+            "roles" => $roles,
+            "permissions" => $permissions,
+            "title" => $title,
+        ]);
     }
-  /**
+    /**
      * Display the registration view.
      */
     public function create(): View
     {
-        $title = 'إضافة مستخدم جديد';
-        $roles = Role::select('id', 'name')->get();
-        return view('user.user-create', ['roles' => $roles , 'title' => $title]);
+        $title = "إضافة مستخدم جديد";
+        $roles = Role::select("id", "name")->get();
+        return view("user.user-create", ["roles" => $roles, "title" => $title]);
     }
 
-
-      /**
+    /**
      * Handle an incoming registration request.
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-  public function store(Request $request): RedirectResponse
-{
-    $validated = $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-        'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        'role' => ['required', 'string', 'exists:roles,name'],
-    ]);
-
-    // تنفيذ العملية ككتلة واحدة آمنة
-    $user = DB::transaction(function () use ($validated, $request) {
-        $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($request->password),
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            "name" => ["required", "string", "max:255"],
+            "email" => [
+                "required",
+                "string",
+                "lowercase",
+                "email",
+                "max:255",
+                "unique:" . User::class,
+            ],
+            "password" => ["required", "confirmed", Rules\Password::defaults()],
+            "role" => ["required", "string", "exists:roles,name"],
         ]);
 
-        $user->assignRole($validated['role']);
+        // تنفيذ العملية ككتلة واحدة آمنة
+        $user = DB::transaction(function () use ($validated, $request) {
+            $user = User::create([
+                "name" => $validated["name"],
+                "email" => $validated["email"],
+                "password" => Hash::make($request->password),
+            ]);
 
-        return $user;
-    });
+            $user->assignRole($validated["role"]);
 
-    event(new Registered($user));
+            return $user;
+        });
 
-    return redirect()->route('users.index')
-        ->with('success-store-user', 'User registered successfully.');
-}
+        event(new Registered($user));
+
+        return redirect()
+            ->route("users.index")
+            ->with("success-store-user", "User registered successfully.");
+    }
     /**
      * Show the form for editing the specified user.
      *
@@ -80,9 +91,13 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $title = 'تعديل المستخدم للادمن';
-        $roles = Role::select('id', 'name')->get();
-        return view('user.user-edit', ['user' => $user, 'roles' => $roles , 'title' => $title]);
+        $title = "تعديل المستخدم للادمن";
+        $roles = Role::select("id", "name")->get();
+        return view("user.user-edit", [
+            "user" => $user,
+            "roles" => $roles,
+            "title" => $title,
+        ]);
     }
 
     /**
@@ -95,17 +110,22 @@ class UserController extends Controller
     public function update(User $user, Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'role' => 'required|string|exists:roles,name',
+            "name" => "required|string|max:255",
+            "role" => "required|string|exists:roles,name",
         ]);
 
-        $user->name = $validatedData['name'];
+        $user->name = $validatedData["name"];
         $user->save();
 
         // Sync user roles
-        $user->syncRoles([$validatedData['role']]);
+        $user->syncRoles([$validatedData["role"]]);
 
-        return redirect()->route('users.index')->with('success-update-user', 'User information updated successfully.');
+        return redirect()
+            ->route("users.index")
+            ->with(
+                "success-update-user",
+                "User information updated successfully.",
+            );
     }
 
     /**
@@ -118,6 +138,8 @@ class UserController extends Controller
     public function destroy(User $user, Request $request)
     {
         $user->delete();
-        return redirect()->route('users.index')->with('success-delete-user', 'User account deleted successfully.');
+        return redirect()
+            ->route("users.index")
+            ->with("success-delete-user", "User account deleted successfully.");
     }
 }

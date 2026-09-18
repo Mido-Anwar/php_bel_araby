@@ -51,9 +51,9 @@
                     <div class="space-y-2">
                         <x-input-label for="content" :value="'Post Content'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
-                        <textarea id="content" name="content" rows="6" placeholder="Write the full content of your post here..."
-                            class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm resize-y"
-                            required>{{ old('content', $post->content) }}</textarea>
+                        <textarea  name="content" data-editor dir="rtl" rows="20"
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 text-right"
+                            required>{{ $post->content }}</textarea>
                         <x-input-error :messages="$errors->get('content')" class="mt-1 text-xs" />
                     </div>
 
@@ -94,7 +94,8 @@
                                         </svg>
                                     </div>
                                     <p class="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                        <span class="text-emerald-600 dark:text-emerald-400 underline">Click to upload</span> or drag and drop
+                                        <span class="text-emerald-600 dark:text-emerald-400 underline">Click to
+                                            upload</span> or drag and drop
                                     </p>
                                     <p class="text-xs text-gray-400 mt-1">PNG, JPG, WEBP up to 5MB</p>
                                 </div>
@@ -104,11 +105,14 @@
                                     class="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-md text-white text-xs px-4 py-3 truncate flex justify-between items-center border-t border-white/10">
                                     <div class="flex items-center gap-2 truncate">
                                         <span x-text="isNew ? 'New File' : 'Current Image'"
-                                            :class="isNew ? 'bg-blue-500/40 text-blue-200 border-blue-400/30' : 'bg-emerald-500/40 text-emerald-200 border-emerald-400/30'"
+                                            :class="isNew ? 'bg-blue-500/40 text-blue-200 border-blue-400/30' :
+                                                'bg-emerald-500/40 text-emerald-200 border-emerald-400/30'"
                                             class="px-2 py-0.5 text-[10px] font-semibold rounded-md border"></span>
-                                        <span x-text="fileName ? fileName : 'Attached Image'" class="truncate font-medium text-gray-200"></span>
+                                        <span x-text="fileName ? fileName : 'Attached Image'"
+                                            class="truncate font-medium text-gray-200"></span>
                                     </div>
-                                    <span class="text-xs text-emerald-300 group-hover:text-emerald-200 font-semibold underline shrink-0 ml-2">
+                                    <span
+                                        class="text-xs text-emerald-300 group-hover:text-emerald-200 font-semibold underline shrink-0 ml-2">
                                         Change Image
                                     </span>
                                 </div>

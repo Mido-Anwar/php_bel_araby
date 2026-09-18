@@ -35,6 +35,9 @@
             {{ $slot }}
         </main>
         @livewireScripts
+        <script>
+            new MarkdownEditor('#markdown-editor');
+        </script>
     </div>
 </body>
 
