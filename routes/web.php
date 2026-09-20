@@ -21,8 +21,17 @@ Route::get('/', function () {
 
 Route::get('/about', function () {
     $title = "about us";
-    return view('about', ['title' => $title]);
+    return view('contact-privacy.about', ['title' => $title]);
 })->name('about');
+
+Route::get('/contact', function () {
+    $title = "contact us";
+    return view('contact-privacy.contact-us', compact('title'));
+})->name('contact');
+Route::get('/privacy', function () {
+    $title = "privacy";
+    return view('contact-privacy.privacy', compact('title'));
+})->name('privacy');
 /**
  * Blog Routes
  * Handles the display of blog posts for public viewing.
@@ -86,13 +95,12 @@ Route::prefix('technology')->controller(TechnologyController::class)->group(func
  * Handles CRUD operations for Sections within a Technology.
  */
 Route::prefix('section')->controller(SectionController::class)->group(function () {
-    Route::get('/create/{technology}','create')->name('section.create');
-    Route::post('/store/{technology}','store')->name('section.store');
+    Route::get('/create/{technology}', 'create')->name('section.create');
+    Route::post('/store/{technology}', 'store')->name('section.store');
     Route::get('/show/{section}', 'show')->name('section.show');
     Route::get('/edit/{section}', 'edit')->name('section.edit');
     Route::post('/update/{section}', 'update')->name('section.update');
     Route::delete('/delete/{section}', 'destroy')->name('section.destroy');
-
 })->middleware(['auth', 'verified', 'role:super-admin']);
 /**
  * Concept Management Routes
