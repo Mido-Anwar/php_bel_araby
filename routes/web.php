@@ -7,14 +7,15 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\UserController;
-use App\Models\Concept;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Models\Post;
+use App\Http\Controllers\ContactController;
+
 
 Route::get('/', function () {
-    $latestPosts = Post::latest()->take(3)->get();
+    $latestPosts = Post::latest()->take(6)->get();
     return view('welcome', compact('latestPosts'));
 })->name('home');
 
@@ -32,6 +33,11 @@ Route::get('/privacy', function () {
     $title = "privacy";
     return view('contact-privacy.privacy', compact('title'));
 })->name('privacy');
+Route::get('/terms', function () {
+    $title = "terms";
+    return view('contact-privacy.terms', compact('title'));
+})->name('terms');
+
 /**
  * Blog Routes
  * Handles the display of blog posts for public viewing.
@@ -41,7 +47,7 @@ Route::prefix('/blog')->controller(BlogController::class)->group(function () {
     Route::get('/', 'index')->name('blog.main');
     // Show a specific blog post
     Route::get('/{post}', 'show')->name('blog.show');
-});
+})->name('blog');
 
 
 /**
@@ -56,7 +62,7 @@ Route::prefix('/docs')->controller(LearnReferenceController::class)->group(funct
 // dashboard & Authenticated Routes control panel of app - only for logged in users
 Route::get('/dashboard', function () {
     $title = 'لوحة التحكم';
-    return view('dashboard', compact('title'));
+    return view('dashboard.dashboard', compact('title'));
 })->middleware(['auth', 'verified', 'role:super-admin|writer'])->name('dashboard');
 
 /**
@@ -74,7 +80,7 @@ Route::prefix('posts')->controller(PostController::class)->group(function () {
     Route::post('/publish/{post}', 'publish')->name('post.publish');
     Route::post('/unpublish/{post}', 'unpublish')->name('post.unpublish');
     Route::delete('/delete/{post}', 'destroy')->name('post.destroy');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified','role:super-admin|writer']);
 
 /**
  * Technology Management Routes
@@ -88,7 +94,7 @@ Route::prefix('technology')->controller(TechnologyController::class)->group(func
     Route::get('/edit/{technology}', 'edit')->name('technology.edit');
     Route::post('/update/{technology}', 'update')->name('technology.update');
     Route::delete('/delete/{technology}', 'destroy')->name('technology.destroy');
-})->middleware(['auth', 'verified', 'role:super-admin|admin']);
+})->middleware(['auth', 'verified', 'role:super-admin']);
 
 /**
  * Section Management Routes
@@ -160,4 +166,6 @@ Route::prefix('permission')->controller(PermissionController::class)->group(func
     Route::delete('/delete/{permission}', 'destroy')->name('permission.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
 
+
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 require __DIR__ . '/auth.php';

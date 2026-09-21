@@ -48,6 +48,12 @@ class Concept extends Model
     {
         static::saved(fn(Concept $concept) => $concept->clearCache());
         static::deleted(fn(Concept $concept) => $concept->clearCache());
+                static::saving(function (Concept $concept) {
+            if ($concept->type === 'concept') {
+                $concept->syntax = null;
+                $concept->return_type = null;
+            }
+        });
     }
 
     public function section(): BelongsTo

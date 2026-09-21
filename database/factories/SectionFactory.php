@@ -19,8 +19,8 @@ class SectionFactory extends Factory
     {
         return [
             'title' => $this->faker->words(3, true),  // عنوان قصير
-            'content' => $this->faker->text(150),     // نص عشوائي بطول ~150 حرف
-            'technology_id' => null,  //
+            'description' => $this->faker->text(150),     // نص عشوائي بطول ~150 حرف
+            'technology_id' => Technology::factory(),
         ];
     }
 }

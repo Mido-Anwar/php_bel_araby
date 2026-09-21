@@ -12,12 +12,15 @@
               </div>
 
               <!-- روابط أو حقوق إضافية / مساحة تفتقدها الشاشات الكبيرة -->
-        
-                  <div class="flex items-center gap-6 text-xs sm:text-sm">
-                      <a href="{{ route('about') }}" class="hover:text-yellow-400 transition-colors">about us</a>
-                               
-                  </div>
-            
+
+              <div class="flex items-center gap-6 text-xs sm:text-sm">
+                  <a href="{{ route('about') }}" class="hover:text-yellow-400 transition-colors">عن الموقع</a>
+                  <a href="{{ route('contact') }}" class="hover:text-yellow-400 transition-colors">اتصل بنا</a>
+                  <a href="{{ route('privacy') }}" class="hover:text-yellow-400 transition-colors">سياسة الخصوصية</a>
+                  <a href="{{ route('terms') }}" class="hover:text-yellow-400 transition-colors">شروط الاستخدام</a>
+
+              </div>
+
 
           </div>
       </footer>

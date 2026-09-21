@@ -16,11 +16,11 @@
                 @auth
                     <!-- أزرار الديسكتوب -->
                     <div class="hidden sm:flex items-center gap-3">
-                        <a href="{{ url('/dashboard') }}"
-                            class="group relative inline-flex items-center gap-2 px-4.5 py-2 rounded-xl text-sm font-semibold tracking-wide 
-                                  bg-[#1e293b] text-[#f3ebeb] border border-slate-700/60 shadow-md 
-                                  hover:bg-[#2b384f] hover:border-yellow-500/50 
-                                  focus:outline-none focus:ring-2 focus:ring-yellow-500 
+                        <a href="{{ route('dashboard') }}"
+                            class="group relative inline-flex items-center gap-2 px-4.5 py-2 rounded-xl text-sm font-semibold tracking-wide
+                                  bg-[#1e293b] text-[#f3ebeb] border border-slate-700/60 shadow-md
+                                  hover:bg-[#2b384f] hover:border-yellow-500/50
+                                  focus:outline-none focus:ring-2 focus:ring-yellow-500
                                   transition-all duration-300">
                             <svg class="w-4 h-4 text-yellow-400 group-hover:rotate-12 transition-transform duration-300"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,10 +32,10 @@
                         </a>
 
                         <a href="{{ route('logout') }}"
-                            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium 
-                                  bg-red-500/10 text-red-400 border border-red-500/20 
-                                  hover:bg-red-500 hover:text-white 
-                                  focus:outline-none focus:ring-2 focus:ring-red-500 
+                            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium
+                                  bg-red-500/10 text-red-400 border border-red-500/20
+                                  hover:bg-red-500 hover:text-white
+                                  focus:outline-none focus:ring-2 focus:ring-red-500
                                   transition-all duration-300"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -61,7 +61,7 @@
                             class="absolute left-0 mt-2 w-48 rounded-2xl bg-[#1e293b] border border-slate-700 shadow-2xl py-2 z-50 text-right"
                             style="display: none;">
 
-                            <a href="{{ url('/dashboard') }}"
+                            <a href="{{ route('dashboard') }}"
                                 class="flex items-center gap-3 px-4 py-2.5 text-sm text-[#f3ebeb] hover:bg-[#2b384f] transition">
                                 <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
@@ -87,7 +87,7 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                         @csrf
                     </form>
-           
+
                 @endauth
             </div>
         </div>
