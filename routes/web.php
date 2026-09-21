@@ -16,7 +16,13 @@ use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     $latestPosts = Post::latest()->take(6)->get();
-    return view('welcome', compact('latestPosts'));
+    $stats = [
+        'posts'        => Post::published()->count(),
+        'technologies' => \App\Models\Technology::count(),
+        'sections'     => \App\Models\Section::count(),
+        'concepts'     => \App\Models\Concept::count(),
+    ];
+    return view('welcome', compact('latestPosts','stats'));
 })->name('home');
 
 
