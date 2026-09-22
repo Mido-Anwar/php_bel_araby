@@ -10,40 +10,31 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
-use App\Models\Post;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PageController;
+
+// ============================
+// Public Pages
+// ============================
+Route::controller(PageController::class)->group(function () {
+    Route::get('/',        'home')->name('home');
+    Route::get('/about',   'about')->name('about');
+    Route::get('/privacy', 'privacy')->name('privacy');
+    Route::get('/terms',   'terms')->name('terms');
+});
 
 
-Route::get('/', function () {
-    $latestPosts = Post::latest()->take(6)->get();
-    $stats = [
-        'posts'        => Post::published()->count(),
-        'technologies' => \App\Models\Technology::count(),
-        'sections'     => \App\Models\Section::count(),
-        'concepts'     => \App\Models\Concept::count(),
-    ];
-    return view('welcome', compact('latestPosts','stats'));
-})->name('home');
 
+// ============================
+// Contact
+// ============================
+Route::controller(ContactController::class)->group(function () {
+    Route::get('/contact',  'index')->name('contact');
 
-Route::get('/about', function () {
-    $title = "about us";
-    return view('contact-privacy.about', ['title' => $title]);
-})->name('about');
-
-Route::get('/contact', function () {
-    $title = "contact us";
-    return view('contact-privacy.contact-us', compact('title'));
-})->name('contact');
-Route::get('/privacy', function () {
-    $title = "privacy";
-    return view('contact-privacy.privacy', compact('title'));
-})->name('privacy');
-Route::get('/terms', function () {
-    $title = "terms";
-    return view('contact-privacy.terms', compact('title'));
-})->name('terms');
-
+    Route::post('/contact', 'send')
+        ->middleware('throttle:5,1')  // five messages at minute
+        ->name('contact.send');
+});
 /**
  * Blog Routes
  * Handles the display of blog posts for public viewing.
@@ -66,10 +57,12 @@ Route::prefix('/docs')->controller(LearnReferenceController::class)->group(funct
 });
 
 // dashboard & Authenticated Routes control panel of app - only for logged in users
-Route::get('/dashboard', function () {
-    $title = 'لوحة التحكم';
-    return view('dashboard.dashboard', compact('title'));
-})->middleware(['auth', 'verified', 'role:super-admin|writer'])->name('dashboard');
+// ============================
+// Dashboard (Authenticated)
+// ============================
+Route::middleware(['auth', 'verified', 'role:super-admin|writer'])->group(function () {
+    Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
+});
 
 /**
  * Post Management Routes
@@ -86,7 +79,7 @@ Route::prefix('posts')->controller(PostController::class)->group(function () {
     Route::post('/publish/{post}', 'publish')->name('post.publish');
     Route::post('/unpublish/{post}', 'unpublish')->name('post.unpublish');
     Route::delete('/delete/{post}', 'destroy')->name('post.destroy');
-})->middleware(['auth', 'verified','role:super-admin|writer']);
+})->middleware(['auth', 'verified', 'role:super-admin|writer']);
 
 /**
  * Technology Management Routes
@@ -134,14 +127,17 @@ Route::prefix('concept')->controller(ConceptController::class)->group(function (
  * Handles CRUD operations for Users.
  * Accessible only by super-admin.
  */
-Route::prefix('user')->controller(UserController::class)->group(function () {
-    Route::get('/', 'index')->name('users.index');
-    Route::get('/create', 'create')->name('user.create');
-    Route::post('/store', 'store')->name('user.store');
-    Route::get('/{user}/edit', 'edit')->name('user.edit');
-    Route::post('/{user}/update', 'update')->name('user.update');
-    Route::delete('/{user}/delete', 'destroy')->name('user.destroy');
-})->middleware(['auth', 'verified', 'role:super-admin']);
+Route::prefix('user')
+    ->controller(UserController::class)
+    ->middleware(['auth', 'verified', 'role:super-admin', 'throttle:30,1'])
+    ->group(function () {
+        Route::get('/', 'index')->name('users.index');
+        Route::get('/create', 'create')->name('user.create');
+        Route::post('/store', 'store')->name('user.store');
+        Route::get('/{user}/edit', 'edit')->name('user.edit');
+        Route::post('/{user}/update', 'update')->name('user.update');
+        Route::delete('/{user}/delete', 'destroy')->name('user.destroy');
+    });
 
 /**
  * Role Management Routes

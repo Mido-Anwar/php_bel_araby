@@ -51,7 +51,7 @@
             prose-pre:overflow-x-auto prose-pre:max-w-full
             prose-img:max-w-full prose-img:h-auto
             prose-table:max-w-full">
-                {!! $post->content !!}
+                {!! Purifier::clean($post->content) !!}
             </div>
 
             <!-- فاصل سفلي -->

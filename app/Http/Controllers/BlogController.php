@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
-
+use Mews\Purifier\Facades\Purifier;
 
 
 class BlogController extends Controller
@@ -42,7 +42,18 @@ class BlogController extends Controller
     {
         $title = $post->title;
         $post->load("image");
-
+        $this->sanitizePostContent($post);
         return view("blog.show-post", ["post" => $post, "title" => $title]);
+    }
+
+    /**
+     * تنظيف محتوى التقنية والأقسام والمفاهيم من XSS.
+     *
+     * @param Post $post
+     * @return void
+     */
+    private function sanitizePostContent(Post $post): void
+    {
+        $post->content = Purifier::clean($post->content ?? '');
     }
 }

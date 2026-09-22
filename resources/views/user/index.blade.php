@@ -33,6 +33,8 @@
             <x-message :message="session('success-store-user')" :color="'green'" />
             <x-message :message="session('success-update-user')" :color="'blue'" />
             <x-message :message="session('success-delete-user')" :color="'red'" />
+            <x-message :message="session('error')" :color="'red'" />
+
         </div>
     </x-slot>
 

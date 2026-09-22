@@ -107,25 +107,21 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(User $user, Request $request)
+    public function update(Request $request, User $user): RedirectResponse
     {
-        $validatedData = $request->validate([
-            "name" => "required|string|max:255",
-            "role" => "required|string|exists:roles,name",
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'role' => ['required', 'string', 'exists:roles,name'],
         ]);
 
-        $user->name = $validatedData["name"];
-        $user->save();
-
-        // Sync user roles
-        $user->syncRoles([$validatedData["role"]]);
+        DB::transaction(function () use ($validated, $user) {
+            $user->update(['name' => $validated['name']]);
+            $user->syncRoles([$validated['role']]);
+        });
 
         return redirect()
-            ->route("users.index")
-            ->with(
-                "success-update-user",
-                "User information updated successfully.",
-            );
+            ->route('users.index')
+            ->with('success-update-user', 'تم تحديث المستخدم بنجاح.');
     }
 
     /**
@@ -135,11 +131,17 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(User $user, Request $request)
+    public function destroy(User $user): RedirectResponse
     {
+        // loged user cant delete him self
+        if ($user->id === auth()->id()) {
+            return back()->with('error', 'لا يمكنك حذف حسابك الخاص.');
+        }
+
         $user->delete();
+
         return redirect()
-            ->route("users.index")
-            ->with("success-delete-user", "User account deleted successfully.");
+            ->route('users.index')
+            ->with('success-delete-user', 'تم حذف المستخدم بنجاح.');
     }
 }
