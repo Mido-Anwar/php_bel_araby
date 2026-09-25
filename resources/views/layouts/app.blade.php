@@ -34,11 +34,11 @@
         <main class="p-3">
             {{ $slot }}
         </main>
-        @livewireScripts
-        <script>
-            new MarkdownEditor('#markdown-editor');
-        </script>
+
+
     </div>
+    @livewireScripts
+
 </body>
 
 </html>

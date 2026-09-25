@@ -50,9 +50,14 @@
                     <div class="space-y-2">
                         <x-input-label for="content" :value="'Post Content'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
-                        <textarea dir="rtl" name="content" data-editor rows="20"
-                            class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100"
-                            required>{{ old('content') }}</textarea>
+                        <div>
+                            {{-- حقل المخفي لربط البيانات مع Livewire أو الفورم العادي --}}
+                            <input id="x" type="hidden" name="content" wire:model="content">
+
+                            {{-- المحرر نفسه --}}
+                            <trix-editor input="x"
+                                class="min-h-[300px] p-4 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 prose dark:prose-invert max-w-full focus:outline-none"></trix-editor>
+                        </div>
                         <x-input-error :messages="$errors->get('content')" class="mt-1 text-xs" />
                     </div>
 
