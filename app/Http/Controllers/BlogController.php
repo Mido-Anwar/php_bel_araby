@@ -6,8 +6,11 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Mews\Purifier\Facades\Purifier;
-
-
+use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\Autolink\AutolinkExtension;
+use League\CommonMark\MarkdownConverter;
 class BlogController extends Controller
 {
     /**
@@ -42,18 +45,39 @@ class BlogController extends Controller
     {
         $title = $post->title;
         $post->load("image");
-        $this->sanitizePostContent($post);
+
+        // تحويل الـ Markdown وتنظيف المحتوى
+        $this->processAndSanitizePostContent($post);
+
         return view("blog.show-post", ["post" => $post, "title" => $title]);
     }
 
     /**
-     * تنظيف محتوى التقنية والأقسام والمفاهيم من XSS.
+     * تحويل محتوى الـ Markdown إلى HTML وتنظيفه من XSS.
      *
      * @param Post $post
      * @return void
      */
-    private function sanitizePostContent(Post $post): void
+    private function processAndSanitizePostContent(Post $post): void
     {
-        $post->content = Purifier::clean($post->content ?? '');
+       $rawContent = $post->content ?? '';
+
+    // إعداد البيئة بالشكل الصحيح والآمن
+    $environment = new Environment([
+        'html_input' => 'strip',
+        'allow_unsafe_links' => false,
+    ]);
+
+    // إضافة الإضافات القياسية للـ Markdown
+    $environment->addExtension(new CommonMarkCoreExtension());
+    $environment->addExtension(new AutolinkExtension());
+
+    $converter = new MarkdownConverter($environment);
+
+    // تحويل النص الخام إلى HTML
+    $htmlContent = $converter->convert($rawContent)->__toString();
+
+    // تنظيف الـ HTML بالـ Purifier وحفظه
+    $post->content = Purifier::clean($htmlContent);
     }
 }

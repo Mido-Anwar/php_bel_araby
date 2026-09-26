@@ -45,7 +45,7 @@
             @endif
 
             <!-- محتوى المقال (Content) مع دعم الاتجاه والتنسيق -->
-            <div dir="{{ textDir($post->content) }}"
+            <div
                 class="prose prose-invert prose-yellow max-w-full text-slate-300 text-base sm:text-lg leading-loose space-y-6
             break-words overflow-x-auto
             prose-pre:overflow-x-auto prose-pre:max-w-full

@@ -3,6 +3,17 @@
 @tailwind utilities;
 
 
+/* تخصيص محرر مارك دوّن للغة العربية و الـ RTL */
+.CodeMirror, .editor-preview {
+    direction: rtl !important;
+    text-align: right !important;
+    font-family: 'Cairo', sans-serif; /* أو أي خط عربي تفضله */
+}
 
+/* تعديل شريط الأدوات العلوي عشان يناسب الشكل العام */
+.editor-toolbar {
+    direction: ltr; /* نخلي الأيقونات في مكانها الطبيعي أو تعدلها لو حابب */
+    text-align: left;
+}
 
 

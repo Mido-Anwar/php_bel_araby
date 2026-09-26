@@ -20,6 +20,6 @@
         "vite": "^7.0.4"
     },
     "dependencies": {
-        "trix": "^2.1.19"
+        "easymde": "^2.21.0"
     }
 }
