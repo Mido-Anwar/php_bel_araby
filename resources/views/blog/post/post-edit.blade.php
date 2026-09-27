@@ -55,9 +55,7 @@
                         <div class="max-w-4xl mx-auto p-6">
                             <label for="markdown-editor" class="block mb-2 font-bold text-lg">اكتب محتوى التوثيق أو
                                 المقال:</label>
-                            <textarea id="markdown-editor" name="content">
-                                {{ $post->content }}
-                            </textarea>
+                            <textarea id="markdown-editor" name="content" rows="15">{{ old('content', $post->content) }}</textarea>
 
                             <x-input-error :messages="$errors->get('content')" class="mt-1 text-xs" />
                         </div>

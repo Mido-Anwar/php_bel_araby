@@ -2,18 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════ */
+/* EasyMDE — RTL + LTR Auto                    */
+/* ═══════════════════════════════════════════ */
 
-/* تخصيص محرر مارك دوّن للغة العربية و الـ RTL */
-.CodeMirror, .editor-preview {
-    direction: rtl !important;
-    text-align: right !important;
-    font-family: 'Cairo', sans-serif; /* أو أي خط عربي تفضله */
+/* الافتراضي — LTR للإنجليزي */
+.EasyMDEContainer .CodeMirror,
+.EasyMDEContainer .editor-preview,
+.EasyMDEContainer .editor-preview-side {
+    direction: ltr;
+    text-align: left;
+    font-family: "Cairo", "Figtree", sans-serif;
 }
 
-/* تعديل شريط الأدوات العلوي عشان يناسب الشكل العام */
-.editor-toolbar {
-    direction: ltr; /* نخلي الأيقونات في مكانها الطبيعي أو تعدلها لو حابب */
+/* RTL — لما يكون فيه عربي */
+.EasyMDEContainer .CodeMirror[dir="rtl"],
+.EasyMDEContainer .editor-preview[dir="rtl"],
+.EasyMDEContainer .editor-preview-side[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Toolbar — RTL عشان الأيقونات تبان من اليمين */
+.EasyMDEContainer .editor-toolbar {
+    direction: rtl;
+}
+
+.EasyMDEContainer .editor-toolbar button {
+    margin: 0 2px;
+}
+
+/* Code blocks — دائمًا LTR */
+.EasyMDEContainer .CodeMirror pre,
+.EasyMDEContainer .CodeMirror code,
+.EasyMDEContainer .editor-preview pre,
+.EasyMDEContainer .editor-preview code {
+    direction: ltr;
     text-align: left;
 }
-
-

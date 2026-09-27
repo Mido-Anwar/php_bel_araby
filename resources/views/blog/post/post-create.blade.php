@@ -48,13 +48,10 @@
 
                     <!-- Field: Post Content -->
                     <div class="space-y-2">
-                        <x-input-label for="content" :value="'Post Content'"
-                            class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
-                        <div class="max-w-4xl mx-auto p-6">
-                            <label for="markdown-editor" class="block mb-2 font-bold text-lg">اكتب محتوى التوثيق أو
-                                المقال:</label>
-                            <textarea id="markdown-editor" name="content"></textarea>
-                        
+                        <x-input-label for="content" :value="'Post Content'" />
+
+                        <textarea id="markdown-editor" name="content" rows="15">{{ old('content') }}</textarea>
+
                         <x-input-error :messages="$errors->get('content')" class="mt-1 text-xs" />
                     </div>
                     <!-- Field: Post Image Upload with Alpine.js Preview -->

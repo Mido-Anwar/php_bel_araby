@@ -11,6 +11,7 @@ use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
 use League\CommonMark\MarkdownConverter;
+
 class BlogController extends Controller
 {
     /**
@@ -41,43 +42,35 @@ class BlogController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\View\View
      */
-    public function show(Post $post)
+    public function show(Post $post): View
     {
+        abort_unless($post->is_published, 404);
+
         $title = $post->title;
-        $post->load("image");
+        $post->load('image:id,mediable_id,mediable_type,file_path,alt_text');
 
-        // تحويل الـ Markdown وتنظيف المحتوى
-        $this->processAndSanitizePostContent($post);
+        // ✅ تحويل Markdown → HTML
+        $converter = new \League\CommonMark\CommonMarkConverter([
+            'html_input' => 'allow',
+            'allow_unsafe_links' => false,
+        ]);
 
-        return view("blog.show-post", ["post" => $post, "title" => $title]);
+        $html = $converter->convert($post->content)->getContent();
+
+        // Meta
+        $description = \Str::limit(strip_tags($html), 160);
+        $ogImage = $post->image
+            ? asset('storage/' . $post->image->file_path)
+            : asset('images/og-default.jpg');
+
+        return view('blog.show-post', compact(
+            'post',
+            'title',
+            'html',
+            'description',
+            'ogImage'
+        ));
     }
 
-    /**
-     * تحويل محتوى الـ Markdown إلى HTML وتنظيفه من XSS.
-     *
-     * @param Post $post
-     * @return void
-     */
-    private function processAndSanitizePostContent(Post $post): void
-    {
-       $rawContent = $post->content ?? '';
-
-    // إعداد البيئة بالشكل الصحيح والآمن
-    $environment = new Environment([
-        'html_input' => 'strip',
-        'allow_unsafe_links' => false,
-    ]);
-
-    // إضافة الإضافات القياسية للـ Markdown
-    $environment->addExtension(new CommonMarkCoreExtension());
-    $environment->addExtension(new AutolinkExtension());
-
-    $converter = new MarkdownConverter($environment);
-
-    // تحويل النص الخام إلى HTML
-    $htmlContent = $converter->convert($rawContent)->__toString();
-
-    // تنظيف الـ HTML بالـ Purifier وحفظه
-    $post->content = Purifier::clean($htmlContent);
-    }
+  
 }
