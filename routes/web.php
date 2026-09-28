@@ -12,7 +12,12 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\SitemapController;
 
+
+
+// site map routes
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 // ============================
 // Public Pages
 // ============================
@@ -85,15 +90,17 @@ Route::prefix('posts')->controller(PostController::class)->group(function () {
  * Technology Management Routes
  * Handles CRUD operations for Technologies.
  */
-Route::prefix('technology')->controller(TechnologyController::class)->group(function () {
-    Route::get('/', 'index')->name('technology.index');
-    Route::get('/create', 'create')->name('technology.create');
-    Route::post('/store', 'store')->name('technology.store');
-    Route::get('/show/{technology}', 'show')->name('technology.show');
-    Route::get('/edit/{technology}', 'edit')->name('technology.edit');
-    Route::post('/update/{technology}', 'update')->name('technology.update');
-    Route::delete('/delete/{technology}', 'destroy')->name('technology.destroy');
-})->middleware(['auth', 'verified', 'role:super-admin']);
+Route::prefix('technology')->controller(TechnologyController::class)
+    ->middleware(['auth', 'verified', 'role:super-admin'])
+    ->group(function () {
+        Route::get('/', 'index')->name('technology.index');
+        Route::get('/create', 'create')->name('technology.create');
+        Route::post('/store', 'store')->name('technology.store');
+        Route::get('/show/{technology}', 'show')->name('technology.show');
+        Route::get('/edit/{technology}', 'edit')->name('technology.edit');
+        Route::post('/update/{technology}', 'update')->name('technology.update');
+        Route::delete('/delete/{technology}', 'destroy')->name('technology.destroy');
+    });
 
 /**
  * Section Management Routes

@@ -32,8 +32,13 @@
                 قائمة بالتقنيات واللغات المسجلة في النظام
             </p>
         </div>
+            @if ()
 
+            @endif
         <a href="{{ route('technology.index') ?? '#' }}" class="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 font-semibold flex items-center gap-1">
+
+          
+
             <span>إدارة التقنيات</span>
             <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>

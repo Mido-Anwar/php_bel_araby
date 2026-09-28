@@ -1,2 +1,29 @@
 User-agent: *
-Disallow:
+Allow: /
+Allow: /blog
+Allow: /docs
+Allow: /about
+Allow: /contact
+Allow: /privacy
+Allow: /terms
+
+# Disallow Dashboard & Management (CRUD)
+Disallow: /dashboard
+Disallow: /posts
+Disallow: /technology
+Disallow: /section
+Disallow: /concept
+Disallow: /user
+Disallow: /role
+Disallow: /permission
+
+# Disallow Authentication & Profile Routes (from auth.php)
+Disallow: /logintowhiscrashowapp
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /verify-email
+Disallow: /email
+Disallow: /confirm-password
+Disallow: /profile
+
+Sitemap: https://whiscrashow.com/sitemap.xml
