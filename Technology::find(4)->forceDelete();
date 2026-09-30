@@ -1,0 +1,13 @@
+[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#8603
+    [34mall[39m: [
+      [34;4mApp\Models\Technology[39;24m {#8604
+        [34mid[39m: [35m4[39m,
+        [34mname[39m: [32m"[39m[32mhtml[39m[32m"[39m,
+        [34mslug[39m: [32m"[39m[32mhtml[39m[32m"[39m,
+        [34mdescription[39m: [32m"[39m[32mLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text for Letraset's Body Type sheets. It has survived not only many decades, but also the leap into electronic typesetting, remaining essentially unchanLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text for Letraset's Body Type sheets. It has survived not only many decades, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised thanks to these sheets and more recently with desktop publishing software like Aldus PageMaker and Microsoft Word including versions of Lorem Ipsum.ged. It was popularised thanks to these sheets and more recently with desktop publishing software like Aldus PageMaker and Microsoft Word including versions of Lorem Ipsum.[39m[32m"[39m,
+        [34mcreated_at[39m: [32m"[39m[32m2026-09-18 15:41:18[39m[32m"[39m,
+        [34mupdated_at[39m: [32m"[39m[32m2026-09-18 15:41:44[39m[32m"[39m,
+        [34mdeleted_at[39m: [32m"[39m[32m2026-09-18 15:41:44[39m[32m"[39m,
+      },
+    ],
+  }

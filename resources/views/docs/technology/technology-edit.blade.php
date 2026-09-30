@@ -49,35 +49,39 @@
                     </div>
 
                     <!-- Field: Description -->
-                    <div class="space-y-2">
-                        <x-input-label for="description" :value="'Post Content'"
-                            class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
-                        <div class="max-w-4xl mx-auto p-6">
+                    <!-- Technology Description (Toast UI Editor) -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Technology
+                            Description</label>
 
-                            <textarea id="markdown-editor" name="description" rows="15">
-                                {{ $technology->description }}
-                            </textarea>
+                        <div id="markdown-editor"></div>
 
-                            <x-input-error :messages="$errors->get('content')" class="mt-1 text-xs" />
-                        </div>
+                        <!-- ⚠️ لاحظ هنا: الـ name والـ id طابقناهم مع اسم الحقل عندك (description) -->
+                        <input type="hidden" name="description" id="description-input"
+                            value="{{ old('description', $technology->description ?? '') }}">
 
-                        <!-- Action Buttons -->
-                        <div
-                            class="pt-4 flex items-center justify-end gap-3 border-t border-gray-100 dark:border-gray-700/60">
-                            <a href="{{ route('technology.index') }}"
-                                class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200">
-                                Cancel
-                            </a>
+                        @error('description')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                            <button type="submit"
-                                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold shadow-lg shadow-amber-500/25 hover:shadow-amber-500/35 active:scale-[0.98] transition-all duration-200">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>Update Technology</span>
-                            </button>
-                        </div>
+                    <!-- Action Buttons -->
+                    <div
+                        class="pt-4 flex items-center justify-end gap-3 border-t border-gray-100 dark:border-gray-700/60">
+                        <a href="{{ route('technology.index') }}"
+                            class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200">
+                            Cancel
+                        </a>
+
+                        <button type="submit"
+                            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold shadow-lg shadow-amber-500/25 hover:shadow-amber-500/35 active:scale-[0.98] transition-all duration-200">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Update Technology</span>
+                        </button>
+                    </div>
                 </form>
 
             </div>

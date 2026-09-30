@@ -2,41 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ═══════════════════════════════════════════ */
-/* EasyMDE — RTL + LTR Auto                    */
-/* ═══════════════════════════════════════════ */
 
-/* الافتراضي — LTR للإنجليزي */
-.EasyMDEContainer .CodeMirror,
-.EasyMDEContainer .editor-preview,
-.EasyMDEContainer .editor-preview-side {
-    direction: ltr;
-    text-align: left;
-    font-family: "Cairo", "Figtree", sans-serif;
-}
-
-/* RTL — لما يكون فيه عربي */
-.EasyMDEContainer .CodeMirror[dir="rtl"],
-.EasyMDEContainer .editor-preview[dir="rtl"],
-.EasyMDEContainer .editor-preview-side[dir="rtl"] {
-    direction: rtl;
-    text-align: right;
-}
-
-/* Toolbar — RTL عشان الأيقونات تبان من اليمين */
-.EasyMDEContainer .editor-toolbar {
-    direction: rtl;
-}
-
-.EasyMDEContainer .editor-toolbar button {
-    margin: 0 2px;
-}
-
-/* Code blocks — دائمًا LTR */
-.EasyMDEContainer .CodeMirror pre,
-.EasyMDEContainer .CodeMirror code,
-.EasyMDEContainer .editor-preview pre,
-.EasyMDEContainer .editor-preview code {
-    direction: ltr;
-    text-align: left;
-}

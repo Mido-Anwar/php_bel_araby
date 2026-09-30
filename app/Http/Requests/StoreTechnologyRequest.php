@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreTechnologyRequest extends FormRequest
 {
@@ -14,8 +14,15 @@ class StoreTechnologyRequest extends FormRequest
 
     public function rules(): array
     {
+        $technologyId = $this->route('technology');
+
         return [
-            'name'        => ['required', 'string', 'max:255', 'unique:technologies,name'],
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('technologies', 'name')->ignore($technologyId),
+            ],
             'description' => ['nullable', 'string'],
         ];
     }

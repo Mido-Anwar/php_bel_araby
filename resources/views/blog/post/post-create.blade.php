@@ -47,12 +47,19 @@
                     </div>
 
                     <!-- Field: Post Content -->
-                    <div class="space-y-2">
-                        <x-input-label for="content" :value="'Post Content'" />
+                    <!-- Post Content (Toast UI Editor with Tabs) -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Post Content</label>
 
-                        <textarea id="markdown-editor" name="content" rows="15">{{ old('content') }}</textarea>
+                        <!-- المكان اللي هيترسم فيه المحرر -->
+                        <div id="markdown-editor"></div>
 
-                        <x-input-error :messages="$errors->get('content')" class="mt-1 text-xs" />
+                        <!-- حقل مخفي لتخزين محتوى الماركداون وإرساله للكونترولر -->
+                        <input type="hidden" name="content" id="content-input" value="{{ old('content') }}">
+
+                        @error('content')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                     <!-- Field: Post Image Upload with Alpine.js Preview -->
                     <div class="space-y-2">

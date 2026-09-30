@@ -1,55 +1,36 @@
-import EasyMDE from "easymde";
-import "easymde/dist/easymde.min.css";
-
-window.EasyMDE = EasyMDE;
+import Editor from '@toast-ui/editor';
+import '@toast-ui/editor/dist/toastui-editor.css';
 
 document.addEventListener("DOMContentLoaded", function () {
     const el = document.getElementById("markdown-editor");
     if (!el) return;
 
-    const editor = new EasyMDE({
-        element: el,
-        spellChecker: false,
-        placeholder: "اكتب هنا باستخدام Markdown...",
-        status: false,
-        autoDownloadFontAwesome: true,
-        toolbar: [
-            "bold",
-            "italic",
-            "heading",
-            "|",
-            "quote",
-            "code",
-            "unordered-list",
-            "ordered-list",
-            "|",
-            "link",
-            "image",
-            "table",
-            "|",
-            "preview",
-            "side-by-side",
-            "fullscreen",
-            "|",
-            "guide",
-        ],
+    // البحث عن أي حقل مخفي داخل الفورم (سواء كان content أو description)
+    const hiddenInput = document.querySelector('form input[type="hidden"][name="content"], form input[type="hidden"][name="description"]');
+    const initialContent = hiddenInput ? hiddenInput.value : '';
+
+    const editor = new Editor({
+        el: el,
+        height: '450px',
+        initialEditType: 'markdown',
+        previewStyle: 'tab',
+        initialValue: initialContent,
+        placeholder: 'اكتب التفاصيل هنا...',
+        events: {
+            load: function() {
+                const editorEl = document.querySelector('.toastui-editor-defaultUI');
+                if (editorEl) {
+                    editorEl.setAttribute('dir', 'rtl');
+                }
+            }
+        }
     });
 
-    // ✅ Auto Direction
-    const cm = editor.codemirror;
-
-    function updateDirection() {
-        const line = cm.getLine(cm.getCursor().line) || "";
-        const isArabic = /[\u0600-\u06FF]/.test(line);
-
-        const wrapper = cm.getWrapperElement();
-        wrapper.setAttribute("dir", isArabic ? "rtl" : "ltr");
-
-        const preview = document.querySelector(".editor-preview");
-        if (preview) preview.setAttribute("dir", isArabic ? "rtl" : "ltr");
+    // تحديث الحقل المخفي فور ضغط زر الإرسال أياً كان اسمه
+    const form = el.closest('form');
+    if (form && hiddenInput) {
+        form.addEventListener('submit', function() {
+            hiddenInput.value = editor.getMarkdown();
+        });
     }
-
-    cm.on("cursorActivity", updateDirection);
-    cm.on("change", updateDirection);
-    updateDirection();
 });

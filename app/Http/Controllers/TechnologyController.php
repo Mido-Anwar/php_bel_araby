@@ -41,7 +41,10 @@ class TechnologyController extends Controller
      */
     public function store(StoreTechnologyRequest $request): RedirectResponse
     {
-        Technology::create($request->validated());
+        $data = $request->validated();
+        $data['name'] = strtolower(trim($data['name'])); // أو ucfirst لتوحيد الشكل
+
+        Technology::create($data);
 
         return to_route('technology.index')->with(
             'success-store-technology',

@@ -41,39 +41,43 @@
                         <div class="relative">
                             <x-text-input id="name" name="name" type="text"
                                 class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm"
-                                placeholder="e.g. Laravel, React, Vue.js"  required autofocus />
+                                placeholder="e.g. Laravel, React, Vue.js" required autofocus />
                         </div>
                         <x-input-error :messages="$errors->get('name')" class="mt-1 text-xs" />
                     </div>
 
                     <!-- Field: Description -->
-                    <div class="space-y-2">
-                        <x-input-label for="description" :value="'Post Content'"
-                            class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
-                        <div class="max-w-4xl mx-auto p-6">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Technology description</label>
 
-                            <textarea id="markdown-editor" name="description" rows="15"></textarea>
+                        <!-- المكان اللي هيترسم فيه المحرر -->
+                        <div id="markdown-editor"></div>
 
-                            <x-input-error :messages="$errors->get('content')" class="mt-1 text-xs" />
-                        </div>
+                        <!-- حقل مخفي لتخزين محتوى الماركداون وإرساله للكونترولر -->
+                        <input type="hidden" name="description" id="description-input" value="">
 
-                        <!-- Action Buttons -->
-                        <div
-                            class="pt-4 flex items-center justify-end gap-3 border-t border-gray-100 dark:border-gray-700/60">
-                            <a href="{{ route('technology.index') }}"
-                                class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200">
-                                Cancel
-                            </a>
+                        @error('description')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                            <button type="submit"
-                                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/35 active:scale-[0.98] transition-all duration-200">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>Save Technology</span>
-                            </button>
-                        </div>
+                    <!-- Action Buttons -->
+                    <div
+                        class="pt-4 flex items-center justify-end gap-3 border-t border-gray-100 dark:border-gray-700/60">
+                        <a href="{{ route('technology.index') }}"
+                            class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200">
+                            Cancel
+                        </a>
+
+                        <button type="submit"
+                            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/35 active:scale-[0.98] transition-all duration-200">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Save Technology</span>
+                        </button>
+                    </div>
                 </form>
 
             </div>

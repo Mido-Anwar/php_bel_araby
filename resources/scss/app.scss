@@ -1,5 +1,4 @@
 
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -8,3 +7,20 @@
 
 
 
+/* ═══════════════════════════════════════════ */
+/* Toast UI Editor — RTL Styles (SCSS)         */
+/* ═══════════════════════════════════════════ */
+
+.toastui-editor-defaultUI {
+    direction: rtl;
+    text-align: right;
+    font-family: "Cairo", "Figtree", sans-serif;
+
+    /* الحفاظ على مناطق كتابة وتنسيق الأكواد والروابط LTR لعدم تكسير الرموز التقنية */
+    .toastui-editor-ww-code-block,
+    .toastui-editor-md-container code,
+    .toastui-editor-contents pre {
+        direction: ltr !important;
+        text-align: left !important;
+    }
+}
