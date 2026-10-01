@@ -130,7 +130,7 @@
 
                                 @if($section->description)
                                     <p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2 leading-relaxed">
-                                        {{ $section->description }}
+                                        {{$section->description }}
                                     </p>
                                 @endif
                             </div>

@@ -59,7 +59,7 @@
                         <div id="markdown-editor"></div>
 
                         <!-- حقل مخفي لتخزين محتوى الماركداون وإرساله للكونترولر -->
-                        <input type="hidden" name="description" id="description-input" value="{{ old('description') }}">
+                        <input type="hidden" name="description" id="description-input" value="{{ old('description', $section->description ?? '') }}">
 
                         @error('description')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

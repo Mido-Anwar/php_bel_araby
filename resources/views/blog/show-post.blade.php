@@ -43,30 +43,32 @@
                         loading="lazy" class="w-full h-auto rounded-lg object-cover">
                 </div>
             @endif
+            <div
+                class="prose prose-invert prose-yellow max-w-none
+    text-slate-300 text-base sm:text-lg leading-loose
+    prose-headings:text-yellow-400 prose-headings:font-bold
+    prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
+    prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
+    prose-p:my-4
+    prose-ul:my-4 prose-ul:pr-6
+    prose-ol:my-4 prose-ol:pr-6
+    prose-li:my-1
+    prose-blockquote:border-r-4 prose-blockquote:border-yellow-400
+    prose-blockquote:pr-4 prose-blockquote:italic
 
-            <!-- محتوى المقال (Content) مع دعم الاتجاه والتنسيق -->
-         <div class="prose prose-invert prose-yellow max-w-none
-            text-slate-300 text-base sm:text-lg leading-loose
-            prose-headings:text-yellow-400 prose-headings:font-bold
-            prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
-            prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
-            prose-p:my-4
-            prose-ul:my-4 prose-ul:pr-6
-            prose-ol:my-4 prose-ol:pr-6
-            prose-li:my-1
-            prose-blockquote:border-r-4 prose-blockquote:border-yellow-400
-            prose-blockquote:pr-4 prose-blockquote:italic
-            prose-code:text-yellow-300 prose-code:bg-slate-800
-            prose-code:px-2 prose-code:py-1 prose-code:rounded
-            prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-800
-            prose-pre:p-4 prose-pre:rounded-xl
-            prose-a:text-yellow-400 prose-a:underline
-            prose-img:rounded-xl prose-img:my-6
-            prose-table:border prose-table:border-slate-700
-            prose-th:bg-slate-800 prose-th:p-3
-            prose-td:p-3 prose-td:border prose-td:border-slate-700">
-    {!! $html !!}
-</div>
+    /* تخصيص الأكواد الصغيرة داخل السطر (Inline Code) */
+    prose-code:text-yellow-300 prose-code:bg-slate-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-[''] prose-code:after:content-['']
+
+    /* إلغاء خلفية الـ pre الافتراضية لترك المجال لثيم Prism */
+    prose-pre:bg-transparent prose-pre:p-0 prose-pre:m-0
+
+    prose-a:text-yellow-400 prose-a:underline
+    prose-img:rounded-xl prose-img:my-6
+    prose-table:border prose-table:border-slate-700
+    prose-th:bg-slate-800 prose-th:p-3
+    prose-td:p-3 prose-td:border prose-td:border-slate-700">
+                {!! $html !!}
+            </div>
 
             <!-- فاصل سفلي -->
             <div class="mt-12 pt-8 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">

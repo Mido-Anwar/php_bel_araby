@@ -3,3 +3,9 @@
 @tailwind utilities;
 
 
+/* إجبار صناديق الكود والـ Syntax highlighting على اتجاه LTR الصحيح برمجياً */
+pre, code, kbd, samp {
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: embed;
+}
