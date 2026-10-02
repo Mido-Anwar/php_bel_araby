@@ -21,54 +21,66 @@
     </x-slot>
 
     <div class="py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-<!-- 2. Technologies Section -->
-<div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700/60 shadow-sm p-6 space-y-5">
-    <div class="flex items-center justify-between border-b border-gray-100 dark:border-gray-700/60 pb-4">
-        <div>
-            <h3 class="font-bold text-gray-900 dark:text-white text-lg">
-                التقنيات المستخدمة
-            </h3>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                قائمة بالتقنيات واللغات المسجلة في النظام
-            </p>
-        </div>
-      
-        <a href="{{ route('technology.index') ?? '#' }}" class="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 font-semibold flex items-center gap-1">
+        @role('super-admin')
+            <!-- 2. Technologies Section -->
+            <div
+                class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700/60 shadow-sm p-6 space-y-5">
+                <div class="flex items-center justify-between border-b border-gray-100 dark:border-gray-700/60 pb-4">
+                    <div>
+                        <h3 class="font-bold text-gray-900 dark:text-white text-lg">
+                            التقنيات المستخدمة
+                        </h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                            قائمة بالتقنيات واللغات المسجلة في النظام
+                        </p>
+                    </div>
+
+                    <a href="{{ route('technology.index') ?? '#' }}"
+                        class="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 font-semibold flex items-center gap-1">
 
 
 
-            <span>إدارة التقنيات</span>
-            <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-        </a>
-    </div>
-
-    <!-- Grid of Technologies -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        @forelse (\App\Models\Technology::all() as $tech)
-            <a href="{{ route('technology.show', $tech->id) }}" class="group relative p-4 rounded-xl border border-gray-100 dark:border-gray-700/50 bg-gray-50/50 dark:bg-gray-900/40 hover:bg-white dark:hover:bg-gray-800 hover:shadow-md hover:border-blue-500/30 dark:hover:border-blue-500/30 transition-all duration-200 flex flex-col items-center text-center">
-
-                <!-- Tech Icon / Logo -->
-                <div class="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-2 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                        <!-- Default Code Icon -->
-                        <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        <span>إدارة التقنيات</span>
+                        <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
+                    </a>
                 </div>
 
-                <!-- Tech Name -->
-                <h4 class="mt-3 text-sm font-bold text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    {{ $tech->name }}
-                </h4>
-            </a>
-        @empty
-            <div class="col-span-full py-8 text-center text-gray-400 text-sm">
-                لا توجد تقنيات مضافة حتى الآن.
+                <!-- Grid of Technologies -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    @forelse (\App\Models\Technology::all() as $tech)
+                        <a href="{{ route('technology.show', $tech->id) }}"
+                            class="group relative p-4 rounded-xl border border-gray-100 dark:border-gray-700/50 bg-gray-50/50 dark:bg-gray-900/40 hover:bg-white dark:hover:bg-gray-800 hover:shadow-md hover:border-blue-500/30 dark:hover:border-blue-500/30 transition-all duration-200 flex flex-col items-center text-center">
+
+                            <!-- Tech Icon / Logo -->
+                            <div
+                                class="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-2 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                                <!-- Default Code Icon -->
+                                <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                </svg>
+                            </div>
+
+                            <!-- Tech Name -->
+                            <h4
+                                class="mt-3 text-sm font-bold text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                {{ $tech->name }}
+                            </h4>
+                        </a>
+                    @empty
+                        <div class="col-span-full py-8 text-center text-gray-400 text-sm">
+                            لا توجد تقنيات مضافة حتى الآن.
+                        </div>
+                    @endforelse
+                </div>
             </div>
-        @endforelse
-    </div>
-</div>
+
+        @endrole
+
+
         <!-- 1. Stats Grid Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
 

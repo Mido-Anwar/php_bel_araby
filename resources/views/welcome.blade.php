@@ -1,117 +1,118 @@
 <x-master-layout :title="'Whiscrashow - منصة عربية لتوثيق لغات البرمجة'">
 
-    <div dir="rtl" class="relative overflow-hidden">
+    <div dir="rtl" class="relative overflow-hidden bg-[#090d16] text-slate-100 selection:bg-yellow-500 selection:text-slate-950 font-sans">
+
+        {{-- خلفية شبكية برمجية --}}
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b12_1px,transparent_1px),linear-gradient(to_bottom,#1e293b12_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none"></div>
+
+        {{-- إضاءات خلفية فنية --}}
+        <div class="absolute top-12 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-yellow-500/10 rounded-full blur-[120px] pointer-events-none"></div>
 
         {{-- ═══════════════════════════════════════════ --}}
-        {{-- 1. Hero Section --}}
+        {{-- 1. Hero Section & Mario/Pixel Retro Arcade --}}
         {{-- ═══════════════════════════════════════════ --}}
-        <section class="relative py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
+        <section class="relative pt-16 pb-20 lg:pt-24 lg:pb-28 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
 
-            {{-- خلفية جمالية --}}
-            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute bottom-10 right-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div class="relative max-w-5xl mx-auto text-center z-10">
-
-                {{-- شارة --}}
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700/60 text-yellow-400 text-xs sm:text-sm font-medium mb-6 shadow-sm backdrop-blur-md">
-                    <span class="flex h-2 w-2 rounded-full bg-yellow-400 animate-pulse"></span>
-                    منصة عربية لتوثيق لغات البرمجة
+                {{-- عنوان رئيسي بسيط فوق الشاشة الكبيرة --}}
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-slate-900 border border-slate-700/80 text-yellow-400 text-xs sm:text-sm font-mono mb-4 shadow-xl">
+                        <span class="inline-block w-2 h-2 bg-yellow-400 animate-pulse"></span>
+                        [ ARCADE_MODE: PHP_BACKEND ]
+                    </div>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                        أكواد ومستندات برمجية
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500">
+                            بروح المطورين الكلاسيكية
+                        </span>
+                    </h1>
                 </div>
 
-                {{-- العنوان --}}
-                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6">
-                    تعلّم البرمجة
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-200">
-                        بالعربي
-                    </span>
-                </h1>
+                {{-- الشاشة الكبيرة الضخمة (Retro Arcade Terminal) --}}
+                <div class="relative rounded-3xl bg-[#0b0f19] border-2 border-yellow-500/30 shadow-[0_0_50px_rgba(234,179,8,0.15)] overflow-hidden">
 
-                {{-- الوصف --}}
-                <p class="text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10">
-                    مقالات عميقة، وشروحات أصلية، وتوثيق شامل للغات البرمجة — كل ده بالعربي، وبجودة تنافس المحتوى الإنجليزي.
-                </p>
+                    {{-- شريط العلوي للنافذة --}}
+                    <div class="flex items-center justify-between px-5 py-3.5 bg-[#111827] border-b border-slate-800">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3.5 h-3.5 rounded-full bg-red-500 inline-block"></span>
+                            <span class="w-3.5 h-3.5 rounded-full bg-yellow-500 inline-block"></span>
+                            <span class="w-3.5 h-3.5 rounded-full bg-green-500 inline-block"></span>
+                        </div>
+                        <div class="text-xs font-mono text-yellow-400 font-bold tracking-widest flex items-center gap-2">
+                            <span>🎮</span> WHISCRASHOW_CONSOLE.php
+                        </div>
+                        <div class="text-xs font-mono text-slate-400 hidden sm:block">FPS: 60 | LVL: PHP</div>
+                    </div>
 
-                {{-- CTA Buttons --}}
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="{{ route('blog.main') }}"
-                        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-slate-950 text-sm font-bold transition-all shadow-lg shadow-yellow-500/20">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
-                        تصفّح المقالات
-                    </a>
-                    <a href="{{ route('about') }}"
-                        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-200 text-sm font-bold transition-all">
-                        اعرف أكتر
-                    </a>
+                    {{-- مسار الجري لشخصية البكسل آرت (Animation Track) --}}
+                    <div class="relative h-12 bg-[#070a12] border-b border-slate-800/80 overflow-hidden flex items-center">
+                        <div class="absolute inset-0 bg-[linear-gradient(90deg,#1e293b33_1px,transparent_1px)] bg-[size:2rem_100%] opacity-30"></div>
+
+                        {{-- شخصية البكسل المتحركة بالجافا سكريبت --}}
+                        <div id="pixel-character" class="absolute left-0 text-xl select-none transition-transform duration-75" style="will-change: transform;">
+                            🏃‍♂️<span class="text-[10px] font-mono text-yellow-400 bg-slate-950/80 px-1.5 py-0.5 rounded ml-1 border border-slate-800">RUN.PHP</span>
+                        </div>
+                    </div>
+
+                    {{-- محتوى كود PHP الكبير والواضح --}}
+                    <div class="p-6 sm:p-10 font-mono text-xs sm:text-sm leading-relaxed text-slate-300 text-left overflow-x-auto space-y-2 bg-[#090d16]" dir="ltr">
+                        <p class="text-slate-500">&lt;?php</p>
+                        <p class="text-purple-400">namespace <span class="text-blue-300">App\Core</span>;</p>
+                        <br>
+                        <p class="text-purple-400">class <span class="text-yellow-400">BackendEngine</span> &#123;</p>
+                        <p class="pl-6"><span class="text-purple-400">private</span> <span class="text-yellow-300">$framework</span> = <span class="text-green-300">'Laravel & Custom MVC'</span>;</p>
+                        <p class="pl-6"><span class="text-purple-400">private</span> <span class="text-yellow-300">$database</span> = <span class="text-green-300">'MySQL & Eloquent'</span>;</p>
+                        <br>
+                        <p class="pl-6"><span class="text-purple-400">public function</span> <span class="text-blue-400">compileArticles</span>() &#123;</p>
+                        <p class="pl-12"><span class="text-yellow-300">return</span> Post::<span class="text-blue-400">latest</span>()-&gt;<span class="text-blue-400">get</span>();</p>
+                        <p class="pl-6">&#125;</p>
+                        <p>&#125;</p>
+                        <br>
+                        <p class="text-yellow-400">$engine = <span class="text-purple-400">new</span> BackendEngine();</p>
+                        <p class="text-yellow-400">echo $engine-&gt;compileArticles(); <span class="inline-block w-2.5 h-4 bg-yellow-400 animate-pulse align-middle ml-1"></span></p>
+                    </div>
+
+                    {{-- شريط سفلي للأزرار السريعة داخل الشاشة --}}
+                    <div class="px-6 py-4 bg-[#070a12] border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <a href="{{ route('blog.main') }}"
+                                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold transition-all shadow-md font-mono">
+                                <span>> تصفّح المقالات</span>
+                            </a>
+                            <a href="{{ route('blog.main') }}"
+                                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold transition-all font-mono">
+                                الأرشيف البرمجي
+                            </a>
+                        </div>
+                        <div class="text-xs font-mono text-green-400 font-bold flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
+                            STATUS: RUNNING
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
         </section>
 
         {{-- ═══════════════════════════════════════════ --}}
-        {{-- 2. Stats Section --}}
+        {{-- 2. Latest Posts (مباشرة بدون إحصائيات) --}}
         {{-- ═══════════════════════════════════════════ --}}
-        <section class="py-12 px-4 sm:px-6 lg:px-8 border-y border-slate-800/60 bg-slate-900/40">
-            <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-
-                {{-- Stats: Articles --}}
-                <div class="text-center">
-                    <div class="text-3xl sm:text-4xl font-extrabold text-yellow-400 mb-1">
-                        {{ $stats['posts'] }}+
-                    </div>
-                    <div class="text-xs sm:text-sm text-slate-400">مقال</div>
-                </div>
-
-                {{-- Stats: Technologies --}}
-                <div class="text-center">
-                    <div class="text-3xl sm:text-4xl font-extrabold text-yellow-400 mb-1">
-                        {{ $stats['technologies'] }}
-                    </div>
-                    <div class="text-xs sm:text-sm text-slate-400">تقنية</div>
-                </div>
-
-                {{-- Stats: Sections --}}
-                <div class="text-center">
-                    <div class="text-3xl sm:text-4xl font-extrabold text-yellow-400 mb-1">
-                        {{ $stats['sections'] }}
-                    </div>
-                    <div class="text-xs sm:text-sm text-slate-400">قسم</div>
-                </div>
-
-                {{-- Stats: Concepts --}}
-                <div class="text-center">
-                    <div class="text-3xl sm:text-4xl font-extrabold text-yellow-400 mb-1">
-                        {{ $stats['concepts'] }}
-                    </div>
-                    <div class="text-xs sm:text-sm text-slate-400">مفهوم</div>
-                </div>
-
-            </div>
-        </section>
-
-        {{-- ═══════════════════════════════════════════ --}}
-        {{-- 3. Latest Posts --}}
-        {{-- ═══════════════════════════════════════════ --}}
-        <section class="py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+        <section class="py-20 px-4 sm:px-6 lg:px-8 border-t border-slate-800/60 bg-slate-900/10">
             <div class="max-w-6xl mx-auto">
 
                 {{-- Header --}}
-                <div class="flex items-center justify-between mb-10">
+                <div class="flex items-end justify-between mb-12">
                     <div>
-                        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">
-                            أحدث المقالات
+                        <span class="text-yellow-400 font-mono text-xs uppercase tracking-widest block mb-2">// LATEST_ARTICLES</span>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                            أحدث المقالات المضافة
                         </h2>
-                        <p class="text-slate-400 text-sm">
-                            مقالات تقنية عميقة — بالعربي
-                        </p>
                     </div>
                     <a href="{{ route('blog.main') }}"
-                        class="hidden sm:inline-flex items-center gap-2 text-sm text-yellow-400 hover:text-yellow-300 transition-colors">
+                        class="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-yellow-400 hover:text-yellow-300 transition-colors group font-mono">
                         عرض الكل
-                        <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 rtl:rotate-180 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
@@ -120,59 +121,59 @@
 
                 {{-- Grid --}}
                 @if($latestPosts->count() > 0)
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         @foreach($latestPosts as $post)
                             <article
-                                class="group rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-yellow-500/40 transition-all duration-300 backdrop-blur-sm flex flex-col overflow-hidden">
+                                class="group rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-yellow-500/50 transition-all duration-300 backdrop-blur-md flex flex-col overflow-hidden shadow-xl hover:-translate-y-1.5">
 
                                 {{-- Image --}}
-                                <a href="{{ route('blog.show', $post) }}" class="relative block h-48 w-full overflow-hidden bg-slate-800">
+                                <a href="{{ route('blog.show', $post) }}" class="relative block h-52 w-full overflow-hidden bg-slate-950">
                                     @if($post->image)
                                         <img src="{{ asset('storage/' . $post->image->file_path) }}"
                                             alt="{{ $post->image->alt_text }}"
                                             loading="lazy"
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
                                     @else
-                                        <div class="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-slate-800 to-slate-900">
-                                            <svg class="w-12 h-12 mb-3 text-yellow-500/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <div class="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-slate-900 to-slate-950">
+                                            <svg class="w-10 h-10 mb-3 text-yellow-500/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                                             </svg>
-                                            <span class="text-sm font-bold text-slate-400 line-clamp-2">
+                                            <span class="text-xs font-mono text-slate-400 line-clamp-1">
                                                 {{ $post->title }}
                                             </span>
                                         </div>
                                     @endif
+
+                                    <div class="absolute top-3 right-3 bg-slate-950/80 border border-slate-700/60 px-2.5 py-1 rounded-lg text-[10px] font-mono text-yellow-400 backdrop-blur-md">
+                                        توثيق برمجي
+                                    </div>
                                 </a>
 
                                 {{-- Content --}}
                                 <div class="p-6 flex flex-col flex-grow">
-                                    {{-- Date --}}
-                                    <div class="flex items-center gap-2 text-xs text-slate-500 mb-3">
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="flex items-center gap-2 text-xs text-slate-400 mb-3 font-mono">
+                                        <svg class="w-3.5 h-3.5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                         <span>{{ $post->created_at->diffForHumans() }}</span>
                                     </div>
 
-                                    {{-- Title --}}
-                                    <h3 class="text-lg font-bold text-white group-hover:text-yellow-400 transition-colors mb-3 line-clamp-2">
+                                    <h3 class="text-lg font-bold text-white group-hover:text-yellow-400 transition-colors mb-3 line-clamp-2 leading-snug">
                                         <a href="{{ route('blog.show', $post) }}">
                                             {{ $post->title }}
                                         </a>
                                     </h3>
 
-                                    {{-- Excerpt --}}
-                                    <p class="text-slate-400 text-sm leading-relaxed mb-4 line-clamp-3 flex-grow">
-                                        {{ Str::limit(strip_tags($post->content), 100) }}
+                                    <p class="text-slate-300 text-sm leading-relaxed mb-6 line-clamp-3 flex-grow font-normal opacity-85">
+                                        {{ Str::limit(strip_tags($post->content), 110) }}
                                     </p>
 
-                                    {{-- Read More --}}
                                     <a href="{{ route('blog.show', $post) }}"
-                                        class="inline-flex items-center gap-1 text-xs font-semibold text-yellow-400 hover:text-yellow-300 transition-colors pt-4 border-t border-slate-800/60">
-                                        اقرأ المقال
-                                        <svg class="w-3 h-3 rtl:rotate-180 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        class="inline-flex items-center gap-2 text-xs font-bold text-yellow-400 hover:text-yellow-300 transition-colors pt-4 border-t border-slate-800 font-mono">
+                                        <span>اقرأ التفاصيل</span>
+                                        <svg class="w-3.5 h-3.5 rtl:rotate-180 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                         </svg>
@@ -183,22 +184,16 @@
                         @endforeach
                     </div>
 
-                    {{-- View All (Mobile) --}}
-                    <div class="mt-8 text-center sm:hidden">
+                    <div class="mt-10 text-center sm:hidden">
                         <a href="{{ route('blog.main') }}"
-                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-200 text-sm font-bold transition-all">
+                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 text-sm font-bold font-mono">
                             عرض كل المقالات
                         </a>
                     </div>
                 @else
-                    {{-- Empty State --}}
-                    <div class="py-16 text-center bg-slate-900/40 rounded-2xl border border-slate-800">
-                        <svg class="w-16 h-16 mx-auto mb-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-                        </svg>
-                        <h3 class="text-lg font-bold text-white mb-2">لا توجد مقالات بعد</h3>
-                        <p class="text-slate-400 text-sm">تابعنا قريبًا — بنجهّز محتوى جديد.</p>
+                    <div class="py-20 text-center bg-slate-900/30 rounded-2xl border border-slate-800">
+                        <h3 class="text-lg font-bold text-white mb-2 font-mono">لا توجد مقالات منشورة بعد</h3>
+                        <p class="text-slate-400 text-sm">انتظرونا قريباً بأحدث الشروحات والأكواد.</p>
                     </div>
                 @endif
 
@@ -206,36 +201,53 @@
         </section>
 
         {{-- ═══════════════════════════════════════════ --}}
-        {{-- 4. CTA Section --}}
+        {{-- 3. Call To Action --}}
         {{-- ═══════════════════════════════════════════ --}}
-        <section class="py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
-            <div class="max-w-4xl mx-auto text-center bg-gradient-to-br from-slate-900 to-slate-900/50 border border-slate-800 rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+        <section class="py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center bg-gradient-to-br from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800 rounded-3xl p-8 sm:p-14 relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-yellow-500/10 rounded-full blur-[100px] pointer-events-none"></div>
 
-                {{-- Background Glow --}}
-                <div class="absolute top-0 right-0 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-                <div class="relative">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">
-                        عايز تتعلم البرمجة صح؟
+                <div class="relative z-10">
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white mb-4 tracking-tight">
+                        استكشف المزيد من الأكواد والمقالات
                     </h2>
-                    <p class="text-slate-400 text-sm sm:text-base mb-8 max-w-xl mx-auto leading-relaxed">
-                        كل المقالات على الموقع مكتوبة بحب، وبمعلومات من واقع التجربة.
-                        ابدأ رحلتك دلوقتي.
+                    <p class="text-slate-300 text-sm sm:text-base mb-8 max-w-xl mx-auto leading-relaxed">
+                        تصفح الأرشيف الكامل واطلع على الشروحات البرمجية المصممة بعناية لمطوري الباك إند.
                     </p>
 
                     <a href="{{ route('blog.main') }}"
-                        class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-slate-950 text-sm font-bold transition-all shadow-lg shadow-yellow-500/20">
-                        ابدأ التعلم الآن
-                        <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
+                        class="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-sm font-bold transition-all shadow-xl shadow-yellow-500/20 hover:scale-105 font-mono">
+                        <span>// تصفّح الأرشيف كاملاً</span>
                     </a>
                 </div>
-
             </div>
         </section>
 
     </div>
+
+    {{-- جافا سكريبت لتحريك شخصية البكسل آرت في مسار الجري --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const runner = document.getElementById("pixel-character");
+            if (!runner) return;
+
+            let position = -50;
+            let speed = 2.5;
+
+            function animateRunner() {
+                const parentWidth = runner.parentElement.clientWidth;
+                position += speed;
+
+                if (position > parentWidth + 50) {
+                    position = -50;
+                }
+
+                runner.style.transform = `translateX(${position}px)`;
+                requestAnimationFrame(animateRunner);
+            }
+
+            requestAnimationFrame(animateRunner);
+        });
+    </script>
 
 </x-master-layout>

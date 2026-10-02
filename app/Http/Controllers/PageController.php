@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use App\Models\Post;
 
 class PageController extends Controller
 {
@@ -28,20 +27,13 @@ class PageController extends Controller
 
     public function home(): View
     {
-        $latestPosts = \App\Models\Post::published()
-            ->with('image')
+        $latestPosts = Post::published()
+            ->select('id', 'title', 'slug', 'content', 'created_at')
+            ->with('image:id,mediable_id,mediable_type,file_path,alt_text')
             ->latest()
             ->take(6)
             ->get();
-
-        $stats = [
-            'posts'        => \App\Models\Post::published()->count(),
-            'technologies' => \App\Models\Technology::count(),
-            'sections'     => \App\Models\Section::count(),
-            'concepts'     => \App\Models\Concept::count(),
-        ];
-
-        return view('welcome', compact('latestPosts', 'stats'));
+        return view('welcome', compact('latestPosts'));
     }
 
     public function dashboard(): View
@@ -52,21 +44,21 @@ class PageController extends Controller
     }
     public function about(): View
     {
-        return view('contact-privacy.about', [
+        return view('public_pages.about', [
             'title' => 'من نحن',
         ]);
     }
 
     public function privacy(): View
     {
-        return view('contact-privacy.privacy', [
+        return view('public_pages.privacy', [
             'title' => 'سياسة الخصوصية',
         ]);
     }
 
     public function terms(): View
     {
-        return view('contact-privacy.terms', [
+        return view('public_pages.terms', [
             'title' => 'شروط الاستخدام',
         ]);
     }

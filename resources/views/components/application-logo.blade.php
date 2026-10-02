@@ -1,6 +1,6 @@
 <!-- Whiscrashow Brand Logo -->
 <!-- Whiscrashow Brand Logo -->
-<a href="{{ route('home') }}" class="flex items-center gap-3 group bg-[#0f172a] p-2.5 rounded-2xl w-fit">
+<a href="{{ route('home') }}" dir="ltr" class="flex items-center gap-3 group bg-[#0f172a] p-2.5 rounded-2xl w-fit">
     <!-- Icon / Badge -->
     <span class="bg-yellow-500 text-[#0f172a] font-mono text-base font-black px-3 py-1.5 rounded-xl shadow-lg shadow-yellow-400/10 group-hover:scale-105 transition-transform duration-200">
         &gt;_

@@ -11,7 +11,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('contact-privacy.contact-us');
+        return view('public_pages.contact-us');
     }
 
     /**

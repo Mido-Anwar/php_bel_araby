@@ -1,3 +1,4 @@
+@auth
 <nav x-data="{ open: false }" class="bg-[#1e293b]/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 sticky top-0 z-50 shadow-lg">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
@@ -13,30 +14,30 @@
 
                 <!-- Navigation Links (Desktop & Tablet) -->
                 <div class="hidden md:flex items-center space-x-1 lg:space-x-2 rtl:space-x-reverse">
-                    @if (Auth::user()->hasRole('super-admin') || Auth::user()->hasRole('writer'))
-                        
+                    @if (Auth::user()->hasAnyRole(['super-admin', 'writer']))
+
                         <!-- Dashboard Link -->
-                        <a href="{{ route('dashboard') }}" 
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
                            class="px-3 lg:px-4 py-2 rounded-xl text-xs lg:text-sm font-medium transition-all duration-200 {{ request()->routeIs('dashboard') ? 'bg-[#2b384f] text-yellow-400 shadow-sm border border-yellow-500/30' : 'text-[#f3ebeb]/80 hover:text-white hover:bg-[#2b384f]/50' }}">
                             {{ __('Dashboard') }}
-                        </a>
+                        </x-nav-link>
 
-                        @if (Auth::user()->hasRole('super-admin'))
+                        @role('super-admin')
                             <!-- Users Link -->
-                            <a href="{{ route('users.index') }}" 
+                            <a href="{{ route('users.index') }}"
                                class="px-3 lg:px-4 py-2 rounded-xl text-xs lg:text-sm font-medium transition-all duration-200 {{ request()->routeIs('users.index') ? 'bg-[#2b384f] text-yellow-400 shadow-sm border border-yellow-500/30' : 'text-[#f3ebeb]/80 hover:text-white hover:bg-[#2b384f]/50' }}">
                                 {{ __('Users') }}
                             </a>
 
                             <!-- Technologies Link -->
-                            <a href="{{ route('technology.index') }}" 
+                            <a href="{{ route('technology.index') }}"
                                class="px-3 lg:px-4 py-2 rounded-xl text-xs lg:text-sm font-medium transition-all duration-200 {{ request()->routeIs('technology.index') ? 'bg-[#2b384f] text-yellow-400 shadow-sm border border-yellow-500/30' : 'text-[#f3ebeb]/80 hover:text-white hover:bg-[#2b384f]/50' }}">
                                 {{ __('Technologies') }}
                             </a>
-                        @endif
+                        @endrole
 
                         <!-- Blog Link -->
-                        <a href="{{ route('posts.index') }}" 
+                        <a href="{{ route('posts.index') }}"
                            class="px-3 lg:px-4 py-2 rounded-xl text-xs lg:text-sm font-medium transition-all duration-200 {{ request()->routeIs('posts.index') ? 'bg-[#2b384f] text-yellow-400 shadow-sm border border-yellow-500/30' : 'text-[#f3ebeb]/80 hover:text-white hover:bg-[#2b384f]/50' }}">
                             {{ __('Blog') }}
                         </a>
@@ -92,24 +93,24 @@
 
     <!-- Responsive Navigation Menu (Mobile & Tablet Dropdown) -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden md:hidden bg-[#1e293b] border-t border-slate-700/50 px-4 pt-3 pb-5 space-y-2 shadow-2xl transition-all">
-        @if (Auth::user()->hasRole('super-admin') || Auth::user()->hasRole('writer'))
-            <a href="{{ route('dashboard') }}" 
+        @if (Auth::user()->hasAnyRole(['super-admin', 'writer']))
+            <a href="{{ route('dashboard') }}"
                class="block px-4 py-2.5 rounded-xl text-sm sm:text-base font-medium {{ request()->routeIs('dashboard') ? 'bg-[#2b384f] text-yellow-400 border border-yellow-500/30' : 'text-[#f3ebeb] hover:bg-[#2b384f]/60' }}">
                 {{ __('Dashboard') }}
             </a>
-            
-            @if (Auth::user()->hasRole('super-admin'))
-                <a href="{{ route('users.index') }}" 
+
+            @role('super-admin')
+                <a href="{{ route('users.index') }}"
                    class="block px-4 py-2.5 rounded-xl text-sm sm:text-base font-medium {{ request()->routeIs('users.index') ? 'bg-[#2b384f] text-yellow-400 border border-yellow-500/30' : 'text-[#f3ebeb] hover:bg-[#2b384f]/60' }}">
                     {{ __('Users') }}
                 </a>
-                <a href="{{ route('technology.index') }}" 
+                <a href="{{ route('technology.index') }}"
                    class="block px-4 py-2.5 rounded-xl text-sm sm:text-base font-medium {{ request()->routeIs('technology.index') ? 'bg-[#2b384f] text-yellow-400 border border-yellow-500/30' : 'text-[#f3ebeb] hover:bg-[#2b384f]/60' }}">
                     {{ __('Technologies') }}
                 </a>
-            @endif
-            
-            <a href="{{ route('posts.index') }}" 
+            @endrole
+
+            <a href="{{ route('posts.index') }}"
                class="block px-4 py-2.5 rounded-xl text-sm sm:text-base font-medium {{ request()->routeIs('posts.index') ? 'bg-[#2b384f] text-yellow-400 border border-yellow-500/30' : 'text-[#f3ebeb] hover:bg-[#2b384f]/60' }}">
                 {{ __('Blog') }}
             </a>
@@ -138,3 +139,4 @@
         </div>
     </div>
 </nav>
+@endauth

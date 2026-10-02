@@ -1,7 +1,7 @@
 <header class="w-full bg-[#0f172a]/95 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-50 shadow-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col gap-4">
 
-        <!-- الشريط العلوي: اللوجو وأزرار الحساب/الدخول -->
+        <!-- الشريط العلوي: اللوجو وأزرار التحكم (تظهر فقط عند تسجيل دخولك كمدير) -->
         <div class="flex items-center justify-between">
 
             <!-- اللوجو -->
@@ -11,7 +11,7 @@
                 </a>
             </div>
 
-            <!-- أزرار تسجيل الدخول وحساب المستخدم -->
+            <!-- أزرار التحكم الخاصة بك -->
             <div class="login relative" x-data="{ openMobileMenu: false }">
                 @auth
                     <!-- أزرار الديسكتوب -->
@@ -58,7 +58,7 @@
                         </button>
 
                         <div x-show="openMobileMenu" @click.away="openMobileMenu = false" x-transition
-                            class="absolute left-0 mt-2 w-48 rounded-2xl bg-[#1e293b] border border-slate-700 shadow-2xl py-2 z-50 text-right"
+                            class="absolute right-0 mt-2 w-48 rounded-2xl bg-[#1e293b] border border-slate-700 shadow-2xl py-2 z-50 text-right"
                             style="display: none;">
 
                             <a href="{{ route('dashboard') }}"
@@ -87,7 +87,6 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                         @csrf
                     </form>
-
                 @endauth
             </div>
         </div>

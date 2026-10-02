@@ -32,7 +32,8 @@
 
     {{-- Canonical --}}
     <link rel="canonical" href="{{ url()->current() }}" />
-
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="alternate icon" href="{{ asset('favicon.ico') }}">
     {{-- Favicon --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
