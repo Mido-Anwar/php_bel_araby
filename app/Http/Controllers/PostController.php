@@ -22,11 +22,17 @@ class PostController extends Controller
      */
     public function index(): View
     {
-        $title = 'ادارة المنشورات';
+        $title = 'إدارة المنشورات';
+        $user  = Auth::user();
 
         $query = Post::select('id', 'title', 'user_id', 'slug', 'is_published', 'created_at')
-            ->with(['image', 'user:id,name'])
+            ->with(['image:id,mediable_id,mediable_type,file_path,alt_text', 'user:id,name'])
             ->latest();
+
+        // If the user is not a super-admin, filter posts to only those created by the user
+        if (! $user->hasRole('super-admin')) {
+            $query->where('user_id', $user->id);
+        }
 
         $posts = $query->paginate(10);
 
@@ -77,7 +83,6 @@ class PostController extends Controller
      */
     public function show(Post $post): View
     {
-        // استرجاع أحدث بيانات للمقال والعلاقات بدون كاش لضمان الدقة
         $post->load(['image', 'user:id,name']);
 
         return view('blog.post.post-show', compact('post'));
