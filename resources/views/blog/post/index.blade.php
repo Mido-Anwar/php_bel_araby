@@ -100,10 +100,11 @@
 
                                 <!-- Column: Compact Title -->
                                 <td class="px-6 py-4 max-w-xs">
-                                    <div class="font-bold text-gray-900 dark:text-white truncate"
+                                    <a href="{{ route('post.show', $post) }}"
+                                        class="font-bold text-gray-900 dark:text-white truncate"
                                         title="{{ $post->title }}">
                                         {{ $post->title }}
-                                    </div>
+                                    </a>
                                     <p class="text-xs text-gray-400 truncate mt-0.5">
                                         {{ Str::limit(strip_tags($post->body ?? ($post->content ?? '')), 45) }}
                                     </p>
