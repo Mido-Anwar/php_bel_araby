@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use App\Models\Post;
+use App\Models\Technology;
 
 class PageController extends Controller
 {
@@ -28,11 +29,12 @@ class PageController extends Controller
     public function home(): View
     {
         $latestPosts = Post::published()
-            ->select('id', 'title', 'slug', 'content', 'created_at')
+            ->select('id', 'title', 'slug', 'created_at')
             ->with('image:id,mediable_id,mediable_type,file_path,alt_text')
             ->latest()
             ->take(6)
             ->get();
+
         return view('welcome', compact('latestPosts'));
     }
 

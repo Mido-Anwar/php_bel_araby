@@ -5,33 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-/**
- * Technology model representing programming technologies or languages.
- * Each technology can have multiple sections and built-in functions.
- *
- * @property int $id
- * @property string $name
- * @property string $description
- */
 class Technology extends Model
 {
-    /** @use HasFactory<\Database\Factories\TechnologyFactory> */
     use HasFactory, SoftDeletes, HasSlug;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = ['name', 'slug', 'description'];
-    // Enable automatic cache clearing after database transactions
-    protected $afterCommit = true;
-      public function getSlugOptions(): SlugOptions
+
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
@@ -41,53 +26,34 @@ class Technology extends Model
             ->preventOverwrite();
     }
 
-    /**
-     * استخدام الـ slug في الـ Route Model Binding
-     */
     public function getRouteKeyName(): string
     {
         return 'slug';
     }
 
-    // Cache invalidation for technologies when created, updated, or deleted
     protected static function booted(): void
     {
-        static::saved(function (Technology $technology) {
-            static::clearTechnologyCache($technology);
-        });
+        static::saved(fn (Technology $tech) => static::clearTechnologyCache($tech));
+        static::deleted(fn (Technology $tech) => static::clearTechnologyCache($tech));
 
-        static::deleted(function (Technology $technology) {
-            static::clearTechnologyCache($technology);
-        });
         static::deleting(function (Technology $tech) {
             if (! $tech->isForceDeleting()) {
-                // soft delete للأبناء
-                $tech->sections()->each(fn($section) => $section->delete());
+                $tech->sections()->each(fn ($section) => $section->delete());
             }
         });
 
         static::restored(function (Technology $tech) {
-            $tech->sections()->onlyTrashed()->restore();
-            // + concepts
+            $tech->sections()->onlyTrashed()->get()->each->restore();
         });
     }
 
-    /**
-     * Clear all related cache keys for this technology.
-     */
     protected static function clearTechnologyCache(Technology $technology): void
     {
-        // Clear global technology list (e.g. used in Navbar dropdowns)
         Cache::forget('technologies.all');
-
-        // Clear individual technology view cache
         Cache::forget("technologies.show.{$technology->id}");
+        Cache::forget("technology.show.{$technology->slug}");
     }
-    /**
-     * Get the sections associated with the technology.
-     *
-     * @return HasMany
-     */
+
     public function sections(): HasMany
     {
         return $this->hasMany(Section::class);

@@ -105,11 +105,11 @@
                         </li>
                     @endif
                     @if (!request()->routeIs('blog.main'))
-                    <li>
-                        <a href="{{ route('blog.main') }}"
-                            class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-[#f3ebeb] bg-[#2b384f]/60 hover:bg-[#2b384f] hover:text-yellow-400 border border-slate-700/50 transition-all duration-300">مدونة</a>
-                    </li>
-                        @endif
+                        <li>
+                            <a href="{{ route('blog.main') }}"
+                                class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-[#f3ebeb] bg-[#2b384f]/60 hover:bg-[#2b384f] hover:text-yellow-400 border border-slate-700/50 transition-all duration-300">مدونة</a>
+                        </li>
+                    @endif
                 </ul>
 
                 <!-- قائمة التقنيات -->
@@ -117,7 +117,7 @@
                     @if (isset($technologies))
                         @foreach ($technologies as $technology)
                             <li>
-                                <a href="{{ route('docs.show', $technology->name) }}"
+                                <a href="{{ route('docs.show', $technology) }}"
                                     class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium text-yellow-400 bg-yellow-500/10 hover:bg-yellow-500 hover:text-slate-950 border border-yellow-500/20 transition-all duration-300">
                                     {{ $technology->name }}
                                 </a>

@@ -50,7 +50,7 @@
                 <!-- Grid of Technologies -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                     @forelse (\App\Models\Technology::all() as $tech)
-                        <a href="{{ route('technology.show', $tech->id) }}"
+                        <a href="{{ route('technology.show', $tech) }}"
                             class="group relative p-4 rounded-xl border border-gray-100 dark:border-gray-700/50 bg-gray-50/50 dark:bg-gray-900/40 hover:bg-white dark:hover:bg-gray-800 hover:shadow-md hover:border-blue-500/30 dark:hover:border-blue-500/30 transition-all duration-200 flex flex-col items-center text-center">
 
                             <!-- Tech Icon / Logo -->

@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class Concept extends Model
 {
-    use HasFactory,HasSlug,SoftDeletes;
+    use HasFactory, HasSlug, SoftDeletes;
 
     protected $fillable = [
         'section_id',
@@ -26,7 +26,6 @@ class Concept extends Model
         'return_type',
     ];
 
-    protected $afterCommit = true;
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
@@ -37,23 +36,22 @@ class Concept extends Model
             ->preventOverwrite();
     }
 
-    /**
-     * استخدام الـ slug في الـ Route Model Binding
-     */
     public function getRouteKeyName(): string
     {
         return 'slug';
     }
+
     protected static function booted(): void
     {
-        static::saved(fn(Concept $concept) => $concept->clearCache());
-        static::deleted(fn(Concept $concept) => $concept->clearCache());
-                static::saving(function (Concept $concept) {
+        static::saving(function (Concept $concept) {
             if ($concept->type === 'concept') {
                 $concept->syntax = null;
                 $concept->return_type = null;
             }
         });
+
+        static::saved(fn (Concept $concept) => $concept->clearCache());
+        static::deleted(fn (Concept $concept) => $concept->clearCache());
     }
 
     public function section(): BelongsTo
@@ -101,8 +99,8 @@ class Concept extends Model
 
         Cache::forget("sections.show.{$this->section_id}");
 
-        if ($this->section) {
-            Cache::forget("technologies.show.{$this->section->technology_id}");
+        if ($this->section && $this->section->technology) {
+            Cache::forget("technology.show.{$this->section->technology->slug}");
         }
     }
 }
