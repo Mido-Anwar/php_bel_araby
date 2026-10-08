@@ -67,7 +67,7 @@
     prose-table:border prose-table:border-slate-700
     prose-th:bg-slate-800 prose-th:p-3
     prose-td:p-3 prose-td:border prose-td:border-slate-700">
-                {!! $html !!}
+                {!! $post->parsed_content !!}
             </div>
 
             <!-- فاصل سفلي -->

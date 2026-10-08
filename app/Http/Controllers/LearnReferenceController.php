@@ -8,60 +8,53 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Mews\Purifier\Facades\Purifier;
 
-
 class LearnReferenceController extends Controller
 {
-
-    /**
-     * Cache TTL (ساعة).
-     */
     private const CACHE_TTL = 3600;
 
     /**
+     * عرض صفحة التقنية بالتوثيق الخاص بها.
      *
-     *
-     * @param Technology $technology
+     * @param string $technology (هنا سيحمل قيمة الـ slug القادمة من الراوتر مباشرة كنص)
      * @return View
      */
-    public function show(Technology $technology): View
+    public function show(string $technology): View
     {
-        $cacheKey = "technology.show.{$technology->slug}";
+        // استخدام قيمة $technology (التي تمثل الـ slug) في مفتاح الكاش
+        $cacheKey = "technology.show.{$technology}";
 
-        // ✅ جلب التقنية من الكاش (أو من الداتابيز لو مش موجودة)
-        $technology = Cache::remember(
+        $technologyModel = Cache::remember(
             $cacheKey,
             self::CACHE_TTL,
             function () use ($technology) {
-                return Technology::with([
+                // البحث بالـ slug النصي القادم من الراوتر
+                $tech = Technology::where('slug', $technology)->with([
                     'sections' => fn($query) => $query->orderBy('id'),
                     'sections.concepts' => fn($query) => $query->orderBy('type')->orderBy('id'),
-                ])->find($technology->id);
+                ])->firstOrFail();
+
+                // التنظيف يتم مرة واحدة فقط عند بناء الكاش
+                $this->sanitizeTechnologyContent($tech);
+
+                return $tech;
             }
         );
 
-        // ✅ حماية من XSS: تنظيف المحتوى
-        $this->sanitizeTechnologyContent($technology);
-
-        $title        = $technology->name;
-        $pageTitle    = $technology->name;
+        $title        = $technologyModel->name;
+        $pageTitle    = $technologyModel->name;
         $pageSubtitle = 'توثيق رسمي';
-        $canonicalUrl = route('docs.show', $technology->slug);
+        $canonicalUrl = route('docs.show', $technology);
 
-        return view('docs.main', compact(
-            'technology',
-            'title',
-            'pageTitle',
-            'pageSubtitle',
-            'canonicalUrl',
-        ));
+        // تمرير المتغير للـ View بالاسم الذي تحتاجه (مثلاً technology)
+        return view('docs.main', [
+            'technology'   => $technologyModel,
+            'title'        => $title,
+            'pageTitle'    => $pageTitle,
+            'pageSubtitle' => $pageSubtitle,
+            'canonicalUrl' => $canonicalUrl,
+        ]);
     }
 
-    /**
-     * تنظيف محتوى التقنية والأقسام والمفاهيم من XSS.
-     *
-     * @param Technology $technology
-     * @return void
-     */
     private function sanitizeTechnologyContent(Technology $technology): void
     {
         $technology->description = Purifier::clean($technology->description ?? '');

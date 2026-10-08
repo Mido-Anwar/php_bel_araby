@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-
+use App\Traits\HasRichContent;
 class Post extends Model
 {
-    use HasFactory, SoftDeletes, HasSlug;
+    use HasFactory, SoftDeletes, HasSlug,HasRichContent;
 
     // ─── Cache Configuration ───
     public const CACHE_PREFIX = 'blog.posts.published.page.';
