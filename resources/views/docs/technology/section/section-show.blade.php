@@ -64,7 +64,7 @@
                 </h1>
                 @if($section->description)
                     <p class="text-gray-600 dark:text-gray-300 mt-2 text-sm sm:text-base leading-relaxed">
-                        {{ $section->description }}
+                        {!! $section->parsed_content !!}
                     </p>
                 @endif
             </div>

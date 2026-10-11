@@ -67,7 +67,7 @@
                             <div class="px-6 py-4 bg-gray-900 text-amber-300 border-b border-gray-800 flex items-center justify-between gap-4 font-mono text-sm sm:text-base overflow-x-auto">
                                 <div class="flex items-center gap-3">
                                     <span class="text-xl tracking-wider text-gray-300 select-none">Syntax</span>
-                                    <code class="text-amber-400 font-medium">{{ $concept->syntax }}</code>
+                                    <code class="text-amber-400 font-medium">{!! concept->parsed_content !!}</code>
                                 </div>
                             </div>
                         @endif
@@ -75,7 +75,7 @@
                         <!-- Body Content Article -->
                         <div class="p-6 sm:p-8 space-y-6">
                             <article class="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 leading-relaxed font-sans">
-                                {!! nl2br(e($concept->description)) !!}
+                                {!! $concept->parsed_content !!}
                             </article>
                         </div>
 

@@ -32,6 +32,7 @@ class StoreTechnologyRequest extends FormRequest
         return [
             'name.required' => 'اسم التقنية مطلوب.',
             'name.unique'   => 'الاسم مستخدم بالفعل.',
+
         ];
     }
 }

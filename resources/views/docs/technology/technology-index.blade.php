@@ -114,7 +114,33 @@
                                               d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                     </svg>
                                 </a>
-
+@if ($technology->is_published)
+    <!-- زرار إلغاء النشر -->
+    <form action="{{ route('technology.unpublish', $technology) }}" method="POST" class="inline">
+        @csrf
+        <button type="submit"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 rounded-xl text-xs font-medium transition-all shadow-sm">
+            <!-- إضافة pointer-events-none عشان الضغطة تسمع في الزرار فوراً -->
+            <svg class="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>منشور</span>
+        </button>
+    </form>
+@else
+    <!-- زرار النشر -->
+    <form action="{{ route('technology.publish', $technology) }}" method="POST" class="inline">
+        @csrf
+        <button type="submit"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 dark:bg-gray-700/60 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl text-xs font-medium transition-all shadow-sm">
+            <!-- إضافة pointer-events-none عشان الضغطة تسمع في الزرار فوراً -->
+            <svg class="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <span>غير منشور</span>
+        </button>
+    </form>
+@endif
                                 @if (Auth::user()->hasRole('super-admin'))
                                     <x-delete-form :action-url="route('technology.destroy', $technology)" />
                                 @endif

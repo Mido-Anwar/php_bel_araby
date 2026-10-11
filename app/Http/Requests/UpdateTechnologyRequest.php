@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -32,7 +31,7 @@ class UpdateTechnologyRequest extends FormRequest
     {
         return [
             'name.required' => 'اسم التقنية مطلوب.',
-            'name.unique'   => 'الاسم مستخدم بالفعل.',
+            'name.unique' => 'الاسم مستخدم بالفعل.',
         ];
     }
 }

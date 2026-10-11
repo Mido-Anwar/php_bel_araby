@@ -14,7 +14,7 @@ class Technology extends Model
 {
     use HasFactory, SoftDeletes, HasSlug,HasRichContent;
 
-    protected $fillable = ['name', 'slug', 'description'];
+    protected $fillable = ['name', 'slug', 'description','is_published'];
 
     public function getSlugOptions(): SlugOptions
     {

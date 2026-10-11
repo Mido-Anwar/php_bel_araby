@@ -2,19 +2,17 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ConceptController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LearnReferenceController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\SitemapController;
-
-
 
 // site map routes
 Route::get('/sitemap.xml', [SitemapController::class, 'index']);
@@ -22,19 +20,17 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 // Public Pages
 // ============================
 Route::controller(PageController::class)->group(function () {
-    Route::get('/',        'home')->name('home');
-    Route::get('/about',   'about')->name('about');
+    Route::get('/', 'home')->name('home');
+    Route::get('/about', 'about')->name('about');
     Route::get('/privacy', 'privacy')->name('privacy');
-    Route::get('/terms',   'terms')->name('terms');
+    Route::get('/terms', 'terms')->name('terms');
 });
-
-
 
 // ============================
 // Contact
 // ============================
 Route::controller(ContactController::class)->group(function () {
-    Route::get('/contact',  'index')->name('contact');
+    Route::get('/contact', 'index')->name('contact');
 
     Route::post('/contact', 'send')
         ->middleware('throttle:5,1')  // five messages at minute
@@ -50,7 +46,6 @@ Route::prefix('/blog')->controller(BlogController::class)->group(function () {
     // Show a specific blog post
     Route::get('/{post}', 'show')->name('blog.show');
 })->name('blog');
-
 
 /**
  * Documentation Routes
@@ -74,17 +69,24 @@ Route::middleware(['auth', 'verified', 'role:super-admin|writer'])->group(functi
  * Handles CRUD operations for blog posts.
  * specific for Admin or authorized users
  */
-Route::prefix('posts')->controller(PostController::class)->group(function () {
-    Route::get('/', 'index')->name('posts.index');
-    Route::get('/create', 'create')->name('post.create');
-    Route::post('/store', 'store')->name('post.store');
-    Route::get('/show/{post}', 'show')->name('post.show');
-    Route::get('/edit/{post}', 'edit')->name('post.edit');
-    Route::post('/update/{post}', 'update')->name('post.update');
-    Route::post('/publish/{post}', 'publish')->name('post.publish');
-    Route::post('/unpublish/{post}', 'unpublish')->name('post.unpublish');
-    Route::delete('/delete/{post}', 'destroy')->name('post.destroy');
-})->middleware(['auth', 'verified', 'role:super-admin|writer']);
+Route::prefix('posts')->controller(PostController::class)->middleware(['auth', 'verified'])
+    ->group(function () {
+
+        Route::middleware(['role:super-admin|writer'])->group(function () {
+            Route::get('/', 'index')->name('posts.index');
+            Route::get('/create', 'create')->name('post.create');
+            Route::post('/store', 'store')->name('post.store');
+            Route::get('/show/{post}', 'show')->name('post.show');
+            Route::get('/edit/{post}', 'edit')->name('post.edit');
+            Route::post('/update/{post}', 'update')->name('post.update');
+            Route::delete('/delete/{post}', 'destroy')->name('post.destroy');
+        });
+
+        Route::middleware(['role:super-admin'])->group(function () {
+            Route::post('/publish/{post}', 'publish')->name('post.publish');
+            Route::post('/unpublish/{post}', 'unpublish')->name('post.unpublish');
+        });
+    });
 
 /**
  * Technology Management Routes
@@ -100,6 +102,8 @@ Route::prefix('technology')->controller(TechnologyController::class)
         Route::get('/edit/{technology}', 'edit')->name('technology.edit');
         Route::post('/update/{technology}', 'update')->name('technology.update');
         Route::delete('/delete/{technology}', 'destroy')->name('technology.destroy');
+        Route::post('/publish/{technology}', 'publish')->name('technology.publish');
+        Route::post('/unpublish/{technology}', 'unpublish')->name('technology.unpublish');
     });
 
 /**
@@ -127,7 +131,6 @@ Route::prefix('concept')->controller(ConceptController::class)->group(function (
     Route::post('/update/{concept}', 'update')->name('concept.update');
     Route::delete('/delete/{concept}', 'destroy')->name('concept.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
-
 
 /**
  * User Management Routes
@@ -160,7 +163,7 @@ Route::prefix('role')->controller(RoleController::class)->group(function () {
     Route::delete('/delete/{role}', 'destroy')->name('role.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
 
-//Route::resource('permission', RoleController::class)->middleware(['auth', 'verified', 'role:super-admin']);
+// Route::resource('permission', RoleController::class)->middleware(['auth', 'verified', 'role:super-admin']);
 /**
  * Permission Management Routes
  * Handles CRUD operations for Permissions.
@@ -175,6 +178,5 @@ Route::prefix('permission')->controller(PermissionController::class)->group(func
     Route::delete('/delete/{permission}', 'destroy')->name('permission.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
 
-
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

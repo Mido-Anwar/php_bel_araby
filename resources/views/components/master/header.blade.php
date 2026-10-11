@@ -117,10 +117,12 @@
                     @if (isset($technologies))
                         @foreach ($technologies as $technology)
                             <li>
-                                <a href="{{ route('docs.show', $technology) }}"
-                                    class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium text-yellow-400 bg-yellow-500/10 hover:bg-yellow-500 hover:text-slate-950 border border-yellow-500/20 transition-all duration-300">
-                                    {{ $technology->name }}
-                                </a>
+                                @if ($technology->is_publish == true)
+                                    <a href="{{ route('docs.show', $technology) }}"
+                                        class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium text-yellow-400 bg-yellow-500/10 hover:bg-yellow-500 hover:text-slate-950 border border-yellow-500/20 transition-all duration-300">
+                                        {{ $technology->name }}
+                                    </a>
+                                @endif
                             </li>
                         @endforeach
                     @endif

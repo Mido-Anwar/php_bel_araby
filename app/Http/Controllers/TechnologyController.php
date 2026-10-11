@@ -43,7 +43,7 @@ class TechnologyController extends Controller
     {
         $data = $request->validated();
         $data['name'] = strtolower(trim($data['name'])); // أو ucfirst لتوحيد الشكل
-
+        $data['is_published'] = false;
         Technology::create($data);
 
         return to_route('technology.index')->with(
@@ -96,6 +96,25 @@ class TechnologyController extends Controller
             'success-update-technology',
             'Technology updated successfully.',
         );
+    }
+
+    public function publish(Technology $technology)
+    {
+        $technology->update([
+            'is_published' => true,
+        ]);
+
+        return back()->with('success-publish-technology', 'Technology published successfully.');
+    }
+
+
+    public function unpublish(Technology $technology)
+    {
+        $technology->update([
+            'is_published' => false,
+        ]);
+
+        return back()->with('success-unpublish-technology', 'Technology unpublished successfully.');
     }
 
     /**
