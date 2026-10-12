@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTechnologyRequest;
 use App\Models\Technology;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class TechnologyController extends Controller
 {
@@ -16,7 +17,7 @@ class TechnologyController extends Controller
     public function index(): View
     {
         $title = 'التقنيات المتاحة';
-        $technologies = Technology::select('id', 'name', 'slug')
+        $technologies = Technology::select('id', 'name', 'slug', 'is_published')->where('is_published', true)
             ->latest()
             ->get();
 
@@ -97,24 +98,17 @@ class TechnologyController extends Controller
             'Technology updated successfully.',
         );
     }
-
     public function publish(Technology $technology)
     {
-        $technology->update([
-            'is_published' => true,
-        ]);
+        $technology->update(['is_published' => true]);
 
-        return back()->with('success-publish-technology', 'Technology published successfully.');
+        return to_route('technology.index');
     }
-
-
     public function unpublish(Technology $technology)
     {
-        $technology->update([
-            'is_published' => false,
-        ]);
+        $technology->update(['is_published' => false]);
 
-        return back()->with('success-unpublish-technology', 'Technology unpublished successfully.');
+        return to_route('technology.index');
     }
 
     /**

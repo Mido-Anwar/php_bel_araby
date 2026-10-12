@@ -24,6 +24,7 @@ class StoreTechnologyRequest extends FormRequest
                 Rule::unique('technologies', 'name')->ignore($technologyId),
             ],
             'description' => ['nullable', 'string'],
+            'is_published' => ['required', 'boolean'],
         ];
     }
 

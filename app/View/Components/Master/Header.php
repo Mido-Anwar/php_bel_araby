@@ -21,7 +21,7 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
-        $technologies = Technology::select('id', 'name', 'slug')->get();
+        $technologies = Technology::select('id', 'name', 'slug', 'is_published')->get();
         return view('components.master.header', [
             'technologies' => $technologies
         ]);

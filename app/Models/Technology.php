@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Cache;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use App\Traits\HasRichContent;
+
+
 class Technology extends Model
 {
     use HasFactory, SoftDeletes, HasSlug,HasRichContent;
