@@ -17,12 +17,12 @@ class TechnologyController extends Controller
     public function index(): View
     {
         $title = 'التقنيات المتاحة';
-        $technologies = Technology::select('id', 'name', 'slug', 'is_published')->where('is_published', true)
+        $technologies = Technology::select('id', 'name', 'slug', 'is_published')
             ->latest()
             ->get();
 
         return view(
-            'docs.technology.technology-index',
+            'docs.technology.technologies-index',
             compact('technologies', 'title'),
         );
     }
@@ -42,9 +42,9 @@ class TechnologyController extends Controller
      */
     public function store(StoreTechnologyRequest $request): RedirectResponse
     {
+
         $data = $request->validated();
         $data['name'] = strtolower(trim($data['name'])); // أو ucfirst لتوحيد الشكل
-        $data['is_published'] = false;
         Technology::create($data);
 
         return to_route('technology.index')->with(
@@ -102,13 +102,19 @@ class TechnologyController extends Controller
     {
         $technology->update(['is_published' => true]);
 
-        return to_route('technology.index');
+        return to_route('technology.index')->with(
+            'success-publish-technology',
+            'Technology published successfully!',
+        );
     }
     public function unpublish(Technology $technology)
     {
         $technology->update(['is_published' => false]);
 
-        return to_route('technology.index');
+        return to_route('technology.index')->with(
+            'success-unpublish-technology',
+            'Technology unpublished successfully!',
+        );
     }
 
     /**

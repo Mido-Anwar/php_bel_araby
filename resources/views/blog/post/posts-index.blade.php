@@ -32,20 +32,13 @@
     <div class="py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
         <!-- Flash Message -->
-        @if (session('success-store-post') ||
-                session('success-update-post') ||
-                session('success-delete-post') ||
-                session('success-toggle-post'))
-            <div
-                class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-sm font-medium flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>{{ session('success-store-post') ?? (session('success-update-post') ?? (session('success-delete-post') ?? session('success-toggle-post'))) }}</span>
-                </div>
-            </div>
-        @endif
+       <div class="mt-4 space-y-2">
+            <x-message :message="session('success-store-post')" :color="'green'" />
+            <x-message :message="session('success-update-post')" :color="'blue'" />
+            <x-message :message="session('success-delete-post')" :color="'red'" />
+            <x-message :message="session('success-publish-post')" :color="'green'" />
+            <x-message :message="session('success-unpublish-post')" :color="'black'" />
+        </div>
 
         <!-- Posts Table Container -->
         <div

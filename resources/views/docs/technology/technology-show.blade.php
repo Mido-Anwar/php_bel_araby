@@ -57,19 +57,20 @@
                 class="p-6 sm:p-8 bg-gradient-to-r from-amber-500/10 via-teal-500/5 to-transparent border-b border-gray-100 dark:border-gray-700/60">
                 <div class="flex items-center justify-between">
                     <span
-                        class="px-3 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300 border border-amber-200 dark:border-amber-700/50">
-                        🚀 Technology Overview
+                        class="px-3.5 py-1 text-xs font-medium uppercase tracking-wider rounded-md bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600">
+                        Technology Overview
                     </span>
                     <span class="text-xs font-mono text-gray-500 dark:text-gray-400">
                         {{ $technology->sections->count() }}
                         {{ Str::plural('Section', $technology->sections->count()) }}
                     </span>
                 </div>
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mt-3">
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mt-3" dir="auto">
                     {{ $technology->name }}
                 </h1>
                 @if ($technology->description)
-                    <p class="text-gray-600 dark:text-gray-300 mt-2 text-sm sm:text-base leading-relaxed">
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 text-sm sm:text-base leading-relaxed"
+                        dir="auto">
                         {!! $technology->parsed_content !!}
                     </p>
                 @endif
@@ -165,7 +166,8 @@
                                     <a href="{{ route('section.edit', $section) }}"
                                         class="p-1.5 text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
                                         title="تعديل القسم">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>

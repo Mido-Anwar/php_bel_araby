@@ -34,6 +34,8 @@
             <x-message :message="session('success-store-technology')" :color="'green'" />
             <x-message :message="session('success-update-technology')" :color="'blue'" />
             <x-message :message="session('success-delete-technology')" :color="'red'" />
+            <x-message :message="session('success-publish-technology')" :color="'green'" />
+            <x-message :message="session('success-unpublish-technology')" :color="'black'" />
         </div>
     </x-slot>
 

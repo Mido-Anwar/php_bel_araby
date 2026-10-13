@@ -1,75 +1,103 @@
 <x-guest-layout>
-    {{-- الحاوية الرئيسية الواسعة مع السماح بالتمرير الحر --}}
-    <div dir="rtl"
-        class="py-12 px-4 sm:px-6 lg:px-12 bg-[#090d16] text-slate-100 flex justify-center items-start selection:bg-yellow-500 selection:text-slate-950 relative min-h-screen">
+    <div class="min-h-screen relative py-12 px-4 sm:px-6 lg:px-12 bg-[#171a1d] text-[#eff1f4] selection:bg-emerald-500 selection:text-slate-950 font-sans">
 
-        {{-- خلفية شبكية برمجية خفيفة --}}
-        <div
-            class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b12_1px,transparent_1px),linear-gradient(to_bottom,#1e293b12_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none">
-        </div>
+        {{-- خلفية شبكية برمجية فنية فائقة الخفة --}}
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b0a_1px,transparent_1px),linear-gradient(to_bottom,#1e293b0a_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none"></div>
 
-        {{-- حاوية المقال الرئيسية الواسعة --}}
-        <article
-            class="relative max-w-6xl w-full bg-[#0b0f19] border border-slate-800/80 rounded-3xl p-6 sm:p-12 lg:p-16 shadow-[0_0_60px_rgba(0,0,0,0.6)] backdrop-blur-sm z-10">
+        {{-- حاوية واسعة بالكامل مع الصفحة (max-w-6xl) --}}
+        <div class="max-w-6xl mx-auto relative z-10 space-y-8">
 
-            {{-- ترويسة المقال --}}
-            <header
-                class="flex items-center justify-between flex-wrap gap-4 mb-8 text-xs sm:text-sm text-slate-400 border-b border-slate-800 pb-6 font-mono">
-                <div class="flex items-center gap-3">
-                    @if ($post->category)
-                        <span class="px-4 py-1.5 rounded-lg bg-yellow-500/10 text-yellow-400 font-semibold border border-yellow-500/20">
-                            {{ $post->category->name }}
-                        </span>
-                    @endif
-                    <span class="text-slate-700">•</span>
-                    <time datetime="{{ $post->created_at->toIso8601String() }}">
-                        نُشر {{ $post->created_at->diffForHumans() }}
-                    </time>
-                </div>
-            </header>
-
-            {{-- عنوان المقال الرئيسي --}}
-            <h1 dir="{{ textDir($post->title) }}"
-                class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.2] mb-10 font-sans break-words"
-                style="text-align: {{ textDir($post->title) == 'rtl' ? 'right' : 'left' }};">
-                {{ $post->title }}
-            </h1>
-
-            {{-- الصورة البارزة --}}
-            @if ($post->image)
-                <figure class="mb-12 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900 aspect-[21/9] flex items-center justify-center">
-                    <img src="{{ asset('storage/' . $post->image->file_path) }}"
-                        alt="{{ $post->title }}" loading="lazy"
-                        class="w-full h-full object-cover">
-                </figure>
-            @endif
-
-            {{-- محتوى المقال المنسق --}}
-            <div
-                class="prose prose-invert prose-yellow max-w-none
-                text-slate-300 text-lg sm:text-xl leading-loose
-                prose-headings:text-white prose-headings:font-extrabold prose-headings:tracking-tight
-                prose-h2:text-2xl sm:prose-h2:text-3xl lg:prose-h2:text-4xl prose-h2:mt-14 prose-h2:mb-6 prose-h2:border-b prose-h2:border-slate-800/80 prose-h2:pb-4
-                prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-4
-                prose-p:my-6 prose-p:text-slate-300/95
-                prose-strong:text-yellow-300
-                prose-ul:my-6 prose-ul:pr-6
-                prose-ol:my-6 prose-ol:pr-6
-                prose-li:my-2 prose-li:marker:text-yellow-500
-                prose-a:text-yellow-400 prose-a:no-underline hover:prose-a:text-yellow-300 hover:prose-a:underline
-                prose-blockquote:border-r-4 prose-blockquote:border-yellow-500 prose-blockquote:bg-yellow-500/5 prose-blockquote:py-5 prose-blockquote:pr-6 prose-blockquote:my-8
-                prose-blockquote:rounded-r-xl prose-blockquote:text-yellow-200/90 prose-blockquote:font-medium
-                prose-img:rounded-2xl prose-img:my-10 prose-img:border prose-img:border-slate-800 prose-img:shadow-xl
-                prose-code:text-yellow-300 prose-code:bg-[#111827] prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:font-mono prose-code:text-sm prose-code:border prose-code:border-slate-800
-                prose-code:before:content-[''] prose-code:after:content-['']
-                prose-pre:bg-[#070a12] prose-pre:border prose-pre:border-slate-800 prose-pre:rounded-2xl prose-pre:p-6 prose-pre:font-mono prose-pre:text-sm prose-pre:shadow-inner
-                prose-table:border prose-table:border-slate-800 prose-table:text-sm prose-table:rounded-xl prose-table:overflow-hidden
-                prose-th:bg-[#111827] prose-th:p-4 prose-th:border-b prose-th:border-slate-800 prose-th:text-yellow-400
-                prose-td:p-4 prose-td:border prose-td:border-slate-800">
-
-                {!! $post->parsed_content !!}
+            {{-- زر العودة للخلف --}}
+            <div>
+                <a href="{{ route('posts.index') }}" class="inline-flex items-center gap-2.5 px-4.5 py-3 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-[#353e43] text-slate-300 hover:text-white transition-all text-sm font-semibold shadow-sm group">
+                    <svg class="w-4 h-4 rtl:rotate-180 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    <span>العودة للمدونة / Back to Blog</span>
+                </a>
             </div>
 
-        </article>
+            {{-- المقال الرئيسي الواسع الفخم --}}
+            <article class="bg-[#202429] border border-[#353e43] rounded-3xl p-6 sm:p-12 lg:p-16 shadow-2xl shadow-black/80 backdrop-blur-xl overflow-hidden relative">
+
+                {{-- ترويسة المقال الفخمة --}}
+                <header class="mb-12 pb-8 border-b border-[#353e43] text-sm sm:text-base text-[#8c99a3]">
+                    <div class="flex items-center gap-4 flex-wrap mb-6">
+                        @if ($post->category)
+                            <span class="px-5 py-2 rounded-xl bg-emerald-500/10 text-emerald-400 font-bold border border-emerald-500/25 shadow-sm">
+                                {{ $post->category->name }}
+                            </span>
+                        @endif
+                        <span class="text-slate-700">•</span>
+                        <div class="flex items-center gap-2.5 text-[#8c99a3]">
+                            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <time datetime="{{ $post->created_at->toIso8601String() }}">
+                                نُشر {{ $post->created_at->diffForHumans() }}
+                            </time>
+                        </div>
+                    </div>
+
+                    {{-- عنوان المقال الرئيسي الواسع --}}
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.2] mb-12 font-serif text-[#b59a6c]"
+                        dir="auto"
+                        style="text-align: {{ textDir($post->title) == 'rtl' ? 'right' : 'left' }};">
+                        {{ $post->title }}
+                    </h1>
+
+                    {{-- معلومات الكاتب أعلى المقال --}}
+                    @if($post->user)
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-600 text-slate-950 font-bold flex items-center justify-center text-sm shadow-lg shadow-amber-500/20 shrink-0">
+                                {{ mb_substr($post->user->name, 0, 1) }}
+                            </div>
+                            <div>
+                                <p class="text-xs text-[#8c99a3] font-medium">كاتب المقال / Author</p>
+                                <p class="text-base font-bold text-[#eff1f4]">{{ $post->user->name }}</p>
+                            </div>
+                        </div>
+                    @endif
+                </header>
+
+                {{-- الصورة البارزة بعرض واسع وفخم --}}
+                @if ($post->image)
+                    <figure class="mb-16 rounded-2xl overflow-hidden border border-[#353e43] bg-slate-900 aspect-[21/9] shadow-2xl flex items-center justify-center relative group">
+                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-300"></div>
+                        <img src="{{ asset('storage/' . $post->image->file_path) }}"
+                            alt="{{ $post->title }}" loading="lazy"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    </figure>
+                @endif
+
+                {{-- محتوى المقال المنسق الواسع (Prose) --}}
+                <div class="prose prose-invert max-w-none text-base sm:text-lg lg:text-xl leading-relaxed
+                    prose-headings:text-[#b59a6c] prose-headings:font-serif
+                    prose-a:text-[#218a55] hover:prose-a:text-[#218a55]/80
+                    prose-strong:text-white
+                    prose-code:text-[#b59a6c] prose-code:bg-[#111417] prose-code:px-2 prose-code:py-0.5 prose-code:rounded prose-code:border prose-code:border-[#353e43]
+                    prose-pre:bg-[#111417] prose-pre:border prose-pre:border-[#353e43] prose-pre:rounded-2xl
+                    prose-blockquote:border-s-4 prose-blockquote:border-[#b59a6c] prose-blockquote:bg-[#b59a6c]/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-2xl prose-blockquote:text-slate-200
+                    prose-table:border prose-table:border-[#353e43] prose-table:rounded-xl prose-table:overflow-hidden
+                    prose-th:bg-[#1a1d21] prose-th:text-[#218a55] prose-th:border-[#353e43] prose-th:p-4
+                    prose-td:border prose-td:border-[#353e43] prose-td:p-4
+                    prose-ul:my-6 prose-ul:pr-6 prose-ol:my-6 prose-ol:pr-6 prose-li:my-2 prose-li:marker:text-[#218a55]" dir="auto">
+                    {!! $post->parsed_content !!}
+                </div>
+
+                {{-- بطاقة معلومات الكاتب أسفل المقال --}}
+                @if($post->user)
+                    <div class="mt-20 pt-10 border-t border-[#353e43] flex items-center gap-5 p-6 sm:p-8 bg-[#1a1d21] rounded-2xl border border-[#353e43] shadow-xl shadow-black/30">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-600 text-slate-950 font-extrabold flex items-center justify-center text-2xl shadow-lg shadow-amber-500/20 shrink-0 relative">
+                            {{ mb_substr($post->user->name, 0, 1) }}
+                            <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[#218a55] border-4 border-slate-950 flex items-center justify-center text-white text-xs">✔</div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-[#218a55] font-bold uppercase tracking-wider mb-1">الكاتب الرسمي</p>
+                            <p class="text-lg sm:text-xl font-extrabold text-white">{{ $post->user->name }}</p>
+                            <p class="text-sm text-[#8c99a3] mt-0.5">تم توثيق هذا المقال بواسطة الكاتب لضمان صحة المعلومات.</p>
+                        </div>
+                    </div>
+                @endif
+
+            </article>
+
+        </div>
     </div>
 </x-guest-layout>

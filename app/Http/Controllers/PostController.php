@@ -36,7 +36,7 @@ class PostController extends Controller
 
         $posts = $query->paginate(10);
 
-        return view('blog.post.index', compact('posts', 'title'));
+        return view('blog.post.posts-index', compact('posts', 'title'));
     }
 
     /**
@@ -113,7 +113,6 @@ class PostController extends Controller
         $this->authorizeOwnerOrAdmin($post);
 
         $validated = $request->validated();
-
         $post->update([
             'title'   => $validated['title'],
             'content' => $validated['content'],

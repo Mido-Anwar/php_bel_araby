@@ -46,29 +46,31 @@
         </div>
     </x-slot>
 
-    <div class="py-8 space-y-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="py-8 space-y-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <!-- Section Details Hero Card -->
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-2xl border border-gray-100 dark:border-gray-700/60 transition-all">
-            <div class="p-6 sm:p-8 bg-gradient-to-r from-amber-500/10 via-teal-500/5 to-transparent border-b border-gray-100 dark:border-gray-700/60">
-                <div class="flex items-center justify-between">
-                    <span class="px-3 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300 border border-amber-200 dark:border-amber-700/50">
-                        📁 Section Details
-                    </span>
-                    <span class="text-xs font-mono text-gray-500 dark:text-gray-400">
-                        {{ $section->concepts->count() }} {{ Str::plural('Concept', $section->concepts->count()) }}
-                    </span>
-                </div>
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mt-3">
-                    {{ $section->title }}
-                </h1>
-                @if($section->description)
-                    <p class="text-gray-600 dark:text-gray-300 mt-2 text-sm sm:text-base leading-relaxed">
-                        {!! $section->parsed_content !!}
-                    </p>
-                @endif
+    <!-- Section Details Hero Card -->
+    <div class="bg-white dark:bg-gray-800 shadow-xl sm:rounded-2xl border border-gray-100 dark:border-gray-700/60 transition-all">
+        <div class="p-6 sm:p-8 bg-gradient-to-r from-amber-500/10 via-teal-500/5 to-transparent border-b border-gray-100 dark:border-gray-700/60">
+            <div class="flex items-center justify-between">
+                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300 border border-amber-200 dark:border-gray-700/50">
+                    📁 Section Details
+                </span>
+                <span class="text-xs font-mono text-gray-500 dark:text-gray-400">
+                    {{ $section->concepts->count() }} {{ Str::plural('Concept', $section->concepts->count()) }}
+                </span>
             </div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mt-3" dir="auto">
+                {{ $section->title }}
+            </h1>
+            @if($section->description)
+                <p class="text-gray-600 dark:text-gray-300 mt-2 text-sm sm:text-base leading-relaxed" dir="auto">
+                    {!! $section->parsed_content !!}
+                </p>
+            @endif
         </div>
+    </div>
+
+</div>
 
         <!-- Concepts Section List -->
         <div class="space-y-4">
