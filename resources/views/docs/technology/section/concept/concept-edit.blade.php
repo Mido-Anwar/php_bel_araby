@@ -24,7 +24,8 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-gray-900 dark:text-white">Edit: {{ $concept->title }}</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Update concept details, syntax, or documentation content.</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Update concept details, syntax,
+                                or documentation content.</p>
                         </div>
                     </div>
                 </div>
@@ -40,8 +41,10 @@
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
                         <select id="type" name="type"
                             class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all duration-200 shadow-sm">
-                            <option value="concept" {{ old('type', $concept->type) == 'concept' ? 'selected' : '' }}>Concept (مفهوم عام / شرح)</option>
-                            <option value="function" {{ old('type', $concept->type) == 'function' ? 'selected' : '' }}>Built-in Function (دالة جاهزة)</option>
+                            <option value="concept" {{ old('type', $concept->type) == 'concept' ? 'selected' : '' }}>
+                                Concept (مفهوم عام / شرح)</option>
+                            <option value="function" {{ old('type', $concept->type) == 'function' ? 'selected' : '' }}>
+                                Built-in Function (دالة جاهزة)</option>
                         </select>
                         <x-input-error :messages="$errors->get('type')" class="mt-1 text-xs" />
                     </div>
@@ -53,8 +56,8 @@
                         <div class="relative">
                             <x-text-input id="title" name="title" type="text"
                                 class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all duration-200 shadow-sm"
-                                placeholder="e.g. array_map() or Dependency Injection"
-                                :value="old('title', $concept->title)" required autofocus />
+                                placeholder="e.g. array_map() or Dependency Injection" :value="old('title', $concept->title)" required
+                                autofocus />
                         </div>
                         <x-input-error :messages="$errors->get('title')" class="mt-1 text-xs" />
                     </div>
@@ -70,17 +73,28 @@
                         <x-input-error :messages="$errors->get('syntax')" class="mt-1 text-xs" />
                     </div>
 
+                    <div class="space-y-2">
+                        <x-input-label for="return_type" :value="'return type'"
+                            class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
+                        <div class="relative">
+                            <x-text-input id="return_type" name="return_type" type="text"
+                                class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm"
+                                placeholder="e.g. array_map() or Dependency Injection" :value="old('return_type', $concept->return_type)"
+                                autofocus />
+                        </div>
+                        <x-input-error :messages="$errors->get('return_type')" class="mt-1 text-xs" />
+                    </div>
 
-
-               <!-- Field: Description -->
-                  <div class="mb-4">
+                    <!-- Field: Description -->
+                    <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Section Description</label>
 
                         <!-- المكان اللي هيترسم فيه المحرر -->
                         <div id="markdown-editor"></div>
 
                         <!-- حقل مخفي لتخزين محتوى الماركداون وإرساله للكونترولر -->
-                        <input type="hidden" name="description" id="description-input" value="{{ old('description',$concept->description ?? '') }}">
+                        <input type="hidden" name="description" id="description-input"
+                            value="{{ old('description', $concept->description ?? '') }}">
 
                         @error('description')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

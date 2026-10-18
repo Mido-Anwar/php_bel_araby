@@ -8,16 +8,6 @@ use Spatie\Permission\Models\Permission;
 class PermissionController extends Controller
 {
     /**
-     * Display a listing of the permissions.
-     *
-     * @return void
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new permission.
      *
      * @return \Illuminate\View\View
@@ -43,17 +33,6 @@ class PermissionController extends Controller
         Permission::create(['name' => $request->name]);
 
         return redirect()->route('users.index')->with('success-store-permission', 'success permission created');
-    }
-
-    /**
-     * Display the specified permission.
-     *
-     * @param  \Spatie\Permission\Models\Permission  $permission
-     * @return void
-     */
-    public function show(Permission $permission)
-    {
-        //
     }
 
     /**

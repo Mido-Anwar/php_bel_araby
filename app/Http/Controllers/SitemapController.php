@@ -23,7 +23,7 @@ class SitemapController extends Controller
             ->add(Url::create('/terms')->setPriority(0.3)->setChangeFrequency('yearly'));
 
         // إضافة المقالات المنشورة ديناميكياً من قاعدة البيانات
-        Post::latest()->each(function (Post $post) use ($sitemap) {
+        Post::published()->latest()->each(function (Post $post) use ($sitemap) {
             $sitemap->add(
                 Url::create(route('blog.show', $post->slug))
                     ->setLastModificationDate($post->updated_at)

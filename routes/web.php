@@ -36,6 +36,8 @@ Route::controller(ContactController::class)->group(function () {
         ->middleware('throttle:5,1')  // five messages at minute
         ->name('contact.send');
 });
+
+
 /**
  * Blog Routes
  * Handles the display of blog posts for public viewing.
@@ -123,7 +125,6 @@ Route::prefix('section')->controller(SectionController::class)->group(function (
  * Handles CRUD operations for Concepts within a Section.
  */
 Route::prefix('concept')->controller(ConceptController::class)->group(function () {
-    Route::get('/', 'index')->name('concept.index');
     Route::get('/create/{section}', 'create')->name('concept.create');
     Route::post('/store/{section}', 'store')->name('concept.store');
     Route::get('/show/{concept}', 'show')->name('concept.show');
@@ -157,7 +158,6 @@ Route::prefix('user')
 Route::prefix('role')->controller(RoleController::class)->group(function () {
     Route::get('/create', 'create')->name('role.create');
     Route::post('/store', 'store')->name('role.store');
-    Route::get('/show/{role}', 'show')->name('role.show');
     Route::get('/edit/{role}', 'edit')->name('role.edit');
     Route::post('/update/{role}', 'update')->name('role.update');
     Route::delete('/delete/{role}', 'destroy')->name('role.destroy');
@@ -172,11 +172,9 @@ Route::prefix('role')->controller(RoleController::class)->group(function () {
 Route::prefix('permission')->controller(PermissionController::class)->group(function () {
     Route::get('/create', 'create')->name('permission.create');
     Route::post('/store', 'store')->name('permission.store');
-    Route::get('/show/{permission}', 'show')->name('permission.show');
     Route::get('/edit/{permission}', 'edit')->name('permission.edit');
     Route::post('/update/{permission}', 'update')->name('permission.update');
     Route::delete('/delete/{permission}', 'destroy')->name('permission.destroy');
 })->middleware(['auth', 'verified', 'role:super-admin']);
 
-Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 require __DIR__.'/auth.php';

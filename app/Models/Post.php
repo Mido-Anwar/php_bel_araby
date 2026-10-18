@@ -80,9 +80,8 @@ class Post extends Model
     {
         Cache::forget('posts.all');
         Cache::forget("posts.show.{$post->id}");
-
-        foreach (range(1, 50) as $page) {
-            Cache::forget(self::CACHE_PREFIX . $page);
+        if ($post->slug) {
+            Cache::forget("posts.show.{$post->slug}");
         }
     }
 

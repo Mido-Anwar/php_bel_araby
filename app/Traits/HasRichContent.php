@@ -31,6 +31,31 @@ trait HasRichContent
     }
 
     /**
+     * كائن محول الماركداون المشترك لتفادي إعادة الإنشاء في كل استدعاء (Singleton).
+     */
+    protected static ?CommonMarkConverter $markdownConverter = null;
+
+    /**
+     * تخزين ناتج التحويل مؤقتاً على مستوى السجل (Memoization).
+     */
+    protected ?string $memoizedParsedContent = null;
+
+    /**
+     * الحصول على كائن CommonMarkConverter المشترك.
+     */
+    protected function getMarkdownConverter(): CommonMarkConverter
+    {
+        if (static::$markdownConverter === null) {
+            static::$markdownConverter = new CommonMarkConverter([
+                'html_input' => 'allow',
+                'allow_unsafe_links' => false,
+            ]);
+        }
+
+        return static::$markdownConverter;
+    }
+
+    /**
      * تحويل Markdown → HTML.
      */
     protected function convertMarkdownToHtml(?string $content): string
@@ -39,12 +64,7 @@ trait HasRichContent
             return '';
         }
 
-        $converter = new CommonMarkConverter([
-            'html_input' => 'allow',
-            'allow_unsafe_links' => false,
-        ]);
-
-        return $converter->convert($content)->getContent();
+        return $this->getMarkdownConverter()->convert($content)->getContent();
     }
 
     /**
@@ -52,8 +72,12 @@ trait HasRichContent
      */
     public function getParsedContentAttribute(): string
     {
+        if ($this->memoizedParsedContent !== null) {
+            return $this->memoizedParsedContent;
+        }
+
         $field = $this->contentField();
-        return $this->convertMarkdownToHtml($this->{$field} ?? '');
+        return $this->memoizedParsedContent = $this->convertMarkdownToHtml($this->{$field} ?? '');
     }
 
     /**

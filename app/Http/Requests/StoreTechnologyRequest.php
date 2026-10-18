@@ -67,7 +67,7 @@ class StoreTechnologyRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('technologies', 'name')->ignore($technologyId),
+                Rule::unique('technologies', 'name')->ignore($technologyId)->whereNull('deleted_at'),
             ],
             'description' => ['nullable', 'string'],
             'is_published' => ['nullable', 'boolean'],

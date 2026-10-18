@@ -23,6 +23,8 @@ class MediaFactory extends Factory
             'alt_text'   => $this->faker->sentence(),
             'mime_type'  => 'image/webp',
             'file_size'  => $this->faker->numberBetween(10000, 500000),
+            'width'      => 1200,
+            'height'     => 630,
         ];
     }
 }

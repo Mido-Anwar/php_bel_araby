@@ -15,8 +15,11 @@ use Illuminate\Support\Facades\Storage;
  * @property int $id
  * @property string $file_path
  * @property string $file_name
- * @property string $mime_type
- * @property int $file_size
+ * @property string|null $alt_text
+ * @property string|null $mime_type
+ * @property int|null $file_size
+ * @property int|null $width
+ * @property int|null $height
  * @property string $mediable_type
  * @property int $mediable_id
  * @property-read string $url
@@ -34,11 +37,28 @@ class Media extends Model
     protected $fillable = [
         'file_path',
         'file_name',
+        'alt_text',
         'mime_type',
         'file_size',
+        'width',
+        'height',
         'mediable_type',
         'mediable_id',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'file_size' => 'integer',
+            'width' => 'integer',
+            'height' => 'integer',
+        ];
+    }
 
     /**
      * Touch parent model updated_at timestamp on media change.

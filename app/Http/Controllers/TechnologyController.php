@@ -32,7 +32,7 @@ class TechnologyController extends Controller
      */
     public function create(): View
     {
-        $title = 'انشاء مقالة جديدة';
+        $title = 'إضافة تقنية جديدة';
 
         return view('docs.technology.technology-create', compact('title'));
     }

@@ -9,13 +9,6 @@ use Spatie\Permission\Models\Permission;
 class RoleController extends Controller
 {
     /**
-     * Display a listing of the roles.
-     *
-     * @return void
-     */
-    public function index() {}
-
-    /**
      * Show the form for creating a new role.
      *
      * @return \Illuminate\View\View
