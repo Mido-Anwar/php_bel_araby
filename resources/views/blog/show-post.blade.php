@@ -69,13 +69,6 @@
     prose-td:p-3 prose-td:border prose-td:border-slate-700">
                 {!! $post->parsed_content !!}
             </div>
-
-            <!-- فاصل سفلي -->
-            <div class="mt-12 pt-8 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-                <span>منصة Whiscrashow</span>
-                <span class="text-yellow-400">جميع الحقوق محفوظة &copy; {{ date('Y') }}</span>
-            </div>
-
         </article>
     </div>
 </x-master-layout>

@@ -1,11 +1,11 @@
 <x-app-layout :title="$title">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Create New Post') }}
+            {{ __('إنشاء مقال جديد') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12" dir="rtl">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <!-- Form Card Container -->
             <div
@@ -23,9 +23,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Add New Post</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Fill in the details below to
-                                write and publish a new blog post.</p>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">إضافة مقال جديد</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">املأ التفاصيل أدناه لكتابة ونشر مقال جديد في المدونة.</p>
                         </div>
                     </div>
                 </div>
@@ -37,19 +36,18 @@
 
                     <!-- Field: Post Title -->
                     <div class="space-y-2">
-                        <x-input-label for="title" :value="'Post Title'"
+                        <x-input-label for="title" :value="'عنوان المقال'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
                         <x-text-input id="title" name="title" type="text"
                             class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm"
-                            placeholder="e.g. Getting Started with Web Development" :value="old('title')" required
-                            autofocus />
+                            placeholder="مثال: الدليل الشامل للبدء في تطوير الويب" :value="old('title')" required
+                            autofocus dir="auto" />
                         <x-input-error :messages="$errors->get('title')" class="mt-1 text-xs" />
                     </div>
 
                     <!-- Field: Post Content -->
-                    <!-- Post Content (Toast UI Editor with Tabs) -->
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Post Content</label>
+                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">محتوى المقال</label>
 
                         <!-- المكان اللي هيترسم فيه المحرر -->
                         <div id="markdown-editor"></div>
@@ -61,9 +59,10 @@
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
+
                     <!-- Field: Post Image Upload with Alpine.js Preview -->
                     <div class="space-y-2">
-                        <x-input-label for="image" :value="'Featured Image'"
+                        <x-input-label for="image" :value="'الصورة البارزة'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
 
                         <div x-data="{
@@ -99,10 +98,9 @@
                                         </svg>
                                     </div>
                                     <p class="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                        <span class="text-emerald-600 dark:text-emerald-400 underline">Click to
-                                            upload</span> or drag and drop
+                                        <span class="text-emerald-600 dark:text-emerald-400 underline">انقر للرفع</span> أو اسحب وأفلت الصورة هنا
                                     </p>
-                                    <p class="text-xs text-gray-400 mt-1">PNG, JPG, WEBP up to 5MB</p>
+                                    <p class="text-xs text-gray-400 mt-1">PNG, JPG, WEBP بحد أقصى 5 ميجابايت</p>
                                 </div>
 
                                 <!-- Image Overlay with File Name when selected -->
@@ -110,8 +108,7 @@
                                     class="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-md text-white text-xs px-4 py-3 truncate flex justify-between items-center border-t border-white/10">
                                     <span x-text="fileName" class="truncate font-medium"></span>
                                     <span
-                                        class="text-xs text-emerald-300 hover:text-emerald-200 font-semibold underline">Change
-                                        Image</span>
+                                        class="text-xs text-emerald-300 hover:text-emerald-200 font-semibold underline">تغيير الصورة</span>
                                 </div>
 
                                 <input id="image" name="image" type="file" accept="image/*" class="sr-only"
@@ -127,7 +124,7 @@
                         class="pt-4 flex items-center justify-end gap-3 border-t border-gray-100 dark:border-gray-700/60">
                         <a href="{{ route('posts.index') }}"
                             class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200">
-                            Cancel
+                            إلغاء
                         </a>
 
                         <button type="submit"
@@ -136,7 +133,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M5 13l4 4L19 7" />
                             </svg>
-                            <span>Save Post</span>
+                            <span>حفظ ونشر المقال</span>
                         </button>
                     </div>
                 </form>

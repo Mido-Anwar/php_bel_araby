@@ -1,11 +1,11 @@
 <x-app-layout :title="$title">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Create New Section') }}
+            {{ __('إنشاء قسم جديد') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12" dir="rtl">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <!-- Form Card Container -->
             <div
@@ -23,10 +23,9 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Add Section to:
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">إضافة قسم إلى:
                                 {{ $technology->name }}</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Fill in the details below to
-                                create a new section under this technology.</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">املأ التفاصيل أدناه لإنشاء قسم جديد تحت هذه التقنية.</p>
                         </div>
                     </div>
                 </div>
@@ -40,20 +39,20 @@
 
                     <!-- Field: Section Title -->
                     <div class="space-y-2">
-                        <x-input-label for="title" :value="'Section Title'"
+                        <x-input-label for="title" :value="'عنوان القسم'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
                         <div class="relative">
                             <x-text-input id="title" name="title" type="text"
                                 class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm"
-                                placeholder="e.g. Basics, Advanced Concepts, Routing"  required
-                                autofocus />
+                                placeholder="مثال: الأساسيات، المفاهيم المتقدمة، التوجيه (Routing)" required
+                                autofocus dir="auto" />
                         </div>
                         <x-input-error :messages="$errors->get('title')" class="mt-1 text-xs" />
                     </div>
 
                     <!-- Field: Description -->
-                  <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Section Description</label>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">وصف القسم</label>
 
                         <!-- المكان اللي هيترسم فيه المحرر -->
                         <div id="markdown-editor"></div>
@@ -72,7 +71,7 @@
                         {{-- استخدام optional() أو التأكد من وجود المتغير --}}
                         <a href="{{ isset($technology) ? route('technology.show', $technology->id) : route('technology.index') }}"
                             class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200">
-                            Cancel
+                            إلغاء
                         </a>
 
                         <button type="submit"
@@ -81,7 +80,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M5 13l4 4L19 7" />
                             </svg>
-                            <span>Save Section</span>
+                            <span>حفظ القسم</span>
                         </button>
                     </div>
                 </form>

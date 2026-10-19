@@ -32,19 +32,17 @@
 
     <!-- القائمة الجانبية للتنقل (Sidebar) -->
     <aside
-        class="w-full lg:w-80 bg-slate-900/90 border-l border-slate-800 p-6 overflow-y-auto max-h-[calc(100vh-80px)] backdrop-blur-md">
+        class="w-full lg:w-80 bg-slate-900/90 border-l border-slate-800 p-6 overflow-y-auto max-h-[calc(100vh-80px)] backdrop-blur-md shrink-0">
 
         <!-- عنوان التكنولوجيا -->
         <div class="mb-6 pb-4 border-b border-slate-800 cursor-pointer" @click="resetToTech()">
             <span class="text-xs text-yellow-400 font-semibold uppercase tracking-wider">توثيق رسمي</span>
-            <h2 class="text-xl font-extrabold text-white mt-1 hover:text-yellow-400 transition-colors">
+            <h2 class="text-xl font-extrabold text-white mt-1 hover:text-yellow-400 transition-colors break-words">
                 {{ $technology->name }}
             </h2>
         </div>
 
-        {{-- ═══════════════════════════════════════════════ --}}
-        {{-- 1. المفاهيم (Concepts) — فوق --}}
-        {{-- ═══════════════════════════════════════════════ --}}
+        {{-- 1. المفاهيم (Concepts) --}}
         <div class="mb-8">
             <h3 class="text-sm font-bold text-yellow-400 mb-4 flex items-center gap-2">
                 <span class="w-1 h-4 rounded-full bg-yellow-400"></span>
@@ -60,14 +58,14 @@
                     @if ($concepts->count() > 0)
                         <div class="space-y-2">
                             <button @click="showSection({{ $section->id }})"
-                                class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-[#1e293b] text-[#f3ebeb] border border-slate-700/50 hover:bg-[#2b384f] hover:text-yellow-400 transition-all duration-300 shadow-md"
+                                class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-[#1e293b] text-[#f3ebeb] border border-slate-700/50 hover:bg-[#2b384f] hover:text-yellow-400 transition-all duration-300 shadow-md text-right"
                                 :class="activeSection && activeSection.id === {{ $section->id }} && activeView === 'section' ?
                                     'ring-1 ring-yellow-400 border-yellow-400/50 bg-[#2b384f] text-yellow-400' : ''">
-                                <span class="flex items-center gap-2">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
-                                    {{ $section->title }}
+                                <span class="flex items-center gap-2 truncate">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 shrink-0"></span>
+                                    <span class="truncate">{{ $section->title }}</span>
                                 </span>
-                                <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300"
+                                <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 shrink-0 ms-2"
                                     :class="openSections[{{ $section->id }}] ? 'rotate-180' : ''" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -102,9 +100,7 @@
             </div>
         </div>
 
-        {{-- ═══════════════════════════════════════════════ --}}
-        {{-- 2. الدوال (Functions) — تحت --}}
-        {{-- ═══════════════════════════════════════════════ --}}
+        {{-- 2. الدوال (Functions) --}}
         <div>
             <h3 @click="showFunctionsIntro()"
                 class="text-sm font-bold text-blue-400 mb-4 flex items-center gap-2 cursor-pointer hover:text-blue-300 transition-colors group select-none">
@@ -121,14 +117,14 @@
                     @if ($functions->count() > 0)
                         <div class="space-y-2">
                             <button @click="showSection({{ $section->id }})"
-                                class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-[#1e293b] text-[#f3ebeb] border border-slate-700/50 hover:bg-[#2b384f] hover:text-blue-400 transition-all duration-300 shadow-md"
+                                class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-[#1e293b] text-[#f3ebeb] border border-slate-700/50 hover:bg-[#2b384f] hover:text-blue-400 transition-all duration-300 shadow-md text-right"
                                 :class="activeSection && activeSection.id === {{ $section->id }} && activeView === 'section' ?
                                     'ring-1 ring-blue-400 border-blue-400/50 bg-[#2b384f] text-blue-400' : ''">
-                                <span class="flex items-center gap-2">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-                                    {{ $section->title }}
+                                <span class="flex items-center gap-2 truncate">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></span>
+                                    <span class="truncate">{{ $section->title }}</span>
                                 </span>
-                                <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300"
+                                <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 shrink-0 ms-2"
                                     :class="openSections[{{ $section->id }}] ? 'rotate-180' : ''" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -153,7 +149,7 @@
                                                 class="w-full text-right px-3 py-1.5 rounded-lg text-xs transition-all flex items-center justify-between group">
                                                 <span class="truncate font-mono" dir="ltr">{{ $func->title }}</span>
                                                 <span
-                                                    class="text-[9px] px-1.5 py-0.2 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">func</span>
+                                                    class="text-[9px] px-1.5 py-0.2 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 shrink-0 ms-1">func</span>
                                             </button>
                                         </li>
                                     @endforeach
@@ -167,7 +163,7 @@
     </aside>
 
     <!-- منطقة عرض المحتوى الرئيسية -->
-    <main class="flex-1 p-6 sm:p-10 lg:p-12 overflow-y-auto max-h-[calc(100vh-80px)] bg-slate-950 relative">
+    <main class="flex-1 min-w-0 p-6 sm:p-10 lg:p-12 overflow-y-auto max-h-[calc(100vh-80px)] bg-slate-950 relative">
 
         <!-- خلفية جمالية -->
         <div class="absolute top-10 left-10 w-72 h-72 bg-yellow-500/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -178,16 +174,16 @@
                 class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-yellow-400 text-xs font-medium">
                 نظرة عامة على التكنولوجيا
             </div>
-            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight break-words">
                 {{ $technology->name }}
             </h1>
             <div
-                class="prose prose-invert prose-yellow text-slate-300 text-base sm:text-lg leading-loose whitespace-pre-line bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800/80 shadow-lg">
+                class="prose prose-invert prose-yellow text-slate-300 text-base sm:text-lg leading-loose whitespace-pre-line break-words overflow-wrap-anywhere bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800/80 shadow-lg">
                 {{ $technology->description }}
             </div>
         </div>
 
-        <!-- 2. شاشة عرض القسم (Section View) - تعرض محتوى القسم فقط -->
+        <!-- 2. شاشة عرض القسم (Section View) -->
         <div x-show="activeView === 'section'" x-cloak class="max-w-4xl mx-auto space-y-6">
 
             <div class="flex items-center gap-3">
@@ -196,14 +192,14 @@
                 </span>
             </div>
 
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight"
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight break-words"
                 x-text="activeSection?.title"></h1>
 
             <!-- وصف القسم -->
             <template x-if="activeSection?.description && activeSection.description.trim() !== ''">
                 <div
-                    class="prose prose-invert prose-yellow text-slate-300 text-base sm:text-lg leading-loose whitespace-pre-line bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800/80 shadow-lg backdrop-blur-sm">
-                    <p x-text="activeSection.description"></p>
+                    class="prose prose-invert prose-yellow text-slate-300 text-base sm:text-lg leading-loose whitespace-pre-line break-words overflow-wrap-anywhere bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800/80 shadow-lg backdrop-blur-sm">
+                    <p x-text="activeSection.description" class="break-words"></p>
                 </div>
             </template>
 
@@ -225,21 +221,21 @@
                 </span>
             </div>
 
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight font-mono"
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight font-mono break-words"
                 :dir="activeConcept?.type === 'function' ? 'ltr' : 'rtl'"
                 x-text="activeConcept?.title"></h1>
 
-            <!-- صندوق الـ Syntax (موجه LTR للأكواد البرمجية دائماً) -->
+            <!-- صندوق الـ Syntax -->
             <template x-if="activeConcept?.syntax && activeConcept.syntax.trim() !== ''">
                 <div class="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden shadow-md">
                     <div
                         class="bg-slate-800/80 px-4 py-2 border-b border-slate-700/50 text-xs text-slate-400 font-mono flex justify-between items-center"
                         dir="ltr">
                         <span>Syntax / الصيغة البرمجية</span>
-                        <span class="text-yellow-400"
+                        <span class="text-yellow-400 truncate ms-2"
                             x-text="activeConcept?.return_type ? 'Returns: ' + activeConcept.return_type : ''"></span>
                     </div>
-                    <div class="p-4 font-mono text-sm text-yellow-300 overflow-x-auto text-left" dir="ltr"
+                    <div class="p-4 font-mono text-sm text-yellow-300 overflow-x-auto text-left break-all" dir="ltr"
                         x-text="activeConcept.syntax">
                     </div>
                 </div>
@@ -247,7 +243,7 @@
 
             <!-- الوصف التفصيلي -->
             <div class="bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800/80 shadow-lg backdrop-blur-sm">
-                <p class="text-slate-300 text-base sm:text-lg leading-loose whitespace-pre-line"
+                <p class="text-slate-300 text-base sm:text-lg leading-loose whitespace-pre-line break-words overflow-wrap-anywhere"
                     x-text="activeConcept?.description"></p>
             </div>
         </div>
@@ -260,12 +256,12 @@
                 دليل الدوال المدمجة (Built-in Functions)
             </div>
 
-            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight break-words">
                 ما هي الدوال المدمجة (Built-in Functions)؟
             </h1>
 
             <div
-                class="prose prose-invert prose-blue text-slate-300 text-base sm:text-lg leading-loose bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800/80 shadow-lg backdrop-blur-sm space-y-4">
+                class="prose prose-invert prose-blue text-slate-300 text-base sm:text-lg leading-loose break-words bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800/80 shadow-lg backdrop-blur-sm space-y-4">
                 <p>
                     <strong>الدوال المدمجة (Built-in Functions)</strong> هي مجموعة من الدوال الجاهزة والمبنية مسبقاً داخل لغة البرمجة، وتأتي مُضمنة مع اللغة بشكل افتراضي، مما يتيح لك استخدامها مباشرة دون الحاجة لتعريفها بنفسك أو تثبيت مكاتب خارجية.
                 </p>
@@ -281,7 +277,7 @@
     </main>
 </div>
 
-<!-- مكوّن Alpine.js النظيف لإدارة الحالة بدون Vanilla JS في عناصر الـ HTML -->
+<!-- مكوّن Alpine.js النظيف لإدارة الحالة -->
 <script>
     function docViewer(config) {
         return {

@@ -19,27 +19,27 @@
                         <!-- Dashboard Link -->
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
                            class="px-4 lg:px-5 py-2.5 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 {{ request()->routeIs('dashboard') ? 'bg-indigo-50 text-indigo-600 shadow-sm border border-indigo-200/60 dark:bg-indigo-950/50 dark:text-indigo-400 dark:border-indigo-800/60' : 'text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/60' }}">
-                            {{ __('Dashboard') }}
+                            {{ __('لوحة التحكم') }}
                         </x-nav-link>
 
                         @role('super-admin')
                             <!-- Users Link -->
                             <a href="{{ route('users.index') }}"
                                class="px-4 lg:px-5 py-2.5 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 {{ request()->routeIs('users.index') ? 'bg-indigo-50 text-indigo-600 shadow-sm border border-indigo-200/60 dark:bg-indigo-950/50 dark:text-indigo-400 dark:border-indigo-800/60' : 'text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/60' }}">
-                                {{ __('Users') }}
+                                {{ __('المستخدمين') }}
                             </a>
 
                             <!-- Technologies Link -->
                             <a href="{{ route('technology.index') }}"
                                class="px-4 lg:px-5 py-2.5 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 {{ request()->routeIs('technology.index') ? 'bg-indigo-50 text-indigo-600 shadow-sm border border-indigo-200/60 dark:bg-indigo-950/50 dark:text-indigo-400 dark:border-indigo-800/60' : 'text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/60' }}">
-                                {{ __('Technologies') }}
+                                {{ __('التقنيات') }}
                             </a>
                         @endrole
 
                         <!-- Blog Link -->
                         <a href="{{ route('posts.index') }}"
                            class="px-4 lg:px-5 py-2.5 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 {{ request()->routeIs('posts.index') ? 'bg-indigo-50 text-indigo-600 shadow-sm border border-indigo-200/60 dark:bg-indigo-950/50 dark:text-indigo-400 dark:border-indigo-800/60' : 'text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/60' }}">
-                            {{ __('Blog') }}
+                            {{ __('المدونة') }}
                         </a>
                     @endif
                 </div>
@@ -83,7 +83,7 @@
                                 <div class="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400 shrink-0">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                                 </div>
-                                <span>{{ __('Profile') }}</span>
+                                <span>{{ __('الملف الشخصي') }}</span>
                             </x-dropdown-link>
                         </div>
 
@@ -97,7 +97,7 @@
                                     <div class="w-9 h-9 rounded-xl bg-rose-50 dark:bg-rose-950/60 flex items-center justify-center text-rose-500 dark:text-rose-400 shrink-0">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
                                     </div>
-                                    <span>{{ __('Log Out') }}</span>
+                                    <span>{{ __('تسجيل الخروج') }}</span>
                                 </x-dropdown-link>
                             </form>
                         </div>
@@ -123,23 +123,23 @@
         @if (Auth::user()->hasAnyRole(['super-admin', 'writer']))
             <a href="{{ route('dashboard') }}"
                class="block px-4 py-3 rounded-xl text-base sm:text-lg font-semibold {{ request()->routeIs('dashboard') ? 'bg-indigo-50 text-indigo-600 border border-indigo-200/60 dark:bg-indigo-950/50 dark:text-indigo-400 dark:border-indigo-800/60' : 'text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800' }}">
-                {{ __('Dashboard') }}
+                {{ __('لوحة التحكم') }}
             </a>
 
             @role('super-admin')
                 <a href="{{ route('users.index') }}"
                    class="block px-4 py-3 rounded-xl text-base sm:text-lg font-semibold {{ request()->routeIs('users.index') ? 'bg-indigo-50 text-indigo-600 border border-indigo-200/60 dark:bg-indigo-950/50 dark:text-indigo-400 dark:border-indigo-800/60' : 'text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800' }}">
-                    {{ __('Users') }}
+                    {{ __('المستخدمين') }}
                 </a>
                 <a href="{{ route('technology.index') }}"
                    class="block px-4 py-3 rounded-xl text-base sm:text-lg font-semibold {{ request()->routeIs('technology.index') ? 'bg-indigo-50 text-indigo-600 border border-indigo-200/60 dark:bg-indigo-950/50 dark:text-indigo-400 dark:border-indigo-800/60' : 'text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800' }}">
-                    {{ __('Technologies') }}
+                    {{ __('التقنيات') }}
                 </a>
             @endrole
 
             <a href="{{ route('posts.index') }}"
                class="block px-4 py-3 rounded-xl text-base sm:text-lg font-semibold {{ request()->routeIs('posts.index') ? 'bg-indigo-50 text-indigo-600 border border-indigo-200/60 dark:bg-indigo-950/50 dark:text-indigo-400 dark:border-indigo-800/60' : 'text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800' }}">
-                {{ __('Blog') }}
+                {{ __('المدونة') }}
             </a>
         @endif
 
@@ -157,7 +157,7 @@
 
             <a href="{{ route('profile.edit') }}" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-base font-semibold text-slate-800 dark:text-slate-200 hover:bg-indigo-50 hover:text-indigo-600 dark:hover:bg-slate-800 dark:hover:text-indigo-400">
                 <svg class="w-5 h-5 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                <span>{{ __('Profile') }}</span>
+                <span>{{ __('الملف الشخصي') }}</span>
             </a>
 
             <!-- Authentication -->
@@ -167,7 +167,7 @@
                     class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-base font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition"
                     onclick="event.preventDefault(); this.closest('form').submit();">
                     <svg class="w-5 h-5 text-rose-500 dark:text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                    <span>{{ __('Log Out') }}</span>
+                    <span>{{ __('تسجيل الخروج') }}</span>
                 </a>
             </form>
         </div>

@@ -1,11 +1,11 @@
 <x-app-layout :title="$title">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Create New Concept') }}
+            {{ __('إنشاء مفهوم جديد') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12" dir="rtl">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <!-- Form Card Container -->
             <div
@@ -22,10 +22,9 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Add Concept to:
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">إضافة مفهوم إلى:
                                 {{ $section->title }}</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Fill in the details below to
-                                create a new concept or function under this section.</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">املأ التفاصيل أدناه لإنشاء مفهوم أو دالة جديدة تحت هذا القسم.</p>
                         </div>
                     </div>
                 </div>
@@ -36,58 +35,56 @@
 
                     <!-- Field: Type Selection -->
                     <div class="space-y-2">
-                        <x-input-label for="type" :value="'Concept Type'"
+                        <x-input-label for="type" :value="'نوع المفهوم'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
                         <select id="type" name="type"
                             class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm">
-                            <option value="concept" {{ old('type') == 'concept' ? 'selected' : '' }}>Concept (مفهوم عام
-                                / شرح)</option>
-                            <option value="function" {{ old('type') == 'function' ? 'selected' : '' }}>Built-in Function
-                                (دالة جاهزة)</option>
+                            <option value="concept" {{ old('type') == 'concept' ? 'selected' : '' }}>مفهوم (مفهوم عام / شرح)</option>
+                            <option value="function" {{ old('type') == 'function' ? 'selected' : '' }}>دالة جاهزة (Built-in Function)</option>
                         </select>
                         <x-input-error :messages="$errors->get('type')" class="mt-1 text-xs" />
                     </div>
 
                     <!-- Field: Title / Function Name -->
                     <div class="space-y-2">
-                        <x-input-label for="title" :value="'Title / Function Name'"
+                        <x-input-label for="title" :value="'العنوان / اسم الدالة'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
                         <div class="relative">
                             <x-text-input id="title" name="title" type="text"
                                 class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm"
-                                placeholder="e.g. array_map() or Dependency Injection" :value="old('title')" required
-                                autofocus />
+                                placeholder="مثال: array_map() أو Dependency Injection" :value="old('title')" required
+                                autofocus dir="auto" />
                         </div>
                         <x-input-error :messages="$errors->get('title')" class="mt-1 text-xs" />
                     </div>
 
                     <!-- Field: Syntax / Signature (Optional) -->
                     <div class="space-y-2">
-                        <x-input-label for="syntax" :value="'Syntax / Signature (Optional)'"
+                        <x-input-label for="syntax" :value="'صيغة الكود / التوقيع (اختياري)'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
                         <x-text-input id="syntax" name="syntax" type="text"
                             class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm font-mono text-sm"
-                            placeholder="e.g. array_map(?callable $callback, array $array1, array ...$arrays): array"
-                            :value="old('syntax')" />
+                            placeholder="مثال: array_map(?callable $callback, array $array1, array ...$arrays): array"
+                            :value="old('syntax')" dir="ltr" />
                         <x-input-error :messages="$errors->get('syntax')" class="mt-1 text-xs" />
                     </div>
 
                     <!-- return type -->
                     <div class="space-y-2">
-                        <x-input-label for="return_type" :value="'Title / Function Name'"
+                        <x-input-label for="return_type" :value="'نوع القيمة المرجعة (Return Type)'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
                         <div class="relative">
                             <x-text-input id="return_type" name="return_type" type="text"
-                                class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm"
-                                placeholder="e.g. array_map() or Dependency Injection" 
-                                autofocus />
+                                class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm font-mono text-sm"
+                                placeholder="مثال: array, string, void, mixed"
+                                autofocus dir="ltr" />
                         </div>
                         <x-input-error :messages="$errors->get('return_type')" class="mt-1 text-xs" />
                     </div>
-                    <!-- Field: Description / Details -->
+
                     <!-- Field: Description -->
-                  <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Section Description</label>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">وصف أو محتوى المفهوم</label>
 
                         <!-- المكان اللي هيترسم فيه المحرر -->
                         <div id="markdown-editor"></div>
@@ -105,7 +102,7 @@
                         class="pt-4 flex items-center justify-end gap-3 border-t border-gray-100 dark:border-gray-700/60">
                         <a href="{{ isset($section) ? route('section.show', $section) : route('technology.index') }}"
                             class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200">
-                            Cancel
+                            إلغاء
                         </a>
 
                         <button type="submit"
@@ -114,7 +111,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M5 13l4 4L19 7" />
                             </svg>
-                            <span>Save Concept</span>
+                            <span>حفظ المفهوم</span>
                         </button>
                     </div>
                 </form>

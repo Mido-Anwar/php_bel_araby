@@ -1,11 +1,11 @@
 <x-app-layout :title="$title">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Edit Technology') }}
+            {{ __('تعديل التقنية') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12" dir="rtl">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <!-- Form Card Container -->
             <div
@@ -23,10 +23,9 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Edit: {{ $technology->name }}
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">تعديل: {{ $technology->name }}
                             </h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Update the information for this
-                                technology.</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">قم بتحديث المعلومات الخاصة بهذه التقنية.</p>
                         </div>
                     </div>
                 </div>
@@ -38,12 +37,12 @@
 
                     <!-- Field: Name -->
                     <div class="space-y-2">
-                        <x-input-label for="name" :value="'Technology Name'"
+                        <x-input-label for="name" :value="'اسم التقنية'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
                         <div class="relative">
                             <x-text-input id="name" name="name" type="text"
                                 class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all duration-200 shadow-sm"
-                                placeholder="e.g. Laravel, React, Vue.js" :value="old('name', $technology->name)" required autofocus />
+                                placeholder="مثال: Laravel, React, Vue.js" :value="old('name', $technology->name)" required autofocus dir="auto" />
                         </div>
                         <x-input-error :messages="$errors->get('name')" class="mt-1 text-xs" />
                     </div>
@@ -51,8 +50,7 @@
                     <!-- Field: Description -->
                     <!-- Technology Description (Toast UI Editor) -->
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Technology
-                            Description</label>
+                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">وصف التقنية</label>
 
                         <div id="markdown-editor"></div>
 
@@ -70,7 +68,7 @@
                         class="pt-4 flex items-center justify-end gap-3 border-t border-gray-100 dark:border-gray-700/60">
                         <a href="{{ route('technology.index') }}"
                             class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200">
-                            Cancel
+                            إلغاء
                         </a>
 
                         <button type="submit"
@@ -79,7 +77,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M5 13l4 4L19 7" />
                             </svg>
-                            <span>Update Technology</span>
+                            <span>تحديث التقنية</span>
                         </button>
                     </div>
                 </form>

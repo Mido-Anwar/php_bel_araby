@@ -1,11 +1,11 @@
 <x-app-layout :title="$title">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Edit Post') }}
+            {{ __('تعديل المقال') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12" dir="rtl">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <!-- Form Card Container -->
             <div
@@ -23,9 +23,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Edit Post</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Update the details below to
-                                modify your blog post.</p>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">تعديل المقال</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">قم بتحديث التفاصيل أدناه لتعديل مقال المدونة الخاص بك.</p>
                         </div>
                     </div>
                 </div>
@@ -38,12 +37,12 @@
 
                     <!-- Field: Post Title -->
                     <div class="space-y-2">
-                        <x-input-label for="title" :value="'Post Title'"
+                        <x-input-label for="title" :value="'عنوان المقال'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
                         <x-text-input id="title" name="title" type="text"
                             class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 shadow-sm"
-                            placeholder="e.g. Getting Started with Web Development" :value="old('title', $post->title)" required
-                            autofocus />
+                            placeholder="مثال: الدليل الشامل للبدء في تطوير الويب" :value="old('title', $post->title)" required
+                            autofocus dir="auto" />
                         <x-input-error :messages="$errors->get('title')" class="mt-1 text-xs" />
                     </div>
 
@@ -51,8 +50,7 @@
                     <!-- Field: Post Content -->
                     <!-- Post Content (Toast UI Editor with Tabs) -->
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Post
-                            Content</label>
+                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">محتوى المقال</label>
 
                         <!-- مكان ظهور المحرر -->
                         <div id="markdown-editor"></div>
@@ -67,7 +65,7 @@
                     </div>
                     <!-- Field: Post Image Upload / Preview -->
                     <div class="space-y-2">
-                        <x-input-label for="image" :value="'Featured Image'"
+                        <x-input-label for="image" :value="'الصورة البارزة'"
                             class="text-sm font-semibold text-gray-700 dark:text-gray-300" />
 
                         <div x-data="{
@@ -102,26 +100,25 @@
                                         </svg>
                                     </div>
                                     <p class="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                        <span class="text-emerald-600 dark:text-emerald-400 underline">Click to
-                                            upload</span> or drag and drop
+                                        <span class="text-emerald-600 dark:text-emerald-400 underline">انقر للرفع</span> أو اسحب وأفلت الصورة هنا
                                     </p>
-                                    <p class="text-xs text-gray-400 mt-1">PNG, JPG, WEBP up to 5MB</p>
+                                    <p class="text-xs text-gray-400 mt-1">PNG, JPG, WEBP بحد أقصى 5 ميجابايت</p>
                                 </div>
 
                                 <!-- Overlay showing file info and status -->
                                 <div x-show="previewUrl"
-                                    class="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-md text-white text-xs px-4 py-3 truncate flex justify-between items-center border-t border-white/10">
+                                    class="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-md text-white text-xs px-4 py-3 truncate flex justify-between items-center border-t border-white/15">
                                     <div class="flex items-center gap-2 truncate">
-                                        <span x-text="isNew ? 'New File' : 'Current Image'"
+                                        <span x-text="isNew ? 'ملف جديد' : 'الصورة الحالية'"
                                             :class="isNew ? 'bg-blue-500/40 text-blue-200 border-blue-400/30' :
                                                 'bg-emerald-500/40 text-emerald-200 border-emerald-400/30'"
                                             class="px-2 py-0.5 text-[10px] font-semibold rounded-md border"></span>
-                                        <span x-text="fileName ? fileName : 'Attached Image'"
+                                        <span x-text="fileName ? fileName : 'صورة مرفقة'"
                                             class="truncate font-medium text-gray-200"></span>
                                     </div>
                                     <span
-                                        class="text-xs text-emerald-300 group-hover:text-emerald-200 font-semibold underline shrink-0 ml-2">
-                                        Change Image
+                                        class="text-xs text-emerald-300 group-hover:text-emerald-200 font-semibold underline shrink-0 mr-2">
+                                        تغيير الصورة
                                     </span>
                                 </div>
 
@@ -138,7 +135,7 @@
                         class="pt-4 flex items-center justify-end gap-3 border-t border-gray-100 dark:border-gray-700/60">
                         <a href="{{ route('posts.index') }}"
                             class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200">
-                            Cancel
+                            إلغاء
                         </a>
 
                         <button type="submit"
@@ -147,7 +144,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M5 13l4 4L19 7" />
                             </svg>
-                            <span>Update Post</span>
+                            <span>تحديث المقال</span>
                         </button>
                     </div>
                 </form>
