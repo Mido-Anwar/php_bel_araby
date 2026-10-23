@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -11,7 +13,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('public_pages.contact-us');
+        return view('public_pages.emails.contact-us');
     }
 
     /**
@@ -33,8 +35,7 @@ class ContactController extends Controller
             'message.min' => 'الرسالة قصيرة جدًا (10 أحرف على الأقل).',
         ]);
 
-        // TODO: إرسال الإيميل (هنضيفه بعدين)
-        // Mail::to('contact@whiscrashow.com')->send(new ContactMail($validated));
+         Mail::to('contact@whiscrashow.com')->send(new ContactMail($validated));
 
         return back()->with('success', 'تم إرسال رسالتك بنجاح. هنرد عليك في أقرب وقت.');
     }
