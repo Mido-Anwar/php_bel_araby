@@ -37,6 +37,6 @@ class ContactController extends Controller
 
          Mail::to('contact@whiscrashow.com')->send(new ContactMail($validated));
 
-        return back()->with('success', 'تم إرسال رسالتك بنجاح. هنرد عليك في أقرب وقت.');
+        return back()->with('success-sending-message', 'تم إرسال رسالتك بنجاح. هنرد عليك في أقرب وقت.');
     }
 }

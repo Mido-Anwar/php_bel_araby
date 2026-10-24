@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use App\Traits\HasRichContent;
+
+
+
+
+
 class Post extends Model
 {
     use HasFactory, SoftDeletes, HasSlug,HasRichContent;

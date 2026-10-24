@@ -54,7 +54,12 @@ class LearnReferenceController extends Controller
             'canonicalUrl' => $canonicalUrl,
         ]);
     }
-
+    /**
+     * تنظيف محتوى التقنية من أي أكواد HTML ضارة باستخدام مكتبة Purifier.
+     *
+     * @param Technology $technology
+     * @return void
+     */
     private function sanitizeTechnologyContent(Technology $technology): void
     {
         $technology->description = Purifier::clean($technology->description ?? '');

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use App\Models\Post;
-use App\Models\Technology;
 
 class PageController extends Controller
 {
@@ -21,7 +20,6 @@ class PageController extends Controller
      * - Terms of Service page
      * - Authenticated dashboard (restricted to super-admin & writer roles)
      *
-     * @package App\Http\Controllers
      */
 
 

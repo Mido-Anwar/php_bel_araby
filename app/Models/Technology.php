@@ -49,6 +49,7 @@ class Technology extends Model
         });
     }
 
+    
     protected static function clearTechnologyCache(Technology $technology): void
     {
         Cache::forget('technologies.all');

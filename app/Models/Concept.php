@@ -12,9 +12,10 @@ use Illuminate\Support\Facades\Cache;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use App\Traits\HasRichContent;
+
 class Concept extends Model
 {
-    use HasFactory, HasSlug, SoftDeletes,HasRichContent;
+    use HasFactory, HasSlug, SoftDeletes, HasRichContent;
 
     protected $fillable = [
         'section_id',
@@ -50,8 +51,8 @@ class Concept extends Model
             }
         });
 
-        static::saved(fn (Concept $concept) => $concept->clearCache());
-        static::deleted(fn (Concept $concept) => $concept->clearCache());
+        static::saved(fn(Concept $concept) => $concept->clearCache());
+        static::deleted(fn(Concept $concept) => $concept->clearCache());
     }
 
     public function section(): BelongsTo

@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Storage;
  * @property int $mediable_id
  * @property-read string $url
  */
+
 class Media extends Model
 {
     /** @use HasFactory<\Database\Factories\MediaFactory> */
