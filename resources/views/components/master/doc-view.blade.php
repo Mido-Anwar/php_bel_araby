@@ -1,28 +1,3 @@
-@php
-    $sectionsPayload = [];
-    $conceptsPayload = [];
-
-    foreach ($technology->sections as $section) {
-        $sectionsPayload[$section->id] = [
-            'id' => $section->id,
-            'title' => $section->title,
-            'description' => $section->description ?? '',
-        ];
-
-        foreach ($section->concepts as $concept) {
-            $conceptsPayload[$concept->id] = [
-                'id' => $concept->id,
-                'section_id' => $section->id,
-                'title' => $concept->title,
-                'description' => $concept->description ?? '',
-                'type' => $concept->type,
-                'syntax' => $concept->syntax ?? '',
-                'return_type' => $concept->return_type ?? '',
-            ];
-        }
-    }
-@endphp
-
 <div dir="rtl"
     class="min-h-[calc(100vh-80px)] bg-slate-950 text-slate-100 flex flex-col lg:flex-row overflow-hidden border-t border-slate-800/80"
     x-data="docViewer({

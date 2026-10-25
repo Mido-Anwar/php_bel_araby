@@ -39,7 +39,28 @@ class LearnReferenceController extends Controller
                 return $tech;
             }
         );
+        $sectionsPayload = [];
+        $conceptsPayload = [];
 
+        foreach ($technologyModel->sections as $section) {
+            $sectionsPayload[$section->id] = [
+                'id' => $section->id,
+                'title' => $section->title,
+                'description' => $section->description ?? '',
+            ];
+
+            foreach ($section->concepts as $concept) {
+                $conceptsPayload[$concept->id] = [
+                    'id' => $concept->id,
+                    'section_id' => $section->id,
+                    'title' => $concept->title,
+                    'description' => $concept->description ?? '',
+                    'type' => $concept->type,
+                    'syntax' => $concept->syntax ?? '',
+                    'return_type' => $concept->return_type ?? '',
+                ];
+            }
+        }
         $title        = $technologyModel->name;
         $pageTitle    = $technologyModel->name;
         $pageSubtitle = 'توثيق رسمي';
