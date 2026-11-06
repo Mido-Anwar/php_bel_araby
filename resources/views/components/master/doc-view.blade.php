@@ -1,3 +1,28 @@
+@php
+    $sectionsPayload = [];
+    $conceptsPayload = [];
+
+    foreach ($technology->sections as $section) {
+        $sectionsPayload[$section->id] = [
+            'id' => $section->id,
+            'title' => $section->title,
+            'description' => $section->description ?? '',
+        ];
+
+        foreach ($section->concepts as $concept) {
+            $conceptsPayload[$concept->id] = [
+                'id' => $concept->id,
+                'section_id' => $section->id,
+                'title' => $concept->title,
+                'description' => $concept->description ?? '',
+                'type' => $concept->type,
+                'syntax' => $concept->syntax ?? '',
+                'return_type' => $concept->return_type ?? '',
+            ];
+        }
+    }
+@endphp
+
 <div dir="rtl"
     class="min-h-[calc(100vh-80px)] bg-slate-950 text-slate-100 flex flex-col lg:flex-row overflow-hidden border-t border-slate-800/80"
     x-data="docViewer({
@@ -41,8 +66,8 @@
                                     <span class="truncate">{{ $section->title }}</span>
                                 </span>
                                 <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 shrink-0 ms-2"
-                                    :class="openSections[{{ $section->id }}] ? 'rotate-180' : ''" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                    :class="openSections[{{ $section->id }}] ? 'rotate-180' : ''" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M19 9l-7 7-7-7" />
                                 </svg>
@@ -57,9 +82,9 @@
                                 <ul class="space-y-1">
                                     @foreach ($concepts as $concept)
                                         <li>
-                                            <button
-                                                @click="showConcept({{ $concept->id }}, {{ $section->id }})"
-                                                :class="activeConcept && activeConcept.id === {{ $concept->id }} && activeView === 'concept' ?
+                                            <button @click="showConcept({{ $concept->id }}, {{ $section->id }})"
+                                                :class="activeConcept && activeConcept.id === {{ $concept->id }} &&
+                                                    activeView === 'concept' ?
                                                     'bg-yellow-500/10 text-yellow-400 border-r-2 border-yellow-400' :
                                                     'text-slate-400 hover:text-yellow-400 hover:bg-[#2b384f]'"
                                                 class="w-full text-right px-3 py-1.5 rounded-lg text-xs transition-all flex items-center justify-between group">
@@ -93,15 +118,16 @@
                         <div class="space-y-2">
                             <button @click="showSection({{ $section->id }})"
                                 class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-[#1e293b] text-[#f3ebeb] border border-slate-700/50 hover:bg-[#2b384f] hover:text-blue-400 transition-all duration-300 shadow-md text-right"
-                                :class="activeSection && activeSection.id === {{ $section->id }} && activeView === 'section' ?
+                                :class="activeSection && activeSection.id === {{ $section->id }} &&
+                                    activeView === 'section' ?
                                     'ring-1 ring-blue-400 border-blue-400/50 bg-[#2b384f] text-blue-400' : ''">
                                 <span class="flex items-center gap-2 truncate">
                                     <span class="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></span>
                                     <span class="truncate">{{ $section->title }}</span>
                                 </span>
                                 <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 shrink-0 ms-2"
-                                    :class="openSections[{{ $section->id }}] ? 'rotate-180' : ''" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                    :class="openSections[{{ $section->id }}] ? 'rotate-180' : ''" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M19 9l-7 7-7-7" />
                                 </svg>
@@ -116,13 +142,14 @@
                                 <ul class="space-y-1">
                                     @foreach ($functions as $func)
                                         <li>
-                                            <button
-                                                @click="showConcept({{ $func->id }}, {{ $section->id }})"
-                                                :class="activeConcept && activeConcept.id === {{ $func->id }} && activeView === 'concept' ?
+                                            <button @click="showConcept({{ $func->id }}, {{ $section->id }})"
+                                                :class="activeConcept && activeConcept.id === {{ $func->id }} &&
+                                                    activeView === 'concept' ?
                                                     'bg-blue-500/10 text-blue-400 border-r-2 border-blue-400' :
                                                     'text-slate-400 hover:text-blue-400 hover:bg-[#2b384f]'"
                                                 class="w-full text-right px-3 py-1.5 rounded-lg text-xs transition-all flex items-center justify-between group">
-                                                <span class="truncate font-mono" dir="ltr">{{ $func->title }}</span>
+                                                <span class="truncate font-mono"
+                                                    dir="ltr">{{ $func->title }}</span>
                                                 <span
                                                     class="text-[9px] px-1.5 py-0.2 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 shrink-0 ms-1">func</span>
                                             </button>
@@ -154,7 +181,7 @@
             </h1>
             <div
                 class="prose prose-invert prose-yellow text-slate-300 text-base sm:text-lg leading-loose whitespace-pre-line break-words overflow-wrap-anywhere bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800/80 shadow-lg">
-                {{ $technology->description }}
+                {!! $technology->parsed_content !!}
             </div>
         </div>
 
@@ -162,7 +189,8 @@
         <div x-show="activeView === 'section'" x-cloak class="max-w-4xl mx-auto space-y-6">
 
             <div class="flex items-center gap-3">
-                <span class="px-3 py-1 rounded-md text-xs font-semibold border bg-yellow-500/15 text-yellow-400 border-yellow-500/30">
+                <span
+                    class="px-3 py-1 rounded-md text-xs font-semibold border bg-yellow-500/15 text-yellow-400 border-yellow-500/30">
                     قسم (Section)
                 </span>
             </div>
@@ -197,21 +225,19 @@
             </div>
 
             <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight font-mono break-words"
-                :dir="activeConcept?.type === 'function' ? 'ltr' : 'rtl'"
-                x-text="activeConcept?.title"></h1>
+                :dir="activeConcept?.type === 'function' ? 'ltr' : 'rtl'" x-text="activeConcept?.title"></h1>
 
             <!-- صندوق الـ Syntax -->
             <template x-if="activeConcept?.syntax && activeConcept.syntax.trim() !== ''">
                 <div class="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden shadow-md">
-                    <div
-                        class="bg-slate-800/80 px-4 py-2 border-b border-slate-700/50 text-xs text-slate-400 font-mono flex justify-between items-center"
+                    <div class="bg-slate-800/80 px-4 py-2 border-b border-slate-700/50 text-xs text-slate-400 font-mono flex justify-between items-center"
                         dir="ltr">
                         <span>Syntax / الصيغة البرمجية</span>
                         <span class="text-yellow-400 truncate ms-2"
                             x-text="activeConcept?.return_type ? 'Returns: ' + activeConcept.return_type : ''"></span>
                     </div>
-                    <div class="p-4 font-mono text-sm text-yellow-300 overflow-x-auto text-left break-all" dir="ltr"
-                        x-text="activeConcept.syntax">
+                    <div class="p-4 font-mono text-sm text-yellow-300 overflow-x-auto text-left break-all"
+                        dir="ltr" x-text="activeConcept.syntax">
                     </div>
                 </div>
             </template>
@@ -238,10 +264,13 @@
             <div
                 class="prose prose-invert prose-blue text-slate-300 text-base sm:text-lg leading-loose break-words bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800/80 shadow-lg backdrop-blur-sm space-y-4">
                 <p>
-                    <strong>الدوال المدمجة (Built-in Functions)</strong> هي مجموعة من الدوال الجاهزة والمبنية مسبقاً داخل لغة البرمجة، وتأتي مُضمنة مع اللغة بشكل افتراضي، مما يتيح لك استخدامها مباشرة دون الحاجة لتعريفها بنفسك أو تثبيت مكاتب خارجية.
+                    <strong>الدوال المدمجة (Built-in Functions)</strong> هي مجموعة من الدوال الجاهزة والمبنية مسبقاً
+                    داخل لغة البرمجة، وتأتي مُضمنة مع اللغة بشكل افتراضي، مما يتيح لك استخدامها مباشرة دون الحاجة
+                    لتعريفها بنفسك أو تثبيت مكاتب خارجية.
                 </p>
                 <p>
-                    تُقدم هذه الدوال حلولاً سريعة ومُحسّنة للمهام الشائعة، مثل معالجة النصوص، والتعامل مع المصفوفات، وإجراء العمليات الحسابية والرياضية، والتعامل مع التواريخ وقواعد البيانات والملفات.
+                    تُقدم هذه الدوال حلولاً سريعة ومُحسّنة للمهام الشائعة، مثل معالجة النصوص، والتعامل مع المصفوفات،
+                    وإجراء العمليات الحسابية والرياضية، والتعامل مع التواريخ وقواعد البيانات والملفات.
                 </p>
                 <p class="text-sm text-slate-400 pt-2 border-t border-slate-800/60">
                     💡 يمكنك استعراض دوال كل قسم والصيغة البرمجية (Syntax) الخاصة بها من خلال القوائم الموجودة بالجانب.
