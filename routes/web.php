@@ -112,26 +112,26 @@ Route::prefix('technology')->controller(TechnologyController::class)
  * Section Management Routes
  * Handles CRUD operations for Sections within a Technology.
  */
-Route::prefix('section')->controller(SectionController::class)->group(function () {
+Route::prefix('section')->controller(SectionController::class)->middleware(['auth', 'verified', 'role:super-admin'])->group(function () {
     Route::get('/create/{technology}', 'create')->name('section.create');
     Route::post('/store/{technology}', 'store')->name('section.store');
     Route::get('/show/{section}', 'show')->name('section.show');
     Route::get('/edit/{section}', 'edit')->name('section.edit');
     Route::post('/update/{section}', 'update')->name('section.update');
     Route::delete('/delete/{section}', 'destroy')->name('section.destroy');
-})->middleware(['auth', 'verified', 'role:super-admin']);
+});
 /**
  * Concept Management Routes
  * Handles CRUD operations for Concepts within a Section.
  */
-Route::prefix('concept')->controller(ConceptController::class)->group(function () {
+Route::prefix('concept')->controller(ConceptController::class)->middleware(['auth', 'verified', 'role:super-admin'])->group(function () {
     Route::get('/create/{section}', 'create')->name('concept.create');
     Route::post('/store/{section}', 'store')->name('concept.store');
     Route::get('/show/{concept}', 'show')->name('concept.show');
     Route::get('/edit/{concept}', 'edit')->name('concept.edit');
     Route::post('/update/{concept}', 'update')->name('concept.update');
     Route::delete('/delete/{concept}', 'destroy')->name('concept.destroy');
-})->middleware(['auth', 'verified', 'role:super-admin']);
+});
 
 /**
  * User Management Routes
@@ -155,13 +155,13 @@ Route::prefix('user')
  * Handles CRUD operations for Roles.
  * Accessible only by super-admin.
  */
-Route::prefix('role')->controller(RoleController::class)->group(function () {
+Route::prefix('role')->controller(RoleController::class)->middleware(['auth', 'verified', 'role:super-admin'])->group(function () {
     Route::get('/create', 'create')->name('role.create');
     Route::post('/store', 'store')->name('role.store');
     Route::get('/edit/{role}', 'edit')->name('role.edit');
     Route::post('/update/{role}', 'update')->name('role.update');
     Route::delete('/delete/{role}', 'destroy')->name('role.destroy');
-})->middleware(['auth', 'verified', 'role:super-admin']);
+});
 
 // Route::resource('permission', RoleController::class)->middleware(['auth', 'verified', 'role:super-admin']);
 /**
@@ -169,12 +169,12 @@ Route::prefix('role')->controller(RoleController::class)->group(function () {
  * Handles CRUD operations for Permissions.
  * Accessible only by super-admin.
  */
-Route::prefix('permission')->controller(PermissionController::class)->group(function () {
+Route::prefix('permission')->controller(PermissionController::class)->middleware(['auth', 'verified', 'role:super-admin'])->group(function () {
     Route::get('/create', 'create')->name('permission.create');
     Route::post('/store', 'store')->name('permission.store');
     Route::get('/edit/{permission}', 'edit')->name('permission.edit');
     Route::post('/update/{permission}', 'update')->name('permission.update');
     Route::delete('/delete/{permission}', 'destroy')->name('permission.destroy');
-})->middleware(['auth', 'verified', 'role:super-admin']);
+});
 
 require __DIR__.'/auth.php';
