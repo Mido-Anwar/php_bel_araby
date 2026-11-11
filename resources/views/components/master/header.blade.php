@@ -58,14 +58,14 @@
                         </button>
 
                         <div x-show="openMobileMenu" @click.away="openMobileMenu = false" x-transition
-                            class="absolute right-0 mt-2 w-48 rounded-2xl bg-[#1e293b] border border-slate-700 shadow-2xl py-2 z-50 text-right"
+                            class="absolute left-0 mt-2 w-48 rounded-2xl bg-[#1e293b] border border-slate-700 shadow-2xl py-2 z-50 text-right"
                             style="display: none;">
 
                             <a href="{{ route('dashboard') }}"
                                 class="flex items-center gap-3 px-4 py-2.5 text-sm text-[#f3ebeb] hover:bg-[#2b384f] transition">
-                                <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor"
+                                <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="5"
                                         d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"></path>
                                 </svg>
                                 <span>لوحة التحكم</span>
@@ -74,8 +74,8 @@
                             <a href="{{ route('logout') }}"
                                 class="flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
                                         d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
                                     </path>
                                 </svg>

@@ -283,8 +283,8 @@
 
 <!-- مكوّن Alpine.js النظيف لإدارة الحالة -->
 <script>
-    function docViewer(config) {
-        return {
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('docViewer', (config = {}) => ({
             activeView: 'tech',
             sections: config.sections || {},
             concepts: config.concepts || {},
@@ -292,22 +292,36 @@
             activeConcept: null,
             openSections: {},
 
-            showSection(sectionId) {
-                if (this.activeSection && this.activeSection.id === sectionId && this.activeView === 'section') {
-                    this.openSections[sectionId] = !this.openSections[sectionId];
-                } else {
-                    this.activeSection = this.sections[sectionId] || null;
-                    this.activeView = 'section';
-                    this.openSections[sectionId] = true;
+            init() {
+                // افتح أول section مبدئيًا لو موجود
+                const firstSection = Object.keys(this.sections)[0];
+                if (firstSection) {
+                    this.openSections[firstSection] = true;
                 }
             },
 
-            showConcept(conceptId, sectionId) {
-                this.activeConcept = this.concepts[conceptId] || null;
-                if (sectionId && this.sections[sectionId]) {
-                    this.activeSection = this.sections[sectionId];
-                }
+            showSection(sectionId) {
+                if (!this.sections[sectionId]) return;
+
+                this.activeSection = this.sections[sectionId];
+                this.activeView = 'section';
+                this.openSections[sectionId] = true;
+            },
+
+            showConcept(conceptId, sectionId = null) {
+                if (!this.concepts[conceptId]) return;
+
+                this.activeConcept = this.concepts[conceptId];
                 this.activeView = 'concept';
+
+                // افتح الـ Section الأب تلقائيًا
+                const parentSection = sectionId || this.concepts[conceptId].section_id;
+                if (parentSection) {
+                    this.openSections[parentSection] = true;
+                    if (this.sections[parentSection]) {
+                        this.activeSection = this.sections[parentSection];
+                    }
+                }
             },
 
             showFunctionsIntro() {
@@ -320,7 +334,7 @@
                 this.activeView = 'tech';
                 this.activeSection = null;
                 this.activeConcept = null;
-            }
-        };
-    }
+            },
+        }));
+    });
 </script>
